@@ -1060,28 +1060,53 @@
         integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
         crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <!--    <script async
-        src="https://www.googletagmanager.com/gtag/js?id=G-NQRJFC1DV9"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'G-NQRJFC1DV9');
-    </script>  -->
-    <!-- Google tag (gtag.js) -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10814774228"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-10814774228');
-</script> -->
+        $("#userForm").submit((event) => {
+            event.preventDefault()
+            let name = document.getElementById("conatct-name");
+            let email = document.getElementById("contact-email");
+            let number = document.getElementById("contact-mobile");
+            let companyName = document.getElementById("companyname");
+            let city = document.getElementById("position");
+            let description = document.getElementById("description");
+            let obj = {
+                name: name.value,
+                email: email.value,
+                number: parseInt(number.value),
+                companyName: companyName.value,
+                city: city.value,
+                description: description.value
+            }
+            console.log("OBJ", obj)
+            let link = `https://api.valuenable.in/contact-us`
+            $.ajax({
+                type: "POST",
+                url: link,
+                data: JSON.stringify(obj), // Convert object to JSON
+                contentType: "application/json", // Specify JSON format
+                dataType: "json",
+                encode: true,
+            }).done((data) => {
+                console.log(data)
+                let response = JSON.parse(data?.body)
+                if(data?.statusCode === 400){
+                    alert(`${data?.error}`);
+                }
+                if(data?.statusCode === 200){
+                    alert("Thanks for your message. We will contact you soon");
+                    name.value = null;
+                    email.value = null;
+                    number.value = null;
+                    companyName.value = null;
+                    city.value = null;
+                    description.value = null;
+                }else{
+                    alert("Something went wrong. Please try again later");
+                }
+                
+            });
+        });
+    </script>
 </body>
 
 </html>

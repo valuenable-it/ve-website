@@ -207,7 +207,7 @@
                                                 style="display: flex;
                                                 justify-content: center;
                                                 align-items: center; cursor: pointer;">
-                                                <a href="pdf/ValuEnable Tech ProductManager_JD.pdf"
+                                                <a href="pdf/JD - AVP Insurer Relationship.pdf"
                                                     _tar
                                                     download
                                                     style="font-size: 16px;
@@ -215,7 +215,7 @@
                                                 color: white;
                                                 text-align: center;">
                                                     <i>
-                                                        Tech Product Manager
+                                                        AVP Insurer Relationship
                                                     </i>
                                                 </a>
                                             </div>
@@ -259,10 +259,21 @@
                                         <li>
                                             <div class="box"
                                                 style="display: flex;justify-content: center;align-items: center; cursor: pointer;">
-                                                <a href="pdf/JD Head Contact Centre.pdf"
+                                                <a href="pdf/JD for Data Scientist.pdf"
                                                     download
                                                     style="font-size: 16px;margin: 12px;color: white;text-align: center;"><i>
-                                                        Head Contact Centre
+                                                        Data Scientist
+                                                    </i></a>
+                                            </div>
+
+                                        </li>
+                                        <li>
+                                            <div class="box"
+                                                style="display: flex;justify-content: center;align-items: center; cursor: pointer;">
+                                                <a href="pdf/JD-ASM - LAS.pdf"
+                                                    download
+                                                    style="font-size: 16px;margin: 12px;color: white;text-align: center;"><i>
+                                                        ASM - LAS
                                                     </i></a>
                                             </div>
 
@@ -859,49 +870,67 @@
     <script src="js/main.js"></script>
 
     <script>
-        $("#careerForm").submit((event) => {
-            event.preventDefault()
-            let name = document.getElementById("name");
-            let email = document.getElementById("email");
-            let number = document.getElementById("mobile");
-            let position = document.getElementById("position");
-            let resume = document.getElementById("file") ? document.getElementById("file").files[0] : null;
-            let fileName = document.getElementById("file-name");
-            let message = document.getElementById("message");
-            var bodyFormData = new FormData();
-            bodyFormData.append('name', name.value);
-            bodyFormData.append('email', email.value);
-            bodyFormData.append('mobile', mobile.value);
-            bodyFormData.append('position', position.value);
-            bodyFormData.append('resume', resume);
-            bodyFormData.append('summary', message.value);
-            let obj = {
-                name: name.value,
-                email: email.value,
-                mobile: parseInt(number.value),
-                position: position.value,
-                resume: resume,
-                summary: message.value
-            }
+        $("#careerForm").submit(async (event) => {
+        event.preventDefault();
 
-            let link = `https://microservice.valuenable.in/careers`
-            const xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                console.log(xhr);
-                if (xhr.readyState == XMLHttpRequest.DONE && xhr.statusCode == 201) {
-                    name.value = null
-                    email.value = null
-                    mobile.value = null
-                    position.value = null
-                    fileName.value = null
-                    message.value = null
-                    return alert("Resume uploaded successfully");
-                }
-            }
-            xhr.open("POST", link, true)
-            xhr.send(bodyFormData)
+        let name = document.getElementById("name").value.trim();
+        let email = document.getElementById("email").value.trim();
+        let mobile = document.getElementById("mobile").value.trim();
+        let position = document.getElementById("position").value.trim();
+        let resumeFile = document.getElementById("file")?.files[0]; // Optional chaining
+        let message = document.getElementById("message").value.trim();
 
+        let file = "";
+        let extension = "";
+
+        if (resumeFile) {
+            file = await fileToBase64(resumeFile);
+            extension = resumeFile.name.split('.').pop(); // Extract file extension
+        }
+
+        let requestData = {
+            name,
+            email,
+            mobile,
+            position,
+            file,       // Base64 encoded file content
+            extension,  // File extension (e.g., pdf, docx)
+            summary: message,
+        };
+
+        let link = "https://api.valuenable.in/career";
+
+        fetch(link, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestData),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.statusCode === 200) {
+                alert("Resume uploaded successfully");
+                document.getElementById("careerForm").reset(); // Reset form
+            } else {
+                alert("Error uploading resume. Please try again.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Something went wrong. Please try again.");
         });
+    });
+
+    // Convert File to Base64
+    function fileToBase64(file) {
+        return new Promise((resolve, reject) => {
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result.split(",")[1]); // Extract Base64 content
+            reader.onerror = (error) => reject(error);
+        });
+    }
     </script>
     <!-- <script>
         function Call_Api(baseUrl) 

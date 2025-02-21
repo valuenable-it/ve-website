@@ -642,21 +642,32 @@
                 city: city.value,
                 description: description.value
             }
-            let link = `https://microservice.valuenable.in/contact-us`
+            let link = `https://api.valuenable.in/contact-us`
             $.ajax({
                 type: "POST",
                 url: link,
-                data: obj,
+                data: JSON.stringify(obj), // Convert object to JSON
+                contentType: "application/json", // Specify JSON format
                 dataType: "json",
                 encode: true,
             }).done((data) => {
-                alert("Thanks for your message. We will contact you soon");
-                name.value = null;
-                email.value = null;
-                number.value = null;
-                companyName.value = null;
-                city.value = null;
-                description.value = null;
+                console.log(data)
+                let response = JSON.parse(data?.body)
+                if(data?.statusCode === 400){
+                    alert(`${data?.error}`);
+                }
+                if(data?.statusCode === 200){
+                    alert("Thanks for your message. We will contact you soon");
+                    name.value = null;
+                    email.value = null;
+                    number.value = null;
+                    companyName.value = null;
+                    city.value = null;
+                    description.value = null;
+                }else{
+                    alert("Something went wrong. Please try again later");
+                }
+                
             });
         });
     </script>
