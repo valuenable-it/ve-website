@@ -349,6 +349,8 @@
                         <div style="color: red;  margin-top: -4px; text-align: center;  margin-bottom: 12px; margin-left: 74px;">Upload Documents</div>
                         
                         <div class="col-md-4 col-sm-6">
+                          <label id="unitStatementLebelId" style="display: none;">Unit Statement</label>
+
                           <div class="form-group" style="display: flex; align-items: center">
                             <input name="user" type="file" style="display: none" id="attachment"
                               onchange="handleFileUpload(this.files)" />
@@ -361,6 +363,7 @@
                         </div>
 
                         <div class="col-md-4 col-sm-6">
+                          <label id="policybondlebelId" style="display: none;">Policy Bond</label>
                           <div class="form-group" style="display: flex; align-items: center">
                             <input name="user" type="file" style="display: none" id="uploadPolicyDocumentMob"
                               onchange="handelUploadPolicyMob(this.files)" />
@@ -372,6 +375,7 @@
 
                         </div>
                         <div class="col-md-4 col-sm-6">
+                          <label id="policystatementlebelId" style="display: none;">Policy Statement</label>
                           <div class="form-group" style="display: flex; align-items: center">
                             <input name="user" type="file" style="display: none" id="uploadPolicyStatementMob"
                               onchange="handelUploadPolicyStatementMob(this.files)" />
@@ -407,6 +411,7 @@
                           </div>
                         </div> -->
                         <div class="col-md-4 col-sm-6" style="display: none;" id="laPhotoBoxresp">
+                          <label id="laPhotolabelMob" style="display: none;">Photo</label>
                           <div class="form-group" style="display: flex; align-items: center">
                             <input name="user" type="file" style="display: none" id="laPhotoMob"
                               onchange="handelLaPhotoMob(this.files)" />
@@ -421,6 +426,7 @@
 
                    
                          <div class="col-md-4 col-sm-6" style="display: none;" id="respLaPanBox">
+                          <label id="laPanlabelMob" style="display: none;">Pan</label>
                           <div class="form-group" style="display: flex; align-items: center">
                             <input name="user" type="file" style="display: none" id="laPanCardMob"
                               onchange="handelLaPanMob(this.files)" />
@@ -432,6 +438,7 @@
                           </div>
                         </div>
                         <div class="col-md-4 col-sm-6" style="display: none;" id="respLaAadharBox">
+                          <label id="laAadharlabelMob" style="display: none;">Aadhar</label>
                           <div class="form-group" style="display: flex; align-items: center">
                             <input name="user" type="file" style="display: none" id="laAadharMob"
                               onchange="handelLaAadharMob(this.files)" />
@@ -980,6 +987,7 @@
                     <div style="color: #da1e37; font-weight: bold; margin-top: -11px; border-bottom: 2px solid; width: 165px; margin-bottom: 12px;">Upload Documents</div>
                     <div class="row">
                       <div class="col-md-4 col-sm-6">
+                        <label id="unitStatementLebel" style="display: none;">Unit Statement</label>
                         <div class="form-group" style="display: flex; align-items: center">
                           <input name="user" type="file" style="display: none" id="attachments"
                             onchange="handleFileUploads(this.files)" />
@@ -990,6 +998,7 @@
                         </div>
                       </div>
                       <div class="col-md-4 col-sm-6">
+                        <label id="policybondlebel" style="display: none;">Policy Bond</label>
                         <div class="form-group" style="display: flex; align-items: center">
                           <input name="user" type="file" style="display: none" id="uploadPolicyDocument"
                             onchange="handelUploadPolicy(this.files)" />
@@ -1001,6 +1010,7 @@
 
                       </div>
                       <div class="col-md-4 col-sm-6">
+                        <label id="policystatementlebel" style="display: none;">Policy Statement</label>
                         <div class="form-group" style="display: flex; align-items: center">
                           <input name="user" type="file" style="display: none" id="uploadPolicyStatement"
                             onchange="handelUploadPolicyStatement(this.files)" />
@@ -1037,6 +1047,7 @@
                       </div> -->
                       
                       <div class="col-md-4 col-sm-6" id="laPanBox" style="display: none;">
+                        <label id="laPanlabel" style="display: none;">Pan</label>
                         <div class="form-group" style="display: flex; align-items: center">
                           <input name="user" type="file" style="display: none" id="laPanCard"
                             onchange="handelLaPan(this.files)" />
@@ -1048,6 +1059,7 @@
                         </div>
                       </div>
                       <div class="col-md-4 col-sm-6" id="laAadharBox" style="display: none;">
+                        <label id="laAadharlabel" style="display: none;">Aadhar</label>
                         <div class="form-group" style="display: flex; align-items: center">
                           <input name="user" type="file" style="display: none" id="laAadhar"
                             onchange="handelLaAadhar(this.files)" />
@@ -1060,6 +1072,7 @@
                       </div>
 
                       <div class="col-md-4 col-sm-6" style="display: none;" id="laPhotoBox">
+                        <label id="laPhotolabel" style="display: none;">Photo</label>
                         <div class="form-group" style="display: flex; align-items: center">
                           <input name="user" type="file" style="display: none" id="laPhoto"
                             onchange="handelLaPhoto(this.files)" />
@@ -3326,7 +3339,9 @@ if(branchNameResp=="Branch Name*"){
     }
     function handleFileUpload(files) {
       var fileName = files[0].name;
+      let unitStatementLebelId=document.getElementById("unitStatementLebelId");
       if(fileName){
+        unitStatementLebelId.style.display = "block"; 
         let attachmentsFile = document.getElementById("attachment");
         uploadDocument("unitStatement",attachmentsFile.files[0].type).then((result) => {
           console.log(result)
@@ -3344,6 +3359,8 @@ if(branchNameResp=="Branch Name*"){
               })
   }
 })
+      }else{
+        unitStatementLebelId.style.display = "none"; 
       }
       document.getElementById("selectedFileName").value = fileName;
     }
@@ -3379,7 +3396,9 @@ if(branchNameResp=="Branch Name*"){
   
     function handleFileUploads(files) {
       var fileName = files[0].name;
+      let unitStatementLebel=document.getElementById("unitStatementLebel");
       if(fileName){
+        unitStatementLebel.style.display = "block"; 
         let attachmentsFile = document.getElementById("attachments");
         uploadDocument("unitStatement",attachmentsFile.files[0].type).then((result) => {
           console.log(result)
@@ -3397,6 +3416,8 @@ if(branchNameResp=="Branch Name*"){
               })
   }
 })
+      }else{
+        unitStatementLebel.style.display = "none"; 
       }
       document.getElementById("selectedFileNames").value = fileName;
     }
@@ -3430,7 +3451,9 @@ if(branchNameResp=="Branch Name*"){
     function handelUploadPolicy(files) {
       var fileName = files[0].name;
       console.log(files)
+      let policybondlebel=document.getElementById("policybondlebel");
       if(fileName){
+        policybondlebel.style.display = "block"; 
         let attachmentsFile = document.getElementById("uploadPolicyDocument");
         uploadDocument("policyDocument",attachmentsFile.files[0].type).then((result) => {
           console.log(result)
@@ -3449,6 +3472,8 @@ if(branchNameResp=="Branch Name*"){
               })
   }
 })
+      }else{
+        policybondlebel.style.display = "none"; 
       }
       document.getElementById("uploadPolicyDocumentFile").value = fileName;
     }
@@ -3458,7 +3483,9 @@ if(branchNameResp=="Branch Name*"){
     function handelUploadPolicyStatement(files) {
       var fileName = files[0].name;
       console.log(files)
+      let policystatementlebel=document.getElementById("policystatementlebel");
       if(fileName){
+        policystatementlebel.style.display = "block"; 
         let attachmentsFile = document.getElementById("uploadPolicyStatement");
         uploadDocument("policyStatement",attachmentsFile.files[0].type).then((result) => {
           console.log(result)
@@ -3477,6 +3504,9 @@ if(branchNameResp=="Branch Name*"){
               })
   }
 })
+      }else{
+        policystatementlebel.style.display = "none"; 
+
       }
       document.getElementById("uploadPolicyStatementFile").value = fileName;
     }
@@ -3513,7 +3543,9 @@ if(branchNameResp=="Branch Name*"){
    
     function handelUploadPolicyMob(files) {
       var fileName = files[0].name;
+      let policybondlebelId = document.getElementById("policybondlebelId");
       if(fileName){
+        policybondlebelId.style.display = "block"; 
         let attachmentsFile = document.getElementById("uploadPolicyDocumentMob");
         uploadDocument("policyDocument",attachmentsFile.files[0].type).then((result) => {
           console.log(result)
@@ -3532,6 +3564,8 @@ if(branchNameResp=="Branch Name*"){
               })
   }
 })
+      }else{
+        policybondlebelId.style.display = "none"; 
       }
       document.getElementById("uploadPolicyDocumentFileMob").value = fileName;
 
@@ -3541,7 +3575,9 @@ if(branchNameResp=="Branch Name*"){
     }
     function handelUploadPolicyStatementMob(files) {
       var fileName = files[0].name;
+      let policystatementlebelId=document.getElementById("policystatementlebelId");
       if(fileName){
+        policystatementlebelId.style.display = "block"; 
         let attachmentsFile = document.getElementById("uploadPolicyStatementMob");
         uploadDocument("policyStatement",attachmentsFile.files[0].type).then((result) => {
           console.log(result)
@@ -3560,6 +3596,8 @@ if(branchNameResp=="Branch Name*"){
               })
   }
 })
+      }else{
+        policystatementlebelId.style.display = "none";
       }
       document.getElementById("uploadPolicyStatementFileMob").value = fileName;
 
@@ -3713,7 +3751,9 @@ if(branchNameResp=="Branch Name*"){
         function handelLaPhotoMob(files){
       console.log(files)
       var fileName = files[0].name;
+      let laPhotolabelMob = document.getElementById("laPhotolabelMob");
       if(fileName){
+        laPhotolabelMob.style.display = "block"; 
         let attachmentsFile = document.getElementById("laPhotoMob");
         uploadDocument("laPhoto",attachmentsFile.files[0].type).then((result) => {
           console.log(result)
@@ -3731,6 +3771,8 @@ if(branchNameResp=="Branch Name*"){
               })
   }
 })
+      }else{
+        laPhotolabelMob.style.display = "block"; 
       }
       document.getElementById("laPhotoIdMob").value = fileName;
     }
@@ -3739,39 +3781,41 @@ if(branchNameResp=="Branch Name*"){
     }
 
 
-    function handelLaPanMob(files){
-      console.log(files)
-      var fileName = files[0].name;
-      if(fileName){
-        let attachmentsFile = document.getElementById("laPanCardMob");
-        uploadDocument("laPan",attachmentsFile.files[0].type).then((result) => {
-          console.log(result)
-      if (result.status=="success") {
-        uploadFile(result.uploadUrl, attachmentsFile.files[0])
-              .then(response => {
-                documentKeys.laPanCardKey = result.uploadKey;
-              })
-              .catch(error => {
-                console.error('Upload error:', error);
+//     function handelLaPanMob(files){
+//       console.log(files)
+//       var fileName = files[0].name;
+//       if(fileName){
+//         let attachmentsFile = document.getElementById("laPanCardMob");
+//         uploadDocument("laPan",attachmentsFile.files[0].type).then((result) => {
+//           console.log(result)
+//       if (result.status=="success") {
+//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
+//               .then(response => {
+//                 documentKeys.laPanCardKey = result.uploadKey;
+//               })
+//               .catch(error => {
+//                 console.error('Upload error:', error);
                 
-            alert("Photo upload failed. Please try again.");
-            return;
+//             alert("Photo upload failed. Please try again.");
+//             return;
 
-              })
-  }
-})
-      }
-      document.getElementById("laPanFileMob").value = fileName;
-    }
-    function openLaPanFileMob(){
- document.getElementById("laPanCardMob").click();
-    }
+//               })
+//   }
+// })
+//       }
+//       document.getElementById("laPanFileMob").value = fileName;
+//     }
+//     function openLaPanFileMob(){
+//  document.getElementById("laPanCardMob").click();
+//     }
 
 
     function handelLaAadharMob(files){
       console.log(files)
       var fileName = files[0].name;
+      let laAadharlabelMob = document.getElementById("laAadharlabelMob");
       if(fileName){
+        laAadharlabelMob.style.display = "block"; 
         let attachmentsFile = document.getElementById("laAadharMob");
         uploadDocument("laAadhar",attachmentsFile.files[0].type).then((result) => {
           console.log(result)
@@ -3789,6 +3833,8 @@ if(branchNameResp=="Branch Name*"){
               })
   }
 })
+      }else{
+        laAadharlabelMob.style.display = "none"; 
       }
       document.getElementById("laAadharFileMob").value = fileName;
     }
@@ -3800,68 +3846,70 @@ if(branchNameResp=="Branch Name*"){
 
 
 
-    function handelLaPan(files){
-      console.log(files)
-      var fileName = files[0].name;
-      if(fileName){
-        let attachmentsFile = document.getElementById("laPanCard");
-        uploadDocument("laPan",attachmentsFile.files[0].type).then((result) => {
-          console.log(result)
-      if (result.status=="success") {
-        uploadFile(result.uploadUrl, attachmentsFile.files[0])
-              .then(response => {
-                documentKeys.laPanCardKey = result.uploadKey;
-              })
-              .catch(error => {
-                console.error('Upload error:', error);
+//     function handelLaPan(files){
+//       console.log(files)
+//       var fileName = files[0].name;
+//       if(fileName){
+//         let attachmentsFile = document.getElementById("laPanCard");
+//         uploadDocument("laPan",attachmentsFile.files[0].type).then((result) => {
+//           console.log(result)
+//       if (result.status=="success") {
+//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
+//               .then(response => {
+//                 documentKeys.laPanCardKey = result.uploadKey;
+//               })
+//               .catch(error => {
+//                 console.error('Upload error:', error);
                 
-            alert("Photo upload failed. Please try again.");
-            return;
+//             alert("Photo upload failed. Please try again.");
+//             return;
 
-              })
-  }
-})
-      }
-      document.getElementById("laPanFile").value = fileName;
-    }
-    function openLaPanFile(){
- document.getElementById("laPanCard").click();
-    }
+//               })
+//   }
+// })
+//       }
+//       document.getElementById("laPanFile").value = fileName;
+//     }
+//     function openLaPanFile(){
+//  document.getElementById("laPanCard").click();
+//     }
 
 
-    function handelLaAadhar(files){
-      console.log(files)
-      var fileName = files[0].name;
-      if(fileName){
-        let attachmentsFile = document.getElementById("laAadhar");
-        uploadDocument("laAadhar",attachmentsFile.files[0].type).then((result) => {
-          console.log(result)
-      if (result.status=="success") {
-        uploadFile(result.uploadUrl, attachmentsFile.files[0])
-              .then(response => {
-                documentKeys.laAadharCardKey = result.uploadKey;
-              })
-              .catch(error => {
-                console.error('Upload error:', error);
+//     function handelLaAadhar(files){
+//       console.log(files)
+//       var fileName = files[0].name;
+//       if(fileName){
+//         let attachmentsFile = document.getElementById("laAadhar");
+//         uploadDocument("laAadhar",attachmentsFile.files[0].type).then((result) => {
+//           console.log(result)
+//       if (result.status=="success") {
+//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
+//               .then(response => {
+//                 documentKeys.laAadharCardKey = result.uploadKey;
+//               })
+//               .catch(error => {
+//                 console.error('Upload error:', error);
                 
-            alert("Photo upload failed. Please try again.");
-            return;
+//             alert("Photo upload failed. Please try again.");
+//             return;
 
-              })
-  }
-})
-      }
-      document.getElementById("laAadharFile").value = fileName;
-    }
-    function openLaAadharFile(){
- document.getElementById("laAadhar").click();
-    }
+//               })
+//   }
+// })
+//       }
+//       document.getElementById("laAadharFile").value = fileName;
+//     }
+//     function openLaAadharFile(){
+//  document.getElementById("laAadhar").click();
+//     }
 
 
     function handelLaPhoto(files){
       console.log(files)
       var fileName = files[0].name;
+      let laPhotolabel=document.getElementById("laPhotolabel");
       if(fileName){
+        laPhotolabel.style.display = "block"; 
         let attachmentsFile = document.getElementById("laPhoto");
         uploadDocument("laPhoto",attachmentsFile.files[0].type).then((result) => {
           console.log(result)
@@ -3879,6 +3927,8 @@ if(branchNameResp=="Branch Name*"){
               })
   }
 })
+      }else{
+        laPhotolabel.style.display = "none"; 
       }
       document.getElementById("laPhotoFile").value = fileName;
 
@@ -3894,7 +3944,9 @@ if(branchNameResp=="Branch Name*"){
     function handelLaPanMob(files){
       console.log(files)
       var fileName = files[0].name;
+      let laPanlabelMob = document.getElementById("laPanlabelMob");
       if(fileName){
+        laPanlabelMob.style.display = "block"; 
         let attachmentsFile = document.getElementById("laPanCardMob");
         uploadDocument("laPan",attachmentsFile.files[0].type).then((result) => {
           console.log(result)
@@ -3912,6 +3964,8 @@ if(branchNameResp=="Branch Name*"){
               })
   }
 })
+      }else{
+        laPanlabelMob.style.display = "none"; 
       }
       document.getElementById("laPanFileMob").value = fileName;
     }
@@ -3920,33 +3974,33 @@ if(branchNameResp=="Branch Name*"){
     }
 
 
-    function handelLaAadharMob(files){
-      console.log(files)
-      var fileName = files[0].name;
-      if(fileName){
-        let attachmentsFile = document.getElementById("laAadharMob");
-        uploadDocument("laAadhar",attachmentsFile.files[0].type).then((result) => {
-          console.log(result)
-      if (result.status=="success") {
-        uploadFile(result.uploadUrl, attachmentsFile.files[0])
-              .then(response => {
-                documentKeys.laAadharCardKey = result.uploadKey;
-              })
-              .catch(error => {
-                console.error('Upload error:', error);
+//     function handelLaAadharMob(files){
+//       console.log(files)
+//       var fileName = files[0].name;
+//       if(fileName){
+//         let attachmentsFile = document.getElementById("laAadharMob");
+//         uploadDocument("laAadhar",attachmentsFile.files[0].type).then((result) => {
+//           console.log(result)
+//       if (result.status=="success") {
+//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
+//               .then(response => {
+//                 documentKeys.laAadharCardKey = result.uploadKey;
+//               })
+//               .catch(error => {
+//                 console.error('Upload error:', error);
                 
-            alert("Photo upload failed. Please try again.");
-            return;
+//             alert("Photo upload failed. Please try again.");
+//             return;
 
-              })
-  }
-})
-      }
-      document.getElementById("laAadharFileMob").value = fileName;
-    }
-    function openLaAadharFileMob(){
- document.getElementById("laAadharMob").click();
-    }
+//               })
+//   }
+// })
+//       }
+//       document.getElementById("laAadharFileMob").value = fileName;
+//     }
+//     function openLaAadharFileMob(){
+//  document.getElementById("laAadharMob").click();
+//     }
 
 
 
@@ -3955,7 +4009,9 @@ if(branchNameResp=="Branch Name*"){
     function handelLaPan(files){
       console.log(files)
       var fileName = files[0].name;
+      let laPanlabel=document.getElementById("laPanlabel");
       if(fileName){
+        laPanlabel.style.display = "block"; 
         let attachmentsFile = document.getElementById("laPanCard");
         uploadDocument("laPan",attachmentsFile.files[0].type).then((result) => {
           console.log(result)
@@ -3973,6 +4029,8 @@ if(branchNameResp=="Branch Name*"){
               })
   }
 })
+      }else{
+        laPanlabel.style.display = "none"; 
       }
       document.getElementById("laPanFile").value = fileName;
     }
@@ -3984,7 +4042,9 @@ if(branchNameResp=="Branch Name*"){
     function handelLaAadhar(files){
       console.log(files)
       var fileName = files[0].name;
+      let laAadharlabel=document.getElementById("laAadharlabel");
       if(fileName){
+        laAadharlabel.style.display = "block"; 
         let attachmentsFile = document.getElementById("laAadhar");
         uploadDocument("laAadhar",attachmentsFile.files[0].type).then((result) => {
           console.log(result)
@@ -4002,6 +4062,8 @@ if(branchNameResp=="Branch Name*"){
               })
   }
 })
+      }else{
+        laAadharlabel.style.display = "none"; 
       }
       document.getElementById("laAadharFile").value = fileName;
     }
@@ -4139,12 +4201,12 @@ function toggleFileUpload() {
 
         
         if (isChecked) {
-            panCardGroup.style.display = "flex"; 
-            aadharGroup.style.display = "flex"; 
-            nameGroup.style.display = "flex"; 
-            emailGroup.style.display = "flex"; 
-            phoneGroup.style.display = "flex"; 
-            laPhotoBox.style.display = "flex"; 
+            panCardGroup.style.display = "block"; 
+            aadharGroup.style.display = "block"; 
+            nameGroup.style.display = "block"; 
+            emailGroup.style.display = "block"; 
+            phoneGroup.style.display = "block"; 
+            laPhotoBox.style.display = "block"; 
 
         } else {
             panCardGroup.style.display = "none"; 
