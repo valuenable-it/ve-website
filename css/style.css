@@ -6648,7 +6648,7 @@ margin-top: 31px;
 }
 
 .subtitle-policy-backed {
-  font-family: SF Pro;
+  font-family: '"Inter", "SF Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;';
   font-weight: 510;
   font-size: 25.43px;
   line-height: 130%;
@@ -6676,7 +6676,7 @@ color: #FFFFFF80;
 display: inline-flex; gap: 11px; align-items: center;
 }
 .tabs-text-back{
-font-family: SF Pro;
+font-family: "Inter", "SF Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;;
 font-weight: 400;
 font-size: 19.52px;
 line-height: 100%;
@@ -6713,7 +6713,7 @@ letter-spacing: -1.094px;
   margin-bottom: 40px;
 color: rgba(255, 255, 255, 0.50);
 text-align: center;
-font-family: "SF Pro";
+font-family: ""Inter", "SF Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;";
 font-size: 25.433px;
 font-style: normal;
 font-weight: 510;
@@ -6777,8 +6777,8 @@ letter-spacing: -0.509px;
 
 .content-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  grid-template-columns: 600px 1fr;
+  /* gap: 40px; */
   align-items: center;
   text-align: left;
 }
@@ -6786,7 +6786,7 @@ letter-spacing: -0.509px;
 .text-content h2 {
   margin-bottom: 30px;
 color: #FFF;
-font-family: "SF Pro";
+font-family: "Inter", "SF Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;;
 font-size: 40.821px;
 font-style: normal;
 font-weight: 590;
@@ -6803,7 +6803,7 @@ margin-left: 0px;
   padding-left: 30px;
   position: relative;
 color: #FFF;
-font-family: "SF Pro";
+font-family: "Inter", "SF Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;;
 font-size: 20.411px;
 font-style: normal;
 font-weight: 400;
@@ -6868,7 +6868,7 @@ margin-top: 42px;
 .policies-paragraph{
   color: #9B9B9B;
 text-align: center;
-font-family: "SF Pro";
+font-family: "Inter", "SF Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;;
 font-size: 25.433px;
 font-style: normal;
 font-weight: 510;
@@ -6915,4 +6915,7 @@ font-style: normal;
 font-weight: 600;
 line-height: 128%;
 letter-spacing: -1.088px;
+}
+.security-span{
+  margin-left: -15px;
 }
