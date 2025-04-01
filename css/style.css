@@ -6685,7 +6685,8 @@ color: #FFFFFF;
 }
 .hero-policy-hero {
   padding: 80px 0;
-  background-color: #2B3674;
+  height: 763px;
+  background-color: #30436C;
 }
 .container-policy-hero {
   max-width: 1200px;
@@ -6698,16 +6699,26 @@ color: #FFFFFF;
 }
 
 .hero-content-policy-hero h2 {
-  font-size: 48px;
-  line-height: 1.2;
   margin-bottom: 20px;
+  color: #FFF;
+font-family: Poppins;
+font-size: 54.712px;
+font-style: normal;
+font-weight: 600;
+line-height: 128%; 
+letter-spacing: -1.094px;
 }
 
 .hero-content-policy-hero p {
-  font-size: 18px;
-  color: #B0B7CA;
-  line-height: 1.6;
   margin-bottom: 40px;
+color: rgba(255, 255, 255, 0.50);
+text-align: center;
+font-family: "SF Pro";
+font-size: 25.433px;
+font-style: normal;
+font-weight: 510;
+line-height: 129.9%; /* 33.038px */
+letter-spacing: -0.509px;
 }
 
 .tabs-policy-hero {
@@ -6773,54 +6784,84 @@ color: #FFFFFF;
 }
 
 .text-content h2 {
-  font-size: 36px;
   margin-bottom: 30px;
-  line-height: 1.2;
+color: #FFF;
+font-family: "SF Pro";
+font-size: 40.821px;
+font-style: normal;
+font-weight: 590;
+line-height: 41.638px; /* 102% */
+margin-left: 0px;
 }
 
 .features-list {
   list-style: none;
 }
 
-.features-list li {
+.features-list span {
   margin-bottom: 15px;
   padding-left: 30px;
   position: relative;
-  color: #B0B7CA;
+color: #FFF;
+font-family: "SF Pro";
+font-size: 20.411px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
 }
-.investor-speak-policy-hero {
-  padding: 4rem 2rem;
-  text-align: center;
-  background: #f8fafc;
-}
+
 
 .investor-speak-policy-hero h2 {
   font-size: 2.5rem;
-  margin-bottom: 2rem;
+  margin-top: 42px;
+  
 }
 .video-placeholder-policy-hero {
-  width: 100%;
-  max-width: 800px;
-  height: 450px;
   margin: 0 auto;
-  background: #e2e8f0;
+  background: #D9D9D9;
   border-radius: 0.5rem;
+ width: 1074px;
+height: 378px;
+margin-top: 126px;
 }
 .partners-policy-hero {
   background: #2A3855;
   padding: 4rem 2rem;
   text-align: center;
+  margin-top: 30px;
 }
 
 .partners-policy-hero h2 {
-  color: white;
-  font-size: 2.5rem;
+
   margin-bottom: 3rem;
+ color: #FFF;
+text-align: center;
+font-family: Poppins;
+font-size: 54px;
+font-style: normal;
+font-weight: 600;
+line-height: 128%; 
+letter-spacing: -1.094px;
 }
 .partner-logos-policy-hero {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   gap: 4rem;
   align-items: center;
 }
 
+.Speak-text-policy{
+ text-align: center;
+color: #30436C;
+font-family: Poppins;
+font-size: 54.712px;
+font-style: normal;
+font-weight: 600;
+line-height: 128%; /* 70.032px */
+letter-spacing: -1.094px;
+margin-top: 42px;
+}
+.policy-hr-line{
+  background-color: #FFFFFF1A;
+  margin-top: -36px;
+}
