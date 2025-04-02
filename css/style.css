@@ -3282,7 +3282,9 @@ form ul {
     width: calc(100% - 250px);
     padding: 20px 0; }
     .header .header-right .nav-main ul.menu > li {
-      margin-right: 105px; }
+      /* margin-right: 105px;  */
+      margin-right: 50px; 
+    }
       .header .header-right .nav-main ul.menu > li a {
         font-size: 22px; }
     .header .header-right .user-menu {
