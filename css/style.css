@@ -1434,6 +1434,10 @@ section {
           color: white;
           text-align: justify;
           margin-bottom: 9px; }
+        .contact-wrapper .contact-raw .location-wrapper .text-wrap ul li p.office_timing{
+          width: calc(100% - 20px);
+          padding-left: 97px;
+           }
     .contact-wrapper .contact-raw .location-wrapper .map-raw .map-wrapper-raw {
       width: calc(100% + 30px);
       margin: 0 -15px;
@@ -5118,6 +5122,9 @@ form ul {
           display: block;
           float: none; }
         .contact-wrapper .contact-raw .location-wrapper .text-wrap ul li p {
+          width: 100%;
+          padding: 20px 0px 0px; }
+        .contact-wrapper .contact-raw .location-wrapper .text-wrap ul li p.office_timing {
           width: 100%;
           padding: 20px 0px 0px; }
     .contact-wrapper .contact-raw .location-wrapper .map-raw {
