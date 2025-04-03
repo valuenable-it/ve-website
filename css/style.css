@@ -666,7 +666,7 @@ section {
   .surrender-wrap::before {
     position: absolute;
     bottom: 0;
-    height: 70px;
+    height: 60px;
     width: 100%;
     left: 0;
     background: #ca2825;
@@ -701,7 +701,7 @@ section {
     -moz-border-radius: 20px;
     -ms-border-radius: 20px;
     border-radius: 20px;
-    min-height: 480px;
+    min-height: 400px;
     display: flex;
     align-items: center; }
     .surrender-wrap .know-box.policy-lapse {
@@ -1540,7 +1540,7 @@ form ul {
 
 .home-slider .slick-arrow {
   position: absolute;
-  top: 43%;
+  top: 53%;
   left: 4% !important;
   height: 50px;
   width: 50px;
@@ -5604,10 +5604,8 @@ form ul {
   .mgt206,
   .main-wrapper {
     margin-top: 90px; }
-  .surrender-wrap::before {
-    height: 30px;
-    /* border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;  */
+    .surrender-wrap::before {
+      height: 38px !important;
   }
   .surrender-wrap .know-box {
     min-height: 250px; }
@@ -5883,21 +5881,174 @@ form ul {
   .mobile-hide {
     display: none; }
   .slick-arrow {
-    display: none !important; } }
-    .crisil-text{
-      position: absolute;
-        bottom: 0;
-        height: 22px;
-        font-size: 8px;
-        text-align: center;
-        width: 100%;
-        left: 0;
-        content: "";
-        font-family: Poppins;
-        font-weight: 500;
-        color: #FFFFFF;
+    display: none !important; } 
+
+    .partners-policy-hero h5 {
+      font-size: 19px !important; }
+    
+      .hero-content-policy-hero h2 {
+        font-size: 21px !important;
+      }
+      .partners-policy-hero-second {
+        margin-top: -24px !important;
+      }
+      .hero-content-policy-hero p {
+        font-size: 17px !important;
+      }
+      .Speak-text-policy {
+        font-size: 20.712px !important;
+    }
+    .video-placeholder-policy-hero {
+      height: 222px !important;
+    }
+    .policy-backed-hero h1 {
+    font-size: 20.39px !important;
+    }
+    
+    .policy-backed-hero h2 {
+      font-size: 20.39px !important;
     }
 
+    .download-btn-policy-backed {
+      width: 243px !important;
+      height: 54px !important;
+  }
+
+  .tabs-policy-hero {
+    flex-direction: column !important;
+    align-items: center !important;
+}
+.content-grid {
+  grid-template-columns: 1fr !important;
+  text-align: center !important;
+}
+.content-grid {
+  gap: 30px;
+}
+.text-content h2 {
+  font-size: 17px !important;
+}
+.features-list {
+  display: inline-block !important;
+  text-align: left !important;
+}
+.tabs-head-back{
+  text-align: inherit !important;
+}
+.text-content h2 {
+  font-size: 13px !important;
+}
+.unlock-img{
+  width: 14px !important;
+}
+.features-list span {
+  font-size: 14.411px !important;
+}
+.hero-content-policy-hero h2 {
+  margin-top: -81px !important;
+}
+.hero-content-policy-hero p {
+  margin-top: -33px !important;
+}
+.tabs-policy-hero {
+  margin-top: -22px !important;
+  gap: 0px !important;
+}
+.insurance-backed{
+  margin-top: -25px !important;
+}
+.hero-policy-hero {
+  margin-top: -6px !important;
+  height: 1327px !important;
+}
+.tab-btn-policy-hero {
+  font-size: 14px !important;
+}
+.video-placeholder-policy-hero {
+  margin-top: 83px !important;
+}
+.partners-policy-hero h5 {
+  margin-top: -39px !important;
+}
+.partner-logos-policy-hero {
+  flex-direction: column !important;
+  gap: 2rem !important;
+}
+.loan-against {
+  margin-top: -29px !important;
+}
+.Iphone-img{
+  height: auto !important;
+}
+.lender-req {
+  font-size: 22.712px !important;
+}
+.loan-against-digitised {
+  font-size: 21.39px !important;
+}
+.policies-paragraph {
+  font-size: 12.433px !important;
+}
+.Iphone-img {
+  margin-top: 37px !important;
+}
+.demo-class{
+  margin-top: 39px !important;
+}
+.dashboard-image{
+  width: 285px !important;
+}
+.crisil-text {
+  bottom: -17px !important;
+    height: 52px !important;
+    font-size: 12px !important;
+}
+.right-arrow-icon{
+  width: 20px !important;
+}
+.buyout-mobile-sec{
+  display: block !important;
+}
+.buyout-desktop-sec{
+  display: none !important;
+}
+.mobile-policyholder{
+color: #FFF;
+font-family: "SF Pro";
+font-size: 19.517px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: 0.39px;
+margin-top: 22px;
+}
+.mobile-policyholder-paragraph{
+  color: #FFF;
+  font-family: "SF Pro";
+  font-size: 16.821px;
+  font-style: normal;
+  font-weight: 590;
+  margin-top: 16px;
+}
+.mobile-instant-para{
+  color: #FFF;
+leading-trim: both;
+text-edge: cap;
+font-family: "SF Pro";
+font-size: 14.411px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+.card-mobile-view-tab{
+  background: cornflowerblue;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  width: 320px;
+  text-align: center;
+}
+}
 @media only screen and (max-device-width: 480px) {
   html {
     -webkit-text-size-adjust: none; } }
@@ -6537,7 +6688,7 @@ select2-container--default .select2-selection--single .select2-selection__render
 .crisil-text{
   position: absolute;
     bottom: 0;
-    height: 50px;
+    height: 44px;
     font-size: 22px;
     text-align: center;
     width: 100%;
@@ -6565,11 +6716,11 @@ text-align: center;
 }
 
 .policy-backed-hero h2 {
-  font-size: 2.5rem;
+  font-size: 54.39px;
   margin-bottom: 2rem;
 }
 .policy-backed-hero h1, .policy-backed-hero h2 {
-  font-size: 2rem;
+  font-size: 54.39px;
 }
 
 .highlight-policy-backed {
@@ -6620,10 +6771,6 @@ text-align: center;
 width: 379px;
 height: 66px;
 border-radius: 16px;
-padding-top: 18.63px;
-padding-right: 10.65px;
-padding-bottom: 18.63px;
-padding-left: 10.65px;
 background-color: #30436C;
 color: #FFFFFF;
 font-family: Poppins;
@@ -6687,8 +6834,9 @@ color: #FFFFFF;
 }
 .hero-policy-hero {
   padding: 80px 0;
-  height: 763px;
+  height: 730px;
   background-color: #30436C;
+  margin-top: 31px;
 }
 .container-policy-hero {
   max-width: 1200px;
@@ -6704,7 +6852,7 @@ color: #FFFFFF;
   margin-bottom: 20px;
   color: #FFF;
 font-family: Poppins;
-font-size: 54.712px;
+font-size: 45.712px;
 font-style: normal;
 font-weight: 600;
 line-height: 128%; 
@@ -6716,7 +6864,7 @@ letter-spacing: -1.094px;
 color: rgba(255, 255, 255, 0.50);
 text-align: center;
 font-family: ""Inter", "SF Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;";
-font-size: 25.433px;
+font-size: 20.433px;
 font-style: normal;
 font-weight: 510;
 line-height: 129.9%; /* 33.038px */
@@ -6763,7 +6911,9 @@ letter-spacing: -0.509px;
 .tab-btn-policy-hero.active::after {
   background-color: #ffffff;
 }
-
+.tab-btn-policy-hero{
+  color: #ffffff;
+}
 .tab-icon {
   width: 24px;
   height: 24px;
@@ -6792,7 +6942,7 @@ font-family: "Inter", "SF Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", R
 font-size: 40.821px;
 font-style: normal;
 font-weight: 590;
-line-height: 41.638px; /* 102% */
+/* line-height: 41.638px;  */
 margin-left: 0px;
 }
 
@@ -6839,7 +6989,7 @@ margin-top: 126px;
  color: #FFF;
 text-align: center;
 font-family: Poppins;
-font-size: 54px;
+font-size: 40px;
 font-style: normal;
 font-weight: 600;
 line-height: 128%; 
@@ -6856,7 +7006,7 @@ letter-spacing: -1.094px;
  text-align: center;
 color: #30436C;
 font-family: Poppins;
-font-size: 54.712px;
+font-size: 40.712px;
 font-style: normal;
 font-weight: 600;
 line-height: 128%; /* 70.032px */
@@ -6871,19 +7021,14 @@ margin-top: 42px;
   color: #9B9B9B;
 text-align: center;
 font-family: "Inter", "SF Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;;
-font-size: 25.433px;
+font-size: 20.433px;
 font-style: normal;
 font-weight: 510;
 line-height: 129.9%;
 letter-spacing: -0.509px;
 }
 
-.hero-policy-hero{
-  padding: 80px 0;
-    height: 763px;
-    background-color: #30436C;
-    margin-top: 31px;
-}
+
 .lender-req{
   color: #30436C;
 font-family: Poppins;
@@ -6908,6 +7053,7 @@ font-style: normal;
 font-weight: 600;
 line-height: 128%; /* 69.62px */
 letter-spacing: -1.088px;
+margin-top: 50px;
 }
 .loan-against-digitised{
   color: #0A0;
@@ -6917,7 +7063,33 @@ font-style: normal;
 font-weight: 600;
 line-height: 128%;
 letter-spacing: -1.088px;
+
 }
 .security-span{
   margin-left: -15px;
+}
+.tabs-head-back{
+  text-align: left;
+}
+.Iphone-img{
+width: 651px; height: 445px; margin-top: 75px;
+}
+.demo-class{
+margin-top: 115px;
+}
+.wealth-imgs{
+  width: 188px;
+}
+.loan-against-digitised {
+  font-size: 54.39px ;
+}
+.features-list-li{
+  display: inline-flex;
+  align-items: center;
+}
+.buyout-desktop-sec{
+  display: block;
+}
+.buyout-mobile-sec{
+  display: none ;
 }
