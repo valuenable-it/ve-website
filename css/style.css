@@ -2718,12 +2718,12 @@ form ul {
 
 .footer {
   margin-top: 60px;
-  border-top-left-radius: 100px;
-  border-top-right-radius: 100px;
-  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  -ms-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* border-top-left-radius: 100px; */
+  /* border-top-right-radius: 100px; */
+  /* -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+  /* -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+  /* -ms-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
   padding: 30px 0; }
   .footer .logo {
     width: 260px; }
@@ -5896,7 +5896,9 @@ form ul {
 
     .partners-policy-hero h5 {
       font-size: 19px !important; }
-    
+    .hero-content-policy-hero{
+      margin-bottom: 0px;
+    }
       .hero-content-policy-hero h2 {
         font-size: 33px !important;
       }
@@ -5959,10 +5961,10 @@ form ul {
   font-size: 14.411px !important;
 }
 .hero-content-policy-hero h2 {
-  margin-top: -86px !important;
+  margin-top: -65px !important;
 }
 .hero-content-policy-hero p {
-  color: #fff !important;
+  /* color: #30436C !important; */
   text-align: center;
   font-family: "Inter", "SF Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 15px !important;
@@ -6004,8 +6006,9 @@ letter-spacing: -0.509px;
   margin-top: -39px !important;
 }
 .partner-logos-policy-hero {
-  flex-direction: column !important;
+  /* flex-direction: column !important; */
   gap: 2rem !important;
+  margin-top :0px !important;
 }
 .loan-against {
   margin-top: -29px !important;
@@ -6971,7 +6974,7 @@ letter-spacing: -1.094px;
   margin-bottom: 40px;
 color: rgba(255, 255, 255, 0.50);
 text-align: center;
-font-family: ""Inter", "SF Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;";
+font-family: "Inter", "SF Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 font-size: 20.433px;
 font-style: normal;
 font-weight: 510;
@@ -7059,7 +7062,7 @@ margin-left: 0px;
 }
 
 .features-list span {
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
   padding-left: 30px;
   position: relative;
 color: #FFF;
@@ -7074,15 +7077,14 @@ line-height: normal;
 .investor-speak-policy-hero h2 {
   font-size: 2.5rem;
   margin-top: 42px;
-  
 }
 .video-placeholder-policy-hero {
   margin: 0 auto;
-  background: #D9D9D9;
-  border-radius: 0.5rem;
+  border-radius: 20px;
  width: 1074px;
 height: 378px;
 margin-top: 126px;
+border: 3px solid #F00
 }
 .partners-policy-hero {
   background: #30436C;
@@ -7093,7 +7095,7 @@ margin-top: 126px;
 
 .partners-policy-hero h5 {
 
-  margin-bottom: 3rem;
+  /* margin-bottom: 3rem; */
  color: #FFF;
 text-align: center;
 font-family: Poppins;
@@ -7106,8 +7108,11 @@ letter-spacing: -1.094px;
 .partner-logos-policy-hero {
   display: inline-flex;
   justify-content: center;
-  gap: 4rem;
+  gap: 24.85px;
   align-items: center;
+  max-width: 825px;
+  flex-wrap: wrap;
+  margin-top:65px
 }
 
 .Speak-text-policy{
@@ -7201,3 +7206,217 @@ margin-top: 115px;
 .buyout-mobile-sec{
   display: none ;
 }
+
+.flex-style{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.width-60{
+  width: 60%;
+}
+
+#lottie-animation {
+  width: 100%;  /* Full width */
+  max-width: 500px; /* Maximum width */
+  max-height: 300px; /* Auto height */
+  aspect-ratio: 1; /* Maintain square aspect ratio */
+  margin: 0 auto; /* Centering */
+}
+
+.color_ve_blue{
+  color: #30436C !important;
+  margin-bottom: 0px !important;
+}
+.text-center{
+  text-align: center;
+}
+.width-100{
+  width: 100%;
+}
+.flex-direction-column{
+  flex-direction: column;
+}
+.margin-top-10{
+  margin: 10px !important ;
+}
+.investor-speak-policy-hero {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+.investor-section {
+  position: relative;
+  width: 90%;
+  max-width: 1074px;
+  height: auto;
+  min-height: 320px;
+  background: #fff;
+  border-radius: 20px;
+  border: 3px solid #F00;
+  padding: 80px 20px 30px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.circle {
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 133px;
+  height: 137px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid transparent;
+  /* background-image: linear-gradient(to right, red 50%, transparent 50%); */
+}
+
+.circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.quote-wrapper {
+  max-width: 60%;
+  margin: 0 auto;
+}
+
+.quote-text {
+  color: #30436C;
+text-align: center;
+font-family: "Inter", "SF Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+font-size: 27.43px;
+font-style: normal;
+font-weight: 500;
+line-height: 140%; /* 38.402px */
+letter-spacing: -0.549px;
+margin-bottom: 30px;
+}
+
+.quote-author {
+  color: #F00;
+
+text-align: center;
+font-family: "Inter", "SF Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+font-size: 25.433px;
+font-style: normal;
+font-weight: 510;
+line-height: 129.9%; /* 33.038px */
+letter-spacing: -0.509px;
+}
+.author-designation{
+  color: #484848;
+text-align: center;
+font-family: "Inter", "SF Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+font-size: 20px;
+font-style: italic;
+font-weight: 400;
+line-height: 129.9%; /* 25.98px */
+letter-spacing: -0.4px;
+}
+
+@media (max-width: 768px) {
+  .quote-text {
+    font-size: 20px;
+  }
+
+  .quote-author {
+    font-size: 20px;
+  }
+  .author-designation{
+    font-size: 14px;
+  }
+  .circle {
+    width: 90px;
+    height: 90px;
+    top:-15%
+  }
+  .crisil-text{
+    height: 50px;
+    font-size: 18px;
+  }
+}
+/* @media (max-width: 1026px) {
+  
+  .crisil-text{
+    height: 44px;
+    font-size: 20px;
+  }
+} */
+
+@media (max-width: 425px) {
+  .video-placeholder-policy-hero {
+    padding: 70px 15px 25px;
+    margin-top: 100px;
+  }
+
+  .circle {
+    width: 76px;
+        height: 76px;
+        padding: 2px;
+        top: -37px;
+  }
+
+  .quote-text {
+    font-size: 20px;
+    line-height: 1.5;
+  }
+
+  .quote-author {
+    font-size: 20px;
+  }
+  .author-designation{
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 375px) {
+  .circle {
+    width: 76px;
+    height: 76px;
+    padding: 2px;
+    top: -37px;
+  }
+
+  .quote-text {
+    font-size: 20px;
+  }
+
+  .quote-author {
+    font-size: 20px;
+  }
+  .author-designation{
+    font-size: 14px
+  }
+}
+
+@media (max-width: 320px) {
+  .circle {
+    width: 76px;
+        height: 76px;
+        padding: 2px;
+        top: -37px;
+    
+  }
+
+  .quote-text {
+    font-size: 20px;
+  }
+
+  .quote-author {
+    font-size: 20px;
+  }
+  .author-designation{
+    font-size: 14px
+  }
+}
+
+
+

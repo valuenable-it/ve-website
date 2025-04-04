@@ -39,7 +39,7 @@
         })(window, document, 'script', 'dataLayer', 'GTM-T2P5GVZ');
     </script>
     <!-- End Google Tag Manager -->
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
     <title>ValuEnable</title>
     <!-- Vendor Styles -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
@@ -206,7 +206,8 @@
                                 </ul>
                             </div>
                             <div class="image-content">
-                                <img src="assets/images/irr-data.png" alt="Customers Dashboard" class="dashboard-image">
+                                <img src="assets/images/LAS - Customer.png" style="max-height:340px"alt="Customers Dashboard" class="dashboard-image" >
+                                <!-- <div id="lottie-animation" ></div> -->
                             </div>
                         </div>
                     </div>
@@ -229,27 +230,27 @@
                                 </ul>
                             </div>
                             <div class="image-content">
-                                <img src="assets/images/Group 1.png" alt="Platforms Dashboard" class="dashboard-image">
+                                <img src="assets/images/Partner Portal Mockup-Left 1.png" alt="Platforms Dashboard" class="dashboard-image" style="max-height:340px">
                             </div>
                         </div>
                     </div>
                     <div class="tab-content-policy-hero " id="lenders">
                         <div class="content-grid">
                             <div class="text-content">
-                                <h2>Scale Digital Lending<br /> Across All Securities</h2>
+                                <h2>Scale Digital Lending<br /> Across All Assets</h2>
                                 <ul class="features-list">
                                     <li class="features-list-li"><img src='assets/images/correct-arrow.svg' /><span
-                                            class="security-span">Lenders get verified asset access</span> </li>
+                                            class="security-span">Zero NPA Product</span> &nbsp;&nbsp;    </li>
                                     <li class="features-list-li" style="margin-top: 11px;"><img
                                             src='assets/images/correct-arrow.svg' /><span
-                                            class="security-span">Platforms retain users & boost revenue</span></li>
+                                            class="security-span">Complete LOS and LMS for IP Loans</span></li>
                                     <li class="features-list-li" style="margin-top: 11px;"><img
                                             src='assets/images/correct-arrow.svg' /><span
-                                            class="security-span">Customers get liquidity, stay invested</span></li>
+                                            class="security-span">APls for Fetching and Pledging of Portfolio</span></li>
                                 </ul>
                             </div>
                             <div class="image-content">
-                                <img src="assets/images/Group 62871.png" alt="Lenders Dashboard"
+                                <img src="assets/images/LAS- Lender.png" alt="Lenders Dashboard"
                                     class="dashboard-image">
                             </div>
                         </div>
@@ -410,24 +411,31 @@
         </div>
 
         <div class="partners-policy-hero-second ">
-            <h5 class="lender-req">Our Lender Partners</h5>
-            <div>
-                <p class="platform-img">A platform where Lenders, Platforms, and<br/> Customers all win.</p>
+            <div class="flex-style ">
+                <h5 class="lender-req width-60">Our Lender Partners</h5>
+
             </div>
-            <div class="partner-logos-policy-hero" style="margin-top: 65px;">
+            <div class= "hero-content-policy-hero">
+                <p class="platform-img color_ve_blue">Making lending simpler for everyone.</p>
+            </div>
+            <div class="partner-logos-policy-hero" >
                 <div class="partner-logo">
-                    <img style="width: 188px;" src="assets/images/light_house.png" alt="Lighthouse Canton">
+                    <img style="width: 188px;" src="assets/images/jio.png" alt="jio">
                 </div>
                 <div class="partner-logo">
-                    <img style="width: 188px;" src="assets/images/yubi.png" alt="Yubi">
+                    <img style="width: 188px;" src="assets/images/infina.png" alt="infina">
                 </div>
                 <div class="partner-logo">
-                    <img style="width: 188px;" src="assets/images/grip.png" alt="GRIP">
+                    <img style="width: 188px;" src="assets/images/icici.png" alt="icici">
+                </div>
+                <div class="partner-logo">
+                    <img style="width: 188px;" src="assets/images/tata_capital.png" alt="tata_capital">
+                </div>
+                <div class="partner-logo">
+                    <img style="width: 188px;" src="assets/images/bajaj.png" alt="bajaj">
                 </div>
             </div>
         </div>
-
-
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 const tabs = document.querySelectorAll('.tab-btn');
@@ -446,6 +454,7 @@
                 });
             });
         </script>
+
     </body>
     <footer>
         <div class="footer">
@@ -635,6 +644,13 @@
                 const tabId = button.getAttribute('data-tab');
                 document.getElementById(tabId).classList.add('active');
             });
+        });
+        let animation = lottie.loadAnimation({
+            container: document.getElementById("lottie-animation"),
+            renderer: "svg",
+            loop: true,
+            autoplay: true,
+            path: "assets/json/LAS - For Customer.json"
         });
     </script>
 </body>
