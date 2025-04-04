@@ -2811,7 +2811,9 @@ form ul {
             border: 1px solid #ca2825;
             background-color: #ca2825; }
             .footer .footer-wrap ul.socials li a:hover i {
-              color: #ffffff; }
+              color: #ffffff;
+          
+             }
 
 @media (min-width: 1921px) {
   html {
@@ -4610,7 +4612,14 @@ form ul {
     font-size: 48px !important;
     line-height: 66px !important; }
   .footer-logo {
-    margin-left: 0px !important; } }
+    margin-left: 0px !important; } 
+    .text-content h2 {
+      font-size: 27.821px !important;
+    }
+    .content-grid {
+      grid-template-columns: 427px 1fr !important;
+    }
+  }
  
 
 @media (max-width: 991px) {
@@ -5867,7 +5876,9 @@ form ul {
   .career-wrapper .career-raw .img-wrap img {
     max-width: 400px; }
   .solutions-wrapper .solutions-raw .solutions-box .img-wrap img {
-    max-width: 400px; } }
+    max-width: 400px; } 
+
+  }
 
 @media screen and (min-width: 991px) {
   #nav-tabs-wrapper {
@@ -5887,7 +5898,7 @@ form ul {
       font-size: 19px !important; }
     
       .hero-content-policy-hero h2 {
-        font-size: 21px !important;
+        font-size: 33px !important;
       }
       .partners-policy-hero-second {
         margin-top: -24px !important;
@@ -5906,14 +5917,16 @@ form ul {
     }
     
     .policy-backed-hero h2 {
-      font-size: 20.39px !important;
-    }
-
-    .download-btn-policy-backed {
-      width: 243px !important;
-      height: 54px !important;
+      font-size: 33.39px !important;
   }
 
+  .download-btn-policy-backed {
+    width: 200px !important;
+    height: 46px !important;
+}
+.download-btn-policy-backed {
+  font-size: 13px !important;
+}
   .tabs-policy-hero {
     flex-direction: column !important;
     align-items: center !important;
@@ -5939,17 +5952,27 @@ form ul {
   font-size: 13px !important;
 }
 .unlock-img{
-  width: 14px !important;
+  width: 12.897px !important;
+  height: 14.673px !important;
 }
 .features-list span {
   font-size: 14.411px !important;
 }
 .hero-content-policy-hero h2 {
-  margin-top: -81px !important;
+  margin-top: -86px !important;
 }
 .hero-content-policy-hero p {
-  margin-top: -33px !important;
+  color: #fff !important;
+  text-align: center;
+  font-family: "Inter", "SF Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 15px !important;
+  margin-top: -4px ;
+  font-style: normal;
+  font-weight: 510;
+  line-height: 129.9%;
+  letter-spacing: -0.509px;
 }
+
 .tabs-policy-hero {
   margin-top: -22px !important;
   gap: 0px !important;
@@ -5959,7 +5982,17 @@ form ul {
 }
 .hero-policy-hero {
   margin-top: -6px !important;
-  height: 1327px !important;
+  height: 1163px !important;
+}
+.platform-img{
+  color: #30436C;
+text-align: center;
+font-family: "Inter";
+font-size: 25.433px;
+font-style: normal;
+font-weight: 510;
+line-height: 129.9%; /* 33.038px */
+letter-spacing: -0.509px;
 }
 .tab-btn-policy-hero {
   font-size: 14px !important;
@@ -5984,10 +6017,11 @@ form ul {
   font-size: 22.712px !important;
 }
 .loan-against-digitised {
-  font-size: 21.39px !important;
+  font-size: 33.39px !important;
 }
 .policies-paragraph {
   font-size: 12.433px !important;
+  margin-top: -20px !important;
 }
 .Iphone-img {
   margin-top: 37px !important;
@@ -6013,40 +6047,114 @@ form ul {
   display: none !important;
 }
 .mobile-policyholder{
-color: #FFF;
-font-family: "SF Pro";
-font-size: 19.517px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-letter-spacing: 0.39px;
-margin-top: 22px;
+  color: #30436C;
+  font-family: "SF Pro";
+  font-size: 16.517px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  padding: 5px 24px;
+  border-radius: 45px;
+  background-color: #FFFFFF;
+
+}
+.card-body{
+  text-align: left;
+  display: flex
+;
+  flex-direction: column;
+  justify-content: center;
 }
 .mobile-policyholder-paragraph{
   color: #FFF;
-  font-family: "SF Pro";
-  font-size: 16.821px;
-  font-style: normal;
-  font-weight: 590;
-  margin-top: 16px;
+font-family: "SF Pro";
+font-size: 1.25rem;
+font-style: normal;
+font-weight: 590;
+margin-top: 13px;
+text-align: justify;
 }
+
 .mobile-instant-para{
   color: #FFF;
-leading-trim: both;
-text-edge: cap;
-font-family: "SF Pro";
-font-size: 14.411px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+  font-family: 'Inter' !important;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
 }
 .card-mobile-view-tab{
-  background: cornflowerblue;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 45px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
   margin: auto;
   width: 320px;
-  text-align: center;
+  text-align: left;
+  padding: 25px;
+
+
+}
+
+.custom-card {
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  color: white;
+  height: 100%;
+  transition: transform 0.3s ease;
+  padding: 12px;
+  height: 273px;
+  margin: -14px;
+}
+
+
+
+.card-title1 {
+  color: #FFF !important;
+  font-family: 'Inter' !important;
+  font-size: 19.821px;
+font-style: normal;
+font-weight: 590;
+margin-bottom: 0px !important;
+}
+
+
+.check-icon1 {
+  width: 20px;
+  height: 20px;
+  stroke: #00ff9d;
+  margin-right: 10px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.list-unstyled  li {
+  display: flex;
+  align-items: center;
+  color: #FFF;
+  font-family: "SF Pro";
+  font-size: 20.411px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.badge {
+        color: #30436C;
+        font-family: 'Inter' !important;
+        font-size: 9px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        border-radius: 20px;
+        background: #FFF;
+        text-align: center;
+        padding: 7px 15px;
+}
+.header .header-main .logo a img {
+  width: 80% !important;
+}
+.img-fluid {
+  max-width: 80% !important;
 }
 }
 @media only screen and (max-device-width: 480px) {
@@ -6834,7 +6942,7 @@ color: #FFFFFF;
 }
 .hero-policy-hero {
   padding: 80px 0;
-  height: 730px;
+  height: 683px;
   background-color: #30436C;
   margin-top: 31px;
 }

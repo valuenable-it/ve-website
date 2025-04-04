@@ -60,7 +60,9 @@
     <!-- Favicon -->
 
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <!-- End Head -->
     <!-- Body -->
 
@@ -148,10 +150,10 @@
                         Digitised</spna>
                 </h2>
                 <div>
-                    <p class="policies-paragraph">A single secure platform to enable loans against
+                    <p class="policies-paragraph">A single secure platform to enable loans against<br />
+                        Insurance Policies, Mutual Funds, Shares, Bonds & more.
                     </p>
-                    <p class="policies-paragraph">
-                        Insurance Policies, Mutual Funds, Shares, Bonds & more.</p>
+
                 </div>
                 <img class="Iphone-img" src="assets/images/Iphone - Screens 1.png" alt="Iphone - Screens 1">
                 <div class="demo-class">
@@ -163,8 +165,8 @@
 
         <div class="hero-policy-hero">
             <div class="container-policy-hero">
-                <div class="hero-content-policy-hero">
-                    <h2>Secured, Low-cost, Fast Loan</h2>
+                <div class="hero-content-policy-hero buyout-desktop-sec">
+                    <h2>Secured. Low-cost. Fast Loan.</h2>
                     <p>A platform where Lenders, Platforms, and Customers all win.</p>
                 </div>
                 <div class="buyout-desktop-sec">
@@ -174,19 +176,20 @@
                                 <img src="assets/images/ve_graph_icon.svg" class="tab-icon">
                                 For Customers
                             </button>
-                            <button class="tab-btn-policy-hero " data-tab="lenders">
-                                <img src="assets/images/ve_user_icon.svg" class="tab-icon">
-                                For Lenders
-                            </button>
                             <button class="tab-btn-policy-hero " data-tab="platforms">
                                 <img src="assets/images/ve_file_icon.svg" class="tab-icon">
                                 For Platforms/ IFAs
                             </button>
+                            <button class="tab-btn-policy-hero " data-tab="lenders">
+                                <img src="assets/images/ve_user_icon.svg" class="tab-icon">
+                                For Lenders
+                            </button>
+
 
                         </div>
                         <hr class="policy-hr-line" />
                     </div>
-                    <div class="tab-content-policy-hero" id="customers">
+                    <div class="tab-content-policy-hero active" id="customers">
                         <div class="content-grid">
                             <div class="text-content">
                                 <h2>Instant liquidity. No <br /> selling. No paperwork.</h2>
@@ -203,33 +206,10 @@
                                 </ul>
                             </div>
                             <div class="image-content">
-                                <img src="assets/images/Group 62788.png" alt="Customers Dashboard"
-                                    class="dashboard-image">
+                                <img src="assets/images/irr-data.png" alt="Customers Dashboard" class="dashboard-image">
                             </div>
                         </div>
                     </div>
-                    <div class="tab-content-policy-hero active" id="lenders">
-                        <div class="content-grid">
-                            <div class="text-content">
-                                <h2>Scale Digital Lending<br /> Across All Securities</h2>
-                                <ul class="features-list">
-                                    <li class="features-list-li"><img src='assets/images/correct-arrow.svg' /><span
-                                            class="security-span">Lenders get verified asset access</span> </li>
-                                    <li class="features-list-li" style="margin-top: 11px;"><img
-                                            src='assets/images/correct-arrow.svg' /><span
-                                            class="security-span">Platforms retain users & boost revenue</span></li>
-                                    <li class="features-list-li" style="margin-top: 11px;"><img
-                                            src='assets/images/correct-arrow.svg' /><span
-                                            class="security-span">Customers get liquidity, stay invested</span></li>
-                                </ul>
-                            </div>
-                            <div class="image-content">
-                                <img src="assets/images/Group 62871.png" alt="Lenders Dashboard"
-                                    class="dashboard-image">
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="tab-content-policy-hero" id="platforms">
                         <div class="content-grid">
                             <div class="text-content">
@@ -253,22 +233,55 @@
                             </div>
                         </div>
                     </div>
+                    <div class="tab-content-policy-hero " id="lenders">
+                        <div class="content-grid">
+                            <div class="text-content">
+                                <h2>Scale Digital Lending<br /> Across All Securities</h2>
+                                <ul class="features-list">
+                                    <li class="features-list-li"><img src='assets/images/correct-arrow.svg' /><span
+                                            class="security-span">Lenders get verified asset access</span> </li>
+                                    <li class="features-list-li" style="margin-top: 11px;"><img
+                                            src='assets/images/correct-arrow.svg' /><span
+                                            class="security-span">Platforms retain users & boost revenue</span></li>
+                                    <li class="features-list-li" style="margin-top: 11px;"><img
+                                            src='assets/images/correct-arrow.svg' /><span
+                                            class="security-span">Customers get liquidity, stay invested</span></li>
+                                </ul>
+                            </div>
+                            <div class="image-content">
+                                <img src="assets/images/Group 62871.png" alt="Lenders Dashboard"
+                                    class="dashboard-image">
+                            </div>
+                        </div>
+                    </div>
+
+
 
                 </div>
-            
 
-        <div style="display: inline-flex; gap: 10px; flex-direction: column; margin-top: -22px;">
-            <div class="card-mobile-view-tab">
-                <div class="buyout-mobile-sec">
-                    <div class="tabs-head-back">
 
-                        <h1 class="mobile-policyholder">For Customers</h1>
-                        <div>
-                            <div>
-                                <div>
-                                    <p class="mobile-policyholder-paragraph">Instant liquidity. No selling. No paperwork.</p>
-                                    <div
-                                        style="display: inline-flex;gap: 10px; flex-direction: column; margin-top: 19px;">
+                <div class="buyout-mobile-sec" >
+                    <div class="hero-content-policy-hero buyout-mobile-sec">
+                        <h2>Secured. Low-cost.<br /> Fast Loan.</h2>
+                        <p>A platform where Lenders, Platforms, and <br />Customers all win.</p>
+                    </div>
+                    <div class="container py-5">
+                        <div class="row g-4" style="display: inline-flex; gap:51px">
+                            <!-- Card 1 -->
+                            <div class="col-md-4">
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <div>
+                                        <span class="badge bg-light text-dark mb-3">For Customers</span>
+                                    </div>
+                                        <div>
+                                        <h3 class="card-title1 mb-3">Instant liquidity.</h3>
+                                        </div>
+                                        <div>
+                                        <h3 class="card-title1 ">No selling. No paperwork.</h3>
+                                    </div>
+                                        <div
+                                        style="display: inline-flex;gap: 15px; flex-direction: column; margin-top: 19px;">
                                         <div style="display: inline-flex; gap: 7px; justify-content: left;">
                                             <div>
                                                 <img class="unlock-img" src='assets/images/correct-arrow.svg' />
@@ -297,83 +310,20 @@
                                         </div>
 
                                     </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="image-content">
-                            <img style="margin-top: 16px;" src="assets/images/Group 62788.png"
-                                alt="Lenders Dashboard" class="dashboard-image">
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-            <div class="card-mobile-view-tab">
-                <div class="buyout-mobile-sec">
-                    <div class="tabs-head-back">
-
-                        <h1 class="mobile-policyholder">  For Lenders</h1>
-                        <div>
-                            <div>
-                                <div>
-                                    <p class="mobile-policyholder-paragraph">Scale Digital Lending Across All Securities</p>
-                                    <div
-                                        style="display: inline-flex;gap: 10px; flex-direction: column; margin-top: 19px;">
-                                        <div style="display: inline-flex; gap: 7px; justify-content: left;">
-                                            <div>
-                                                <img class="unlock-img" src='assets/images/correct-arrow.svg' />
-                                            </div>
-                                            <div>
-                                                <p class="mobile-instant-para">Lenders get verified asset access</p>
-                                            </div>
-                                        </div>
-
-                                        <div style="display: inline-flex; gap: 7px; justify-content: left;">
-                                            <div>
-                                                <img class="unlock-img" src='assets/images/correct-arrow.svg' />
-                                            </div>
-                                            <div>
-                                                <p class="mobile-instant-para">Platforms retain users & boost revenue</p>
-                                            </div>
-                                        </div>
-
-                                        <div style="display: inline-flex; gap: 7px; justify-content: left;">
-                                            <div>
-                                                <img class="unlock-img" src='assets/images/correct-arrow.svg' />
-                                            </div>
-                                            <div>
-                                                <p class="mobile-instant-para">Customers get liquidity, stay invested</p>
-                                            </div>
-                                        </div>
-
                                     </div>
                                 </div>
-
                             </div>
-                        </div>
-                        <div class="image-content">
-                            <img style="margin-top: 16px;" src="assets/images/Group 62871.png" alt="Lenders Dashboard"
-                                class="dashboard-image">
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-            <div class="card-mobile-view-tab">
-                <div class="buyout-mobile-sec">
-                    <div class="tabs-head-back">
-
-                        <h1 class="mobile-policyholder"> For Platforms/ IFAs</h1>
-                        <div>
-                            <div>
-                                <div>
-                                    <p class="mobile-policyholder-paragraph">Retain Customers AUM, <br/>
-                                        Earn Additional Income</p>
-                                    <div
-                                        style="display: inline-flex;gap: 10px; flex-direction: column; margin-top: 19px;">
+                
+                            <!-- Card 2 -->
+                            <div class="col-md-4">
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <div>
+                                        <span class="badge bg-light text-dark mb-3">For Platforms/IFAs</span>
+                                        </div>
+                                        <h3 class="card-title1 mb-3">Retain Customers AUM,<br>Earn Additional Income</h3>
+                                        <div
+                                        style="display: inline-flex;gap: 15px; flex-direction: column; margin-top: 19px;">
                                         <div style="display: inline-flex; gap: 7px; justify-content: left;">
                                             <div>
                                                 <img class="unlock-img" src='assets/images/correct-arrow.svg' />
@@ -388,8 +338,8 @@
                                                 <img class="unlock-img" src='assets/images/correct-arrow.svg' />
                                             </div>
                                             <div>
-                                                <p class="mobile-instant-para">Dedicated Partner Portal for Lead generation <br/> & tracking</p>
-                                                
+                                                <p class="mobile-instant-para">Dedicated Partner Portal for Lead Gen. & tracking</p>
+
                                             </div>
                                         </div>
 
@@ -398,39 +348,81 @@
                                                 <img class="unlock-img" src='assets/images/correct-arrow.svg' />
                                             </div>
                                             <div>
-                                                <p class="mobile-instant-para"> Launch as a white-labeled service <br/> within your App</p>
+                                                <p class="mobile-instant-para">Launch as a white-labeled service within your App </p>
                                             </div>
                                         </div>
 
                                     </div>
+                                    </div>
                                 </div>
+                            </div>
+                
+                            <!-- Card 3 -->
+                            <div class="col-md-4">
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <div>
+                                        <span class="badge bg-light text-dark mb-3">For Lenders</span>
+                                    </div>
+                                        <h3 class="card-title1 mb-3">Instant liquidity.<br>No selling. No paperwork.</h3>
+                                        <div
+                                        style="display: inline-flex;gap: 15px; flex-direction: column; margin-top: 19px;">
+                                        <div style="display: inline-flex; gap: 7px; justify-content: left;">
+                                            <div>
+                                                <img class="unlock-img" src='assets/images/correct-arrow.svg' />
+                                            </div>
+                                            <div>
+                                                <p class="mobile-instant-para">Earn up-front & trail income on
+                                                    every lead</p>
+                                            </div>
+                                        </div>
 
+                                        <div style="display: inline-flex; gap: 7px; justify-content: left;">
+                                            <div>
+                                                <img class="unlock-img" src='assets/images/correct-arrow.svg' />
+                                            </div>
+                                            <div>
+                                                <p class="mobile-instant-para">Dedicated Partner Portal for Lead
+                                                    Gen. & tracking</p>
+
+                                            </div>
+                                        </div>
+
+                                        <div style="display: inline-flex; gap: 7px; justify-content: left;">
+                                            <div>
+                                                <img class="unlock-img" src='assets/images/correct-arrow.svg' />
+                                            </div>
+                                            <div>
+                                                <p class="mobile-instant-para"> Launch as a white-labeled
+                                                    service within your App</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="image-content">
-                            <img style="margin-top: 16px;" src="assets/images/Group 1.png" alt="Lenders Dashboard"
-                                class="dashboard-image">
-                        </div>
-                    </div>
-
+                    <!-- </div> -->
 
                 </div>
             </div>
         </div>
-    </div>
-    </div>
 
         <div class="partners-policy-hero-second ">
             <h5 class="lender-req">Our Lender Partners</h5>
+            <div>
+                <p class="platform-img">A platform where Lenders, Platforms, and<br/> Customers all win.</p>
+            </div>
             <div class="partner-logos-policy-hero" style="margin-top: 65px;">
                 <div class="partner-logo">
-                    <img src="assets/images/light_house.png" alt="Lighthouse Canton">
+                    <img style="width: 188px;" src="assets/images/light_house.png" alt="Lighthouse Canton">
                 </div>
                 <div class="partner-logo">
-                    <img src="assets/images/yubi.png" alt="Yubi">
+                    <img style="width: 188px;" src="assets/images/yubi.png" alt="Yubi">
                 </div>
                 <div class="partner-logo">
-                    <img src="assets/images/grip.png" alt="GRIP">
+                    <img style="width: 188px;" src="assets/images/grip.png" alt="GRIP">
                 </div>
             </div>
         </div>
