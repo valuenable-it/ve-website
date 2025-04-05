@@ -4162,6 +4162,10 @@ form ul {
     .inner-wrapper .milestonewrap .boxwrap .milestopboxwrap .imagebox ul li .text {
       height: 110px;
       overflow: hidden; }
+      .crisil-text {
+        font-size: 20px !important; }
+
+      
     .inner-wrapper .milestonewrap .boxwrap .milestopboxwrap .imagebox ul li:nth-child(even) .number {
       height: 110px; }
     .inner-wrapper .milestonewrap .boxwrap .milestopboxwrap .imagebox ul li:nth-child(even) .text {
@@ -5890,7 +5894,8 @@ form ul {
 
 @media screen and (min-width: 991px) {
   #nav-tabs-wrapper {
-    display: block !important; } }
+    display: block !important; } 
+  }
 
 @media screen and (min-width: 576px) {
   .mobile-show {
@@ -7413,8 +7418,8 @@ letter-spacing: -0.4px;
     top:-15%
   }
   .crisil-text{
-    height: 50px;
-    font-size: 18px;
+    height: 42px !important;
+    font-size: 16px !important;
   }
 }
 /* @media (max-width: 1026px) {
