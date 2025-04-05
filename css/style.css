@@ -5622,6 +5622,7 @@ form ul {
     margin-top: 90px; }
     .surrender-wrap::before {
       height: 38px !important;
+      display: none !important;
   }
   .surrender-wrap .know-box {
     min-height: 250px; }
@@ -6043,16 +6044,23 @@ letter-spacing: -0.509px;
   width: 285px !important;
 }
 .crisil-text {
-  bottom: -17px !important;
+  bottom: -24px !important;
     height: 52px !important;
     font-size: 12px !important;
 }
+
+.surrender-wrap .know-box.surrender-banner-phone{
+  flex-direction: column !important;
+  gap: 19px !important;
+  margin-bottom: 25px !important;
+}
 .right-arrow-icon{
-  width: 20px !important;
+  width: 17px !important;
 }
 .buyout-mobile-sec{
   display: block !important;
 }
+
 .buyout-desktop-sec{
   display: none !important;
 }
@@ -6068,6 +6076,7 @@ letter-spacing: -0.509px;
   background-color: #FFFFFF;
 
 }
+
 .card-body{
   text-align: left;
   display: flex
@@ -6084,7 +6093,65 @@ font-weight: 590;
 margin-top: 13px;
 text-align: justify;
 }
+.marquee-container {
+  width: 100%;
+  max-width: 1200px;
+  background: #ca2825;
+  backdrop-filter: blur(8px);
+  padding: 2rem;
+  position: absolute;
+  bottom: -17px;
+    height: 38px !important;
+    height: 15px;
+  /* border-radius: 12px; */
+  /* box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); */
+}
+.marquee-wrapper {
+  /* overflow: hidden; */
+  position: relative;
+}
 
+.marquee {
+  display: flex;
+  width: fit-content;
+  animation: scroll 10s linear infinite;
+}
+
+.marquee-content {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.marquee-item {
+  flex-shrink: 0;
+
+  white-space: nowrap;
+  margin-top: -34px;
+  color: #FFF;
+text-align: center;
+font-family: "Inter";
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: 128%; /* 28.16px */
+letter-spacing: -0.44px;
+padding: 0rem 1rem;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Pause animation on hover */
+/* .marquee-wrapper:hover .marquee {
+  animation-play-state: paused;
+} */
 .mobile-instant-para{
   color: #FFF;
   font-family: 'Inter' !important;
