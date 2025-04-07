@@ -2819,6 +2819,10 @@ form ul {
           
              }
 
+             .desktop-crisil-img{
+              width: 530px;
+            }
+
 @media (min-width: 1921px) {
   html {
     font-size: 0.8333333333333334vw; }
