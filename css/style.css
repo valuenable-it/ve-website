@@ -7428,6 +7428,9 @@ letter-spacing: -0.4px;
     height: 42px !important;
     font-size: 16px !important;
   }
+  .bfl-lsp-heading{
+    font-size: 12px !important;
+  }
 }
 /* @media (max-width: 1026px) {
   
@@ -7461,6 +7464,9 @@ letter-spacing: -0.4px;
   .author-designation{
     font-size: 14px;
   }
+  .bfl-lsp-heading{
+    font-size: 12px !important;
+  }
 }
 
 @media (max-width: 375px) {
@@ -7480,6 +7486,9 @@ letter-spacing: -0.4px;
   }
   .author-designation{
     font-size: 14px
+  }
+  .bfl-lsp-heading{
+    font-size: 12px !important;
   }
 }
 
@@ -7501,6 +7510,9 @@ letter-spacing: -0.4px;
   }
   .author-designation{
     font-size: 14px
+  }
+  .bfl-lsp-heading{
+    font-size: 12px !important;
   }
 }
 
