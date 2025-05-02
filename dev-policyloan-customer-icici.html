@@ -127,6 +127,9 @@
 <!-- Body -->
 
 <body>
+  <div id="loader-container" class="loader-container">
+    <div class="loader"></div>
+  </div>
   <div id="preloader">
     <div id="status">&nbsp;</div>
   </div>
@@ -3586,16 +3589,44 @@ if(branchNameResp=="Branch Name*"){
         .done((data) => {
           // console.log("data", data);
           if (data.status === "success") {
-            resetOTPInputField();
-
+           
+            document.getElementById("loader-container").style.display = "flex";
             // var otpModalHide = document.getElementById('otpModal');
             // var hideOtpModal = new bootstrap.Modal(otpModalHide);
-            otpModalInstance.hide(); 
+            let link = `https://api-dev.valuenable.in/webhook/v1/generate-lead`
+            $.ajax({
+        type: "POST",
+        url: link,
+        data: {
+ "policy_number": payload.policyNumber,
+ "company_code":payload.companyName,
+"email": payload.customerEmail,
+"name": payload.customerFirstName,
+"dob": payload.customerDOB,
+"mobile": payload.customerMobileNumber,
+"la_name": "",
+"la_email": "",
+"la_mobile": "",
+ "unit_statement": payload.unitStatementFilePath,
+ "policy_bond": payload.policyDocumentPath,
+ "branch_name": payload.branchName,
+},
+        dataType: "json",
+        encode: true,
+      }).done((data) => {
+
+        window.location.href = data.link
+        resetOTPInputField();
+        otpModalInstance.hide(); 
             var sentMessageModal=document.getElementById('sentMessageModal');
             var messageModal= new bootstrap.Modal(sentMessageModal);
             messageModal.show()
 
             payload = {};
+      }).fail((error) => {
+          alert(error?.responseJSON?.message);
+        });
+           
           } else {
             alert("Please enter the OTP");
           }
@@ -3631,18 +3662,43 @@ if(branchNameResp=="Branch Name*"){
         .done((data) => {
           console.log("data", data);
           if (data.status === "success") {
-            resetOTPInputsField();
 
-            var resotpModal = document.getElementById('otpModal');
-            var resmodal = new bootstrap.Modal(resotpModal);
-            resmodal.hide(); 
+            document.getElementById("loader-container").style.display = "flex";
+            // var otpModalHide = document.getElementById('otpModal');
+            // var hideOtpModal = new bootstrap.Modal(otpModalHide);
+            let link = `https://api-dev.valuenable.in/webhook/v1/generate-lead`
+            $.ajax({
+        type: "POST",
+        url: link,
+        data: {
+ "policy_number": payload.policyNumber,
+ "company_code":payload.companyName,
+"email": payload.customerEmail,
+"name": payload.customerFirstName,
+"dob": payload.customerDOB,
+"mobile": payload.customerMobileNumber,
+"la_name": "",
+"la_email": "",
+"la_mobile": "",
+ "unit_statement": payload.unitStatementFilePath,
+ "policy_bond": payload.policyDocumentPath,
+ "branch_name": payload.branchName,
+},
+        dataType: "json",
+        encode: true,
+      }).done((data) => {
 
-            var sentMessagePopup = document.getElementById('sentMessageModal');
-            var sentMes = new bootstrap.Modal(sentMessagePopup);
-            sentMes.show();
-            
+        window.location.href = data.link
+        resetOTPInputField();
+        otpModalInstance.hide(); 
+            var sentMessageModal=document.getElementById('sentMessageModal');
+            var messageModal= new bootstrap.Modal(sentMessageModal);
+            messageModal.show()
 
             payload = {};
+      }).fail((error) => {
+          alert(error?.responseJSON?.message);
+        });
           } else {
             alert("Please enter the OTP");
           }
