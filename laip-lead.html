@@ -127,9 +127,13 @@
 <!-- Body -->
 
 <body>
-  <div id="loader-container" class="loader-container">
-    <div class="loader"></div>
-  </div>
+    <div id="loader-container" class="loader-container">
+        <div class="loader"></div>
+      </div>
+    
+      
+      
+      
   <div id="preloader">
     <div id="status">&nbsp;</div>
   </div>
@@ -199,9 +203,22 @@
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <input name="user" placeholder="ICICI Prudential Life Insurance Co. Ltd*" type="text"
+                          <!-- <input name="user" placeholder="ICICI Prudential Life Insurance Co. Ltd*" type="text"
                             class="form-control" id="companysName" readonly
-                            value="ICICI Prudential Life Insurance Co. Ltd" />
+                            value="ICICI Prudential Life Insurance Co. Ltd" /> -->
+                            <!-- <select class="form-control" id="prodctsType">
+                                <option>Company Name*</option> -->
+                                <select class="form-control" id="companysName">
+                                    <option>Insurance Company*</option>
+                                    <option>ICICI Prudential Life Insurance</option>
+                                    <option>HDFC Life Insurance Co. Ltd.</option>
+                                    <option>Tata AIA Life Insurance Co. Ltd.</option>
+                                    <option>PNB MetLife India Insurance Co. Ltd</option>
+                                    <option>Bajaj Allianz Life Insurance Co. Ltd</option>
+                                    <option>Max Life Insurance Company Limited</option>
+
+                                  </select>
+                              <!-- </select> -->
 
                         </div>
                       </div>
@@ -209,270 +226,11 @@
                       <div class="col-md-12">
                         <div class="form-group">
                           <select class="form-control" id="prodctsType">
-                            <option>Product Name*</option>
-                            <option>ICICI Pru Wealth Builder II</option>
-                            <option>ICICI Pru Elite Wealth II</option>
-                            <option>ICICI Pru LifeTime Classic</option>
-                            <!-- <option>
-                                ICICI Pru Guaranteed Wealth Protector
-                              </option> -->
-                            <option>ICICI Pru Elite Life Super</option>
-                            <!-- <option>ICICI Pru Life Time</option> -->
-                            <!-- <option>ICICI Pru Cash Advantage</option>
-                              <option>ICICI Pru Savings Suraksha</option> -->
-                            <option>ICICI Pru Signature</option>
-                            <option>ICICI Pru Smart Life</option>
-                            <option>ICICI Pru Elite Wealth Super</option>
-                            <option>ICICI Pru1 Wealth</option>
-                            <option>ICICI Pru Elite Life II</option>
-                            <option>Guaranteed Wealth Protector</option>
-                            <option>ICICI Pru Ace</option>
+                            <option selected disabled>Product Name*</option>
                           </select>
                         </div>
                       </div>
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <select class="form-control" id="branchNameResp">
-                            <option value="">Branch Name*</option>
-                            <option value='A S Rao Nagar'>A S Rao Nagar</option>
-<option value='AGARTALA'>AGARTALA</option>
-<option value='AGRA'>AGRA</option>
-<option value='AHMEDABAD - BODAKDEV'>AHMEDABAD - BODAKDEV</option>
-<option value='AHMEDABAD - MAIN'>AHMEDABAD - MAIN</option>
-<option value='ALIGARH'>ALIGARH</option>
-<option value='ALLAHABAD'>ALLAHABAD</option>
-<option value='Allahabad-Civil Lines'>Allahabad-Civil Lines</option>
-<option value='AMBALA'>AMBALA</option>
-<option value='AMRAVATI'>AMRAVATI</option>
-<option value='AMRITSAR'>AMRITSAR</option>
-<option value='AMTALA'>AMTALA</option>
-<option value='ARA'>ARA</option>
-<option value='ARBINDO MARG'>ARBINDO MARG</option>
-<option value='ASANSOL'>ASANSOL</option>
-<option value='AURANGABAD'>AURANGABAD</option>
-<option value='AZAMGARH'>AZAMGARH</option>
-<option value='BALASORE'>BALASORE</option>
-<option value='BALLIA'>BALLIA</option>
-<option value='BANGALORE - INDIRA NAGAR'>BANGALORE - INDIRA NAGAR</option>
-<option value='BANGALORE - JAYANAGAR'>BANGALORE - JAYANAGAR</option>
-<option value='BANGALORE - KORAMANGALAM'>BANGALORE - KORAMANGALAM</option>
-<option value='BANGALORE - MAIN'>BANGALORE - MAIN</option>
-<option value='BANGALORE - MALLESHWARAM'>BANGALORE - MALLESHWARAM</option>
-<option value='Bangalore-Residency Road'>Bangalore-Residency Road</option>
-<option value='BANKURA'>BANKURA</option>
-<option value='BANSWARA'>BANSWARA</option>
-<option value='BARASAT'>BARASAT</option>
-<option value='BARDOLI'>BARDOLI</option>
-<option value='BAREILLY'>BAREILLY</option>
-<option value='BARIPADA'>BARIPADA</option>
-<option value='BARODA'>BARODA</option>
-<option value='BATALA'>BATALA</option>
-<option value='BEHRAMPUR'>BEHRAMPUR</option>
-<option value='BELGAUM'>BELGAUM</option>
-<option value='BHADRAK'>BHADRAK</option>
-<option value='BHAGALPUR'>BHAGALPUR</option>
-<option value='BHAVNAGAR'>BHAVNAGAR</option>
-<option value='BHILAI'>BHILAI</option>
-<option value='BHILWARA'>BHILWARA</option>
-<option value='BHIWANI'>BHIWANI</option>
-<option value='BHOPAL'>BHOPAL</option>
-<option value='Bhubaneshwar-Baramunda'>Bhubaneshwar-Baramunda</option>
-<option value='BIHAR SHARIFF'>BIHAR SHARIFF</option>
-<option value='BIKANER'>BIKANER</option>
-<option value='BILASPUR'>BILASPUR</option>
-<option value='BORIVALI'>BORIVALI</option>
-<option value='CHANDANAGAR'>CHANDANAGAR</option>
-<option value='CHANDIGARH'>CHANDIGARH</option>
-<option value='CHANDRAPUR'>CHANDRAPUR</option>
-<option value='CHENNAI - ADYAR'>CHENNAI - ADYAR</option>
-<option value='CHENNAI - ANNANAGAR'>CHENNAI - ANNANAGAR</option>
-<option value='CHENNAI - MAIN'>CHENNAI - MAIN</option>
-<option value='Chennai - Nungambakkam'>Chennai - Nungambakkam</option>
-<option value='Chennai-Tambaram'>Chennai-Tambaram</option>
-<option value='CHINSURAH'>CHINSURAH</option>
-<option value='CHITTAURGARH'>CHITTAURGARH</option>
-<option value='COCHIN'>COCHIN</option>
-<option value='Coimbatore PC'>Coimbatore PC</option>
-<option value='CUTTACK'>CUTTACK</option>
-<option value='DARBHANGA'>DARBHANGA</option>
-<option value='DEHRADUN'>DEHRADUN</option>
-<option value='Delhi – Janakpuri'>Delhi – Janakpuri</option>
-<option value='DELHI - MAIN'>DELHI - MAIN</option>
-<option value='DELHI - MODEL TOWN'>DELHI - MODEL TOWN</option>
-<option value='DELHI - PITAMPURA'>DELHI - PITAMPURA</option>
-<option value='DELHI - PUSHPAVIHAR'>DELHI - PUSHPAVIHAR</option>
-<option value='Delhi -Noida'>Delhi -Noida</option>
-<option value='Delhi-Videocon Towers'>Delhi-Videocon Towers</option>
-<option value='DEORIA'>DEORIA</option>
-<option value='DEVANGERE'>DEVANGERE</option>
-<option value='DHANBAD'>DHANBAD</option>
-<option value='DIAMOND HARBOR'>DIAMOND HARBOR</option>
-<option value='Daltolganj'>Daltolganj</option>
-<option value='DUBAI'>DUBAI</option>
-<option value='DUMKA'>DUMKA</option>
-<option value='DURGAPUR'>DURGAPUR</option>
-<option value='DWARKA'>DWARKA</option>
-<option value='ENGLISH BAZAAR'>ENGLISH BAZAAR</option>
-<option value='ERODE'>ERODE</option>
-<option value='FAIZABAD'>FAIZABAD</option>
-<option value='FARIDABAD'>FARIDABAD</option>
-<option value='FATEHPUR'>FATEHPUR</option>
-<option value='GANDHINAGAR'>GANDHINAGAR</option>
-<option value='GANGANAGAR'>GANGANAGAR</option>
-<option value='GAYA'>GAYA</option>
-<option value='GHAZIABAD'>GHAZIABAD</option>
-<option value='GIRIDIH'>GIRIDIH</option>
-<option value='GOA - TIED'>GOA - TIED</option>
-<option value='GODHRA'>GODHRA</option>
-<option value='GOPALGANJ'>GOPALGANJ</option>
-<option value='GORAKHPUR'>GORAKHPUR</option>
-<option value='Greater Noida'>Greater Noida</option>
-<option value='GUNTUR'>GUNTUR</option>
-<option value='GURGAON'>GURGAON</option>
-<option value='GURGAON DLF'>GURGAON DLF</option>
-<option value='Guwahati - Paltan Bazar'>Guwahati - Paltan Bazar</option>
-<option value='GUWAHATI NEW BRANCH'>GUWAHATI NEW BRANCH</option>
-<option value='Gwalior'>Gwalior</option>
-<option value='HABRA'>HABRA</option>
-<option value='HAJIPUR'>HAJIPUR</option>
-<option value='HALDIA'>HALDIA</option>
-<option value='HALDWANI'>HALDWANI</option>
-<option value='HARDWAR'>HARDWAR</option>
-<option value='HAZARIBAGH'>HAZARIBAGH</option>
-<option value='HISSAR'>HISSAR</option>
-<option value='HOSHIARPUR'>HOSHIARPUR</option>
-<option value='HOSUR'>HOSUR</option>
-<option value='Howrah'>Howrah</option>
-<option value='HUBLI'>HUBLI</option>
-<option value='HYDERABAD'>HYDERABAD</option>
-<option value='HYDERABAD - DILSUKHNAGAR'>HYDERABAD - DILSUKHNAGAR</option>
-<option value='Hyderabad-Secunderabad'>Hyderabad-Secunderabad</option>
-<option value='Imphal'>Imphal</option>
-<option value='INDORE'>INDORE</option>
-<option value='INDORE - METRO TOWER'>INDORE - METRO TOWER</option>
-<option value='IRINJALAKU'>IRINJALAKU</option>
-<option value='JABALPUR'>JABALPUR</option>
-<option value='JAIPUR'>JAIPUR</option>
-<option value='Jaipur New Branch'>Jaipur New Branch</option>
-<option value='JALGAON'>JALGAON</option>
-<option value='JALLANDHAR SHAKTI TOWERS'>JALLANDHAR SHAKTI TOWERS</option>
-<option value='JAMMU'>JAMMU</option>
-<option value='JAMNAGAR NEW'>JAMNAGAR NEW</option>
-<option value='JAMSHEDPUR'>JAMSHEDPUR</option>
-<option value='JAUNPUR'>JAUNPUR</option>
-<option value='JODHPUR'>JODHPUR</option>
-<option value='KALYANI'>KALYANI</option>
-<option value='KANGRA'>KANGRA</option>
-<option value='KANHANGAD'>KANHANGAD</option>
-<option value='KANNUR'>KANNUR</option>
-<option value='KANPUR - J S TOWER'>KANPUR - J S TOWER</option>
-<option value='Kanpur-Civil Lines'>Kanpur-Civil Lines</option>
-<option value='KARIMNAGAR'>KARIMNAGAR</option>
-<option value='KARKARDUMA'>KARKARDUMA</option>
-<option value='KARNAL'>KARNAL</option>
-<option value='KAUSHAMBHI'>KAUSHAMBHI</option>
-<option value='KHANNA'>KHANNA</option>
-<option value='KHARAGPUR'>KHARAGPUR</option>
-<option value='KOLKATA - G C AVENUE'>KOLKATA - G C AVENUE</option>
-<option value='KOLKATA - KAKURGACHI'>KOLKATA - KAKURGACHI</option>
-<option value='KOLKATA - PRINCE ANWAR SHAH'>KOLKATA - PRINCE ANWAR SHAH</option>
-<option value='Kolkata AJC Bose Rd'>Kolkata AJC Bose Rd</option>
-<option value='KOLKATA DUM DUM'>KOLKATA DUM DUM</option>
-<option value='Kolkatta - Gariahat'>Kolkatta - Gariahat</option>
-<option value='Kolkatta - R N Mukherjee Rd'>Kolkatta - R N Mukherjee Rd</option>
-<option value='KONTAI'>KONTAI</option>
-<option value='Kota-Aerodram Circle'>Kota-Aerodram Circle</option>
-<option value='KOTTAYAM KK RD'>KOTTAYAM KK RD</option>
-<option value='KUMBAKONAM'>KUMBAKONAM</option>
-<option value='LATUR'>LATUR</option>
-<option value='LUCKNOW - METRO TOWERS'>LUCKNOW - METRO TOWERS</option>
-<option value='LUDHIANA MALL ROAD'>LUDHIANA MALL ROAD</option>
-<option value='MADURAI'>MADURAI</option>
-<option value='MANDI'>MANDI</option>
-<option value='MANGALORE'>MANGALORE</option>
-<option value='MATHURA'>MATHURA</option>
-<option value='MEERUT'>MEERUT</option>
-<option value='MEHSANA'>MEHSANA</option>
-<option value='MIDNAPUR'>MIDNAPUR</option>
-<option value='MUMBAI - AMBOLI'>MUMBAI - AMBOLI</option>
-<option value='MUMBAI - CHURCHGATE'>MUMBAI - CHURCHGATE</option>
-<option value='MUMBAI - KALYAN'>MUMBAI - KALYAN</option>
-<option value='MUMBAI - KANDIVLI'>MUMBAI - KANDIVLI</option>
-<option value='MUMBAI - LINKING ROAD'>MUMBAI - LINKING ROAD</option>
-<option value='MUMBAI - MAIN'>MUMBAI - MAIN</option>
-<option value='MUMBAI - Malad'>MUMBAI - Malad</option>
-<option value='MUMBAI - MULUND'>MUMBAI - MULUND</option>
-<option value='MUMBAI-PC-GHATKOPAR'>MUMBAI-PC-GHATKOPAR</option>
-<option value='MUNGER'>MUNGER</option>
-<option value='MURSHIDABAD'>MURSHIDABAD</option>
-<option value='MUZAFARPUR'>MUZAFARPUR</option>
-<option value='MUZAFFARNAGAR'>MUZAFFARNAGAR</option>
-<option value='MYSORE'>MYSORE</option>
-<option value='NADIA'>NADIA</option>
-<option value='NADIAD'>NADIAD</option>
-<option value='NAGERCOIL'>NAGERCOIL</option>
-<option value='NAGPUR'>NAGPUR</option>
-<option value='NASHIK COLLEGE RD.'>NASHIK COLLEGE RD.</option>
-<option value='NAVSARI'>NAVSARI</option>
-<option value='NOIDA'>NOIDA</option>
-<option value='PALAKKAD'>PALAKKAD</option>
-<option value='PALAMPUR'>PALAMPUR</option>
-<option value='PANIPAT'>PANIPAT</option>
-<option value='PANVEL'>PANVEL</option>
-<option value='PATHANKOT'>PATHANKOT</option>
-<option value='PATIALA'>PATIALA</option>
-<option value='PATNA'>PATNA</option>
-<option value='PATTANAMTHITTA'>PATTANAMTHITTA</option>
-<option value='PHAGWARA'>PHAGWARA</option>
-<option value='PONDICHERRY'>PONDICHERRY</option>
-<option value='PORBANDAR'>PORBANDAR</option>
-<option value='Pune - FC Road'>Pune - FC Road</option>
-<option value='PUNE - PCMC'>PUNE - PCMC</option>
-<option value='PUNE - SWARGATE'>PUNE - SWARGATE</option>
-<option value='Pune Main'>Pune Main</option>
-<option value='Pune-Vimannagar'>Pune-Vimannagar</option>
-<option value='RAIPUR'>RAIPUR</option>
-<option value='RAJAHMUNDRY'>RAJAHMUNDRY</option>
-<option value='RAJKOT NEW BRANCH'>RAJKOT NEW BRANCH</option>
-<option value='RAJPUR SONARPUR'>RAJPUR SONARPUR</option>
-<option value='RANCHI'>RANCHI</option>
-<option value='REWARI'>REWARI</option>
-<option value='ROHTAK'>ROHTAK</option>
-<option value='ROURKELA'>ROURKELA</option>
-<option value='SAHARANPUR'>SAHARANPUR</option>
-<option value='SALEM'>SALEM</option>
-<option value='Sangli'>Sangli</option>
-<option value='SECUNDERABAD'>SECUNDERABAD</option>
-<option value='SIBSAGAR'>SIBSAGAR</option>
-<option value='SILCHAR'>SILCHAR</option>
-<option value='SIMLA'>SIMLA</option>
-<option value='SITAPUR'>SITAPUR</option>
-<option value='SIWAN'>SIWAN</option>
-<option value='SOLAPUR'>SOLAPUR</option>
-<option value='SONEPAT'>SONEPAT</option>
-<option value='SRINAGAR'>SRINAGAR</option>
-<option value='Surat Ck Tower'>Surat Ck Tower</option>
-<option value='TAMBARAM'>TAMBARAM</option>
-<option value='TAMLUK'>TAMLUK</option>
-<option value='THALASSERY'>THALASSERY</option>
-<option value='THANE'>THANE</option>
-<option value='THIRUVALLA'>THIRUVALLA</option>
-<option value='TINSUKIA'>TINSUKIA</option>
-<option value='TIRUNELVELI'>TIRUNELVELI</option>
-<option value='TRICHUR'>TRICHUR</option>
-<option value='TRIVANDRUM'>TRIVANDRUM</option>
-<option value='UDAIPUR'>UDAIPUR</option>
-<option value='UDUPI'>UDUPI</option>
-<option value='VALSAD'>VALSAD</option>
-<option value='VAPI'>VAPI</option>
-<option value='VARANASI'>VARANASI</option>
-<option value='VASHI'>VASHI</option>
-<option value='VELLORE'>VELLORE</option>
-<option value='VIJAYWADA - 2'>VIJAYWADA - 2</option>
-<option value='VIZAG'>VIZAG</option>
-                          </select>
-                        </div>
-                      </div>
+                      
                     </div>
                     
                     <div class="mt-3 col-md-12 mb-2 ">
@@ -550,23 +308,7 @@
                               
                           </div>
                         </div>
-                        <!-- <div class="col-md-4 col-sm-6">
-                          <div class="form-group">
-
-                            <input name="ladaterange" onkeyup="validateDate('laDOBResp')" id="laDOBResp"
-                              class="form-control" type="date" required placeholder="LA DOB (If Applicable)">
-                          </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                          <div class="form-group">
-                            <select class="form-control" id="genderResp">
-                              <option>LA Gender (If Applicable)</option>
-                              <option>Male</option>
-                              <option>Female</option>
-                              <option>Other</option>
-                            </select>
-                          </div>
-                        </div> -->
+                        
                         <div style="width: 100%; margin-top: 20px;margin-bottom: 20px;">
                           <form  class="checker-container" style="display: flex;gap: 8px;">
                             <input type="checkbox" id="laCheckBoxResp" onchange="toggleFileUpload()">
@@ -601,30 +343,7 @@
                           </div>
 
                         </div>
-                        <!-- <div class="col-md-4 col-sm-6">
-                          <div class="form-group" style="display: flex; align-items: center">
-                            <input name="user" type="file" style="display: none" id="attachment-pan"
-                              onchange="handleFileUploadPancard(this.files)" />
-
-                            <input type="text" class="form-control" placeholder="Signed PAN Copy" id="selectedFilePan"
-                              readonly />
-                            <span onclick="openFileUploaderPancard()"><i class="fa fa-upload"
-                                aria-hidden="true"></i></span>
-                          </div>
-                        </div> -->
-                      
-
-                        <!-- <div class="col-md-4 col-sm-6">
-                          <div class="form-group" style="display: flex; align-items: center">
-                            <input name="user" type="file" style="display: none" id="signedAadharCopyMob"
-                              onchange="handelSignedAadharCopyMob(this.files)" />
-
-                            <input type="text" class="form-control" placeholder="Signed Aadhar Copy"
-                              id="signedAadharCopyFileMob" readonly />
-                            <span onclick="openSignedAadharCopyFileMob()"><i class="fa fa-upload"
-                                aria-hidden="true"></i></span>
-                          </div>
-                        </div> -->
+                        
                         <div class="col-md-4 col-sm-6" style="display: none;" id="laPhotoBoxresp">
                           <label id="laPhotolabelMob" style="display: none;">Photo</label>
                           <div class="form-group" style="display: flex; align-items: center">
@@ -665,28 +384,7 @@
                                 aria-hidden="true"></i></span>
                           </div>
                         </div>
-                        <!-- <div class="col-md-4 col-sm-6">
-                          <div class="form-group" style="display: flex; align-items: center">
-                            <input name="user" type="file" style="display: none" id="applicantIdMob"
-                              onchange="handelUploadPhotos(this.files)" />
-  
-                            <input type="text" class="form-control" placeholder=" Click Selfie"
-                              id="applicantIdMobFile" readonly />
-                            <span onclick="openApplicantPhotos()"><i class="fa fa-upload"
-                                aria-hidden="true"></i></span>
-                          </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                          <div class="form-group" style="display: flex; align-items: center">
-                            <input name="user" type="file" style="display: none" id="cancelCheckIds"
-                              onchange="handelCancelsChecks(this.files)" />
-  
-                            <input type="text" class="form-control" placeholder=" Cheque Copy/Bank Statement "
-                              id="cancelCheckIdFiles" readonly />
-                            <span onclick="openCancelsChecks()"><i class="fa fa-upload"
-                                aria-hidden="true"></i></span>
-                          </div>
-                        </div> -->
+                        
                       </div>
                     </div>
 
@@ -734,16 +432,7 @@
             </h1>
           </div>
           <div class="row heading-content">
-            <div class="col-sm-2 sub-container">
-              <div>
-                <img src="images/policy.svg" style="width: 28px" />
-              </div>
-              <div>
-                <h1 class="reason-heading">
-                  Funding against Policy under lock-in period
-                </h1>
-              </div>
-            </div>
+          
             <div class="col-sm-2 sub-container">
               <div>
                 <img src="images/slip.svg" style="width: 28px" />
@@ -778,82 +467,20 @@
                 <h1 class="reason-heading">Get maximum funding</h1>
               </div>
             </div>
+            <div class="col-sm-2 sub-container">
+                <div>
+                  <img src="images/policy.svg" style="width: 28px" />
+                </div>
+                <div>
+                  <h1 class="reason-heading">
+                    Funding against Unit Linked Policies
+                  </h1>
+                </div>
+              </div>
           </div>
         </div>
       </div>
-        <!-- <div class="row reason-container">
-              
-                <div>
-                  <h1 class="reason-heading-head">
-                    Empowering you to achieve all your aspirations with a single
-                    loan
-                  </h1>
-                </div>
-                <div style="display: flex; flex-wrap: wrap">
-                
-                  <div
-                    class="col-sm-2 sub-container"
-                    style="background-image: url(images/Downpayments.svg)"
-                  >
-                    <h1 class="reason-head">Down payments</h1>
-                  </div>
-                  <div
-                    class="col-sm-2 sub-container"
-                    style="
-                      background-image: url('images/higher.svg');
-                      background-repeat: no-repeat;
-                      background-position: center;
-                      background-size: cover;
-                    "
-                  >
-                    <h1 class="reason-head">Higher Education</h1>
-                  </div>
-                  <div
-                    class="col-sm-2 sub-container"
-                    style="
-                      background-image: url('images/special.svg');
-                      background-repeat: no-repeat;
-                      background-position: center;
-                      background-size: cover;
-                    "
-                  >
-                    <h1 class="reason-head">special Occasion</h1>
-                  </div>
-                  <div
-                    class="col-sm-2 sub-container"
-                    style="
-                      background-image: url('images/home.svg');
-                      background-repeat: no-repeat;
-                      background-position: center;
-                      background-size: cover;
-                    "
-                  >
-                    <h1 class="reason-head">Home renovations</h1>
-                  </div>
-                  <div
-                    class="col-sm-2 sub-container"
-                    style="
-                      background-image: url('images/medical.svg');
-                      background-repeat: no-repeat;
-                      background-position: center;
-                      background-size: cover;
-                    "
-                  >
-                    <h1 class="reason-head">Medical Expense</h1>
-                  </div>
-                  <div
-                    class="col-sm-2 sub-container"
-                    style="
-                      background-image: url('images/pay.svg');
-                      background-repeat: no-repeat;
-                      background-position: center;
-                      background-size: cover;
-                    "
-                  >
-                    <h1 class="reason-head">Pay your pending premium</h1>
-                  </div>
-                </div>
-              </div> -->
+       
 
         <div class="contacts-raws">
           <div class="policy-form-box policy-form-box-responshive">
@@ -1047,8 +674,17 @@
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <input placeholder="ICICI Prudential Life Insurance Co. Ltd*" type="text" class="form-control"
-                            id="companyName" readonly value="ICICI Prudential Life Insurance Co. Ltd" />
+                          <!-- <input placeholder="ICICI Prudential Life Insurance Co. Ltd*" type="text" class="form-control"
+                            id="companyName" readonly value="ICICI Prudential Life Insurance Co. Ltd" /> -->
+                            <select class="form-control" id="companyName">
+                                <option>Insurance Company*</option>
+                                <option>ICICI Prudential Life Insurance</option>
+                                <option>HDFC Life Insurance Co. Ltd.</option>
+                                <option>Tata AIA Life Insurance Co. Ltd.</option>
+                                <option>PNB MetLife India Insurance Co. Ltd</option>
+                                <option>Bajaj Allianz Life Insurance Co. Ltd</option>
+                                <option>Max Life Insurance Company Limited</option>
+                              </select>
                         </div>
 
                       </div>
@@ -1056,271 +692,11 @@
                       <div class="col-md-12">
                         <div class="form-group">
                           <select class="form-control" id="prodctType">
-                            <option>Product Name*</option>
-                            <option>ICICI Pru Wealth Builder II</option>
-                            <option>ICICI Pru Elite Wealth II</option>
-                            <option>ICICI Pru LifeTime Classic</option>
-                            <!-- <option>
-                                    ICICI Pru Guaranteed Wealth Protector
-                                  </option> -->
-                            <option>ICICI Pru Elite Life Super</option>
-                            <!-- <option>ICICI Pru Life Time</option> -->
-                            <!-- <option>ICICI Pru Cash Advantage</option>
-                                  <option>ICICI Pru Savings Suraksha</option> -->
-                            <option>ICICI Pru Signature</option>
-                            <option>ICICI Pru Smart Life</option>
-                            <option>ICICI Pru Elite Wealth Super</option>
-                            <option>ICICI Pru1 Wealth</option>
-                            <option>ICICI Pru Elite Life II</option>
-                            <option>Guaranteed Wealth Protector</option>
-                            <option>ICICI Pru Ace</option>
+                            <option selected disabled>Product Name*</option>
                           </select>
                         </div>
                       </div>
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <select class="form-control" id="branchName">
-                            <option value="">Branch Name*</option>
-                            <option value='A S Rao Nagar'>A S Rao Nagar</option>
-<option value='AGARTALA'>AGARTALA</option>
-<option value='AGRA'>AGRA</option>
-<option value='AHMEDABAD - BODAKDEV'>AHMEDABAD - BODAKDEV</option>
-<option value='AHMEDABAD - MAIN'>AHMEDABAD - MAIN</option>
-<option value='ALIGARH'>ALIGARH</option>
-<option value='ALLAHABAD'>ALLAHABAD</option>
-<option value='Allahabad-Civil Lines'>Allahabad-Civil Lines</option>
-<option value='AMBALA'>AMBALA</option>
-<option value='AMRAVATI'>AMRAVATI</option>
-<option value='AMRITSAR'>AMRITSAR</option>
-<option value='AMTALA'>AMTALA</option>
-<option value='ARA'>ARA</option>
-<option value='ARBINDO MARG'>ARBINDO MARG</option>
-<option value='ASANSOL'>ASANSOL</option>
-<option value='AURANGABAD'>AURANGABAD</option>
-<option value='AZAMGARH'>AZAMGARH</option>
-<option value='BALASORE'>BALASORE</option>
-<option value='BALLIA'>BALLIA</option>
-<option value='BANGALORE - INDIRA NAGAR'>BANGALORE - INDIRA NAGAR</option>
-<option value='BANGALORE - JAYANAGAR'>BANGALORE - JAYANAGAR</option>
-<option value='BANGALORE - KORAMANGALAM'>BANGALORE - KORAMANGALAM</option>
-<option value='BANGALORE - MAIN'>BANGALORE - MAIN</option>
-<option value='BANGALORE - MALLESHWARAM'>BANGALORE - MALLESHWARAM</option>
-<option value='Bangalore-Residency Road'>Bangalore-Residency Road</option>
-<option value='BANKURA'>BANKURA</option>
-<option value='BANSWARA'>BANSWARA</option>
-<option value='BARASAT'>BARASAT</option>
-<option value='BARDOLI'>BARDOLI</option>
-<option value='BAREILLY'>BAREILLY</option>
-<option value='BARIPADA'>BARIPADA</option>
-<option value='BARODA'>BARODA</option>
-<option value='BATALA'>BATALA</option>
-<option value='BEHRAMPUR'>BEHRAMPUR</option>
-<option value='BELGAUM'>BELGAUM</option>
-<option value='BHADRAK'>BHADRAK</option>
-<option value='BHAGALPUR'>BHAGALPUR</option>
-<option value='BHAVNAGAR'>BHAVNAGAR</option>
-<option value='BHILAI'>BHILAI</option>
-<option value='BHILWARA'>BHILWARA</option>
-<option value='BHIWANI'>BHIWANI</option>
-<option value='BHOPAL'>BHOPAL</option>
-<option value='Bhubaneshwar-Baramunda'>Bhubaneshwar-Baramunda</option>
-<option value='BIHAR SHARIFF'>BIHAR SHARIFF</option>
-<option value='BIKANER'>BIKANER</option>
-<option value='BILASPUR'>BILASPUR</option>
-<option value='BORIVALI'>BORIVALI</option>
-<option value='CHANDANAGAR'>CHANDANAGAR</option>
-<option value='CHANDIGARH'>CHANDIGARH</option>
-<option value='CHANDRAPUR'>CHANDRAPUR</option>
-<option value='CHENNAI - ADYAR'>CHENNAI - ADYAR</option>
-<option value='CHENNAI - ANNANAGAR'>CHENNAI - ANNANAGAR</option>
-<option value='CHENNAI - MAIN'>CHENNAI - MAIN</option>
-<option value='Chennai - Nungambakkam'>Chennai - Nungambakkam</option>
-<option value='Chennai-Tambaram'>Chennai-Tambaram</option>
-<option value='CHINSURAH'>CHINSURAH</option>
-<option value='CHITTAURGARH'>CHITTAURGARH</option>
-<option value='COCHIN'>COCHIN</option>
-<option value='Coimbatore PC'>Coimbatore PC</option>
-<option value='CUTTACK'>CUTTACK</option>
-<option value='DARBHANGA'>DARBHANGA</option>
-<option value='DEHRADUN'>DEHRADUN</option>
-<option value='Delhi – Janakpuri'>Delhi – Janakpuri</option>
-<option value='DELHI - MAIN'>DELHI - MAIN</option>
-<option value='DELHI - MODEL TOWN'>DELHI - MODEL TOWN</option>
-<option value='DELHI - PITAMPURA'>DELHI - PITAMPURA</option>
-<option value='DELHI - PUSHPAVIHAR'>DELHI - PUSHPAVIHAR</option>
-<option value='Delhi -Noida'>Delhi -Noida</option>
-<option value='Delhi-Videocon Towers'>Delhi-Videocon Towers</option>
-<option value='DEORIA'>DEORIA</option>
-<option value='DEVANGERE'>DEVANGERE</option>
-<option value='Daltolganj'>Daltolganj</option>
-<option value='DHANBAD'>DHANBAD</option>
-<option value='DIAMOND HARBOR'>DIAMOND HARBOR</option>
-<option value='DUBAI'>DUBAI</option>
-<option value='DUMKA'>DUMKA</option>
-<option value='DURGAPUR'>DURGAPUR</option>
-<option value='DWARKA'>DWARKA</option>
-<option value='ENGLISH BAZAAR'>ENGLISH BAZAAR</option>
-<option value='ERODE'>ERODE</option>
-<option value='FAIZABAD'>FAIZABAD</option>
-<option value='FARIDABAD'>FARIDABAD</option>
-<option value='FATEHPUR'>FATEHPUR</option>
-<option value='GANDHINAGAR'>GANDHINAGAR</option>
-<option value='GANGANAGAR'>GANGANAGAR</option>
-<option value='GAYA'>GAYA</option>
-<option value='GHAZIABAD'>GHAZIABAD</option>
-<option value='GIRIDIH'>GIRIDIH</option>
-<option value='GOA - TIED'>GOA - TIED</option>
-<option value='GODHRA'>GODHRA</option>
-<option value='GOPALGANJ'>GOPALGANJ</option>
-<option value='GORAKHPUR'>GORAKHPUR</option>
-<option value='Greater Noida'>Greater Noida</option>
-<option value='GUNTUR'>GUNTUR</option>
-<option value='GURGAON'>GURGAON</option>
-<option value='GURGAON DLF'>GURGAON DLF</option>
-<option value='Guwahati - Paltan Bazar'>Guwahati - Paltan Bazar</option>
-<option value='GUWAHATI NEW BRANCH'>GUWAHATI NEW BRANCH</option>
-<option value='Gwalior'>Gwalior</option>
-<option value='HABRA'>HABRA</option>
-<option value='HAJIPUR'>HAJIPUR</option>
-<option value='HALDIA'>HALDIA</option>
-<option value='HALDWANI'>HALDWANI</option>
-<option value='HARDWAR'>HARDWAR</option>
-<option value='HAZARIBAGH'>HAZARIBAGH</option>
-<option value='HISSAR'>HISSAR</option>
-<option value='HOSHIARPUR'>HOSHIARPUR</option>
-<option value='HOSUR'>HOSUR</option>
-<option value='Howrah'>Howrah</option>
-<option value='HUBLI'>HUBLI</option>
-<option value='HYDERABAD'>HYDERABAD</option>
-<option value='HYDERABAD - DILSUKHNAGAR'>HYDERABAD - DILSUKHNAGAR</option>
-<option value='Hyderabad-Secunderabad'>Hyderabad-Secunderabad</option>
-<option value='Imphal'>Imphal</option>
-<option value='INDORE'>INDORE</option>
-<option value='INDORE - METRO TOWER'>INDORE - METRO TOWER</option>
-<option value='IRINJALAKU'>IRINJALAKU</option>
-<option value='JABALPUR'>JABALPUR</option>
-<option value='JAIPUR'>JAIPUR</option>
-<option value='Jaipur New Branch'>Jaipur New Branch</option>
-<option value='JALGAON'>JALGAON</option>
-<option value='JALLANDHAR SHAKTI TOWERS'>JALLANDHAR SHAKTI TOWERS</option>
-<option value='JAMMU'>JAMMU</option>
-<option value='JAMNAGAR NEW'>JAMNAGAR NEW</option>
-<option value='JAMSHEDPUR'>JAMSHEDPUR</option>
-<option value='JAUNPUR'>JAUNPUR</option>
-<option value='JODHPUR'>JODHPUR</option>
-<option value='KALYANI'>KALYANI</option>
-<option value='KANGRA'>KANGRA</option>
-<option value='KANHANGAD'>KANHANGAD</option>
-<option value='KANNUR'>KANNUR</option>
-<option value='KANPUR - J S TOWER'>KANPUR - J S TOWER</option>
-<option value='Kanpur-Civil Lines'>Kanpur-Civil Lines</option>
-<option value='KARIMNAGAR'>KARIMNAGAR</option>
-<option value='KARKARDUMA'>KARKARDUMA</option>
-<option value='KARNAL'>KARNAL</option>
-<option value='KAUSHAMBHI'>KAUSHAMBHI</option>
-<option value='KHANNA'>KHANNA</option>
-<option value='KHARAGPUR'>KHARAGPUR</option>
-<option value='KOLKATA - G C AVENUE'>KOLKATA - G C AVENUE</option>
-<option value='KOLKATA - KAKURGACHI'>KOLKATA - KAKURGACHI</option>
-<option value='KOLKATA - PRINCE ANWAR SHAH'>KOLKATA - PRINCE ANWAR SHAH</option>
-<option value='Kolkata AJC Bose Rd'>Kolkata AJC Bose Rd</option>
-<option value='KOLKATA DUM DUM'>KOLKATA DUM DUM</option>
-<option value='Kolkatta - Gariahat'>Kolkatta - Gariahat</option>
-<option value='Kolkatta - R N Mukherjee Rd'>Kolkatta - R N Mukherjee Rd</option>
-<option value='KONTAI'>KONTAI</option>
-<option value='Kota-Aerodram Circle'>Kota-Aerodram Circle</option>
-<option value='KOTTAYAM KK RD'>KOTTAYAM KK RD</option>
-<option value='KUMBAKONAM'>KUMBAKONAM</option>
-<option value='LATUR'>LATUR</option>
-<option value='LUCKNOW - METRO TOWERS'>LUCKNOW - METRO TOWERS</option>
-<option value='LUDHIANA MALL ROAD'>LUDHIANA MALL ROAD</option>
-<option value='MADURAI'>MADURAI</option>
-<option value='MANDI'>MANDI</option>
-<option value='MANGALORE'>MANGALORE</option>
-<option value='MATHURA'>MATHURA</option>
-<option value='MEERUT'>MEERUT</option>
-<option value='MEHSANA'>MEHSANA</option>
-<option value='MIDNAPUR'>MIDNAPUR</option>
-<option value='MUMBAI - AMBOLI'>MUMBAI - AMBOLI</option>
-<option value='MUMBAI - CHURCHGATE'>MUMBAI - CHURCHGATE</option>
-<option value='MUMBAI - KALYAN'>MUMBAI - KALYAN</option>
-<option value='MUMBAI - KANDIVLI'>MUMBAI - KANDIVLI</option>
-<option value='MUMBAI - LINKING ROAD'>MUMBAI - LINKING ROAD</option>
-<option value='MUMBAI - MAIN'>MUMBAI - MAIN</option>
-<option value='MUMBAI - Malad'>MUMBAI - Malad</option>
-<option value='MUMBAI - MULUND'>MUMBAI - MULUND</option>
-<option value='MUMBAI-PC-GHATKOPAR'>MUMBAI-PC-GHATKOPAR</option>
-<option value='MUNGER'>MUNGER</option>
-<option value='MURSHIDABAD'>MURSHIDABAD</option>
-<option value='MUZAFARPUR'>MUZAFARPUR</option>
-<option value='MUZAFFARNAGAR'>MUZAFFARNAGAR</option>
-<option value='MYSORE'>MYSORE</option>
-<option value='NADIA'>NADIA</option>
-<option value='NADIAD'>NADIAD</option>
-<option value='NAGERCOIL'>NAGERCOIL</option>
-<option value='NAGPUR'>NAGPUR</option>
-<option value='NASHIK COLLEGE RD.'>NASHIK COLLEGE RD.</option>
-<option value='NAVSARI'>NAVSARI</option>
-<option value='NOIDA'>NOIDA</option>
-<option value='PALAKKAD'>PALAKKAD</option>
-<option value='PALAMPUR'>PALAMPUR</option>
-<option value='PANIPAT'>PANIPAT</option>
-<option value='PANVEL'>PANVEL</option>
-<option value='PATHANKOT'>PATHANKOT</option>
-<option value='PATIALA'>PATIALA</option>
-<option value='PATNA'>PATNA</option>
-<option value='PATTANAMTHITTA'>PATTANAMTHITTA</option>
-<option value='PHAGWARA'>PHAGWARA</option>
-<option value='PONDICHERRY'>PONDICHERRY</option>
-<option value='PORBANDAR'>PORBANDAR</option>
-<option value='Pune - FC Road'>Pune - FC Road</option>
-<option value='PUNE - PCMC'>PUNE - PCMC</option>
-<option value='PUNE - SWARGATE'>PUNE - SWARGATE</option>
-<option value='Pune Main'>Pune Main</option>
-<option value='Pune-Vimannagar'>Pune-Vimannagar</option>
-<option value='RAIPUR'>RAIPUR</option>
-<option value='RAJAHMUNDRY'>RAJAHMUNDRY</option>
-<option value='RAJKOT NEW BRANCH'>RAJKOT NEW BRANCH</option>
-<option value='RAJPUR SONARPUR'>RAJPUR SONARPUR</option>
-<option value='RANCHI'>RANCHI</option>
-<option value='REWARI'>REWARI</option>
-<option value='ROHTAK'>ROHTAK</option>
-<option value='ROURKELA'>ROURKELA</option>
-<option value='SAHARANPUR'>SAHARANPUR</option>
-<option value='SALEM'>SALEM</option>
-<option value='Sangli'>Sangli</option>
-<option value='SECUNDERABAD'>SECUNDERABAD</option>
-<option value='SIBSAGAR'>SIBSAGAR</option>
-<option value='SILCHAR'>SILCHAR</option>
-<option value='SIMLA'>SIMLA</option>
-<option value='SITAPUR'>SITAPUR</option>
-<option value='SIWAN'>SIWAN</option>
-<option value='SOLAPUR'>SOLAPUR</option>
-<option value='SONEPAT'>SONEPAT</option>
-<option value='SRINAGAR'>SRINAGAR</option>
-<option value='Surat Ck Tower'>Surat Ck Tower</option>
-<option value='TAMBARAM'>TAMBARAM</option>
-<option value='TAMLUK'>TAMLUK</option>
-<option value='THALASSERY'>THALASSERY</option>
-<option value='THANE'>THANE</option>
-<option value='THIRUVALLA'>THIRUVALLA</option>
-<option value='TINSUKIA'>TINSUKIA</option>
-<option value='TIRUNELVELI'>TIRUNELVELI</option>
-<option value='TRICHUR'>TRICHUR</option>
-<option value='TRIVANDRUM'>TRIVANDRUM</option>
-<option value='UDAIPUR'>UDAIPUR</option>
-<option value='UDUPI'>UDUPI</option>
-<option value='VALSAD'>VALSAD</option>
-<option value='VAPI'>VAPI</option>
-<option value='VARANASI'>VARANASI</option>
-<option value='VASHI'>VASHI</option>
-<option value='VELLORE'>VELLORE</option>
-<option value='VIJAYWADA - 2'>VIJAYWADA - 2</option>
-<option value='VIZAG'>VIZAG</option>
-
-                          </select>
-                        </div>
-                      </div>
+                     
                       <div class="mt-3 col-md-12 mb-2">
                         <div class="row">
                           <div class="col-md-4 col-sm-6">
@@ -1399,23 +775,7 @@
                             </div>
                           </div>
 
-                          <!-- <div class="col-md-4 col-sm-6">
-                            <div class="form-group">
-
-                              <input name="ladaterange" onkeyup="validateDate('laDOB')" id="laDOB"
-                                class="form-control" type="date" required placeholder="LA DOB (If Applicable)">
-                            </div>
-                          </div>
-                          <div class="col-md-4 col-sm-6">
-                            <div class="form-group">
-                              <select class="form-control" id="gender">
-                                <option>LA Gender (If Applicable)</option>
-                                <option>Male</option>
-                                <option>Female</option>
-                                <option>Other</option>
-                              </select>
-                            </div>
-                          </div> -->
+                        
                         </div>
                       </div>
                     
@@ -1452,30 +812,7 @@
                         </div>
 
                       </div>
-                      <!-- <div class="col-md-4 col-sm-6">
-                        <div class="form-group" style="display: flex; align-items: center">
-                          <input name="user" type="file" style="display: none;" id="attachment-pancard"
-                            onchange="handleFileUploadPan(this.files)" />
-
-                          <input type="text"  class="form-control"
-                            placeholder="Signed PAN Copy" id="selectedFilePancard" readonly />
-                          <span onclick="openFileUploaderPan()"><i class="fa fa-upload"
-                              aria-hidden="true"></i></span>
-                        </div>
-                      </div> -->
                     
-
-                      <!-- <div class="col-md-4 col-sm-6">
-                        <div class="form-group" style="display: flex; align-items: center">
-                          <input name="user" type="file" style="display: none" id="signedAadhar"
-                            onchange="handelSignedAadhar(this.files)" />
-
-                          <input type="text" class="form-control" placeholder="Signed Aadhar Copy"
-                            id="signedAadharFile" readonly />
-                          <span onclick="openAadharFile()"><i class="fa fa-upload"
-                              aria-hidden="true"></i></span>
-                        </div>
-                      </div> -->
                       
                       <div class="col-md-4 col-sm-6" id="laPanBox" style="display: none;">
                         <label id="laPanlabel" style="display: none;">Pan</label>
@@ -1514,28 +851,7 @@
                               aria-hidden="true"></i></span>
                         </div>
                       </div>
-                      <!-- <div class="col-md-4 col-sm-6">
-                        <div class="form-group" style="display: flex; align-items: center">
-                          <input name="user" type="file" style="display: none" id="applicantIdDesk"
-                            onchange="handelUploadPhoto(this.files)" />
-
-                          <input type="text" class="form-control" placeholder="Click Selfie "
-                            id="applicantIdDeskFile" readonly />
-                          <span onclick="openApplicantPhoto()"><i class="fa fa-upload"
-                              aria-hidden="true"></i></span>
-                        </div>
-                      </div>
-                      <div class="col-md-4 col-sm-6">
-                        <div class="form-group" style="display: flex; align-items: center; width: 247px;">
-                          <input name="user" type="file" style="display: none" id="cancelCheckId"
-                            onchange="handelCancelCheck(this.files)" />
-
-                          <input type="text" class="form-control" placeholder="Cheque Copy/Bank Statement "
-                            id="cancelCheckIdFile" readonly />
-                          <span onclick="openCancelCheck()"><i class="fa fa-upload"
-                              aria-hidden="true"></i></span>
-                        </div>
-                      </div> -->
+                      
                       </div>
                   </div>
                 </div>
@@ -2238,26 +1554,7 @@
                         </div>
                       </div>
                     </div>
-                    <!-- <div class="card">
-                                    <div class="card-header" id="faqHeading-14">
-                                       <div class="mb-0">
-                                          <h5 class="faq-title" data-bs-toggle="collapse"
-                                             data-bs-target="#faqCollapse-14" data-aria-expanded="false"
-                                             data-aria-controls="faqCollapse-14">
-                                             <div class="FAQ">
-                                                <div class="FAQ-pointer">13.</div>
-                                                <div class="FAQ-h5">What are the Benefit of Interest only Loan v/s EMI Loan ?</div>
-                                             </div>
-                                          </h5>
-                                       </div>
-                                    </div>
-                                    <div id="faqCollapse-14" class="collapse" aria-labelledby="faqHeading-14"
-                                       data-parent="#accordion">
-                                       <div class="card-body">
-                                          <p>Under an interest-only loan, you only pay the interest during the period of the loan and the principal is paid in one shot at loan closure. Under a EMI loan, one part of instalment goes towards interest payment and another part goes towards principal re-payment, effectively leading to a higher outgo during the tenure of the loan. Policy Loan are typically issued as an interest only loan. </p>
-                                       </div>
-                                    </div>
-                                 </div> -->
+                 
                   </div>
                 </div>
               </div>
@@ -2366,21 +1663,33 @@
           <div class="modal-body">
             <div class="position-relative" id="otp-div">
               <div class="card p-2 text-center" style="width: 100%">
-                <h6 style="
+                <h6 id="validateMessage" style="
                       color: #000;
                       font-size: 18px;
                       font-weight: 600;
                       text-align: center;
                       margin-bottom: 20px;
+                      display: block;
                     ">
-                  Thank You for your Application.Our Customer service representative will connect with you.
+                  OTP successfully validated.
+                  
+                </h6>
+                <h6 id="ocrMessage" style="
+                      color: #000;
+                      font-size: 18px;
+                      font-weight: 600;
+                      text-align: center;
+                      margin-bottom: 20px;
+                      display: none;
+                    ">
+                 Please wait while we are trying to read your documents.
                   
                 </h6>
                 <h5 class="mt-2">
                   <b>-Team ValuEnable</b>
                 </h5>
                 <div class="mt-4" style="display: block !important">
-                  <button class="btn btn-danger px-4 validate" data-dismiss="modal" aria-hidden="true"
+                  <button class="btn btn-danger px-4 validate" 
                     onclick="resetField()">
                     Okay
                   </button>
@@ -2392,6 +1701,7 @@
         </div>
       </div>
     </div>
+    
   </section>
   <footer>
     <div class="footer">
@@ -2496,28 +1806,158 @@
      let laCheckBoxClick,laCheckBoxMobClick;
     var openOtpModal = document.getElementById('otpModal');
     var otpModalInstance = new bootstrap.Modal(openOtpModal);
-      $(document).ready(function() {
-      console.log(branchNameResp)
-            $('#branchNameResp').select2({
-                placeholder: "Branch Name*",
-                allowClear: true
-            });
-        });
+    //   $(document).ready(function() {
+    //   console.log(branchNameResp)
+    //         $('#branchNameResp').select2({
+    //             placeholder: "Branch Name*",
+    //             allowClear: true
+    //         });
+    //     });
 
-        $(document).ready(function() {
-      console.log(branchNameResp)
-            $('#branchName').select2({
-                placeholder: "Branch Name*",
-                allowClear: true
-            });
-        });
+    //     $(document).ready(function() {
+    //   console.log(branchNameResp)
+    //         $('#branchName').select2({
+    //             placeholder: "Branch Name*",
+    //             allowClear: true
+    //         });
+    //     });
 
-        function resetSelection() {
-                $('#branchName').val(null).trigger('change');
-            }
-            function resetSelectionMob() {
-                $('#branchNameResp').val(null).trigger('change');
-            }
+        // function resetSelection() {
+        //         $('#branchName').val(null).trigger('change');
+        //     }
+        //     function resetSelectionMob() {
+        //         $('#branchNameResp').val(null).trigger('change');
+        //     }
+
+
+        const companyProducts = {
+  "ICICI Prudential Life Insurance": [
+                            "ICICI Pru Wealth Builder II",
+                            "ICICI Pru Elite Wealth II",
+                            "ICICI Pru LifeTime Classic",
+                            "ICICI Pru Elite Life Super",
+                            "ICICI Pru Signature",
+                            "ICICI Pru Smart Life",
+                            "ICICI Pru Elite Wealth Super",
+                            "ICICI Pru1 Wealth",
+                            "ICICI Pru Elite Life II",
+                            "Guaranteed Wealth Protector",
+                            "ICICI Pru Ace"
+  ],
+  "HDFC Life Insurance Co. Ltd.": [
+    "HDFC SL ProGrowth Super II",
+"HDFC SL Pro Growth Plus",
+"HDFC SL ProGrowth Flexi",
+"HDFC Unit Linked Young Star Plus",
+"HDFC SL Young Star Super Premium",
+"HDFC Life Pension Super Plus",
+"HDFC Unit Linked YoungStar Plus II",
+"HDFC SL Crest",
+"HDFC SL Youngstar Super II",
+"HDFC Pension Super",
+"HDFC Life Classic Assure Plan",
+"HDFC Life Classic Assure Plus",
+"HDFC Life Sampoorn Samridhi Insurance Plan",
+"HDFC Life Sampoorn Samridhi Plus",
+"HDFC Life Sanchay",
+"HDFC Life Super Income Plan"
+  ],
+  "Tata AIA Life Insurance Co. Ltd.": [
+    "Tata AIA Life Insurance Fortune Pro",
+    "Tata AIA Life Insurance Wealth Maxima",
+    "Tata AIA Life Insurance Wealth Pro",
+    "Tata AIA Life Insurance Fortune Maxima",
+    "Tata AIA Life Insurance Smart Sampoorna Raksha",
+    "Tata AIA Life InvestAssure Gold",
+    "Tata AIA Life InvestAssure Flexi Supreme"
+  ],
+  "PNB MetLife India Insurance Co. Ltd": [
+  "MetLife Smart Platinum",
+  "MetLife Smart Platinum Plus"
+  ],
+  "Max Life Insurance Company Limited": [
+  "Max Life Platinum Wealth Plan",
+  "Max Life Flexi Wealth Plus",
+  "Max Life Fast Track Super",
+  "Max Life Flexi Wealth Advantage",
+  "Max Life Fast Track"
+  ],
+  "Bajaj Allianz Life Insurance Co. Ltd": [
+  "Bajaj Allianz Unit Gain",
+  "Bajaj Allianz Capital Unit Gain",
+  "Bajaj Allianz Future Gain",
+  "Bajaj Allianz Life Future Wealth Gain",
+  "Bajaj Allianz Life Smart Wealth Goal",
+  "Bajaj Allianz Life Future Wealth Gain II",
+  "Bajaj Allianz Life Smart Wealth Goal II",
+  "Bajaj Allianz Life Magnum Fortune Plus",
+  "Bajaj Allianz Life Future Gain II"
+  ]
+};
+$(document).ready(function () {
+    $("#companyName").on("change", function () {
+      const selectedCompany = $(this).val();
+      const products = companyProducts[selectedCompany] || [];
+console.log(products)
+      const $productDropdown = $("#prodctType");
+console.log($productDropdown)
+      // Clear old options
+      $productDropdown.empty();
+
+      // Add default placeholder
+      $productDropdown.append(
+        $('<option>', {
+          text: "Product Name*",
+          disabled: true,
+          selected: true
+        })
+      );
+
+      // Populate new options
+      $.each(products, function (index, product) {
+        $productDropdown.append(
+          $('<option>', {
+            value: product,
+            text: product
+          })
+        );
+      });
+    });
+  });
+
+  
+  $(document).ready(function () {
+    $("#companysName").on("change", function () {
+      const selectedCompany = $(this).val();
+      const products = companyProducts[selectedCompany] || [];
+console.log(products)
+      const $productDropdown = $("#prodctsType");
+console.log($productDropdown)
+      // Clear old options
+      $productDropdown.empty();
+
+      // Add default placeholder
+      $productDropdown.append(
+        $('<option>', {
+          text: "Product Name*",
+          disabled: true,
+          selected: true
+        })
+      );
+
+      // Populate new options
+      $.each(products, function (index, product) {
+        $productDropdown.append(
+          $('<option>', {
+            value: product,
+            text: product
+          })
+        );
+      });
+    });
+  });
+
+
         function onApiSuccess() {
 //           var otpModal = document.getElementById('otpModal');
 // var modal = new bootstrap.Modal(otpModal);
@@ -2716,7 +2156,7 @@ otpModalInstance.show();
 
       let companyName = document.getElementById("companyName").value;
       let prodctType = document.getElementById("prodctType").value;
-      let branchName = document.getElementById("branchName").value;
+      //let branchName = document.getElementById("branchName").value;
 
       let customerName = document.getElementById("customerName").value;
       let customerMobileNumber = document.getElementById(
@@ -2742,7 +2182,8 @@ otpModalInstance.show();
       // let laGender = document.getElementById("gender").value;
       let laPanCard= document.getElementById("laPanCard");
       let laAadhar= document.getElementById("laAadhar");
-
+      const urlParams = new URLSearchParams(window.location.search);
+      const source = urlParams?.get('source');
       if(laCheckBoxClick){
   if (
     laName == "" ||
@@ -2765,7 +2206,7 @@ otpModalInstance.show();
       if (
         companyName == "" ||
         prodctType == "" ||
-        branchName == "" ||
+        // branchName == "" ||
         customerName == "" ||
         customerMobileNumber == "" ||
         customerEmail == "" ||
@@ -2815,10 +2256,10 @@ if (documentKeys?.laPhotoKey == "") {
 //     alert("Aadhar Document Not Uploaded Successfully. Please select again.");
 //     return;
 // }
-if(branchName=="Branch Name*"){
-  alert("Please select Branch Name.");
-    return;
-}
+// if(branchName=="Branch Name*"){
+//   alert("Please select Branch Name.");
+//     return;
+// }
 // if (documentKeys?.applicantPhotoKey =="") {
 //     alert("applicant Photo  Not Uploaded Successfully. Please select again.");
 //     return;
@@ -2889,7 +2330,7 @@ if(branchName=="Branch Name*"){
         motherName: motherName,
         policyNumber:policyNumber,
         detailsFor: "customer",
-        branchName,
+        branchName:source?source:null,
         laName,
         laEmail,
         laPhone,
@@ -3009,7 +2450,7 @@ console.log(response)
 
       let companysName = document.getElementById("companysName").value;
       let prodctsType = document.getElementById("prodctsType").value;
-      let branchNameResp = document.getElementById("branchNameResp").value;
+    //   let branchNameResp = document.getElementById("branchNameResp").value;
 
       let customersName = document.getElementById("customersName").value;
       let customersMobileNumber = document.getElementById(
@@ -3037,7 +2478,8 @@ console.log(response)
       // let laDOBResp = document.getElementById("laDOBResp").value;
       // let laGenderResp = document.getElementById("genderResp").value;
 
-
+      const urlParams = new URLSearchParams(window.location.search);
+      const source = urlParams?.get('source');
       if(laCheckBoxMobClick){
   if (
     laNameMob == "" ||
@@ -3058,7 +2500,7 @@ console.log(response)
       if (
         companysName == "" ||
         prodctsType == "" ||
-        branchNameResp == "" ||
+        // branchNameResp == "" ||
         customersName == "" ||
         customersMobileNumber == "" ||
         customersEmail == "" ||
@@ -3115,10 +2557,10 @@ if (documentKeys?.laPhotoKey == "") {
 //     alert("cancel Check  Not Uploaded Successfully. Please select again.");
 //     return;
 // }
-if(branchNameResp=="Branch Name*"){
-  alert("Please select Branch Name.");
-    return;
-}
+// if(branchNameResp=="Branch Name*"){
+//   alert("Please select Branch Name.");
+//     return;
+// }
       if (customersEmail !== "") {
         if (!validateEmail("customersEmail")) {
           alert("Please enter a valid email address");
@@ -3178,7 +2620,7 @@ if(branchNameResp=="Branch Name*"){
         motherName:mothersName,
         policyNumber:policyNumberMob,
         detailsFor: "customer",
-        branchName:branchNameResp,
+        branchName:source?source:null,
         laName:laNameMob,
         laEmail:laEmailMob,
         laPhone:laEmailMob,
@@ -3347,7 +2789,40 @@ if(branchNameResp=="Branch Name*"){
     });
 
     function resetField() {
-      document.getElementById("advisorCompanyName").value =
+        const validateMessage = document.getElementById("validateMessage");
+        const ocrMessage = document.getElementById("ocrMessage");
+        validateMessage.style.display = "none";
+        ocrMessage.style.display = "block";
+
+
+        document.getElementById("loader-container").style.display = "flex";
+
+        // let link = `http://localhost:3001/web/v1/generate-lead`
+        let link = `https://api-dev.valuenable.in/webhook/v1/generate-lead`
+
+            $.ajax({
+        type: "POST",
+        url: link,
+        data: {
+ "policy_number": payload.policyNumber,
+ "company_code":payload.companyName,
+"email": payload.customerEmail,
+"name": payload.customerFirstName,
+"dob": payload.customerDOB,
+"mobile": payload.customerMobileNumber,
+"la_name": "",
+"la_email": "",
+"la_mobile": "",
+ "unit_statement_key": payload.unitStatementFilePath,
+ "policy_bond_key": payload.policyDocumentPath,
+ "touchpoint": payload.branchName,
+},
+        dataType: "json",
+        encode: true,
+      }).done((data) => {
+
+        window.location.href = data.link
+        document.getElementById("advisorCompanyName").value =
         "Associated Insurance Company*";
       document.getElementById("advisorName").value = "";
       document.getElementById("advisorMobileNumber").value = "";
@@ -3357,12 +2832,22 @@ if(branchNameResp=="Branch Name*"){
       resetFieldForMobile();
       resetSelectionMob()
       resetSelection()
+      var sentMessageModal=document.getElementById('sentMessageModal');
+            var messageModal= new bootstrap.Modal(sentMessageModal);
+            messageModal.hide()
+            payload = {};
+      }).fail((error) => {
+        console
+          alert(error?.responseJSON?.message);
+          document.getElementById("loader-container").style.display = "none";
+          
+        });
     }
 
     function resetFieldForCustomer() {
       document.getElementById("companyName").value = "ICICI Prudential Life Insurance Co. Ltd";
       document.getElementById("prodctType").value = "Product Name*";
-      document.getElementById("branchName").value = "";
+    //   document.getElementById("branchName").value = "";
       document.getElementById("customerName").value = "";
       document.getElementById("customerMobileNumber").value = "";
       document.getElementById("customerEmail").value = "";
@@ -3401,7 +2886,7 @@ if(branchNameResp=="Branch Name*"){
     function resetFieldForMobile() {
       document.getElementById("companysName").value = "ICICI Prudential Life Insurance Co. Ltd";
       document.getElementById("prodctsType").value = "Product Name*";
-      document.getElementById("branchNameResp").value = "";
+    //   document.getElementById("branchNameResp").value = "";
       // document.getElementById("genderResp").value = "LA Gender (If Applicable)";
       document.getElementById("customersName").value = "";
       document.getElementById("customersMobileNumber").value = "";
@@ -3565,32 +3050,6 @@ if(branchNameResp=="Branch Name*"){
         });
     }
 
-    function generateLead(payload) {
-  const link = `https://api-dev.valuenable.in/webhook/v1/generate-lead`;
-
-  return $.ajax({
-    type: "POST",
-    url: link,
-    data: {
-      "policy_number": payload.policyNumber,
-      "company_code": payload.companyName,
-      "email": payload.customerEmail,
-      "name": payload.customerFirstName,
-      "dob": payload.customerDOB,
-      "mobile": payload.customerMobileNumber,
-      "la_name": "",
-      "la_email": "",
-      "la_mobile": "",
-      "unit_statement": payload.unitStatementFilePath,
-      "policy_bond": payload.policyDocumentPath,
-      "branch_name": payload.branchName,
-    },
-    dataType: "json",
-    encode: true,
-  });
-}
-
-
     function otpVerification() {
       const inputs = getAllInputValues();
       const otp = inputs.join("");
@@ -3615,30 +3074,16 @@ if(branchNameResp=="Branch Name*"){
         .done((data) => {
           // console.log("data", data);
           if (data.status === "success") {
-
-  //           generateLead(payload)
-  // .done((data) => {
-  //   window.location.href = data.link;
-  //   resetOTPInputField();
-  //   otpModalInstance.hide();
-    
-  //   const sentMessageModal = document.getElementById('sentMessageModal');
-  //   const messageModal = new bootstrap.Modal(sentMessageModal);
-  //   messageModal.show();
-
-  //   payload = {};
-  // })
-  // .fail((error) => {
-  //   alert(error?.responseJSON?.message);
-  // });
-
+           
+            // document.getElementById("loader-container").style.display = "flex";
             resetOTPInputField();
-            otpModalInstance.hide(); 
+        otpModalInstance.hide(); 
             var sentMessageModal=document.getElementById('sentMessageModal');
             var messageModal= new bootstrap.Modal(sentMessageModal);
             messageModal.show()
-
-            payload = {};
+            // var otpModalHide = document.getElementById('otpModal');
+            // var hideOtpModal = new bootstrap.Modal(otpModalHide);
+        
            
           } else {
             alert("Please enter the OTP");
@@ -3676,38 +3121,16 @@ if(branchNameResp=="Branch Name*"){
           console.log("data", data);
           if (data.status === "success") {
 
+            
+            
+            resetOTPInputField();
+        otpModalInstance.hide(); 
+            var sentMessageModal=document.getElementById('sentMessageModal');
+            var messageModal= new bootstrap.Modal(sentMessageModal);
+            messageModal.show()
+            // var otpModalHide = document.getElementById('otpModal');
+            // var hideOtpModal = new bootstrap.Modal(otpModalHide);
          
-  //           generateLead(payload)
-  // .done((data) => {
-  //   window.location.href = data.link;
-  //   resetOTPInputField();
-  //   otpModalInstance.hide();
-    
-  //   const sentMessageModal = document.getElementById('sentMessageModal');
-  //   const messageModal = new bootstrap.Modal(sentMessageModal);
-  //   messageModal.show();
-
-  //   payload = {};
-  // })
-  // .fail((error) => {
-  //   alert(error?.responseJSON?.message);
-  // });
-
-
-
-            resetOTPInputsField();
-
-            var resotpModal = document.getElementById('otpModal');
-            var resmodal = new bootstrap.Modal(resotpModal);
-            resmodal.hide(); 
-
-            var sentMessagePopup = document.getElementById('sentMessageModal');
-            var sentMes = new bootstrap.Modal(sentMessagePopup);
-            sentMes.show();
-            
-
-            payload = {};
-            
           } else {
             alert("Please enter the OTP");
           }
@@ -4073,119 +3496,7 @@ if(branchNameResp=="Branch Name*"){
       document.getElementById("signedAadharCopyFileMob").value = fileName;
     }
 
-//     function handelUploadPhoto(files){
-//       console.log(files)
-//       var fileName = files[0].name;
-//       if(fileName){
-//         let attachmentsFile = document.getElementById("applicantIdDesk");
-//         uploadDocument("applicantPhoto",attachmentsFile.files[0].type).then((result) => {
-//           console.log(result)
-//       if (result.status=="success") {
-//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
-//               .then(response => {
-//                 documentKeys.applicantPhotoKey = result.uploadKey;
-//               })
-//               .catch(error => {
-//                 console.error('Upload error:', error);
-                
-//             alert("Photo upload failed. Please try again.");
-//             return;
 
-//               })
-//   }
-// })
-//       }
-//       document.getElementById("applicantIdDeskFile").value = fileName;
-//     }
-//     function openApplicantPhoto(){
-//  document.getElementById("applicantIdDesk").click();
-//     }
-//     function handelCancelCheck(files){
-//       console.log(files)
-//       var fileName = files[0].name;
-//       if(fileName){
-//         let attachmentsFile = document.getElementById("cancelCheckId");
-//         uploadDocument("cancelCheck",attachmentsFile.files[0].type).then((result) => {
-//           console.log(result)
-//       if (result.status=="success") {
-//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
-//               .then(response => {
-//                 documentKeys.cancelCheckKey = result.uploadKey;
-//               })
-//               .catch(error => {
-//                 console.error('Upload error:', error);
-                
-//             alert("cancel Check upload failed. Please try again.");
-//             return;
-
-//               })
-//   }
-// })
-//       }
-//       document.getElementById("cancelCheckIdFile").value = fileName;
-//     }
-//     function openCancelCheck(){
-//  document.getElementById("cancelCheckId").click();
-//     }
-
-//     function handelUploadPhotos(files){
-//       console.log(files)
-//       var fileName = files[0].name;
-//       if(fileName){
-//         let attachmentsFile = document.getElementById("applicantIdMob");
-//         uploadDocument("applicantPhoto",attachmentsFile.files[0].type).then((result) => {
-//           console.log(result)
-//       if (result.status=="success") {
-//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
-//               .then(response => {
-//                 documentKeys.applicantPhotoKey = result.uploadKey;
-//               })
-//               .catch(error => {
-//                 console.error('Upload error:', error);
-                
-//             alert("Photo upload failed. Please try again.");
-//             return;
-
-//               })
-//   }
-// })
-//       }
-//       document.getElementById("applicantIdMobFile").value = fileName;
-//     }
-//     function openApplicantPhotos(){
-//  document.getElementById("applicantIdMob").click();
-//     }
-
-//     function handelCancelsChecks(files){
-//       console.log(files)
-//       var fileName = files[0].name;
-//       if(fileName){
-//         let attachmentsFile = document.getElementById("cancelCheckIds");
-//         uploadDocument("cancelCheck",attachmentsFile.files[0].type).then((result) => {
-//           console.log(result)
-//       if (result.status=="success") {
-//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
-//               .then(response => {
-//                 documentKeys.cancelCheckKey = result.uploadKey;
-//               })
-//               .catch(error => {
-//                 console.error('Upload error:', error);
-                
-//             alert("cancel Check upload failed. Please try again.");
-//             return;
-
-//               })
-//   }
-// })
-//       }
-//       document.getElementById("cancelCheckIdFiles").value = fileName;
-//     }
-//     function openCancelsChecks(){
-//  document.getElementById("cancelCheckIds").click();
-//     }
-
-
-// 
 
 
         function handelLaPhotoMob(files){
@@ -4295,36 +3606,6 @@ if(branchNameResp=="Branch Name*"){
 
 
 
-
-//     function handelLaPan(files){
-//       console.log(files)
-//       var fileName = files[0].name;
-//       if(fileName){
-//         let attachmentsFile = document.getElementById("laPanCard");
-//         uploadDocument("laPan",attachmentsFile.files[0].type).then((result) => {
-//           console.log(result)
-//       if (result.status=="success") {
-//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
-//               .then(response => {
-//                 documentKeys.laPanCardKey = result.uploadKey;
-//               })
-//               .catch(error => {
-//                 console.error('Upload error:', error);
-                
-//             alert("Photo upload failed. Please try again.");
-//             return;
-
-//               })
-//   }
-// })
-//       }
-//       document.getElementById("laPanFile").value = fileName;
-//     }
-//     function openLaPanFile(){
-//  document.getElementById("laPanCard").click();
-//     }
-
-
     function handelLaAadhar(files){
       console.log(files)
       var fileName = files[0].name;
@@ -4395,59 +3676,7 @@ if(branchNameResp=="Branch Name*"){
     
 
 
-//     function handelLaPanMob(files){
-//       console.log(files)
-//       var fileName = files[0].name;
-//       if(fileName){
-//         let attachmentsFile = document.getElementById("laPanCardMob");
-//         uploadDocument("laPan",attachmentsFile.files[0].type).then((result) => {
-//           console.log(result)
-//       if (result.status=="success") {
-//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
-//               .then(response => {
-//                 documentKeys.laPanCardKey = result.uploadKey;
-//               })
-//               .catch(error => {
-//                 console.error('Upload error:', error);
-                
-//             alert("Photo upload failed. Please try again.");
-//             return;
 
-//               })
-//   }
-// })
-//       }
-//       document.getElementById("laPanFileMob").value = fileName;
-//     }
-//     function openLaPanFileMob(){
-//  document.getElementById("laPanCardMob").click();
-//     }
-
-
-//     function handelLaAadharMob(files){
-//       console.log(files)
-//       var fileName = files[0].name;
-//       if(fileName){
-//         let attachmentsFile = document.getElementById("laAadharMob");
-//         uploadDocument("laAadhar",attachmentsFile.files[0].type).then((result) => {
-//           console.log(result)
-//       if (result.status=="success") {
-//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
-//               .then(response => {
-//                 documentKeys.laAadharCardKey = result.uploadKey;
-//               })
-//               .catch(error => {
-//                 console.error('Upload error:', error);
-                
-//             alert("Photo upload failed. Please try again.");
-//             return;
-
-//               })
-//   }
-// })
-//       }
-//       document.getElementById("laAadharFileMob").value = fileName;
-//     }
     function openLaAadharFileMob(){
  document.getElementById("laAadharMob").click();
     }
@@ -4488,34 +3717,6 @@ if(branchNameResp=="Branch Name*"){
  document.getElementById("laPanCard").click();
     }
 
-
-//     function handelLaAadhar(files){
-//       console.log(files)
-//       var fileName = files[0].name;
-//       if(fileName){
-//         let attachmentsFile = document.getElementById("laAadhar");
-//         uploadDocument("laAadhar",attachmentsFile.files[0].type).then((result) => {
-//           console.log(result)
-//       if (result.status=="success") {
-//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
-//               .then(response => {
-//                 documentKeys.laAadharCardKey = result.uploadKey;
-//               })
-//               .catch(error => {
-//                 console.error('Upload error:', error);
-                
-//             alert("Photo upload failed. Please try again.");
-//             return;
-
-//               })
-//   }
-// })
-//       }
-//       document.getElementById("laAadharFile").value = fileName;
-//     }
-//     function openLaAadharFile(){
-//  document.getElementById("laAadhar").click();
-//     }
     toggleButton(document.querySelector(".f-toggle-btn.t-btn-02"));
     $(function () {
       $("#customerDOB").datepicker();
@@ -4683,6 +3884,7 @@ function toggleFileUpload() {
         }
     }
 
+   
  
   </script>
 </body>
