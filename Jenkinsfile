@@ -1,78 +1,44 @@
 pipeline {
     agent any
+
+    environment {
+        AWS_ACCOUNT_ID = '493761185412'                  // Your AWS Account ID
+        S3_BUCKET_NAME = 'valuenable.in'           // Replace with your actual S3 bucket name
+        CLOUDFRONT_DIST_ID = 'E18LLE49KUMJV1'             // Replace with your actual CloudFront distribution ID
+    }
+
     stages {
-        stage('Detect Branch and Set Environment') {
+        stage('Checkout') {
             steps {
-                script {
-                    // Detect the current branch name
-                    def branchName = env.BRANCH_NAME
-                    env.ENVIRON = 'development'
-                }
+                // Checkout your code from GitHub
+                checkout scm
             }
         }
-        stage('Checkout Configuration Repository') {
+
+        stage('Build and Deploy') {
             steps {
-                script {
-                    // Checkout the configuration repository containing script.sh and env_values.py
-                    checkout([
-                        $class: 'GitSCM',
-                        branches: [[name: "refs/heads/${env.BRANCH_NAME}"]],
-                        doGenerateSubmoduleConfigurations: false,
-                        extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'Template']],
-                        submoduleCfg: [],
-                        userRemoteConfigs: [[credentialsId: 'valuenable-it', url: 'https://github.com/valuenable-it/jenkins-config-repo']]
-                    ])
+                sh '''
+                    #!/bin/bash
+                    set -e
 
-                    def envValuesFile = readFile 'Template/env_values.py'
-                    def envVars = evaluate(envValuesFile)
-                    
-                    def environment = env.ENVIRON.toLowerCase()
+                    echo "Assuming IAM role..."
+                    # Assume role and export AWS credentials for this shell session only
+                    eval $(aws sts assume-role --role-arn arn:aws:iam::${AWS_ACCOUNT_ID}:role/OrganizationAccountAccessRole --role-session-name JenkinsSession | \
+                        jq -r '.Credentials | "export AWS_ACCESS_KEY_ID=\\(.AccessKeyId) AWS_SECRET_ACCESS_KEY=\\(.SecretAccessKey) AWS_SESSION_TOKEN=\\(.SessionToken)"')
 
-                    if (envVars[environment]) {
-                        env.TO_MAIL = envVars[environment].TO_MAIL
-                        env.CC_MAIL = envVars[environment].CC_MAIL
-                        env.CUSTOM_MESSAGE = envVars[environment].CUSTOM_MESSAGE
-                    } else {
-                        error "Environment '${environment}' not found in the JSON file."
-                    }
+                    echo "Running npm install and build..."
+                    npm install
+                    npm run build
 
-                }
+                    echo "Syncing build folder to S3 bucket ${S3_BUCKET_NAME}..."
+                    aws s3 sync build/ s3://${S3_BUCKET_NAME} --delete
+
+                    echo "Creating CloudFront invalidation for distribution ${CLOUDFRONT_DIST_ID}..."
+                    aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DIST_ID} --paths "/*"
+
+                    echo "Deployment completed successfully."
+                '''
             }
         }
-        stage('move Script'){
-            steps {
-                sh "mv Template/react_deploy.sh ."
-                sh "mv Template/env_master.sh ."
-            }
-        }
-        stage('Execute Script') {
-            steps {
-                // Run script.sh
-                sh "chmod +x react_deploy.sh"
-                sh "./react_deploy.sh ${env.ENVIRON}"
-            }
-        }    
-}
-   post {
-        always {
-            script {
-                def gitAuthor = sh(returnStdout: true, script: 'git log -1 --pretty=format:"%an"').trim()
-                def triggeredByUser = null
-                if (currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause')['userId']){
-                    triggeredByUser = currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause')['userId']
-                } else {
-                    triggeredByUser = gitAuthor ?: 'Unknown'
-                }
-
-                emailext body: "Build ${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'\n\n" +
-                        "Build URL: ${env.BUILD_URL}\n\n" +
-                        "Triggered by: ${triggeredByUser}\n\n" +
-                        "${env.CUSTOM_MESSAGE}",
-                    subject: "${env.ENVIRON.toUpperCase()} - Jenkins Build Notification - ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
-                    to: env.TO_MAIL,
-                    cc:env.CC_MAIL,
-                    from: "jenkins@valuenable.in"
-                }
-            }
-        }
+    }
 }
