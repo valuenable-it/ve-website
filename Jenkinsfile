@@ -6,7 +6,7 @@ pipeline {
                 script {
                     // Detect the current branch name
                     def branchName = env.BRANCH_NAME
-                    env.ENVIRON = 'developement'
+                    env.ENVIRON = 'development'
                 }
             }
         }
