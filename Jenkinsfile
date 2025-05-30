@@ -6,7 +6,7 @@ pipeline {
                 script {
                     // Detect the current branch name
                     def branchName = env.BRANCH_NAME
-                    env.ENVIRON = 'development'
+                    env.ENVIRON = 've_website'
                 }
             }
         }
@@ -41,15 +41,15 @@ pipeline {
         }
         stage('move Script'){
             steps {
-                sh "mv Template/react_deploy.sh ."
+                sh "mv Template/script_ve-website.sh ."
                 sh "mv Template/env_master.sh ."
             }
         }
         stage('Execute Script') {
             steps {
                 // Run script.sh
-                sh "chmod +x react_deploy.sh"
-                sh "./react_deploy.sh ${env.ENVIRON}"
+                sh "chmod +x script_ve-website.sh"
+                sh "./script_ve-website.sh ${env.ENVIRON}"
             }
         }    
 }
