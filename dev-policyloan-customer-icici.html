@@ -2298,12 +2298,12 @@
                   to verify your Mobile number
                 </h6>
                 <div id="resOtp" class="inputs d-flex flex-row justify-content-center mt-3">
-                  <input class="m-2 text-center form-control rounded" type="text" id="firstInput" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded" type="text" id="secondInput" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded" type="text" id="thirdInput" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded" type="text" id="fourthInput" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded" type="text" id="fifthInput" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded" type="text" id="sixthInput" maxlength="1" />
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="firstInput" maxlength="1" />
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="secondInput" maxlength="1" />
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="thirdInput" maxlength="1" />
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="fourthInput" maxlength="1" />
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="fifthInput" maxlength="1" />
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="sixthInput" maxlength="1" />
                 </div>
                 <div class="mt-4" style="display: block">
                   <button class="btn btn-danger px-4 validate" onclick="otpResVerification()">
@@ -2340,12 +2340,12 @@
                   to verify your Mobile number
                 </h6>
                 <div id="otp" class="inputs d-flex flex-row justify-content-center mt-3">
-                  <input class="m-2 text-center form-control rounded" type="text" id="first" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded" type="text" id="second" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded" type="text" id="third" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded" type="text" id="fourth" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded" type="text" id="fifth" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded" type="text" id="sixth" maxlength="1" />
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="first" maxlength="1" />
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="second" maxlength="1" />
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="third" maxlength="1" />
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="fourth" maxlength="1" />
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="fifth" maxlength="1" />
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="sixth" maxlength="1" />
                 </div>
                 <div class="mt-4" style="display: block">
                   <button class="btn btn-danger px-4 validate" onclick="otpVerification()">
@@ -2522,6 +2522,65 @@
             });
         });
 
+       
+//paste handle 
+document.addEventListener('DOMContentLoaded', () => {
+
+  const inputs = document.querySelectorAll('.otp-input'); 
+
+  inputs.forEach((input, index) => {
+    // Prevent 'v' from being typed on Ctrl+V
+    input.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && (e.key === 'v' || e.key === 'V')) {
+        e.preventDefault(); // Prevent 'v' from typing
+        navigator.clipboard.readText().then(pastedText => {
+          handlePaste(pastedText, index);
+        });
+      }
+
+      // Backspace to previous field
+      if (e.key === 'Backspace' && input.value === '' && index > 0) {
+        inputs[index - 1].focus();
+      }
+    });
+
+    // Right click paste
+    input.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const pastedText = e.clipboardData.getData('text');
+      handlePaste(pastedText, index);
+    });
+
+    // Move to next on input
+    input.addEventListener('input', () => {
+      if (input.value.length === 1 && index < inputs.length - 1) {
+        inputs[index + 1].focus();
+      }
+    });
+  });
+
+  function handlePaste(pastedText, startIndex) {
+    const digits = pastedText.replace(/\D/g, '').split('');
+    digits.forEach((digit, offset) => {
+      const targetIndex = startIndex + offset;
+      if (inputs[targetIndex]) {
+        inputs[targetIndex].value = digit;
+      }
+    });
+
+    const lastIndex = Math.min(startIndex + digits.length - 1, inputs.length - 1);
+    if (lastIndex >= 0) inputs[lastIndex].focus();
+
+    logCurrentOTP();
+  }
+
+  function logCurrentOTP() {
+    const otp = Array.from(inputs).map(input => input.value).join('');
+    console.log('📌 Current OTP:', otp);
+  }
+});
+
+
         function resetSelection() {
                 $('#branchName').val(null).trigger('change');
             }
@@ -2560,6 +2619,11 @@ otpModalInstance.show();
 
       OTPInput();
     });
+
+   
+
+
+
 
     document.addEventListener('DOMContentLoaded', (event) => {
       function OTPInput() {
