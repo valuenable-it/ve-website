@@ -2528,6 +2528,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const inputs = document.querySelectorAll('.otp-input'); 
 
+  // Detect mobile/touch devices
+  const isMobile = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+
   inputs.forEach((input, index) => {
     // Prevent 'v' from being typed on Ctrl+V
     input.addEventListener('keydown', (e) => {
@@ -2544,11 +2547,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Right click paste
+    // Right click or long press (both desktop and mobile)
     input.addEventListener('paste', (e) => {
       e.preventDefault();
       const pastedText = e.clipboardData.getData('text');
-      handlePaste(pastedText, index);
+      if(isMobile){
+        setTimeout(() => {
+          handlePaste(pastedText, index);
+        },0);
+      } else {
+        handlePaste(pastedText, index);
+      }     
     });
 
     // Move to next on input
