@@ -2298,12 +2298,12 @@
                   to verify your Mobile number
                 </h6>
                 <div id="resOtp" class="inputs d-flex flex-row justify-content-center mt-3">
-                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="firstInput" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="secondInput" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="thirdInput" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="fourthInput" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="fifthInput" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="sixthInput" maxlength="1" />
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="firstInput" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="secondInput" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="thirdInput" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="fourthInput" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="fifthInput" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="sixthInput" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
                 </div>
                 <div class="mt-4" style="display: block">
                   <button class="btn btn-danger px-4 validate" onclick="otpResVerification()">
@@ -2340,12 +2340,12 @@
                   to verify your Mobile number
                 </h6>
                 <div id="otp" class="inputs d-flex flex-row justify-content-center mt-3">
-                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="first" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="second" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="third" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="fourth" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="fifth" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="sixth" maxlength="1" />
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="first" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="second" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="third" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="fourth" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="fifth" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="sixth" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
                 </div>
                 <div class="mt-4" style="display: block">
                   <button class="btn btn-danger px-4 validate" onclick="otpVerification()">
@@ -2576,7 +2576,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function logCurrentOTP() {
     const otp = Array.from(inputs).map(input => input.value).join('');
-    console.log('📌 Current OTP:', otp);
+    
   }
 });
 
