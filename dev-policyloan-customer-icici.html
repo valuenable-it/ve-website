@@ -2530,6 +2530,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Detect mobile/touch devices
   const isMobile = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+  console.log("isMobile", isMobile);
+  
 
   inputs.forEach((input, index) => {
     // Prevent 'v' from being typed on Ctrl+V
@@ -2554,7 +2556,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if(isMobile){
         setTimeout(() => {
           handlePaste(pastedText, index);
-        },0);
+        },10);
       } else {
         handlePaste(pastedText, index);
       }     
