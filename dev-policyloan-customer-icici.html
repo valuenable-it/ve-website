@@ -2298,7 +2298,7 @@
                   to verify your Mobile number
                 </h6>
                 <div id="resOtp" class="inputs d-flex flex-row justify-content-center mt-3">
-                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="firstInput" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="firstInput" maxlength="1"  inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code"/>
                   <input class="m-2 text-center form-control rounded otp-input" type="text" id="secondInput" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
                   <input class="m-2 text-center form-control rounded otp-input" type="text" id="thirdInput" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
                   <input class="m-2 text-center form-control rounded otp-input" type="text" id="fourthInput" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
@@ -2340,7 +2340,7 @@
                   to verify your Mobile number
                 </h6>
                 <div id="otp" class="inputs d-flex flex-row justify-content-center mt-3">
-                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="first" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="first" maxlength="1"  inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code"/>
                   <input class="m-2 text-center form-control rounded otp-input" type="text" id="second" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
                   <input class="m-2 text-center form-control rounded otp-input" type="text" id="third" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
                   <input class="m-2 text-center form-control rounded otp-input" type="text" id="fourth" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
@@ -2558,13 +2558,16 @@ document.addEventListener('DOMContentLoaded', () => {
           handlePaste(pastedText, index);
         },10);
       } else {
-        handlePaste(pastedText, index);
+         handlePaste(pastedText, index);
       }     
     });
 
-    // Move to next on input
+    // Move to next on input or handle OTP paste/autofill
     input.addEventListener('input', () => {
-      if (input.value.length === 1 && index < inputs.length - 1) {
+      const val = input.value;
+      if (val.length > 1){
+        handlePaste(val, index);
+      }else if (input.value.length === 1 && index < inputs.length - 1) {
         inputs[index + 1].focus();
       }
     });
