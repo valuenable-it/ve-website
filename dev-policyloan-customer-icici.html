@@ -2553,19 +2553,17 @@ document.addEventListener('DOMContentLoaded', () => {
     input.addEventListener('paste', (e) => {
       e.preventDefault();
       const pastedText = e.clipboardData.getData('text');
-      if(isMobile){
-        setTimeout(() => {
+      input.value = ''; // Clear current input
+      setTimeout(() => {
           handlePaste(pastedText, index);
-        },50);
-      } else {
-         handlePaste(pastedText, index);
-      }     
+        }, isMobile ? 50 : 0);   
     });
 
     // Move to next on input or handle OTP paste/autofill
     input.addEventListener('input', () => {
       const val = input.value;
       if (val.length > 1){
+        input.value = ''; // Clear the input
          setTimeout(() => {
            handlePaste(val, index);
          }, 10);
