@@ -2529,8 +2529,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const inputs = document.querySelectorAll('.otp-input'); 
 
   // Detect mobile/touch devices
-  const isMobile = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
-  console.log("isMobile", isMobile);
+  const isMobile = ('ontouchstart' in window) || navigator.maxTouchPoints > 0; 
   
 
   inputs.forEach((input, index) => {
@@ -2550,12 +2549,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Right click or long press (both desktop and mobile)
-    input.addEventListener('paste', (e) => {
+    input.addEventListener('paste', async (e) => {
       e.preventDefault();
-      const pastedText = e.clipboardData.getData('text');
-      input.value = ''; // Clear current input
+      let pastedText = '';
+       if (e.clipboardData && e.clipboardData.getData) {
+        pastedText = e.clipboardData.getData('text') || '';
+      } else if (navigator.clipboard && navigator.clipboard.readText) {
+        try {
+          pastedText = await navigator.clipboard.readText();
+        } catch {
+          pastedText = '';
+        }
+      }
+      input.value = ''; 
       setTimeout(() => {
-          handlePaste(pastedText, index);
+          handlePaste(pastedText, 0);
         }, isMobile ? 50 : 0);   
     });
 
@@ -2587,9 +2595,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function handlePaste(pastedText, startIndex) {
     const digits = pastedText.replace(/\D/g, '').split('');
-     for (let i = startIndex; i < inputs.length; i++) {
-      inputs[i].value = '';
-    }
+    inputs.forEach(input => input.value = '');
+     
     digits.forEach((digit, offset) => {
       const targetIndex = startIndex + offset;
       if (inputs[targetIndex]) {
@@ -2599,6 +2606,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const lastIndex = Math.min(startIndex + digits.length - 1, inputs.length - 1);
      const nextIndex = startIndex + digits.length;
+
      if (nextIndex < inputs.length) {
       inputs[nextIndex].focus();
       } else {
