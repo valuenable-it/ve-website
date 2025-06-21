@@ -2556,7 +2556,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if(isMobile){
         setTimeout(() => {
           handlePaste(pastedText, index);
-        },10);
+        },50);
       } else {
          handlePaste(pastedText, index);
       }     
@@ -2568,15 +2568,30 @@ document.addEventListener('DOMContentLoaded', () => {
       if (val.length > 1){
          setTimeout(() => {
            handlePaste(val, index);
-         }, 5);
+         }, 10);
       }else if (input.value.length === 1 && index < inputs.length - 1) {
         inputs[index + 1].focus();
       }
     });
+
+    if (isMobile) {
+      input.addEventListener('compositionend', (e) => {
+        const val = e.data || input.value;
+        if (val && val.length > 1) {
+          input.value = '';
+          setTimeout(() => {
+            handlePaste(val, index);
+          }, 20);
+        }
+      });
+    }
   });
 
   function handlePaste(pastedText, startIndex) {
     const digits = pastedText.replace(/\D/g, '').split('');
+     for (let i = startIndex; i < inputs.length; i++) {
+      inputs[i].value = '';
+    }
     digits.forEach((digit, offset) => {
       const targetIndex = startIndex + offset;
       if (inputs[targetIndex]) {
@@ -2585,10 +2600,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const lastIndex = Math.min(startIndex + digits.length - 1, inputs.length - 1);
-    if (lastIndex >= 0) inputs[lastIndex].focus();
+     const nextIndex = startIndex + digits.length;
+     if (nextIndex < inputs.length) {
+      inputs[nextIndex].focus();
+      } else {
+        inputs[lastIndex].focus();
+      }
+      logCurrentOTP();
+    }
 
-    logCurrentOTP();
-  }
 
   function logCurrentOTP() {
     const otp = Array.from(inputs).map(input => input.value).join('');
