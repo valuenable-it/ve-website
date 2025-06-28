@@ -2212,6 +2212,8 @@ otpModalInstance.show();
       let laAadhar= document.getElementById("laAadhar");
       const urlParams = new URLSearchParams(window.location.search);
       const source = urlParams?.get('source');
+      const leadId = urlParams?.get('lead_id');
+
       if(laCheckBoxClick){
   if (
     laName == "" ||
@@ -2362,6 +2364,7 @@ if (documentKeys?.laPhotoKey == "") {
         laName,
         laEmail,
         laPhone,
+        leadId:leadId?leadId:null,
         // laDOB:laDOB,
         // laGender:laGender
       };
@@ -2508,6 +2511,7 @@ console.log(response)
 
       const urlParams = new URLSearchParams(window.location.search);
       const source = urlParams?.get('source');
+      const leadId = urlParams?.get('lead_id');
       if(laCheckBoxMobClick){
   if (
     laNameMob == "" ||
@@ -2652,6 +2656,7 @@ if (documentKeys?.laPhotoKey == "") {
         laName:laNameMob,
         laEmail:laEmailMob,
         laPhone:laEmailMob,
+        leadId:leadId?leadId:null,
         // laDOB:laDOBResp,
         // laGender:laGenderResp
       };
@@ -2844,6 +2849,7 @@ if (documentKeys?.laPhotoKey == "") {
  "unit_statement_key": payload.unitStatementFilePath,
  "policy_bond_key": payload.policyDocumentPath,
  "touchpoint": payload.branchName,
+ "refrenceId":payload.leadId?payload.leadId:null,
 },
         dataType: "json",
         encode: true,
