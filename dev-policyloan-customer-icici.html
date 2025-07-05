@@ -240,9 +240,18 @@
                           </select>
                         </div>
                       </div>
-                      <div class="col-md-12">
+                               <div class="col-md-12">
+  <div class="form-group">
+    <select class="form-control" id="sourceTypeResp" onchange="handleSourceChangeResp()">
+      <option value="">Source*</option>
+      <option value="branch">Branch</option>
+      <option value="support center">Support Centre</option>
+    </select>
+  </div>
+</div>
+                      <div class="col-md-12" id="branchDropdownResp" style="display: none;">
                         <div class="form-group">
-                          <select class="form-control" id="branchNameResp">
+                          <select class="form-control" id="branchNameResp" style="width: 100%;">
                             <option value="">Branch Name*</option>
                             <option value='A S Rao Nagar'>A S Rao Nagar</option>
 <option value='AGARTALA'>AGARTALA</option>
@@ -1094,9 +1103,39 @@
                           </select>
                         </div>
                       </div>
-                      <div class="col-md-12">
+                    <div class="col-md-12">
+  <div class="form-group">
+    <select class="form-control" id="sourceTypeDesktop" onchange="handleSourceChangeDeskTop()">
+      <option value="">Source*</option>
+      <option value="branch">Branch</option>
+      <option value="support center">Support Centre</option>
+    </select>
+  </div>
+</div>
+                      <!-- <div class="col-md-12">
+     <div class="form-group row">
+  <label class="col-md-4 col-form-label"><strong>Source</strong></label>
+
+  <div class="col-md-4" style="display: flex;justify-content: center;align-items: center;">
+    <div class="form-check">
+      <input class="form-check-input" style="margin-top: 2px;" type="radio" name="option" id="branch" value="branch">
+      <label class="form-check-label" for="branch">Branch Name</label>
+    </div>
+  </div>
+
+  <div class="col-md-4" style="display: flex;justify-content: center;align-items: center;">
+    <div class="form-check">
+      <input class="form-check-input" style="margin-top: 2px;" type="radio" name="option" id="support" value="support">
+      <label class="form-check-label" for="support">Support Centre</label>
+    </div>
+  </div>
+</div>
+                      </div> -->
+        
+
+                      <div class="col-md-12" id="branchDropdownDesktop" style="display: none;">
                         <div class="form-group">
-                          <select class="form-control" id="branchName">
+                          <select class="form-control" id="branchName" style="width: 100%;">
                             <option value="">Branch Name*</option>
                             <option value='A S Rao Nagar'>A S Rao Nagar</option>
 <option value='AGARTALA'>AGARTALA</option>
@@ -2533,7 +2572,26 @@
             });
         });
 
-       
+       function handleSourceChangeDeskTop() {
+    const selectedValue = document.getElementById("sourceTypeDesktop").value;
+    const branchDropdown = document.getElementById("branchDropdownDesktop");
+
+    if (selectedValue == "branch") {
+      branchDropdown.style.display = "block";
+    } else {
+      branchDropdown.style.display = "none";
+    }
+  }
+      function handleSourceChangeResp() {
+    const selectedValue = document.getElementById("sourceTypeResp").value;
+    const branchDropdown = document.getElementById("branchDropdownResp");
+
+    if (selectedValue == "branch") {
+      branchDropdown.style.display = "block";
+    } else {
+      branchDropdown.style.display = "none";
+    }
+  }
 //paste handle 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -2844,6 +2902,8 @@ otpModalInstance.show();
       let companyName = document.getElementById("companyName").value;
       let prodctType = document.getElementById("prodctType").value;
       let branchName = document.getElementById("branchName").value;
+      let leadSourceType = document.getElementById("sourceTypeDesktop").value;
+
 
       let customerName = document.getElementById("customerName").value;
       let customerMobileNumber = document.getElementById(
@@ -2888,7 +2948,12 @@ otpModalInstance.show();
         return;
       }
 
-
+if(leadSourceType==""){
+  alert("Please select lead Source")
+  return
+}else if(leadSourceType=="support center"){
+branchName=leadSourceType
+}
       if (
         companyName == "" ||
         prodctType == "" ||
@@ -2898,6 +2963,7 @@ otpModalInstance.show();
         customerEmail == "" ||
         customerDOB == ""||
         motherName == ""||
+        leadSourceType==""||
         policyNumber==""
       ) {
         alert(
@@ -2905,6 +2971,7 @@ otpModalInstance.show();
         );
         return;
       }
+
 
 //       if (documentKeys?.panCardKey == "") {
 //     alert("Pan Card Not Uploaded Successfully. Please select again.");
@@ -3137,6 +3204,7 @@ console.log(response)
       let companysName = document.getElementById("companysName").value;
       let prodctsType = document.getElementById("prodctsType").value;
       let branchNameResp = document.getElementById("branchNameResp").value;
+      let leadSourceType = document.getElementById("sourceTypeResp").value;
 
       let customersName = document.getElementById("customersName").value;
       let customersMobileNumber = document.getElementById(
@@ -3182,6 +3250,12 @@ console.log(response)
         return;
       }
 
+      if(leadSourceType==""){
+  alert("Please select lead Source")
+  return
+}else if(leadSourceType=="support center"){
+branchNameResp=leadSourceType
+}
       if (
         companysName == "" ||
         prodctsType == "" ||
