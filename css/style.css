@@ -2822,6 +2822,9 @@ form ul {
              .desktop-crisil-img{
               width: 651px;
             }
+            .phone-hyperlink {
+              font-size: 13px;
+            }
 
 @media (min-width: 1921px) {
   html {
@@ -7431,6 +7434,9 @@ letter-spacing: -0.4px;
   .bfl-lsp-heading{
     font-size: 12px !important;
   }
+  .phone-hyperlink{
+    font-size: 11px !important;
+  }
 }
 /* @media (max-width: 1026px) {
   
@@ -7467,6 +7473,9 @@ letter-spacing: -0.4px;
   .bfl-lsp-heading{
     font-size: 12px !important;
   }
+  .phone-hyperlink{
+    font-size: 11px !important;
+  }
 }
 
 @media (max-width: 375px) {
@@ -7489,6 +7498,9 @@ letter-spacing: -0.4px;
   }
   .bfl-lsp-heading{
     font-size: 12px !important;
+  }
+  .phone-hyperlink{
+    font-size: 11px !important;
   }
 }
 
@@ -7513,6 +7525,9 @@ letter-spacing: -0.4px;
   }
   .bfl-lsp-heading{
     font-size: 12px !important;
+  }
+  .phone-hyperlink{
+    font-size: 11px !important;
   }
 }
 
