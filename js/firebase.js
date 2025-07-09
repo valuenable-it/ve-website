@@ -1,11 +1,11 @@
 // Your web app's Firebase configuration
 var firebaseConfig = {
-    apiKey: "AIzaSyAVSBJBGl9VXUF60cOWb1UtZGtmsdu_Xu4",
-    authDomain: "valuenable.firebaseapp.com",
-    projectId: "valuenable",
-    storageBucket: "valuenable.appspot.com",
-    messagingSenderId: "555936150493",
-    appId: "1:555936150493:web:f3fabf07ee4b187ed0bc34"
+    apiKey: "",
+    authDomain: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: ""
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
