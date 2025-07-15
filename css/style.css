@@ -2823,7 +2823,7 @@ form ul {
               width: 651px;
             }
             .phone-hyperlink {
-              font-size: 13px;
+              font-size: 10px;
             }
 
 @media (min-width: 1921px) {
@@ -4193,7 +4193,8 @@ form ul {
   .title-text-main.small-title-raw h3 {
     font-size: 44px; }
   .title-text-main h2 {
-    font-size: 58px; }
+    font-size: 58px;
+     margin-top: 62px; }
   .contact-wrapper .contacts-raws {
     padding: 0 30px 0 30px; }
   .contact-wrapper .contact-raw .img-wrap img {
@@ -7435,7 +7436,7 @@ letter-spacing: -0.4px;
     font-size: 12px !important;
   }
   .phone-hyperlink{
-    font-size: 11px !important;
+    font-size: 10px !important;
   }
 }
 /* @media (max-width: 1026px) {
@@ -7474,7 +7475,7 @@ letter-spacing: -0.4px;
     font-size: 12px !important;
   }
   .phone-hyperlink{
-    font-size: 11px !important;
+    font-size: 10px !important;
   }
 }
 
@@ -7500,7 +7501,7 @@ letter-spacing: -0.4px;
     font-size: 12px !important;
   }
   .phone-hyperlink{
-    font-size: 11px !important;
+    font-size: 10px !important;
   }
 }
 
@@ -7527,7 +7528,7 @@ letter-spacing: -0.4px;
     font-size: 12px !important;
   }
   .phone-hyperlink{
-    font-size: 11px !important;
+    font-size: 10px !important;
   }
 }
 
