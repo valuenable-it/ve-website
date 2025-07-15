@@ -3842,6 +3842,7 @@ form ul {
   .title-text-main.small-title-raw h3 {
     font-size: 48px; }
   .title-text-main h2 {
+     margin-top: 37px;
     font-size: 60px; }
   .contact-wrapper .contacts-raws {
     padding: 0 80px 0 80px; }
