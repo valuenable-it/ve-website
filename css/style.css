@@ -4562,7 +4562,7 @@ form ul {
   .title-text-main.small-title-raw h3 {
     font-size: 38px; }
   .title-text-main h2 {
-    font-size: 48px; }
+    font-size: 48px;      margin-top: 37px;}
   .contact-wrapper .contacts-raws {
     padding: 0 40px 0 40px; }
   .career-wrapper .career-box {
