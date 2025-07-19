@@ -1241,6 +1241,9 @@ section {
   background: url(../images/ic-mail.svg) left top 0px no-repeat;
   background-size: 16px; }
 
+  .head-contact ul li.live-support {
+  background: url(../images/live-support.svg) left top 0px no-repeat;
+  background-size: 16px; }
 .head-contact ul li a {
   width: auto;
   padding-left: 35px;
@@ -1361,10 +1364,13 @@ section {
       .contact-wrapper .contact-raw .customer-support .left-wrap ul li.mail {
         background: url(../images/ic-mail.svg) left top 24px no-repeat;
         background-size: 20px; }
+        .contact-wrapper .contact-raw .customer-support .left-wrap ul li.live-support {
+        background: url(../images/live-support.svg) left top 21px no-repeat;
+        background-size: 20px; }
       .contact-wrapper .contact-raw .customer-support .left-wrap ul li a {
         width: auto;
         float: left;
-        padding-left: 70px;
+        padding-left: 32px;
         color: #2b3a67; }
     .contact-wrapper .contact-raw .customer-support .right-wrap {
       padding-left: 50px; }
@@ -1395,10 +1401,13 @@ section {
         .contact-wrapper .contact-raw .customer-support .right-wrap ul li.mail {
           background: url(../images/ic-mail.svg) left top 24px no-repeat;
           background-size: 20px; }
+           .contact-wrapper .contact-raw .customer-support .right-wrap ul li.live-support {
+          background: url(../images/live-support.svg) left top 21px no-repeat;
+          background-size: 20px; }
         .contact-wrapper .contact-raw .customer-support .right-wrap ul li a {
           width: auto;
           float: left;
-          padding-left: 70px;
+          padding-left: 32px;
           color: #2b3a67; }
   .contact-wrapper .contact-raw .location-wrapper {
     margin-top: 80px;
@@ -2824,6 +2833,9 @@ form ul {
             }
             .phone-hyperlink {
               font-size: 10px;
+            }
+            .loan-tab-ul{
+              margin-left: 67px;
             }
 
 @media (min-width: 1921px) {
@@ -4636,6 +4648,7 @@ form ul {
     .content-grid {
       grid-template-columns: 427px 1fr !important;
     }
+
   }
  
 
@@ -5117,7 +5130,7 @@ font-size: 20px !important;
       width: 31%;
       left: 0px; }
     .contact-wrapper .contact-raw .customer-support .left-wrap ul li a {
-      padding-left: 40px; }
+      padding-left: 40px; font-size: 15px;}
   .contact-wrapper .contact-raw .customer-support .right-wrap {
     margin-top: 50px;
     padding: 0px 15px;
@@ -5128,7 +5141,7 @@ font-size: 20px !important;
       width: 31%;
       left: 0px; }
     .contact-wrapper .contact-raw .customer-support .right-wrap ul li a {
-      padding-left: 40px; }
+      padding-left: 40px; font-size: 15px;}
   .contact-wrapper .contact-raw .location-wrapper {
     margin: 50px 0px; }
     .contact-wrapper .contact-raw .location-wrapper .location-raw {
@@ -5260,7 +5273,8 @@ font-size: 20px !important;
     .why-ve-wrapper h2 {
       margin-bottom: 20px; }
   .footer-logo {
-    display: block !important; } }
+    display: block !important; } 
+}
 
 @media (max-width: 767px) {
   .inner-wrapper .innerpage .innercontainerwrap .teamwrap ul li .boxwrap {
@@ -5901,17 +5915,21 @@ font-size: 20px !important;
     max-width: 400px; }
   .solutions-wrapper .solutions-raw .solutions-box .img-wrap img {
     max-width: 400px; } 
-
+  .loan-tab-ul{
+ margin-left: auto !important;
+ }
   }
 
 @media screen and (min-width: 991px) {
   #nav-tabs-wrapper {
-    display: block !important; } 
+    display: block !important; 
+  } 
+
   }
 
 @media screen and (min-width: 576px) {
   .mobile-show {
-    display: none; } }
+    display: none; }  }
 
 @media screen and (max-width: 575px) {
   .mobile-hide {
@@ -6250,6 +6268,9 @@ margin-bottom: 0px !important;
 .img-fluid {
   max-width: 80% !important;
 }
+  .loan-tab-ul{
+ margin-left: auto !important;
+ }
 }
 @media only screen and (max-device-width: 480px) {
   html {
@@ -7439,6 +7460,9 @@ letter-spacing: -0.4px;
   .phone-hyperlink{
     font-size: 10px !important;
   }
+    .loan-tab-ul{
+ margin-left: auto !important;
+ }
 }
 /* @media (max-width: 1026px) {
   
@@ -7478,6 +7502,9 @@ letter-spacing: -0.4px;
   .phone-hyperlink{
     font-size: 10px !important;
   }
+    .loan-tab-ul{
+ margin-left: auto !important;
+ }
 }
 
 @media (max-width: 375px) {
@@ -7504,6 +7531,9 @@ letter-spacing: -0.4px;
   .phone-hyperlink{
     font-size: 10px !important;
   }
+    .loan-tab-ul{
+ margin-left: auto !important;
+ }
 }
 
 @media (max-width: 320px) {
@@ -7531,6 +7561,9 @@ letter-spacing: -0.4px;
   .phone-hyperlink{
     font-size: 10px !important;
   }
+  .loan-tab-ul{
+ margin-left: auto !important;
+ }
 }
 
 
