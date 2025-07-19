@@ -5273,7 +5273,11 @@ font-size: 20px !important;
     .why-ve-wrapper h2 {
       margin-bottom: 20px; }
   .footer-logo {
-    display: block !important; } 
+    display: block !important;
+   } 
+     .loan-tab-ul{
+ margin-left: auto !important;
+ }
 }
 
 @media (max-width: 767px) {
