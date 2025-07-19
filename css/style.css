@@ -2833,6 +2833,10 @@ form ul {
             }
             .phone-hyperlink {
               font-size: 10px;
+           
+            }
+            .qr-phone-link{
+   margin-left: -36px;
             }
             .loan-tab-ul{
               margin-left: 67px;
@@ -7465,8 +7469,13 @@ letter-spacing: -0.4px;
   .phone-hyperlink{
     font-size: 10px !important;
   }
+
     .loan-tab-ul{
  margin-left: auto !important;
+ }
+  .or-span{
+      font-size: 12px !important;
+    font-family: "Poppins", sans-serif !important;
  }
 }
 /* @media (max-width: 1026px) {
@@ -7507,8 +7516,15 @@ letter-spacing: -0.4px;
   .phone-hyperlink{
     font-size: 10px !important;
   }
+     .qr-phone-link{
+  margin-left: auto !important;
+   }
     .loan-tab-ul{
  margin-left: auto !important;
+ }
+  .or-span{
+      font-size: 12px !important;
+    font-family: "Poppins", sans-serif !important;
  }
 }
 
@@ -7536,8 +7552,15 @@ letter-spacing: -0.4px;
   .phone-hyperlink{
     font-size: 10px !important;
   }
+     .qr-phone-link{
+  margin-left: auto !important;
+   }
     .loan-tab-ul{
  margin-left: auto !important;
+ }
+  .or-span{
+      font-size: 12px !important;
+    font-family: "Poppins", sans-serif !important;
  }
 }
 
@@ -7566,8 +7589,15 @@ letter-spacing: -0.4px;
   .phone-hyperlink{
     font-size: 10px !important;
   }
+  .qr-phone-link{
+  margin-left: auto !important;
+   }
   .loan-tab-ul{
  margin-left: auto !important;
+ }
+ .or-span{
+      font-size: 12px !important;
+    font-family: "Poppins", sans-serif !important;
  }
 }
 
