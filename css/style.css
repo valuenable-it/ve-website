@@ -1356,8 +1356,8 @@ section {
       width: 100%;
       padding-top: 25px; }
       .contact-wrapper .contact-raw .customer-support .left-wrap ul li.phone {
-        background: url(../images/ic-phone.svg) left top 26px no-repeat;
-        background-size: 13px; }
+        background: url(../images/ic-phone.svg) left top 23px no-repeat;
+        background-size: 16px; }
       .contact-wrapper .contact-raw .customer-support .left-wrap ul li.whatsapp {
         background: url(../images/whatsapp.png) left top 18px no-repeat;
         background-size: 20px; }
@@ -1396,8 +1396,8 @@ section {
         width: 100%;
         padding-top: 25px; }
         .contact-wrapper .contact-raw .customer-support .right-wrap ul li.phone {
-          background: url(../images/ic-phone.svg) left top 26px no-repeat;
-          background-size: 13px; }
+          background: url(../images/ic-phone.svg) left top 23px no-repeat;
+          background-size: 16px; }
         .contact-wrapper .contact-raw .customer-support .right-wrap ul li.mail {
           background: url(../images/ic-mail.svg) left top 24px no-repeat;
           background-size: 20px; }
@@ -2836,6 +2836,7 @@ form ul {
             }
             .loan-tab-ul{
               margin-left: 67px;
+                  margin-top: -20px;
             }
 
 @media (min-width: 1921px) {
