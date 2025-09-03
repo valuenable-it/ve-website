@@ -176,25 +176,21 @@
                   <!-- <li class="whatsapp">
                                     <a href="https://wa.me/918645351065?text=Hi,Need a help!">+91 86453 51065</a>
                                  </li> -->
-                <li class="phone" style="margin: 6px 0px; font-size: 13px;">
-                    <a class="phone-hyperlink" href="tel:+919136622049">+91 91366 22049</a>
-                    <span class="or-span">or</span>
-                    <a
-                     class="phone-hyperlink qr-phone-link" href="tel:+912241343214">(022) 4134 3214</a>
+                  <li class="phone" style="margin: 6px 0px;font-size: 13px;">
+                    <a class="phone-hyperlink" href="tel:+919136622049">+9136622049 or (022) 4134 3214 </a>
                   </li>
-
 
                   <li class="mail" style="margin: 6px 0px;font-size: 13px;">
-                    <a style="font-size: 10px;" href="mailto: policyloans@valuenable.in"
-                      target="_blank">policyloans@valuenable.in</a>
+                    <a style="font-size: 13px;" href="mailto: policyloans@valuenable.in" target="_blank">policyloans@valuenable.in</a>
                   </li>
                   <li>
-                    <a style="font-size: 10px;" href="https://wa.me/message/USGKHQQ7JRM7D1" target="_blank">
-                      <img style="width: 25px; margin-left: -38px;" src="images/whatsaap_icon.png"
-                        alt="WhatsApp Icon" />
+                    <a style="font-size: 13px;" href="https://wa.me/message/USGKHQQ7JRM7D1" target="_blank">
+                      <img style="width: 25px; margin-left: -38px;" src="images/whatsaap_icon.png" alt="WhatsApp Icon"/>
                       <span style="margin-left: 9px;">+91 86553 36360</span>
                     </a>
                   </li>
+                  
+                  
                 </ul>
               </div>
             </div>
@@ -243,13 +239,13 @@
                             <!-- <select class="form-control" id="prodctsType">
                                 <option>Company Name*</option> -->
                                 <select class="form-control" id="companysName">
-                                    <option>Insurance Company*</option>
-                                    <option>ICICI Prudential Life Insurance</option>
-                                    <option>HDFC Life Insurance Co. Ltd.</option>
-                                    <option>Tata AIA Life Insurance Co. Ltd.</option>
-                                    <option>PNB MetLife India Insurance Co. Ltd</option>
-                                    <option>Bajaj Allianz Life Insurance Co. Ltd</option>
-                                    <option>Max Life Insurance Company Limited</option>
+                                     <option value="Insurance Company*">Insurance Company*</option>
+                                    <option value="IPRU">ICICI Prudential Life Insurance</option>
+                                    <option value="HDFC">HDFC Life Insurance Co. Ltd.</option>
+                                    <option value="TATA">Tata AIA Life Insurance Co. Ltd.</option>
+                                    <option value="METLIFE">PNB MetLife India Insurance Co. Ltd</option>
+                                    <option value="BAJAJ">Bajaj Allianz Life Insurance Co. Ltd</option>
+                                    <option value="MAX">Max Life Insurance Company Limited</option>
 
                                   </select>
                               <!-- </select> -->
@@ -711,13 +707,13 @@
                           <!-- <input placeholder="ICICI Prudential Life Insurance Co. Ltd*" type="text" class="form-control"
                             id="companyName" readonly value="ICICI Prudential Life Insurance Co. Ltd" /> -->
                             <select class="form-control" id="companyName">
-                                <option>Insurance Company*</option>
-                                <option>ICICI Prudential Life Insurance</option>
-                                <option>HDFC Life Insurance Co. Ltd.</option>
-                                <option>Tata AIA Life Insurance Co. Ltd.</option>
-                                <option>PNB MetLife India Insurance Co. Ltd</option>
-                                <option>Bajaj Allianz Life Insurance Co. Ltd</option>
-                                <option>Max Life Insurance Company Limited</option>
+                                <option value="Insurance Company*">Insurance Company*</option>
+                                <option value="IPRU">ICICI Prudential Life Insurance</option>
+                                    <option value="HDFC">HDFC Life Insurance Co. Ltd.</option>
+                                    <option value="TATA">Tata AIA Life Insurance Co. Ltd.</option>
+                                    <option value="METLIFE">PNB MetLife India Insurance Co. Ltd</option>
+                                    <option value="BAJAJ">Bajaj Allianz Life Insurance Co. Ltd</option>
+                                    <option value="MAX">Max Life Insurance Company Limited</option>
                               </select>
                         </div>
 
@@ -1871,7 +1867,7 @@
 
 
         const companyProducts = {
-  "ICICI Prudential Life Insurance": [
+  "IPRU": [
                             "ICICI Pru Wealth Builder II",
                             "ICICI Pru Elite Wealth II",
                             "ICICI Pru LifeTime Classic",
@@ -1884,7 +1880,7 @@
                             "Guaranteed Wealth Protector",
                             "ICICI Pru Ace"
   ],
-  "HDFC Life Insurance Co. Ltd.": [
+  "HDFC": [
     "HDFC SL ProGrowth Super II",
 "HDFC SL Pro Growth Plus",
 "HDFC SL ProGrowth Flexi",
@@ -1902,7 +1898,7 @@
 "HDFC Life Sanchay",
 "HDFC Life Super Income Plan"
   ],
-  "Tata AIA Life Insurance Co. Ltd.": [
+  "TATA": [
     "Tata AIA Life Insurance Fortune Pro",
     "Tata AIA Life Insurance Wealth Maxima",
     "Tata AIA Life Insurance Wealth Pro",
@@ -1911,18 +1907,18 @@
     "Tata AIA Life InvestAssure Gold",
     "Tata AIA Life InvestAssure Flexi Supreme"
   ],
-  "PNB MetLife India Insurance Co. Ltd": [
+  "METLIFE": [
   "MetLife Smart Platinum",
   "MetLife Smart Platinum Plus"
   ],
-  "Max Life Insurance Company Limited": [
+  "MAX": [
   "Max Life Platinum Wealth Plan",
   "Max Life Flexi Wealth Plus",
   "Max Life Fast Track Super",
   "Max Life Flexi Wealth Advantage",
   "Max Life Fast Track"
   ],
-  "Bajaj Allianz Life Insurance Co. Ltd": [
+  "BAJAJ": [
   "Bajaj Allianz Unit Gain",
   "Bajaj Allianz Capital Unit Gain",
   "Bajaj Allianz Future Gain",
@@ -2885,7 +2881,7 @@ if (documentKeys?.laPhotoKey == "") {
     }
 
     function resetFieldForCustomer() {
-      document.getElementById("companyName").value = "ICICI Prudential Life Insurance Co. Ltd";
+      document.getElementById("companyName").value = "Insurance Company*";
       document.getElementById("prodctType").value = "Product Name*";
     //   document.getElementById("branchName").value = "";
       document.getElementById("customerName").value = "";
@@ -2924,7 +2920,7 @@ if (documentKeys?.laPhotoKey == "") {
      
     }
     function resetFieldForMobile() {
-      document.getElementById("companysName").value = "ICICI Prudential Life Insurance Co. Ltd";
+      document.getElementById("companysName").value = "Insurance Company*";
       document.getElementById("prodctsType").value = "Product Name*";
     //   document.getElementById("branchNameResp").value = "";
       // document.getElementById("genderResp").value = "LA Gender (If Applicable)";

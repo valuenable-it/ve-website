@@ -3363,7 +3363,7 @@ form ul {
   .partner-with-us h2 {
     line-height: 50%; }
   .container {
-    width: 82%;
+    /* width: 82%; */
     max-width: 1140px; }
   h1 {
     font-size: 72px; }
