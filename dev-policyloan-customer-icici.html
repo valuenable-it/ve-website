@@ -1971,8 +1971,8 @@
                   <b>-Team ValuEnable</b>
                 </h5> -->
                 <div class="mt-4" style="display: block" id="confirmationModelButtons">
-                  <button class="btn btn-success px-4 validate" data-dismiss="modal" aria-hidden="true"
-                    onclick="resetField()">
+                  <button class="btn btn-success px-4 validate"  aria-hidden="true"
+                    onclick="resetField('multi_policy')">
                     Yes
                   </button>
                   
@@ -2105,8 +2105,8 @@
      let laCheckBoxClick,laCheckBoxMobClick;
     var openOtpModal = document.getElementById('otpModal');
     var otpModalInstance = new bootstrap.Modal(openOtpModal);
-      let oprnConfirmationModel=document.getElementById('confirmationModel');
-      let confirmationModelInstance= new bootstrap.Modal(oprnConfirmationModel);
+      let openConfirmationModel=document.getElementById('confirmationModel');
+      let confirmationModelInstance= new bootstrap.Modal(openConfirmationModel);
       $(document).ready(function() {
       console.log(branchNameResp)
             $('#branchNameResp').select2({
@@ -2559,7 +2559,6 @@ if(branchName=="Branch Name*"){
           laPanPath:documentKeys?.laPanCardKey,
           laAadharPath:documentKeys?.laAadharCardKey,
       };
-console.log("payloads", payloads);
         payload.push(payloads);
         console.log("payload", payload);
             confirmationModelInstance.show()
@@ -2782,7 +2781,15 @@ if(branchNameResp=="Branch Name*"){
     });
 
 
-    function resetField() {
+    function resetField(buttonType) {
+
+      if(buttonType=="multi_policy"){
+         if(payload.length==4){
+         alert("Maximum 4 policy can be processed at a time.");
+         return;
+      }
+        
+      }
 
       if(ocrJourneyType=="nonAssisted"){
           const validateMessage = document.getElementById("validateMessage");
@@ -2841,10 +2848,15 @@ console.log(payload)
       resetFieldForMobile();
       resetSelectionMob()
       resetSelection()
+          confirmationModelInstance.hide()
+
        var sentMessageModal=document.getElementById('sentMessageModal');
             var messageModal= new bootstrap.Modal(sentMessageModal);
             messageModal.hide()
-      window.location.reload(true);
+            if(buttonType!="multi_policy"){
+               window.location.reload(true);
+            }
+   
 }
      
 
