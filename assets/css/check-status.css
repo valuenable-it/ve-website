@@ -570,6 +570,10 @@ line-height: 20.96px; /* 20.96px */
   .footer-link{
     font-size: 14px;
   }
+
+  .form-group label{
+    font-size: 16px;
+  }
 }
 
 /* ===== Tablet (max-width: 1024px) ===== */
