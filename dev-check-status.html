@@ -437,7 +437,7 @@ if (!vkyc) {
         const loader = document.getElementById("loader-container");
         if (loader) loader.style.display = "block";
 
-        const res = await axios.post("http://localhost:3001/web/loan/get-policy-status", {
+        const res = await axios.post("https://api-dev.valuenable.in/webhook/loan/get-policy-status", {
           policy_number: policyNumber,
           generate_link: false,
           company_name: insuranceCompany
@@ -485,7 +485,7 @@ if (pendingText) {
   policy_number: policyNumber,
 }; 
   const response = await axios.post(
-    "http://localhost:3001/web/loan/send-journey-continue-otp",
+    "https://api-dev.valuenable.in/webhook/loan/send-journey-continue-otp",
     data,
     {
       headers: {
@@ -649,7 +649,7 @@ async function handleVerifyOtp() {
     if (loader) loader.style.display = "block";
 
     const res = await axios.post(
-      "http://localhost:3001/web/loan/get-policy-status",
+      "https://api-dev.valuenable.in/webhook/loan/get-policy-status",
       {
         policy_number: policyNumber,
         generate_link: true,
@@ -687,7 +687,7 @@ async function resendOtp() {
   policy_number: policyNumber,
 }; 
   const response = await axios.post(
-    "http://localhost:3001/web/loan/send-journey-continue-otp",
+    "https://api-dev.valuenable.in/webhook/loan/send-journey-continue-otp",
     data,
     {
       headers: {
