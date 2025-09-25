@@ -937,6 +937,15 @@ line-height: 23.58px; /* 23.58px */
  {
         margin-top: 0px;
     }
+    .check-status-otp-input {
+        width: 30px;
+        height: 30px;
+        font-size: 8px;
+    }
+    .check-status-otp-input-container{
+      gap: 4px;
+    }
+
 }
 .loader {
   border: 16px solid #f3f3f3; /* Light gray */
