@@ -80,15 +80,16 @@
                 <h2 class="modal-title check-status-modal-title ">Verify OTP</h2>
                 <button class="close-btn check-status-close-btn" id="closeModal">&times;</button>
             </div>
+
             <div class="modal-body check-status-modal-body">
                 <p class="check-status-otp-message">We have sent a 6-digit OTP to your registered mobile number</p>
                 <div class="check-status-otp-input-container">
-                    <input type="text" class="check-status-otp-input" maxlength="1" data-index="0">
-                    <input type="text" class="check-status-otp-input" maxlength="1" data-index="1">
-                    <input type="text" class="check-status-otp-input" maxlength="1" data-index="2">
-                    <input type="text" class="check-status-otp-input" maxlength="1" data-index="3">
-                    <input type="text" class="check-status-otp-input" maxlength="1" data-index="4">
-                    <input type="text" class="check-status-otp-input" maxlength="1" data-index="5">
+                    <input type="text" inputmode="numeric" class="check-status-otp-input" maxlength="1" data-index="0">
+                    <input type="text" inputmode="numeric" class="check-status-otp-input" maxlength="1" data-index="1">
+                    <input type="text" inputmode="numeric" class="check-status-otp-input" maxlength="1" data-index="2">
+                    <input type="text" inputmode="numeric" class="check-status-otp-input" maxlength="1" data-index="3">
+                    <input type="text" inputmode="numeric" class="check-status-otp-input" maxlength="1" data-index="4">
+                    <input type="text" inputmode="numeric" class="check-status-otp-input" maxlength="1" data-index="5">
                 </div>
                 <div class="check-status-otp-timer">
                     <span id="checkStatusOtpTimer">Resend OTP in 30s</span>
@@ -411,6 +412,8 @@ if (!vkyc) {
 
   // OTP related DOM elements (guarded)
   const otpModal = document.getElementById('otpModal');
+  //  otpModal.classList.add('active');
+  //   document.body.style.overflow = 'hidden';
   const otpInputs = otpModal ? Array.from(otpModal.querySelectorAll('.check-status-otp-input')) : Array.from(document.querySelectorAll('.check-status-otp-input'));
   const resendOtpBtn = document.getElementById('resendOtp');
   const verifyOtpBtn = document.getElementById('verifyOtp');
@@ -437,15 +440,15 @@ if (!vkyc) {
         const loader = document.getElementById("loader-container");
         if (loader) loader.style.display = "block";
 
-        const res = await axios.post("http://localhost:3001/web/loan/get-policy-status", {
+        const res = await axios.post("https://api-uat.valuenable.in/webhook/loan/get-policy-status", {
           policy_number: policyNumber,
           generate_link: false,
           company_name: insuranceCompany
         }, {
-          headers: { "x-api-key": "kS2jSLfszz82IBeukC6n22pBvRZM7LSS9RCBUbcy" }
+          headers: { "x-api-key": "pGP5lpARtk9zc71e2DNSlaizwxtSqt5g3pdXQDZa" }
         });
 
-        const { current_stage, next_stage, v_kyc,isContinueJourney,pendingStage } = res.data.data || {};
+        const { current_stage, next_stage, v_kyc,isContinueJourney,pendingStage } = res.data || {};
         let continueBtn = document.getElementById("continue-button");
         if (continueBtn&&(isContinueJourney||!v_kyc)) continueBtn.style.display = "block";
         if(pendingStage||!v_kyc){
@@ -485,7 +488,7 @@ if (pendingText) {
   policy_number: policyNumber,
 }; 
   const response = await axios.post(
-    "http://localhost:3001/web/loan/send-journey-continue-otp",
+    "https://api-uat.valuenable.in/webhook/loan/send-journey-continue-otp",
     data,
     {
       headers: {
@@ -595,18 +598,57 @@ if (pendingText) {
         }
       });
 
-      input.addEventListener('paste', function (e) {
-        e.preventDefault();
-        const pastedData = (e.clipboardData || window.clipboardData).getData('text') || '';
-        const digits = pastedData.replace(/\D/g, '').slice(0, otpInputs.length);
-        digits.split('').forEach((digit, i) => {
-          if (otpInputs[i]) {
-            otpInputs[i].value = digit;
-            otpInputs[i].classList.add('filled');
-          }
-        });
-        checkOtpComplete();
-      });
+// Desktop paste
+input.addEventListener('paste', function (e) {
+  if (e.clipboardData) { // only desktop
+    e.preventDefault();
+    const pastedData = e.clipboardData.getData('text') || '';
+    const digits = pastedData.replace(/\D/g, '').slice(0, otpInputs.length);
+    digits.split('').forEach((digit, i) => {
+      if (otpInputs[i]) {
+        otpInputs[i].value = digit;
+        otpInputs[i].classList.add('filled');
+      }
+    });
+    for (let i = 0; i < otpInputs.length; i++) {
+      if (!otpInputs[i].value) {
+        otpInputs[i].focus();
+        break;
+      }
+    }
+    checkOtpComplete();
+  }
+});
+
+// Mobile-friendly input (long press or clipboard paste)
+input.addEventListener('input', function (e) {
+  const value = e.target.value;
+  if (value.length > 1) {
+    const digits = value.replace(/\D/g, '').slice(0, otpInputs.length);
+    digits.split('').forEach((digit, i) => {
+      if (otpInputs[i]) {
+        otpInputs[i].value = digit;
+        otpInputs[i].classList.add('filled');
+      }
+    });
+    for (let i = 0; i < otpInputs.length; i++) {
+      if (!otpInputs[i].value) {
+        otpInputs[i].focus();
+        break;
+      }
+    }
+    checkOtpComplete();
+  } else {
+    // single digit input
+    if (/^\d$/.test(value)) {
+      e.target.classList.add('filled');
+    } else {
+      e.target.value = '';
+      e.target.classList.remove('filled');
+    }
+  }
+});
+
     });
   }
 
@@ -649,7 +691,7 @@ async function handleVerifyOtp() {
     if (loader) loader.style.display = "block";
 
     const res = await axios.post(
-      "http://localhost:3001/web/loan/get-policy-status",
+      "https://api-uat.valuenable.in/webhook/loan/get-policy-status",
       {
         policy_number: policyNumber,
         generate_link: true,
@@ -657,7 +699,7 @@ async function handleVerifyOtp() {
         otp: otp
       },
       {
-        headers: { "x-api-key": "kS2jSLfszz82IBeukC6n22pBvRZM7LSS9RCBUbcy" },
+        headers: { "x-api-key": "pGP5lpARtk9zc71e2DNSlaizwxtSqt5g3pdXQDZa" },
       }
     );
 
@@ -687,7 +729,7 @@ async function resendOtp() {
   policy_number: policyNumber,
 }; 
   const response = await axios.post(
-    "http://localhost:3001/web/loan/send-journey-continue-otp",
+    "https://api-uat.valuenable.in/webhook/loan/send-journey-continue-otp",
     data,
     {
       headers: {
