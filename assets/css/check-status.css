@@ -173,6 +173,7 @@ opacity: 0.5;
     appearance: none;
     background: white;
     cursor: pointer;
+    font-family: 'Poppins';
 }
 
 .select-arrow {
@@ -206,6 +207,7 @@ align-self: stretch;
 border-radius: 8px;
 border: 1px solid #2A3B6726;;
 background: #FFF;
+font-family: 'Poppins';
 
 }
 
@@ -469,8 +471,8 @@ line-height: 20.96px; /* 20.96px */
   font-family: Poppins;
 font-weight: 600;
 font-style: SemiBold;
-font-size: 20px;
-line-height: 131%;
+font-size: 17px;
+line-height: 20px;
 letter-spacing: 0%;
 color: #2F3F6B;
 cursor: pointer;
