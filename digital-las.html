@@ -21,6 +21,100 @@
     <!-- Google Tag Manager -->
     <style>
         /* Your custom CSS styles here */
+         .btn-custom-dark {
+            background-color: #2C3E68 !important;
+            border-color: #2C3E68 !important;
+            color: white !important;
+            border-radius: 12px !important;
+            font-size: 1.1rem !important;
+            font-weight: bold !important;
+            transition: all 0.3s ease !important;
+            position: relative !important;
+            overflow: visible !important;
+        }
+
+        .btn-custom-dark:hover {
+            background-color: #2C3E68 !important;
+            border-color: #2C3E68 !important;
+            color: white !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 25px rgba(62, 75, 107, 0.3) !important;
+        }
+
+        .btn-custom-red {
+            background-color: #EC1D29 !important;
+            border-color: #EC1D29 !important;
+            color: white !important;
+            border-radius: 12px !important;
+            font-size: 1.1rem !important;
+            font-weight: bold !important;
+            transition: all 0.3s ease !important;
+            position: relative !important;
+            overflow: visible !important;
+        }
+
+        .btn-custom-red:hover {
+            background-color: #EC1D29 !important;
+            border-color: #EC1D29 !important;
+            color: white !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 25px rgba(229, 62, 62, 0.3) !important;
+        }
+
+        /* Custom Badge Styles */
+        .badge-custom {
+           position: absolute !important;
+    bottom: -8px !important;
+    right: 8px !important;
+    font-size: 0.5rem !important;
+    font-weight: 600 !important;
+    padding: 2px 6px !important;
+    border-radius: 8px !important;
+    color: #000000 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    z-index: 10 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        .badge-partners {
+            background-color: #E1FF3D;
+        }
+
+        .badge-customer {
+            background-color: #E1FF3D;
+        }
+
+        /* Container Styles */
+        .button-container {
+            min-height: 100vh;
+            background-color: #f8f9fa;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 575.98px) {
+            .btn-lg {
+                font-size: 1rem;
+                padding: 0.75rem 1.5rem !important;
+            }
+            
+            .badge-custom {
+                font-size: 0.6rem;
+                padding: 3px 6px;
+                bottom: -6px;
+                right: 6px;
+            }
+        }
+
+        /* Focus states for accessibility */
+        .btn-custom-dark:focus,
+        .btn-custom-red:focus {
+            box-shadow: 0 0 0 0.2rem rgba(62, 75, 107, 0.25);
+        }
+
+        .btn-custom-red:focus {
+            box-shadow: 0 0 0 0.2rem rgba(229, 62, 62, 0.25);
+        }
     </style>
     <script>
         (function (w, d, s, l, i) {
@@ -157,6 +251,33 @@
                     </p>
 
                 </div>
+                <div class="row justify-content-center">
+                <div class="col-auto">
+                    <div class="d-flex gap-4 flex-wrap justify-content-center" style="gap: 1.5rem; margin-top: 20px;">
+                        
+                        <!-- Book a Demo Button -->
+                        <div class="position-relative">
+                            <button class="btn btn-custom-dark btn-lg px-4 py-3" onclick="window.location.href='https://valuenable.in/about-us.html#about-us-section'" >
+                                Book a Demo
+                            </button>
+                            <span class="badge-custom badge-partners">
+                                For Partners
+                            </span>
+                        </div>
+
+                        <!-- Apply Loan Button -->
+                        <div class="position-relative">
+                            <button class="btn btn-custom-red btn-lg px-4 py-3" onclick="window.open('https://las.valuenable.in/', '_blank')">
+                                Apply Loan
+                            </button>
+                            <span class="badge-custom badge-customer">
+                                For Customer
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
                 <img class="Iphone-img" src="assets/images/Iphone - Screens 1.png" alt="Iphone - Screens 1">
                 <div class="demo-class">
                     <button class="download-btn-policy-backed"
