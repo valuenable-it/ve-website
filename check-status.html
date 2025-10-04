@@ -30,18 +30,40 @@
         <p class="status-form-subtitle">Enter Details below to check your loan application status:</p>
         
         <form id="statusForm" class="status-form">
+              <div class="form-group status-form-group">
+                        <label for="insuranceCompany">Insurance Company Name</label>
+                        <div class="select-wrapper">
+                            <select id="insuranceCompany" name="insuranceCompany" required>
+                                <option value="" selected>Select Insurance Company</option>
+                              <option value="IPRU">ICICI Prudential Life Insurance</option>
+                                    <option value="HDFC">HDFC Life Insurance Co. Ltd.</option>
+                                    <option value="TATA">Tata AIA Life Insurance Co. Ltd.</option>
+                                    <option value="METLIFE">PNB MetLife India Insurance Co. Ltd</option>
+                            </select>
+                            <span class="select-arrow">▼</span>
+                        </div>
+                    </div>
           <div class="status-form-group form-group">
             <label for="policyNumber">Enter Policy Number</label>
             <input class="status-policy-input" type="text" id="policyNumber" name="policyNumber" required>
           </div>
           <button type="submit" class="check-status-btn">Check Status ></button>
         </form>
+
+        <div><p id="pending-stage" class="pending-stage-text"></p></div>
+        <div class="continue-button-box" >
+          <button type="submit" class="check-status-btn" onclick="openOtpModal()" style="display: none;" id="continue-button">Continue Application ></button>
+           
+        </div>
       </div>
 
       <div class="status-section">
         <p class="status-title">Application Status</p>
         <div class="status-timeline" id="statusTimeline"></div>
+       
+
       </div>
+      
 
       <footer class="footer">
         <div class="footer-left">
@@ -55,18 +77,48 @@
         </div>
       </footer>
     </main>
+    <div id="otpModal" class="modal-overlay">
+        <div class="check-status-modal-content modal-content">
+            <div class="modal-header check-status-modal-header">
+                <h2 class="modal-title check-status-modal-title ">Verify OTP</h2>
+                <button class="close-btn check-status-close-btn" id="closeModal">&times;</button>
+            </div>
+
+            <div class="modal-body check-status-modal-body">
+                <p class="check-status-otp-message">We have sent a 6-digit OTP to your registered mobile number</p>
+                <div class="check-status-otp-input-container">
+                    <input type="text" inputmode="numeric" class="check-status-otp-input" maxlength="1" data-index="0">
+                    <input type="text" inputmode="numeric" class="check-status-otp-input" maxlength="1" data-index="1">
+                    <input type="text" inputmode="numeric" class="check-status-otp-input" maxlength="1" data-index="2">
+                    <input type="text" inputmode="numeric" class="check-status-otp-input" maxlength="1" data-index="3">
+                    <input type="text" inputmode="numeric" class="check-status-otp-input" maxlength="1" data-index="4">
+                    <input type="text" inputmode="numeric" class="check-status-otp-input" maxlength="1" data-index="5">
+                </div>
+                <div class="check-status-otp-timer">
+                    <span id="checkStatusOtpTimer">Resend OTP in 30s</span>
+                </div>
+                <div class="check-status-modal-actions">
+                    <button class="check-status-verify-btn" id="verifyOtp" onclick="handleVerifyOtp()">Verify OTP</button>
+                    <button onclick="resendOtp()" class="check-status-resend-btn" id="resendOtp" disabled>Resend OTP</button>
+                </div>
+            </div>
+        </div>
+    </div>
   </div>
 
-  <script>
+ <script>
   const stepsConfig = [
     { title: "Application Submission", details: ["Eligible", "Mail sent to customer"] },
     { title: "KYC Verification", details: ["KYC Approved", "Penny Drop"] },
+    { title: "Signing Stage", details: ["Loan Sanctioned (e-agreement sign)", "Assignment signing stage"] },
+    { title: "Mandate", details: ["Mandate"] },
+    { title: "VKYC", details: ["VKYC"] },
     { title: "Securities Validation", details: ["Pending For Assignment", "Assignment Request Raised", "Assignment Approved"] },
     { title: "Loan Initiated", details: ["Loan Initiated"] },
     { title: "Loan Disbursed", details: ["Loan Disbursed"] }
   ];
 
-  function renderTimeline(current, next) {
+  function renderTimeline(current, next,vkyc) {
     const container = document.getElementById("statusTimeline");
     container.innerHTML = "";
 
@@ -74,7 +126,7 @@
       let stepClass = "pending"; // default gray
 
       // Application Submission always green
-      if (i === 0) stepClass = "completed";
+      if (i === 0) stepClass = "pending";
 
       // prepare details
       const detailsHtml = step.details.map(detail => {
@@ -84,19 +136,24 @@
         // ✅ Application submission case
         if (i === 0 && current === "" && next === "") {
           if (detail === "Eligible") { cls = "current";icon = '<img src="images/pending.svg"  style="margin-top: 10px" alt="pending" width="16" height="16">'; }
+
         //   if (detail === "Mail sent to customer") { cls = "current"; icon = "●"; }
         }
         if (i === 0 && (current.includes("Eligible"))) {
-          if (detail === "Eligible") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+          if (detail === "Eligible") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">' }
           if (detail === "Mail sent to customer") { cls = "current"; icon = '<img src="images/pending.svg"  style="margin-top: 10px" alt="pending" width="16" height="16">'; }
+          if (step.title === "Application Submission") stepClass = "completed";
+
         }
 
         // ✅ if current stage is KYC Pending
         if (current === "KYC Pending") {
-          if (detail === "Eligible") { cls = icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+          if (detail === "Eligible") { cls ="completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
           if (detail === "Mail sent to customer") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
           if (detail === "KYC Approved") { cls = "current"; icon = '<img src="images/pending.svg"  style="margin-top: 10px" alt="pending" width="16" height="16">'; }
           if (step.title === "KYC Verification") stepClass = "current";
+          if (step.title === "Application Submission") stepClass = "current";
+if (step.title === "Application Submission") stepClass = "completed";
         }
 
         // ✅ if current stage is KYC Approved
@@ -104,16 +161,82 @@
           if (detail === "Eligible" || detail === "Mail sent to customer") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
           if (detail === "KYC Approved") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
           if (detail === "Penny Drop") { cls = "current"; icon = '<img src="images/pending.svg"  style="margin-top: 10px" alt="pending" width="16" height="16">'; }
-          if (step.title === "KYC Verification") stepClass = "completed";
+          if (step.title === "KYC Verification") stepClass = "current";
+          if (step.title === "Application Submission") stepClass = "completed";
         }
 
-        // ✅ if current stage is Loan Sanctioned
-        if (current === "Loan Sanctioned") {
+
+
+        if (current === "Penny Drop Completed") {
+            if (detail === "Eligible" || detail === "Mail sent to customer") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+          if (detail === "KYC Approved") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+          if (detail === "Penny Drop") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+          if (detail === "Loan Sanctioned (e-agreement sign)") { cls = "current"; icon = '<img src="images/pending.svg"  style="margin-top: 10px" alt="pending" width="16" height="16">'; }
+          if (step.title === "KYC Verification") stepClass = "completed";
+          if (step.title === "Signing Stage") stepClass = "current";
+          if (step.title === "Application Submission") stepClass = "completed";
+        }
+
+
+        if (current === "Loan Sanctioned (e-agreement sign)") {
+            if (detail === "Eligible" || detail === "Mail sent to customer") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+          if (detail === "KYC Approved") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+          if (detail === "Penny Drop") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+          if (detail === "Loan Sanctioned (e-agreement sign)") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+          if (detail === "Assignment signing stage") { cls = "current"; icon = '<img src="images/pending.svg"  style="margin-top: 10px" alt="pending" width="16" height="16">'; }
+          if (step.title === "KYC Verification") stepClass = "completed";
+        if (step.title === "Signing Stage") stepClass = "current";
+        if (step.title === "Application Submission") stepClass = "completed";
+        }
+
+
+
+        if (current === "Assignment Signing stage") {
             if (detail === "Eligible" || detail === "Mail sent to customer") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
           if (detail === "KYC Approved") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
           if (detail === "Penny Drop") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
           if (step.title === "KYC Verification") stepClass = "completed";
+        //   if (step.title === "Securities Validation") stepClass = "current";
+        if (detail === "Loan Sanctioned (e-agreement sign)") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+           if (detail === "Assignment signing stage") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+            if (step.title === "Signing Stage") stepClass = "completed";
+            if (step.title === "Mandate") stepClass = "current";
+            if (detail === "Mandate") { cls = "current"; icon = '<img src="images/pending.svg"  style="margin-top: 10px" alt="pending" width="16" height="16">'; }
+            if (step.title === "Application Submission") stepClass = "completed";
+        }
+
+        if (current === "Mandate Completed") {
+            if (detail === "Eligible" || detail === "Mail sent to customer") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+          if (detail === "KYC Approved") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+          if (detail === "Penny Drop") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+          if (step.title === "KYC Verification") stepClass = "completed";
+          if (detail === "Loan Sanctioned (e-agreement sign)") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+           if (detail === "Assignment signing stage") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+            if (detail === "Mandate") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+            if (step.title === "Signing Stage") stepClass = "completed";
+            if (step.title === "Mandate") stepClass = "completed";
+          if (step.title === "VKYC") stepClass = "current";
+          if (detail === "VKYC") { cls = "current"; icon = '<img src="images/pending.svg"  style="margin-top: 10px" alt="pending" width="16" height="16">'; }
+
+          if (step.title === "Application Submission") stepClass = "completed";
+        }
+
+
+        // ✅ if current stage is Loan Sanctioned
+        if (vkyc) {
+            if (detail === "Eligible" || detail === "Mail sent to customer") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+          if (detail === "KYC Approved") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+          if (detail === "Penny Drop") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+          if (step.title === "KYC Verification") stepClass = "completed";
+          if (detail === "Loan Sanctioned (e-agreement sign)") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+           if (detail === "Assignment signing stage") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+            if (detail === "Mandate") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+            if (step.title === "Signing Stage") stepClass = "completed";
+            if (step.title === "Mandate") stepClass = "completed";
+          if (step.title === "VKYC") stepClass = "completed";
+          if (detail === "VKYC") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
           if (step.title === "Securities Validation") stepClass = "current";
+          if (step.title === "Application Submission") stepClass = "completed";
         }
 
         // ✅ Securities Validation stages
@@ -121,14 +244,24 @@
              if (detail === "Eligible" || detail === "Mail sent to customer") { cls = "completed";icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
           if (detail === "KYC Approved") { cls = "completed";icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
           if (detail === "Penny Drop") { cls = "completed";icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
-          if (step.title === "KYC Verification") stepClass = "current";
+           if (detail === "Loan Sanctioned (e-agreement sign)") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+           if (detail === "Assignment signing stage") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+            if (detail === "Mandate") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+            if (step.title === "Signing Stage") stepClass = "completed";
+            if (step.title === "Mandate") stepClass = "completed";
           if (detail === "Pending For Assignment") { cls = "completed";icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
           if (detail === "Assignment Request Raised" ) { cls = "current"; icon = '<img src="images/pending.svg"  style="margin-top: 10px" alt="pending" width="16" height="16">'; }
           if (step.title === "KYC Verification") stepClass = "completed";
           if (step.title === "Securities Validation") stepClass = "current";
-
+if (step.title === "Application Submission") stepClass = "completed";
+if (!vkyc) {
+                     if (step.title === "VKYC") stepClass = "stage-pending";
+          if (detail === "VKYC") { cls = "stage-pending"; icon = '<img src="images/pending.svg"  style="margin-top: 10px" alt="pending" width="16" height="16">'; }
+                 }
           
         }
+
+
         if (current === "Assignment Request Raised") {
              if (detail === "Eligible" || detail === "Mail sent to customer") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
           if (detail === "KYC Approved") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
@@ -138,9 +271,22 @@
         //   if (detail === "Assignment Request Raised" ) { cls = "current"; icon = "●"; }
           if (detail === "Assignment Request Raised") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
           if (detail === "Assignment Approved") { cls = "current"; icon = '<img src="images/pending.svg"  style="margin-top: 10px" alt="pending" width="16" height="16">'; }
+
+           if (detail === "Loan Sanctioned (e-agreement sign)") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+           if (detail === "Assignment signing stage") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+            if (detail === "Mandate") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+            if (step.title === "Signing Stage") stepClass = "completed";
+            if (step.title === "Mandate") stepClass = "completed";
           if (step.title === "KYC Verification") stepClass = "completed";
           if (step.title === "Securities Validation") stepClass = "current";
+          if (step.title === "Application Submission") stepClass = "completed";
+          if (!vkyc) {
+                     if (step.title === "VKYC") stepClass = "stage-pending";
+          if (detail === "VKYC") { cls = "stage-pending"; icon = '<img src="images/pending.svg"  style="margin-top: 10px" alt="pending" width="16" height="16">'; }
+                 }
         }
+
+
         if (current === "Assignment Approved") {
              if (detail === "Eligible" || detail === "Mail sent to customer") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
           if (detail === "KYC Approved") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
@@ -153,8 +299,20 @@
           if (detail === "Assignment Approved") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
           if (step.title === "KYC Verification") stepClass = "completed";
           if (step.title === "Securities Validation") stepClass = "completed";
+
+ if (detail === "Loan Sanctioned (e-agreement sign)") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+           if (detail === "Assignment signing stage") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+            if (detail === "Mandate") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+            if (step.title === "Signing Stage") stepClass = "completed";
+            if (step.title === "Mandate") stepClass = "completed";
+
           if (step.title === "Loan Initiated") stepClass = "current";
            if (detail === "Loan Initiated") { cls = "current"; icon = '<img src="images/pending.svg"  style="margin-top: 10px" alt="pending" width="16" height="16">'; }
+           if (step.title === "Application Submission") stepClass = "completed";
+           if (!vkyc) {
+                     if (step.title === "VKYC") stepClass = "stage-pending";
+          if (detail === "VKYC") { cls = "stage-pending"; icon = '<img src="images/pending.svg"  style="margin-top: 10px" alt="pending" width="16" height="16">'; }
+                 }
         //   if (stepsConfig[i+1]) stepsConfig[i+1].status = "current";
         }
 
@@ -163,7 +321,7 @@
              if (detail === "Eligible" || detail === "Mail sent to customer") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
           if (detail === "KYC Approved") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
           if (detail === "Penny Drop") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
-          if (step.title === "KYC Verification") stepClass = "current";
+          if (step.title === "KYC Verification") stepClass = "completed";
           if (detail === "Pending For Assignment") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
         //   if (detail === "Assignment Request Raised" ) { cls = "current"; icon = "●"; }
           if (detail === "Assignment Request Raised") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
@@ -171,9 +329,20 @@
           if (detail === "Assignment Approved") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
           if (detail === "Loan Initiated") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
           if (step.title === "Loan Initiated") stepClass = "completed";
+           if (detail === "Loan Sanctioned (e-agreement sign)") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+           if (detail === "Assignment signing stage") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+            if (detail === "Mandate") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+            if (step.title === "Signing Stage") stepClass = "completed";
+            if (step.title === "Mandate") stepClass = "completed";
+
           if (step.title === "KYC Verification") stepClass = "completed";
            if (step.title === "Securities Validation") stepClass = "completed";
            if (step.title === "Loan Disbursed") stepClass = "current";
+           if (step.title === "Application Submission") stepClass = "completed";
+           if (!vkyc) {
+                     if (step.title === "VKYC") stepClass = "stage-pending";
+          if (detail === "VKYC") { cls = "stage-pending"; icon = '<img src="images/pending.svg"  style="margin-top: 10px" alt="pending" width="16" height="16">'; }
+                 }
         }
 
         // ✅ Loan Disbursed
@@ -194,6 +363,16 @@
            if (step.title === "Securities Validation") stepClass = "completed";
           if (step.title === "Loan Disbursed") stepClass = "completed";
 
+           if (detail === "Loan Sanctioned (e-agreement sign)") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+           if (detail === "Assignment signing stage") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+            if (detail === "Mandate") { cls = "completed"; icon = '<img src="images/right.svg" alt="✓" width="16" height="16">'; }
+            if (step.title === "Signing Stage") stepClass = "completed";
+            if (step.title === "Mandate") stepClass = "completed";
+if (step.title === "Application Submission") stepClass = "completed";
+if (!vkyc) {
+                     if (step.title === "VKYC") stepClass = "stage-pending";
+          if (detail === "VKYC") { cls = "stage-pending"; icon = '<img src="images/pending.svg"  style="margin-top: 10px" alt="pending" width="16" height="16">'; }
+                 }
         }
 
         return `<div class="detail-item"><label class="${cls}">${icon}</label > <label >${detail}</label ></div>`;
@@ -213,47 +392,390 @@
     initAccordion(current, next);
   }
 
-  function initAccordion(current, next) {
+  function initAccordion() {
+    // Attach handlers to expand buttons (safe guard)
     document.querySelectorAll(".expand-btn").forEach(btn => {
-      btn.addEventListener("click", function() {
+      btn.removeEventListener?.("click", btn._timelineClick); // try to remove previous handler if any
+      const handler = function () {
+        // collapse all
         document.querySelectorAll(".step-details").forEach(d => d.style.display = "none");
         document.querySelectorAll(".expand-btn").forEach(b => b.innerHTML = '<i class="fa fa-angle-down"></i>');
         const details = this.closest(".status-step").querySelector(".step-details");
+        if (!details) return;
         if (details.style.display === "none" || details.style.display === "") {
           details.style.display = "block";
           this.innerHTML = '<i class="fa fa-angle-up"></i>';
         }
-      });
+      };
+      btn.addEventListener("click", handler);
+      // keep reference so we can remove later if needed
+      btn._timelineClick = handler;
     });
   }
 
-  document.getElementById("statusForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const policyNumber = document.getElementById("policyNumber").value.trim();
-    if (!policyNumber) return alert("Please enter a policy number");
+  // OTP related DOM elements (guarded)
+  const otpModal = document.getElementById('otpModal');
+  //  otpModal.classList.add('active');
+  //   document.body.style.overflow = 'hidden';
+  const otpInputs = otpModal ? Array.from(otpModal.querySelectorAll('.check-status-otp-input')) : Array.from(document.querySelectorAll('.check-status-otp-input'));
+  const resendOtpBtn = document.getElementById('resendOtp');
+  const verifyOtpBtn = document.getElementById('verifyOtp');
+  const otpTimer = document.getElementById('checkStatusOtpTimer');
+  const closeModal = document.getElementById('closeModal');
+  let timerInterval = null;
+  let timeLeft = 30;
 
-    try {
-        document.getElementById("loader-container").style.display = "block";
-         const res = await axios.post("https://api.valuenable.in/webhook/loan/get-policy-status", {
-      policy_number: policyNumber,
-      generate_link: false
-    }, {
-      headers: { "x-api-key": "kS2jSLfszz82IBeukC6n22pBvRZM7LSS9RCBUbcy" }
+  // form submit handler
+  const statusForm = document.getElementById("statusForm");
+  if (statusForm) {
+    statusForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const policyNumber = document.getElementById("policyNumber").value.trim();
+      const insuranceSelect = document.getElementById('insuranceCompany');
+      const insuranceCompany = insuranceSelect ? insuranceSelect.value : "";
+      if (!insuranceCompany) {
+        alert('Please select an insurance company');
+        return;
+      }
+      if (!policyNumber) return alert("Please enter a policy number");
+
+      try {
+        const loader = document.getElementById("loader-container");
+        if (loader) loader.style.display = "block";
+
+        const res = await axios.post("https://api.valuenable.in/webhook/loan/get-policy-status", {
+          policy_number: policyNumber,
+          generate_link: false,
+          company_name: insuranceCompany
+        }, {
+          headers: { "x-api-key": "pGP5lpARtk9zc71e2DNSlaizwxtSqt5g3pdXQDZa" }
+        });
+
+        const { current_stage, next_stage, v_kyc,isContinueJourney,pendingStage } = res.data || {};
+        let continueBtn = document.getElementById("continue-button");
+        if (continueBtn&&(isContinueJourney||!v_kyc)) continueBtn.style.display = "block";
+        if(pendingStage||!v_kyc){
+let pendingText = document.getElementById("pending-stage");
+if (pendingText) {
+  pendingText.textContent = `Application Pending at ${pendingStage?pendingStage:'VKYC'}. Kindly complete to proceed.`;
+}
+
+        }
+        renderTimeline(current_stage || "", next_stage || "", v_kyc);
+        if (loader) loader.style.display = "none";
+      } catch (err) {
+        let errorMsg =
+          err?.response && err?.response.data && err?.response.data.message
+            ? err?.response?.data.message
+            : "Something went wrong!";
+        alert(errorMsg);
+        const loader = document.getElementById("loader-container");
+        if (loader) loader.style.display = "none";
+        console.error(err);
+      }
     });
-
-      const { current_stage, next_stage } = res.data;
-      renderTimeline(current_stage, next_stage);
-       document.getElementById("loader-container").style.display = "none";
-    } catch (err) {
-      alert("Error fetching status");
-       document.getElementById("loader-container").style.display = "none";
-      console.error(err);
-    }
-  });
+  }
 
   // Default view: Application Submission open, Eligible ✓, Mail sent ●
-renderTimeline("", "");
+  renderTimeline("", "", "");
+
+  // OTP modal functions (all guarded)
+  async function openOtpModal() {
+     const loader = document.getElementById("loader-container");
+        if (loader) loader.style.display = "block";
+    try {
+       
+        const policyNumber = document.getElementById("policyNumber").value.trim();
+        if (!policyNumber) return alert("Please enter a policy number");
+        const data = {
+  policy_number: policyNumber,
+}; 
+  const response = await axios.post(
+    "https://api.valuenable.in/webhook/loan/send-journey-continue-otp",
+    data,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      maxBodyLength: Infinity,
+    }
+  );
+ if (!otpModal) return;
+    otpModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    startTimer();
+    if (otpInputs && otpInputs[0]) otpInputs[0].focus();
+  console.log(response.data);
+        if (loader) loader.style.display = "none";
+
+} catch (error) {
+       
+
+    let errorMsg =
+          error?.response && error?.response.data && error?.response.data.message
+            ? error?.response?.data.message
+            : "Something went wrong!";
+        alert(errorMsg);
+  console.error("Error:", error.message);
+   if (loader) loader.style.display = "none";
+}
+   
+  }
+
+  function closeOtpModal() {
+    if (!otpModal) return;
+    otpModal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+    if (timerInterval) clearInterval(timerInterval);
+    resetOtpForm();
+  }
+
+  function resetOtpForm() {
+    if (!otpInputs) return;
+    otpInputs.forEach(input => {
+      input.value = '';
+      input.classList.remove('filled');
+    });
+    timeLeft = 30;
+    if (resendOtpBtn) resendOtpBtn.disabled = true;
+    if (verifyOtpBtn) verifyOtpBtn.disabled = true;
+    if (otpTimer) otpTimer.textContent = `Resend OTP in ${timeLeft}s`;
+  }
+
+  function startTimer() {
+    if (timerInterval) clearInterval(timerInterval);
+    timeLeft = 30;
+    if (resendOtpBtn) resendOtpBtn.disabled = true;
+    if (otpTimer) otpTimer.textContent = `Resend OTP in ${timeLeft}s`;
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      if (otpTimer) otpTimer.textContent = `Resend OTP in ${timeLeft}s`;
+      if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        if (otpTimer) otpTimer.textContent = 'You can now resend OTP';
+        if (resendOtpBtn) resendOtpBtn.disabled = false;
+      }
+    }, 1000);
+  }
+
+  // Close modal events
+  if (closeModal) {
+    closeModal.addEventListener('click', closeOtpModal);
+  }
+
+  if (otpModal) {
+    otpModal.addEventListener('click', function (e) {
+      if (e.target === otpModal) {
+        closeOtpModal();
+      }
+    });
+  }
+
+  // OTP Input handling
+  if (otpInputs && otpInputs.length) {
+    otpInputs.forEach((input, index) => {
+      input.addEventListener('input', function (e) {
+        const value = e.target.value;
+        // Only allow single number
+        if (!/^\d$/.test(value)) {
+          e.target.value = '';
+          return;
+        }
+        if (value) {
+          e.target.classList.add('filled');
+          if (index < otpInputs.length - 1) {
+            otpInputs[index + 1].focus();
+          }
+        } else {
+          e.target.classList.remove('filled');
+        }
+        checkOtpComplete();
+      });
+
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Backspace' && !e.target.value && index > 0) {
+          otpInputs[index - 1].focus();
+          otpInputs[index - 1].value = '';
+          otpInputs[index - 1].classList.remove('filled');
+        }
+      });
+
+// Desktop paste
+input.addEventListener('paste', function (e) {
+  if (e.clipboardData) { // only desktop
+    e.preventDefault();
+    const pastedData = e.clipboardData.getData('text') || '';
+    const digits = pastedData.replace(/\D/g, '').slice(0, otpInputs.length);
+    digits.split('').forEach((digit, i) => {
+      if (otpInputs[i]) {
+        otpInputs[i].value = digit;
+        otpInputs[i].classList.add('filled');
+      }
+    });
+    for (let i = 0; i < otpInputs.length; i++) {
+      if (!otpInputs[i].value) {
+        otpInputs[i].focus();
+        break;
+      }
+    }
+    checkOtpComplete();
+  }
+});
+
+// Mobile-friendly input (long press or clipboard paste)
+input.addEventListener('input', function (e) {
+  const value = e.target.value;
+  if (value.length > 1) {
+    const digits = value.replace(/\D/g, '').slice(0, otpInputs.length);
+    digits.split('').forEach((digit, i) => {
+      if (otpInputs[i]) {
+        otpInputs[i].value = digit;
+        otpInputs[i].classList.add('filled');
+      }
+    });
+    for (let i = 0; i < otpInputs.length; i++) {
+      if (!otpInputs[i].value) {
+        otpInputs[i].focus();
+        break;
+      }
+    }
+    checkOtpComplete();
+  } else {
+    // single digit input
+    if (/^\d$/.test(value)) {
+      e.target.classList.add('filled');
+    } else {
+      e.target.value = '';
+      e.target.classList.remove('filled');
+    }
+  }
+});
+
+    });
+  }
+
+  function checkOtpComplete() {
+    if (!otpInputs || !verifyOtpBtn) return;
+    const otp = Array.from(otpInputs).map(input => input.value).join('');
+    verifyOtpBtn.disabled = otp.length !== otpInputs.length;
+  }
+
+  // Verify OTP
+
+async function handleVerifyOtp() {
+  const otpInputs = document.querySelectorAll(".check-status-otp-input");
+  console.log(otpInputs);
+  if (!otpInputs) return;
+
+  const otp = Array.from(otpInputs).map(input => input.value).join("");
+  console.log("Verifying OTP:", otp);
+  if (otp.length !== otpInputs.length) {
+    alert("Please enter a valid OTP");
+    return;
+  }
+
+  const policyNumber = document.getElementById("policyNumber").value.trim();
+  const insuranceSelect = document.getElementById("insuranceCompany");
+  const insuranceCompany = insuranceSelect ? insuranceSelect.value : "";
+
+  if (!insuranceCompany) {
+    alert("Please select an insurance company");
+    return;
+  }
+
+  if (!policyNumber) {
+    alert("Please enter a policy number");
+    return;
+  }
+
+  try {
+    const loader = document.getElementById("loader-container");
+    if (loader) loader.style.display = "block";
+
+    const res = await axios.post(
+      "https://api.valuenable.in/webhook/loan/get-policy-status",
+      {
+        policy_number: policyNumber,
+        generate_link: true,
+        company_name: insuranceCompany,
+        otp: otp
+      },
+      {
+        headers: { "x-api-key": "pGP5lpARtk9zc71e2DNSlaizwxtSqt5g3pdXQDZa" },
+      }
+    );
+
+    alert(res.data.message || "Link sent to your registered email");
+    closeOtpModal();
+
+    if (loader) loader.style.display = "none";
+  } catch (err) {
+    let errorMsg = err?.response?.data?.message || "Something went wrong!";
+    alert(errorMsg);
+
+    const loader = document.getElementById("loader-container");
+    if (loader) loader.style.display = "none";
+
+    console.error(err);
+  }
+}
+
+async function resendOtp() {
+     const loader = document.getElementById("loader-container");
+        if (loader) loader.style.display = "block";
+  try {
+    
+        const policyNumber = document.getElementById("policyNumber").value.trim();
+        if (!policyNumber) return alert("Please enter a policy number");
+        const data = {
+  policy_number: policyNumber,
+}; 
+  const response = await axios.post(
+    "https://api.valuenable.in/webhook/loan/send-journey-continue-otp",
+    data,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      maxBodyLength: Infinity,
+    }
+  );
+ alert('New OTP sent to your registered mobile number');
+      resetOtpForm();
+      startTimer();
+        if (loader) loader.style.display = "none";
+      if (otpInputs && otpInputs[0]) otpInputs[0].focus();
+} catch (error) {
+        
+
+    let errorMsg =
+          error?.response && error?.response.data && error?.response.data.message
+            ? error?.response?.data.message
+            : "Something went wrong!";
+        alert(errorMsg);
+  console.error("Error:", error.message);
+  if (loader) loader.style.display = "none";
+}
+  }
+  // Resend OTP
+//   if (resendOtpBtn) {
+
+//      resendOtpBtn.addEventListener('click', function () {
+      
+//     });
+//     resendOtpBtn.addEventListener('click', function () {
+//       alert('New OTP sent to your registered mobile number');
+//       resetOtpForm();
+//       startTimer();
+//       if (otpInputs && otpInputs[0]) otpInputs[0].focus();
+//     });
+//   }
+
+  // initialize OTP form state
+  resetOtpForm();
 </script>
+
 
 </body>
 </html>

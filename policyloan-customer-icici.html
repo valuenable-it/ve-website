@@ -251,7 +251,7 @@
                         <div class="form-group">
                           <select class="form-control" id="branchNameResp">
                             <option value="">Branch Name*</option>
-                             <option value='A S Rao Nagar'>A S Rao Nagar</option>
+                            <option value='A S Rao Nagar'>A S Rao Nagar</option>
 <option value='AGARTALA'>AGARTALA</option>
 <option value='AGRA'>AGRA</option>
 <option value='AHMEDABAD - BODAKDEV'>AHMEDABAD - BODAKDEV</option>
@@ -270,6 +270,7 @@
 <option value='AZAMGARH'>AZAMGARH</option>
 <option value='Abohar'>Abohar</option>
 <option value='ARAMBAGH'>ARAMBAGH</option>
+
 <option value='Abu Road'>Abu Road</option>
 <option value='Ahmedabad- Navrangapura'>Ahmedabad- Navrangapura</option>
 <option value='Ahmednagar'>Ahmednagar</option>
@@ -1146,7 +1147,7 @@
                         <div class="form-group">
                           <select class="form-control" id="branchName">
                             <option value="">Branch Name*</option>
-                             <option value='A S Rao Nagar'>A S Rao Nagar</option>
+                            <option value='A S Rao Nagar'>A S Rao Nagar</option>
 <option value='AGARTALA'>AGARTALA</option>
 <option value='AGRA'>AGRA</option>
 <option value='AHMEDABAD - BODAKDEV'>AHMEDABAD - BODAKDEV</option>
@@ -2433,9 +2434,9 @@
           <div class="modal-body">
             <div class="position-relative" id="otp-div">
               <div class="card p-2 text-center">
-                <h6 style="font-size: 18px; font-weight: 600; color: #2e2e2e">
+                <h6 style="font-size: 18px; font-weight: 600; color: #2e2e2e" id="otpHeading">
                   Please enter the OTP <br />
-                  to verify your Mobile number
+                  to verify your Email ID
                 </h6>
                 <div id="otp" class="inputs d-flex flex-row justify-content-center mt-3">
                   <input class="m-2 text-center form-control rounded otp-input" type="text" id="first" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
@@ -2466,6 +2467,7 @@
         </div>
       </div>
     </div>
+    
 
     <div class="modal fade" id="sentMessageModal" tabindex="-1" role="dialog" aria-labelledby="sentMessageModalLabel"
       aria-hidden="true" style="padding-right: 0px !important">
@@ -2481,7 +2483,7 @@
                       text-align: center;
                       margin-bottom: 20px;
                     ">
-                  Thank You for your Application.Our Customer service representative will connect with you.
+                  Thank You for your Application. Our Customer service representative will connect with you.
                   
                 </h6>
                 <h5 class="mt-2">
@@ -2602,6 +2604,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
   <script>
+    let is_valid_email=false;
      let laCheckBoxClick,laCheckBoxMobClick;
     var openOtpModal = document.getElementById('otpModal');
     var otpModalInstance = new bootstrap.Modal(openOtpModal);
@@ -3097,10 +3100,6 @@ if(branchName=="Branch Name*"){
       // let link = `http://localhost:3001/web/generate-otp`;
       let link = `https://api.valuenable.in/webhook/generate-otp`;
 
-      // let link = `https://uat-microservice.valuenable.in/generate-otp`;
-
-      // $("#otpModal").modal("show");
-
       $.ajax({
         type: "POST",
         url: link,
@@ -3130,6 +3129,11 @@ if(branchName=="Branch Name*"){
             //   $("#sentMessageModal").modal("show");
             // $("#otpModal").modal("show");
             onApiSuccess()
+            is_valid_email=false;
+             $("#otpHeading").html(
+            `Please enter the OTP <br /> to verify your Email ID`
+          );
+          resetOTPInputField();
           } else {
             document.getElementById("otpModal").style.display = "none";
           }
@@ -3415,6 +3419,11 @@ if(branchNameResp=="Branch Name*"){
             //     document.getElementById('otpModal').style.display = 'block';
             // $("#resOtpModal").modal("show")
             onApiSuccess()
+            is_valid_email=false;
+             $("#otpHeading").html(
+            `Please enter the OTP <br /> to verify your Email ID`
+          );
+          resetOTPInputField();
           } else {
             // alert("Something went wrong");
           }
@@ -3539,6 +3548,7 @@ if(branchNameResp=="Branch Name*"){
       resetFieldForMobile();
       resetSelectionMob()
       resetSelection()
+      location.reload();
     }
 
     function resetFieldForCustomer() {
@@ -3671,11 +3681,13 @@ if(branchNameResp=="Branch Name*"){
       let newPayload = {
         mobileNumber,
         detailsFor: "resendOtp",
+        type:!is_valid_email?"email":"mobile",
+        customerEmail:payload?.customerEmail
       };
 
       // let link = `https://microservice.valuenable.in/generate-otp`;
       // let link = `https://dev-microservice.valuenable.in/generate-otp`;
-      // let link = `http://localhost:3001/generate-otp`;
+      // let link = `http://localhost:3001/web/generate-otp`;
       let link = `https://api.valuenable.in/webhook/generate-otp`;
 
 
@@ -3722,8 +3734,18 @@ if(branchNameResp=="Branch Name*"){
       // let link = `https://microservice.valuenable.in/generate-otp`;
       // let link = `https://dev-microservice.valuenable.in/generate-otp`;
       // let link = `http://localhost:3001/generate-otp`;
-      let link = `https://api.valuenable.in/webhook/generate-otp`;
-
+      if(is_valid_email){
+       let newPayload = {
+        mobileNumber,
+        detailsFor: "resendOtp",
+      };
+      }
+      else{
+          let newPayload = {
+        email,
+        detailsFor: "resendOtp",
+      };
+      }
 
 
       $.ajax({
@@ -3773,63 +3795,146 @@ if(branchNameResp=="Branch Name*"){
 }
 
 
-    function otpVerification() {
-      const inputs = getAllInputValues();
-      const otp = inputs.join("");
+function otpVerification() {
+  const inputs = getAllInputValues();
+  const otp = inputs.join("");
 
-      // let link = `https://microservice.valuenable.in/verify-otp`;
-      // let link = `https://dev-microservice.valuenable.in/verify-otp`;
-      // let link = `http://localhost:3001/web/verify-otp`
-      let link = `https://api.valuenable.in/webhook/verify-otp`
+  let emailOtpLink = `https://api.valuenable.in/webhook/verify-email-otp`; // Email OTP
+  let mobileOtpLink = `https://api.valuenable.in/webhook/verify-otp`;     // Mobile OTP
 
-      // let link = `https://uat-microservice.valuenable.in/verify-otp`;
+  //  let emailOtpLink = `http://localhost:3001/web/verify-email-otp`; // Email OTP
+  // let mobileOtpLink = `http://localhost:3001/web/verify-otp`; 
 
-      $.ajax({
-        type: "POST",
-        url: link,
-        data: {
-          ...payload,
-          otp,
-        },
-        dataType: "json",
-        encode: true,
+  // Step 1 → Agar abhi tak email verify nahi hua
+  if (!is_valid_email) {
+    $.ajax({
+      type: "POST",
+      url: emailOtpLink,
+      data: {
+        ...payload,
+        otp,
+      },
+      dataType: "json",
+      encode: true,
+    })
+      .done((data) => {
+        if (data.status === "success") {
+          is_valid_email = true; // Mark email as verified
+          $("#otpHeading").html(
+            `Please enter the OTP <br /> to verify your Mobile number`
+          );
+          resetOTPInputField(); // OTP input clear for mobile OTP
+        } else {
+          alert("Invalid Email OTP, please try again.");
+        }
       })
-        .done((data) => {
-          // console.log("data", data);
-          if (data.status === "success") {
+      .fail((error) => {
+        alert(error?.responseJSON?.message || "Email OTP verification failed");
+      });
+  } else {
+    // Step 2 → Email already verified, ab Mobile OTP check karna
+    $.ajax({
+      type: "POST",
+      url: mobileOtpLink,
+      data: {
+        ...payload,
+        otp,
+      },
+      dataType: "json",
+      encode: true,
+    })
+      .done((data) => {
+        if (data.status === "success") {
+          resetOTPInputField();
+          otpModalInstance.hide();
 
-  //           generateLead(payload)
-  // .done((data) => {
-  //   window.location.href = data.link;
-  //   resetOTPInputField();
-  //   otpModalInstance.hide();
-    
-  //   const sentMessageModal = document.getElementById('sentMessageModal');
-  //   const messageModal = new bootstrap.Modal(sentMessageModal);
-  //   messageModal.show();
+          var sentMessageModal = document.getElementById("sentMessageModal");
+          var messageModal = new bootstrap.Modal(sentMessageModal);
+          messageModal.show();
 
-  //   payload = {};
-  // })
-  // .fail((error) => {
-  //   alert(error?.responseJSON?.message);
-  // });
+          payload = {};
+          is_valid_email = false; // Reset flow for next time
+        } else {
+          alert("Invalid Mobile OTP, please try again.");
+        }
+      })
+      .fail((error) => {
+        alert(error?.responseJSON?.message || "Mobile OTP verification failed");
+      });
+  }
+}
 
-            resetOTPInputField();
-            otpModalInstance.hide(); 
-            var sentMessageModal=document.getElementById('sentMessageModal');
-            var messageModal= new bootstrap.Modal(sentMessageModal);
-            messageModal.show()
 
-            payload = {};
+
+
+    // function otpVerification() {
+    //   const inputs = getAllInputValues();
+    //   const otp = inputs.join("");
+    //    let is_valid_email=false;
+    //   // let link = `https://microservice.valuenable.in/verify-otp`;
+    //   // let link = `https://dev-microservice.valuenable.in/verify-otp`;
+    //   // let link = `http://localhost:3001/web/verify-otp`
+    //   // let emailOtpLink = `https://api.valuenable.in/webhook/verify-email-otp`
+    //   let emailOtpLink = `https://api.valuenable.in/webhook/verify-email-otp`
+
+    //   let link = `https://api.valuenable.in/webhook/verify-otp`
+
+    //   // let link = `https://uat-microservice.valuenable.in/verify-otp`;
+
+    //   $.ajax({
+    //     type: "POST",
+    //     url: emailOtpLink,
+    //     data: {
+    //       ...payload,
+    //       otp,
+    //     },
+    //     dataType: "json",
+    //     encode: true,
+    //   })
+    //     .done((data) => {
+    //       if (data.status === "success") {
+    //         is_valid_email = true;
+    //         $("#otpHeading").innerHTML=`Please enter the OTP <br />
+    //               to verify your Mobile number`;
+    //          $.ajax({
+    //     type: "POST",
+    //     url: link,
+    //     data: {
+    //       ...payload,
+    //       otp,
+    //     },
+    //     dataType: "json",
+    //     encode: true,
+    //   })
+    //     .done((data) => {
+    //       // console.log("data", data);
+    //       if (data.status === "success") {
+
+    //         resetOTPInputField();
+    //         otpModalInstance.hide(); 
+    //         var sentMessageModal=document.getElementById('sentMessageModal');
+    //         var messageModal= new bootstrap.Modal(sentMessageModal);
+    //         messageModal.show()
+
+    //         payload = {};
            
-          } else {
-            alert("Please enter the OTP");
-          }
-        })
-        .fail((error) => {
-          alert(error?.responseJSON?.message);
-        });
-    }
+    //       } else {
+    //         is_valid_email = false;
+    //         alert("Please enter the OTP");
+    //       }
+    //     })
+    //     .fail((error) => {
+    //       alert(error?.responseJSON?.message);
+    //     });
+           
+    //       } else {
+    //         alert("Please enter the OTP");
+    //       }
+    //     })
+    //     .fail((error) => {
+    //       alert(error?.responseJSON?.message);
+    //     });
+    // }
 
     function otpResVerification() {
       const inputs = getAllOtpInputValues();
@@ -4255,119 +4360,6 @@ if(branchNameResp=="Branch Name*"){
       document.getElementById("signedAadharCopyFileMob").value = fileName;
     }
 
-//     function handelUploadPhoto(files){
-//       console.log(files)
-//       var fileName = files[0].name;
-//       if(fileName){
-//         let attachmentsFile = document.getElementById("applicantIdDesk");
-//         uploadDocument("applicantPhoto",attachmentsFile.files[0].type).then((result) => {
-//           console.log(result)
-//       if (result.status=="success") {
-//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
-//               .then(response => {
-//                 documentKeys.applicantPhotoKey = result.uploadKey;
-//               })
-//               .catch(error => {
-//                 console.error('Upload error:', error);
-                
-//             alert("Photo upload failed. Please try again.");
-//             return;
-
-//               })
-//   }
-// })
-//       }
-//       document.getElementById("applicantIdDeskFile").value = fileName;
-//     }
-//     function openApplicantPhoto(){
-//  document.getElementById("applicantIdDesk").click();
-//     }
-//     function handelCancelCheck(files){
-//       console.log(files)
-//       var fileName = files[0].name;
-//       if(fileName){
-//         let attachmentsFile = document.getElementById("cancelCheckId");
-//         uploadDocument("cancelCheck",attachmentsFile.files[0].type).then((result) => {
-//           console.log(result)
-//       if (result.status=="success") {
-//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
-//               .then(response => {
-//                 documentKeys.cancelCheckKey = result.uploadKey;
-//               })
-//               .catch(error => {
-//                 console.error('Upload error:', error);
-                
-//             alert("cancel Check upload failed. Please try again.");
-//             return;
-
-//               })
-//   }
-// })
-//       }
-//       document.getElementById("cancelCheckIdFile").value = fileName;
-//     }
-//     function openCancelCheck(){
-//  document.getElementById("cancelCheckId").click();
-//     }
-
-//     function handelUploadPhotos(files){
-//       console.log(files)
-//       var fileName = files[0].name;
-//       if(fileName){
-//         let attachmentsFile = document.getElementById("applicantIdMob");
-//         uploadDocument("applicantPhoto",attachmentsFile.files[0].type).then((result) => {
-//           console.log(result)
-//       if (result.status=="success") {
-//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
-//               .then(response => {
-//                 documentKeys.applicantPhotoKey = result.uploadKey;
-//               })
-//               .catch(error => {
-//                 console.error('Upload error:', error);
-                
-//             alert("Photo upload failed. Please try again.");
-//             return;
-
-//               })
-//   }
-// })
-//       }
-//       document.getElementById("applicantIdMobFile").value = fileName;
-//     }
-//     function openApplicantPhotos(){
-//  document.getElementById("applicantIdMob").click();
-//     }
-
-//     function handelCancelsChecks(files){
-//       console.log(files)
-//       var fileName = files[0].name;
-//       if(fileName){
-//         let attachmentsFile = document.getElementById("cancelCheckIds");
-//         uploadDocument("cancelCheck",attachmentsFile.files[0].type).then((result) => {
-//           console.log(result)
-//       if (result.status=="success") {
-//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
-//               .then(response => {
-//                 documentKeys.cancelCheckKey = result.uploadKey;
-//               })
-//               .catch(error => {
-//                 console.error('Upload error:', error);
-                
-//             alert("cancel Check upload failed. Please try again.");
-//             return;
-
-//               })
-//   }
-// })
-//       }
-//       document.getElementById("cancelCheckIdFiles").value = fileName;
-//     }
-//     function openCancelsChecks(){
-//  document.getElementById("cancelCheckIds").click();
-//     }
-
-
-// 
 
 
         function handelLaPhotoMob(files){
@@ -4477,36 +4469,6 @@ if(branchNameResp=="Branch Name*"){
 
 
 
-
-//     function handelLaPan(files){
-//       console.log(files)
-//       var fileName = files[0].name;
-//       if(fileName){
-//         let attachmentsFile = document.getElementById("laPanCard");
-//         uploadDocument("laPan",attachmentsFile.files[0].type).then((result) => {
-//           console.log(result)
-//       if (result.status=="success") {
-//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
-//               .then(response => {
-//                 documentKeys.laPanCardKey = result.uploadKey;
-//               })
-//               .catch(error => {
-//                 console.error('Upload error:', error);
-                
-//             alert("Photo upload failed. Please try again.");
-//             return;
-
-//               })
-//   }
-// })
-//       }
-//       document.getElementById("laPanFile").value = fileName;
-//     }
-//     function openLaPanFile(){
-//  document.getElementById("laPanCard").click();
-//     }
-
-
     function handelLaAadhar(files){
       console.log(files)
       var fileName = files[0].name;
@@ -4574,62 +4536,6 @@ if(branchNameResp=="Branch Name*"){
     }
 
 
-    
-
-
-//     function handelLaPanMob(files){
-//       console.log(files)
-//       var fileName = files[0].name;
-//       if(fileName){
-//         let attachmentsFile = document.getElementById("laPanCardMob");
-//         uploadDocument("laPan",attachmentsFile.files[0].type).then((result) => {
-//           console.log(result)
-//       if (result.status=="success") {
-//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
-//               .then(response => {
-//                 documentKeys.laPanCardKey = result.uploadKey;
-//               })
-//               .catch(error => {
-//                 console.error('Upload error:', error);
-                
-//             alert("Photo upload failed. Please try again.");
-//             return;
-
-//               })
-//   }
-// })
-//       }
-//       document.getElementById("laPanFileMob").value = fileName;
-//     }
-//     function openLaPanFileMob(){
-//  document.getElementById("laPanCardMob").click();
-//     }
-
-
-//     function handelLaAadharMob(files){
-//       console.log(files)
-//       var fileName = files[0].name;
-//       if(fileName){
-//         let attachmentsFile = document.getElementById("laAadharMob");
-//         uploadDocument("laAadhar",attachmentsFile.files[0].type).then((result) => {
-//           console.log(result)
-//       if (result.status=="success") {
-//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
-//               .then(response => {
-//                 documentKeys.laAadharCardKey = result.uploadKey;
-//               })
-//               .catch(error => {
-//                 console.error('Upload error:', error);
-                
-//             alert("Photo upload failed. Please try again.");
-//             return;
-
-//               })
-//   }
-// })
-//       }
-//       document.getElementById("laAadharFileMob").value = fileName;
-//     }
     function openLaAadharFileMob(){
  document.getElementById("laAadharMob").click();
     }
@@ -4670,34 +4576,6 @@ if(branchNameResp=="Branch Name*"){
  document.getElementById("laPanCard").click();
     }
 
-
-//     function handelLaAadhar(files){
-//       console.log(files)
-//       var fileName = files[0].name;
-//       if(fileName){
-//         let attachmentsFile = document.getElementById("laAadhar");
-//         uploadDocument("laAadhar",attachmentsFile.files[0].type).then((result) => {
-//           console.log(result)
-//       if (result.status=="success") {
-//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
-//               .then(response => {
-//                 documentKeys.laAadharCardKey = result.uploadKey;
-//               })
-//               .catch(error => {
-//                 console.error('Upload error:', error);
-                
-//             alert("Photo upload failed. Please try again.");
-//             return;
-
-//               })
-//   }
-// })
-//       }
-//       document.getElementById("laAadharFile").value = fileName;
-//     }
-//     function openLaAadharFile(){
-//  document.getElementById("laAadhar").click();
-//     }
     toggleButton(document.querySelector(".f-toggle-btn.t-btn-02"));
     $(function () {
       $("#customerDOB").datepicker();
