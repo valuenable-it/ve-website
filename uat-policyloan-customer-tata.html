@@ -2662,6 +2662,11 @@ if(branchName=="Branch Name*"){
             //   $("#sentMessageModal").modal("show");
             // $("#otpModal").modal("show");
             onApiSuccess()
+            is_valid_email=false;
+              $("#otpHeading").html(
+            `Please enter the OTP <br /> to verify your Email ID`
+          );
+          resetOTPInputField();
           } else {
             document.getElementById("otpModal").style.display = "none";
           }
@@ -2947,6 +2952,11 @@ if(branchNameResp=="Branch Name*"){
             //     document.getElementById('otpModal').style.display = 'block';
             // $("#resOtpModal").modal("show")
             onApiSuccess()
+            is_valid_email=false;
+              $("#otpHeading").html(
+            `Please enter the OTP <br /> to verify your Email ID`
+          );
+          resetOTPInputField();
           } else {
             // alert("Something went wrong");
           }
@@ -3071,6 +3081,7 @@ if(branchNameResp=="Branch Name*"){
       resetFieldForMobile();
       resetSelectionMob()
       resetSelection()
+      location.reload();
     }
 
     function resetFieldForCustomer() {

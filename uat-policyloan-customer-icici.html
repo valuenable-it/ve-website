@@ -270,6 +270,7 @@
 <option value='AZAMGARH'>AZAMGARH</option>
 <option value='Abohar'>Abohar</option>
 <option value='ARAMBAGH'>ARAMBAGH</option>
+
 <option value='Abu Road'>Abu Road</option>
 <option value='Ahmedabad- Navrangapura'>Ahmedabad- Navrangapura</option>
 <option value='Ahmednagar'>Ahmednagar</option>
@@ -1146,7 +1147,7 @@
                         <div class="form-group">
                           <select class="form-control" id="branchName">
                             <option value="">Branch Name*</option>
-                           <option value='A S Rao Nagar'>A S Rao Nagar</option>
+                            <option value='A S Rao Nagar'>A S Rao Nagar</option>
 <option value='AGARTALA'>AGARTALA</option>
 <option value='AGRA'>AGRA</option>
 <option value='AHMEDABAD - BODAKDEV'>AHMEDABAD - BODAKDEV</option>
@@ -3128,6 +3129,11 @@ if(branchName=="Branch Name*"){
             //   $("#sentMessageModal").modal("show");
             // $("#otpModal").modal("show");
             onApiSuccess()
+            is_valid_email=false;
+             $("#otpHeading").html(
+            `Please enter the OTP <br /> to verify your Email ID`
+          );
+          resetOTPInputField();
           } else {
             document.getElementById("otpModal").style.display = "none";
           }
@@ -3413,6 +3419,11 @@ if(branchNameResp=="Branch Name*"){
             //     document.getElementById('otpModal').style.display = 'block';
             // $("#resOtpModal").modal("show")
             onApiSuccess()
+            is_valid_email=false;
+             $("#otpHeading").html(
+            `Please enter the OTP <br /> to verify your Email ID`
+          );
+          resetOTPInputField();
           } else {
             // alert("Something went wrong");
           }
@@ -3537,6 +3548,7 @@ if(branchNameResp=="Branch Name*"){
       resetFieldForMobile();
       resetSelectionMob()
       resetSelection()
+      location.reload();
     }
 
     function resetFieldForCustomer() {
