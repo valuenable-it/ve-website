@@ -90,10 +90,11 @@
         width: 65%;
       }
 
-      .title-text-main h2 {
+         .title-text-main h2 {
         line-height: 1;
-        margin-top: 37px;
-      }
+        margin-top: 56px;
+    }
+
     }
 
     @media (max-width: 768px) {
@@ -122,6 +123,13 @@
     .FAQ {
       display: flex;
     }
+
+    #resend-email-button{
+  color: #da1e37;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+}
   </style>
 </head>
 <!-- Body -->
@@ -2384,47 +2392,7 @@
   
     </div>
 
-    <!-- responsive form modal -->
-    <div class="modal fade" id="resOtpModal" tabindex="-1" role="dialog" aria-labelledby="otpModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-            <div class="position-relative" id="otp-div">
-              <div class="card p-2 text-center">
-                <h6 style="font-size: 18px; font-weight: 600; color: #2e2e2e">
-                  Please enter the OTP <br />
-                  to verify your Mobile number
-                </h6>
-                <div id="resOtp" class="inputs d-flex flex-row justify-content-center mt-3">
-                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="firstInput" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
-                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="secondInput" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
-                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="thirdInput" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
-                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="fourthInput" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
-                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="fifthInput" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
-                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="sixthInput" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
-                </div>
-                <div class="mt-4" style="display: block">
-                  <button class="btn btn-danger px-4 validate" onclick="otpResVerification()">
-                    Validate
-                  </button>
-                </div>
-                <div class="resend-otp-div">
-                  <div class="resend-text">Not received your OTP ?</div>
-                  <div class="timer-text-div">
-                    <span id="resend-button-res" onclick="resendOtpNumber()">
-                      Resend OTP
-                    </span>
-                    <span id="otp-timer" style="display: none">00:30</span>
-                  </div>
-                </div>
-                <div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+ 
 
     <!-- Modal -->
     <div class="modal fade" id="otpModal" tabindex="-1" role="dialog" aria-labelledby="otpModalLabel"
@@ -2435,8 +2403,31 @@
             <div class="position-relative" id="otp-div">
               <div class="card p-2 text-center">
                 <h6 style="font-size: 18px; font-weight: 600; color: #2e2e2e" id="otpHeading">
-                  Please enter the OTP <br />
-                  to verify your Email ID
+                  Please enter the OTP to verify your Email ID
+                </h6>
+                <div id="email-otp" class="inputs d-flex flex-row justify-content-center mt-3">
+                  <input class="m-2 text-center form-control rounded email-otp-input" type="text" id="first" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
+                  <input class="m-2 text-center form-control rounded email-otp-input" type="text" id="second" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
+                  <input class="m-2 text-center form-control rounded email-otp-input" type="text" id="third" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
+                  <input class="m-2 text-center form-control rounded email-otp-input" type="text" id="fourth" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
+                  <input class="m-2 text-center form-control rounded email-otp-input" type="text" id="fifth" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
+                  <input class="m-2 text-center form-control rounded email-otp-input" type="text" id="sixth" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
+                  <!-- <i class="fa fa-check" id="email-check" aria-hidden="true" style="margin: auto;
+    color: #008000;display: none;"></i> -->
+
+                </div>
+                <div class="resend-otp-div" id="emailResendDiv">
+                  <div class="resend-text">Not received your Email OTP ?</div>
+                  <div class="timer-text-div">
+                    <span id="resend-email-button" onclick="resendEmailOtp()">
+                      Resend OTP
+                    </span>
+                    <span id="email-timer" style="display: none">00:30</span>
+                  </div>
+                </div>
+                <hr>
+                <h6 style="font-size: 18px; font-weight: 600; color: #2e2e2e" id="otpHeading">
+                  Please enter the OTP to verify your Mobile ID
                 </h6>
                 <div id="otp" class="inputs d-flex flex-row justify-content-center mt-3">
                   <input class="m-2 text-center form-control rounded otp-input" type="text" id="first" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
@@ -2445,6 +2436,8 @@
                   <input class="m-2 text-center form-control rounded otp-input" type="text" id="fourth" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
                   <input class="m-2 text-center form-control rounded otp-input" type="text" id="fifth" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
                   <input class="m-2 text-center form-control rounded otp-input" type="text" id="sixth" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
+                  <!-- <i class="fa fa-check" id="mobile-check" aria-hidden="true" style="margin: auto;
+    color: #008000;display: none;"></i> -->
                 </div>
                 <div class="mt-4" style="display: block">
                   <button class="btn btn-danger px-4 validate" onclick="otpVerification()">
@@ -2452,7 +2445,7 @@
                   </button>
                 </div>
                 <div class="resend-otp-div">
-                  <div class="resend-text">Not received your OTP ?</div>
+                  <div class="resend-text">Not received your Mobile OTP ?</div>
                   <div class="timer-text-div">
                     <span id="resend-button" onclick="resendOtp()">
                       Resend OTP
@@ -2605,9 +2598,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
   <script>
     let is_valid_email=false;
+    let is_valid_mobile=false;
      let laCheckBoxClick,laCheckBoxMobClick;
     var openOtpModal = document.getElementById('otpModal');
     var otpModalInstance = new bootstrap.Modal(openOtpModal);
+    // otpModalInstance.show()
       $(document).ready(function() {
       console.log(branchNameResp)
             $('#branchNameResp').select2({
@@ -2629,6 +2624,72 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   const inputs = document.querySelectorAll('.otp-input'); 
+
+  // Detect mobile/touch devices
+  const isMobile = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+
+  inputs.forEach((input, index) => {
+    // Prevent 'v' from being typed on Ctrl+V
+    input.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && (e.key === 'v' || e.key === 'V')) {
+        e.preventDefault(); // Prevent 'v' from typing
+        navigator.clipboard.readText().then(pastedText => {
+          handlePaste(pastedText, index);
+        });
+      }
+
+      // Backspace to previous field
+      if (e.key === 'Backspace' && input.value === '' && index > 0) {
+        inputs[index - 1].focus();
+      }
+    });
+
+    // Right click or long press (both desktop and mobile)
+    input.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const pastedText = e.clipboardData.getData('text');
+      if(isMobile){
+        setTimeout(() => {
+          handlePaste(pastedText, index);
+        },0);
+      } else {
+        handlePaste(pastedText, index);
+      }     
+    });
+
+    // Move to next on input
+    input.addEventListener('input', () => {
+      if (input.value.length === 1 && index < inputs.length - 1) {
+        inputs[index + 1].focus();
+      }
+    });
+  });
+
+  function handlePaste(pastedText, startIndex) {
+    const digits = pastedText.replace(/\D/g, '').split('');
+    digits.forEach((digit, offset) => {
+      const targetIndex = startIndex + offset;
+      if (inputs[targetIndex]) {
+        inputs[targetIndex].value = digit;
+      }
+    });
+
+    const lastIndex = Math.min(startIndex + digits.length - 1, inputs.length - 1);
+    if (lastIndex >= 0) inputs[lastIndex].focus();
+
+    logCurrentOTP();
+  }
+
+  function logCurrentOTP() {
+    const otp = Array.from(inputs).map(input => input.value).join('');
+    
+  }
+});
+//email otp
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  const inputs = document.querySelectorAll('.email-otp-input'); 
 
   // Detect mobile/touch devices
   const isMobile = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
@@ -2730,37 +2791,39 @@ otpModalInstance.show();
 
       OTPInput();
     });
-
-   
-
-
-
-
-    document.addEventListener('DOMContentLoaded', (event) => {
-      function OTPInput() {
-        const inputs = document.querySelectorAll('#resOtp input');
-        inputs.forEach((input, index) => {
-          input.addEventListener('input', (event) => {
-            if (input.value.length === 1) {
-              if (index !== inputs.length - 1) {
-                inputs[index + 1].focus();
+//email otp
+   document.addEventListener("DOMContentLoaded", function (event) {
+      function EmailOTPInput() {
+        const inputs = document.querySelectorAll("#email-otp > *[id]");
+        for (let i = 0; i < inputs.length; i++) {
+          inputs[i].addEventListener("keydown", function (event) {
+            if (event.key === "Backspace") {
+              inputs[i].value = "";
+              if (i !== 0) inputs[i - 1].focus();
+            } else {
+              if (i === inputs.length - 1 && inputs[i].value !== "") {
+                return true;
+              } else if (event.keyCode > 47 && event.keyCode < 58) {
+                inputs[i].value = event.key;
+                if (i !== inputs.length - 1) inputs[i + 1].focus();
+                event.preventDefault();
+              } else if (event.keyCode > 64 && event.keyCode < 91) {
+                inputs[i].value = String.fromCharCode(event.keyCode);
+                if (i !== inputs.length - 1) inputs[i + 1].focus();
+                event.preventDefault();
               }
             }
           });
-
-          input.addEventListener('keydown', (event) => {
-            if (event.key === 'Backspace') {
-              input.value = '';
-              if (index !== 0) inputs[index - 1].focus();
-            } else if (/[^0-9]/.test(event.key) && event.key !== 'Tab') {
-              event.preventDefault(); // Prevent any non-numeric input
-            }
-          });
-        });
+        }
       }
 
-      OTPInput();
+      EmailOTPInput();
     });
+
+
+
+
+    
     function isValid_Mobile_Number(mobile_number) {
       let regex = new RegExp("^[6-9][0-9]{9}$");
 
@@ -2898,6 +2961,8 @@ otpModalInstance.show();
       event.preventDefault();
 
       startTimer();
+      startEmailOtpTimer();
+
 
       let companyName = "IPRU";
       let prodctType = document.getElementById("prodctType").value;
@@ -3130,9 +3195,7 @@ if(branchName=="Branch Name*"){
             // $("#otpModal").modal("show");
             onApiSuccess()
             is_valid_email=false;
-             $("#otpHeading").html(
-            `Please enter the OTP <br /> to verify your Email ID`
-          );
+            is_valid_mobile=false;
           resetOTPInputField();
           } else {
             document.getElementById("otpModal").style.display = "none";
@@ -3191,8 +3254,8 @@ console.log(response)
       console.log("maxUsersForm submit called");
       event.preventDefault();
 
-      startTime();
-
+      startEmailOtpTimer();
+startTimer()
       let companysName = "IPRU";
       let prodctsType = document.getElementById("prodctsType").value;
       let branchNameResp = document.getElementById("branchNameResp").value;
@@ -3420,9 +3483,8 @@ if(branchNameResp=="Branch Name*"){
             // $("#resOtpModal").modal("show")
             onApiSuccess()
             is_valid_email=false;
-             $("#otpHeading").html(
-            `Please enter the OTP <br /> to verify your Email ID`
-          );
+            is_valid_mobile=false;
+            
           resetOTPInputField();
           } else {
             // alert("Something went wrong");
@@ -3646,8 +3708,8 @@ if(branchNameResp=="Branch Name*"){
         inputs[i].value = "";
       }
     }
-    function getAllOtpInputValues() {
-      let inputs = document.querySelectorAll("#resOtp input");
+    function getEmailOtpInputValues() {
+      let inputs = document.querySelectorAll("#email-otp input");
       console.log(inputs);
       let values = [];
 
@@ -3659,7 +3721,7 @@ if(branchNameResp=="Branch Name*"){
     }
 
     function resetOTPInputsField() {
-      let inputs = document.querySelectorAll("#otp inputs");
+      let inputs = document.querySelectorAll("#email-otp inputs");
       for (var i = 0; i < inputs.length; i++) {
         inputs[i].value = "";
       }
@@ -3681,7 +3743,7 @@ if(branchNameResp=="Branch Name*"){
       let newPayload = {
         mobileNumber,
         detailsFor: "resendOtp",
-        type:!is_valid_email?"email":"mobile",
+        type:"mobile",
         customerEmail:payload?.customerEmail
       };
 
@@ -3713,8 +3775,11 @@ if(branchNameResp=="Branch Name*"){
         });
     }
 
-    function resendOtpNumber() {
-      startTime();
+    
+
+    function resendEmailOtp() {
+            startEmailOtpTimer();
+
 
       let mobileNumber;
 
@@ -3729,23 +3794,15 @@ if(branchNameResp=="Branch Name*"){
       let newPayload = {
         mobileNumber,
         detailsFor: "resendOtp",
+        type:"email",
+        customerEmail:payload?.customerEmail
       };
 
       // let link = `https://microservice.valuenable.in/generate-otp`;
       // let link = `https://dev-microservice.valuenable.in/generate-otp`;
-      // let link = `http://localhost:3001/generate-otp`;
-      if(is_valid_email){
-       let newPayload = {
-        mobileNumber,
-        detailsFor: "resendOtp",
-      };
-      }
-      else{
-          let newPayload = {
-        email,
-        detailsFor: "resendOtp",
-      };
-      }
+      // let link = `http://localhost:3001/web/generate-otp`;
+      let link = `https://api-dev.valuenable.in/webhook/generate-otp`;
+
 
 
       $.ajax({
@@ -3795,214 +3852,214 @@ if(branchNameResp=="Branch Name*"){
 }
 
 
-function otpVerification() {
+// function otpVerification() {
+//   const inputs = getAllInputValues();
+//   const otp = inputs.join("");
+//   const emailInputs = getEmailOtpInputValues();
+//   const emailOtp = emailInputs.join("");
+// console.log("otp", otp);
+// console.log("emailOtp", emailOtp);
+//   let emailOtpLink = `https://api-dev.valuenable.in/webhook/verify-email-otp`; // Email OTP
+//   let mobileOtpLink = `https://api-dev.valuenable.in/webhook/verify-otp`;     // Mobile OTP
+
+//   //  let emailOtpLink = `http://localhost:3001/web/verify-email-otp`; // Email OTP
+//   // let mobileOtpLink = `http://localhost:3001/web/verify-otp`; 
+
+//   // Step 1 → Agar abhi tak email verify nahi hua
+//   if (!is_valid_email) {
+//     $.ajax({
+//       type: "POST",
+//       url: emailOtpLink,
+//       data: {
+//         ...payload,
+//         otp:emailOtp,
+//       },
+//       dataType: "json",
+//       encode: true,
+//     })
+//       .done((data) => {
+//         if (data.status === "success") {
+//           is_valid_email = true; 
+//           $.ajax({
+//       type: "POST",
+//       url: mobileOtpLink,
+//       data: {
+//         ...payload,
+//         otp,
+//       },
+//       dataType: "json",
+//       encode: true,
+//     })
+//       .done((data) => {
+//         if (data.status === "success") {
+//           resetOTPInputField();
+//           otpModalInstance.hide();
+
+//           var sentMessageModal = document.getElementById("sentMessageModal");
+//           var messageModal = new bootstrap.Modal(sentMessageModal);
+//           messageModal.show();
+
+//           payload = {};
+//           is_valid_email = false; // Reset flow for next time
+//         } else {
+//           alert("Invalid Mobile OTP, please try again.");
+//         }
+//       })
+//       .fail((error) => {
+//         alert(error?.responseJSON?.message || "Mobile OTP verification failed");
+//       });
+//         } else {
+//           alert("Invalid Email OTP, please try again.");
+//         }
+//       })
+//       .fail((error) => {
+//         alert(error?.responseJSON?.message || "Email OTP verification failed");
+//       });
+//   } else {
+//     // Step 2 → Email already verified, ab Mobile OTP check karna
+//     $.ajax({
+//       type: "POST",
+//       url: mobileOtpLink,
+//       data: {
+//         ...payload,
+//         otp,
+//       },
+//       dataType: "json",
+//       encode: true,
+//     })
+//       .done((data) => {
+//         if (data.status === "success") {
+//           resetOTPInputField();
+//           otpModalInstance.hide();
+
+//           var sentMessageModal = document.getElementById("sentMessageModal");
+//           var messageModal = new bootstrap.Modal(sentMessageModal);
+//           messageModal.show();
+
+//           payload = {};
+//           is_valid_email = false; // Reset flow for next time
+//         } else {
+//           alert("Invalid Mobile OTP, please try again.");
+//         }
+//       })
+//       .fail((error) => {
+//         alert(error?.responseJSON?.message || "Mobile OTP verification failed");
+//       });
+//   }
+// }
+
+// Global flags
+
+async function otpVerification() {
   const inputs = getAllInputValues();
   const otp = inputs.join("");
-
-  let emailOtpLink = `https://api-dev.valuenable.in/webhook/verify-email-otp`; // Email OTP
-  let mobileOtpLink = `https://api-dev.valuenable.in/webhook/verify-otp`;     // Mobile OTP
-
-  //  let emailOtpLink = `http://localhost:3001/web/verify-email-otp`; // Email OTP
-  // let mobileOtpLink = `http://localhost:3001/web/verify-otp`; 
-
-  // Step 1 → Agar abhi tak email verify nahi hua
-  if (!is_valid_email) {
-    $.ajax({
-      type: "POST",
-      url: emailOtpLink,
-      data: {
-        ...payload,
-        otp,
-      },
-      dataType: "json",
-      encode: true,
-    })
-      .done((data) => {
-        if (data.status === "success") {
-          is_valid_email = true; // Mark email as verified
-          $("#otpHeading").html(
-            `Please enter the OTP <br /> to verify your Mobile number`
-          );
-          resetOTPInputField(); // OTP input clear for mobile OTP
-        } else {
-          alert("Invalid Email OTP, please try again.");
-        }
-      })
-      .fail((error) => {
-        alert(error?.responseJSON?.message || "Email OTP verification failed");
-      });
-  } else {
-    // Step 2 → Email already verified, ab Mobile OTP check karna
-    $.ajax({
-      type: "POST",
-      url: mobileOtpLink,
-      data: {
-        ...payload,
-        otp,
-      },
-      dataType: "json",
-      encode: true,
-    })
-      .done((data) => {
-        if (data.status === "success") {
-          resetOTPInputField();
-          otpModalInstance.hide();
-
-          var sentMessageModal = document.getElementById("sentMessageModal");
-          var messageModal = new bootstrap.Modal(sentMessageModal);
-          messageModal.show();
-
-          payload = {};
-          is_valid_email = false; // Reset flow for next time
-        } else {
-          alert("Invalid Mobile OTP, please try again.");
-        }
-      })
-      .fail((error) => {
-        alert(error?.responseJSON?.message || "Mobile OTP verification failed");
-      });
-  }
+  const emailInputs = getEmailOtpInputValues();
+  const emailOtp = emailInputs.join("");
+if(!otp||otp.length<6){
+alert("Please enter a valid Mobile OTP");
+return;
+}
+if(!emailOtp||emailOtp.length<6){
+alert("Please enter a valid Mobile OTP");
+return;
 }
 
+  const emailOtpLink = `https://api-dev.valuenable.in/webhook/verify-email-otp`;
+  const mobileOtpLink = `https://api-dev.valuenable.in/webhook/verify-otp`;
 
-
-
-    // function otpVerification() {
-    //   const inputs = getAllInputValues();
-    //   const otp = inputs.join("");
-    //    let is_valid_email=false;
-    //   // let link = `https://microservice.valuenable.in/verify-otp`;
-    //   // let link = `https://dev-microservice.valuenable.in/verify-otp`;
-    //   // let link = `http://localhost:3001/web/verify-otp`
-    //   // let emailOtpLink = `https://api-dev.valuenable.in/webhook/verify-email-otp`
-    //   let emailOtpLink = `https://api-dev.valuenable.in/webhook/verify-email-otp`
-
-    //   let link = `https://api-dev.valuenable.in/webhook/verify-otp`
-
-    //   // let link = `https://uat-microservice.valuenable.in/verify-otp`;
-
-    //   $.ajax({
-    //     type: "POST",
-    //     url: emailOtpLink,
-    //     data: {
-    //       ...payload,
-    //       otp,
-    //     },
-    //     dataType: "json",
-    //     encode: true,
-    //   })
-    //     .done((data) => {
-    //       if (data.status === "success") {
-    //         is_valid_email = true;
-    //         $("#otpHeading").innerHTML=`Please enter the OTP <br />
-    //               to verify your Mobile number`;
-    //          $.ajax({
-    //     type: "POST",
-    //     url: link,
-    //     data: {
-    //       ...payload,
-    //       otp,
-    //     },
-    //     dataType: "json",
-    //     encode: true,
-    //   })
-    //     .done((data) => {
-    //       // console.log("data", data);
-    //       if (data.status === "success") {
-
-    //         resetOTPInputField();
-    //         otpModalInstance.hide(); 
-    //         var sentMessageModal=document.getElementById('sentMessageModal');
-    //         var messageModal= new bootstrap.Modal(sentMessageModal);
-    //         messageModal.show()
-
-    //         payload = {};
-           
-    //       } else {
-    //         is_valid_email = false;
-    //         alert("Please enter the OTP");
-    //       }
-    //     })
-    //     .fail((error) => {
-    //       alert(error?.responseJSON?.message);
-    //     });
-           
-    //       } else {
-    //         alert("Please enter the OTP");
-    //       }
-    //     })
-    //     .fail((error) => {
-    //       alert(error?.responseJSON?.message);
-    //     });
-    // }
-
-    function otpResVerification() {
-      const inputs = getAllOtpInputValues();
-      console.log(inputs);
-      const otp = inputs.join("");
-
-      // let link = `https://microservice.valuenable.in/verify-otp`;
-      // let link = `https://dev-microservice.valuenable.in/verify-otp`;
-      // let link = `http://localhost:3001/verify-otp`
-      let link = `https://api-dev.valuenable.in/webhook/verify-otp`
-
-      // let link = `https://uat-microservice.valuenable.in/verify-otp`
-
-
-      $.ajax({
+  try {
+    // Step 1 → If email not yet verified
+    if (!is_valid_email) {
+      const emailResponse = await $.ajax({
         type: "POST",
-        url: link,
+        url: emailOtpLink,
+        data: {
+          ...payload,
+          otp: emailOtp,
+        },
+        dataType: "json",
+        encode: true,
+      });
+
+      if (emailResponse.status === "success") {
+        is_valid_email = true;
+        // Hide resend button safely (only if exists)
+        const resendButtonElement = document.getElementById("emailResendDiv");
+        const emailCheck = document.getElementById("email-check");
+
+        
+        if (resendButtonElement) {
+          resendButtonElement.style.display = "none";
+        }
+        if(emailCheck){
+          emailCheck.style.display = "block";
+        }
+
+        // Disable email input fields
+        const emailInputFields = document.querySelectorAll(".email-otp-input");
+        emailInputFields.forEach((input) => {
+  input.disabled = true;
+  input.style.color = "green";        // ✅ Make text green
+  input.style.fontWeight = "600";     // optional: make text bold
+});
+        console.log("Email OTP verified successfully");
+      } else {
+        alert("Invalid Email OTP, please try again.");
+        return;
+      }
+    }
+
+    // Step 2 → If email is verified but mobile not yet verified
+    if (is_valid_email && !is_valid_mobile) {
+      const mobileResponse = await $.ajax({
+        type: "POST",
+        url: mobileOtpLink,
         data: {
           ...payload,
           otp,
         },
         dataType: "json",
         encode: true,
-      })
-        .done((data) => {
-          console.log("data", data);
-          if (data.status === "success") {
+      });
 
-         
-  //           generateLead(payload)
-  // .done((data) => {
-  //   window.location.href = data.link;
-  //   resetOTPInputField();
-  //   otpModalInstance.hide();
-    
-  //   const sentMessageModal = document.getElementById('sentMessageModal');
-  //   const messageModal = new bootstrap.Modal(sentMessageModal);
-  //   messageModal.show();
+      if (mobileResponse.status === "success") {
+        is_valid_mobile = true;
+                const mobileCheck = document.getElementById("mobile-check");
+                 if(mobileCheck){
+          mobileCheck.style.display = "block";
+        }
 
-  //   payload = {};
-  // })
-  // .fail((error) => {
-  //   alert(error?.responseJSON?.message);
-  // });
-
-
-
-            resetOTPInputsField();
-
-            var resotpModal = document.getElementById('otpModal');
-            var resmodal = new bootstrap.Modal(resotpModal);
-            resmodal.hide(); 
-
-            var sentMessagePopup = document.getElementById('sentMessageModal');
-            var sentMes = new bootstrap.Modal(sentMessagePopup);
-            sentMes.show();
-            
-
-            payload = {};
-            
-          } else {
-            alert("Please enter the OTP");
-          }
-        })
-        .fail((error) => {
-          alert("Please enter the OTP");
-        });
+        console.log("Mobile OTP verified successfully");
+      } else {
+        alert("Invalid Mobile OTP, please try again.");
+        return;
+      }
     }
+
+    // Step 3 → If both verified successfully
+    if (is_valid_email && is_valid_mobile) {
+      resetOTPInputField();
+      otpModalInstance.hide();
+
+      const sentMessageModal = document.getElementById("sentMessageModal");
+      const messageModal = new bootstrap.Modal(sentMessageModal);
+      messageModal.show();
+
+      payload = {};
+      is_valid_email = false;
+      is_valid_mobile = false;
+      console.log("Both OTPs verified successfully");
+    }
+  } catch (error) {
+    console.error("OTP verification error:", error);
+    const message =
+      error?.responseJSON?.message ||
+      "OTP verification failed, please try again.";
+    alert(message);
+  }
+}
+
+
 
     function toggleButton(button) {
       const buttons = document.querySelectorAll(".f-toggle-btn");
@@ -4068,9 +4125,9 @@ function otpVerification() {
     }
 
     function updateTime() {
-      const timerElement = document.getElementById("otp-timer");
+      const timerElement = document.getElementById("email-timer");
       const resendButtonElement =
-        document.getElementById("resend-button-res");
+        document.getElementById("resend-email-button");
 
       if (otpCountDown >= 0) {
         const minutes = Math.floor(otpCountDown / 60);
@@ -4087,10 +4144,10 @@ function otpVerification() {
       }
     }
 
-    function startTime() {
-      const timerElement = document.getElementById("otp-timer");
+    function startEmailOtpTimer() {
+      const timerElement = document.getElementById("email-timer");
       const resendButtonElement =
-        document.getElementById("resend-button-res");
+        document.getElementById("resend-email-button");
 
       otpCountDown = initialCountdownOtp;
 
