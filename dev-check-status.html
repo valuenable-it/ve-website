@@ -1646,7 +1646,7 @@
             if (loader) loader.style.display = "block";
 
             const res = await axios.post(
-              "http://localhost:3001/web/loan/get-policy-status",
+              "https://api-dev.valuenable.in/webhook/loan/get-policy-status",
               {
                 policy_number: policyNumber,
                 generate_link: false,

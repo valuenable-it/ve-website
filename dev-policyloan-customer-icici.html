@@ -2940,8 +2940,8 @@ console.log(payload)
     function generateOtp(){
 // let link = `https://microservice.valuenable.in/generate-otp`;
       // let link = `https://dev-microservice.valuenable.in/generate-otp`;
-      let link = `http://localhost:3001/web/generate-otp`;
-      // let link = `https://api-dev.valuenable.in/webhook/generate-otp`;
+      // let link = `http://localhost:3001/web/generate-otp`;
+      let link = `https://api-dev.valuenable.in/webhook/generate-otp`;
 
       // let link = `https://uat-microservice.valuenable.in/generate-otp`;
       let generateOtpPayload=payload[0];
@@ -3226,11 +3226,11 @@ alert("Please enter a valid Mobile OTP");
 return;
 }
 
-  // const emailOtpLink = `https://api-dev.valuenable.in/webhook/verify-email-otp`;
-  // const mobileOtpLink = `https://api-dev.valuenable.in/webhook/verify-otp`;
+  const emailOtpLink = `https://api-dev.valuenable.in/webhook/verify-email-otp`;
+  const mobileOtpLink = `https://api-dev.valuenable.in/webhook/verify-otp`;
 
-   const emailOtpLink = `http://localhost:3001/web/verify-email-otp`;
-  const mobileOtpLink = `http://localhost:3001/web/verify-otp`;
+  //  const emailOtpLink = `http://localhost:3001/web/verify-email-otp`;
+  // const mobileOtpLink = `http://localhost:3001/web/verify-otp`;
 
   try {
     // Step 1 → If email not yet verified
