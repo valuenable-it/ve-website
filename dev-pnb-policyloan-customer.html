@@ -1749,6 +1749,65 @@
         </div>
       </div>
     </div>
+    <div class="modal fade" id="confirmationModel" tabindex="-1" role="dialog" aria-labelledby="confirmationModelLabel"
+      aria-hidden="true" style="padding-right: 0px !important">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="position-relative" id="otp-div">
+              <div class="card p-2 text-center" style="width: 100%">
+                <h6 style="
+                      color: #000;
+                      font-size: 18px;
+                      font-weight: 600;
+                      text-align: center;
+                      margin-bottom: 20px;display: block;
+                    " id="confirmationText">
+                  Would you like to add another policy?
+                </h6>
+
+                <h6 style="
+                      color: #000;
+                      font-size: 18px;
+                      font-weight: 600;
+                      text-align: center;
+                      margin-bottom: 20px;display: none;
+                    " id="journeyTypeText">
+                  Please select the type of journey you want to proceed with.
+                </h6>
+                <!-- <h5 class="mt-2">
+                  <b>-Team ValuEnable</b>
+                </h5> -->
+                <div class="mt-4" style="display: block" id="confirmationModelButtons">
+                  <button class="btn btn-success px-4 validate"  aria-hidden="true"
+                    onclick="resetField('multi_policy')">
+                    Yes
+                  </button>
+                  
+                  <button class="btn btn-danger px-4 validate" onclick="handleAssistedJourney('assisted')"
+                    >
+                    No
+                  </button>
+                </div>
+
+                <div class="mt-4" style="display: none" id="journeyType">
+                  <button class="btn btn-danger px-4 validate"
+                    onclick="handleAssistedJourney('assisted')">
+                    Assisted 
+                  </button>
+                  
+                  <button onclick="handleNonAssistedJourney('nonAssisted')" class="btn btn-danger px-4 validate"
+                    >
+                    Non-Assisted
+                  </button>
+                </div>
+                <div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
   <footer>
     <div class="footer">
@@ -1854,6 +1913,8 @@
      let laCheckBoxClick,laCheckBoxMobClick;
     var openOtpModal = document.getElementById('otpModal');
     var otpModalInstance = new bootstrap.Modal(openOtpModal);
+     let openConfirmationModel=document.getElementById('confirmationModel');
+      let confirmationModelInstance= new bootstrap.Modal(openConfirmationModel);
       $(document).ready(function() {
       console.log(branchNameResp)
             $('#branchNameResp').select2({
@@ -2064,7 +2125,8 @@ otpModalInstance.show();
     }
    
     console.log(documentKeys)
-    let payload = {};
+    let payload = [];
+    let ocrJourneyType="";
 
     $("#maxUserForm").submit((event) => {
       console.log("maxUserForm submit called");
@@ -2257,7 +2319,7 @@ if(branchName=="Branch Name*"){
 
       // console.log("customerObj", customerObj);
 
-      payload = {
+      payloads = {
         ...customerObj,
           // panFilePath: documentKeys?.panCardKey,
           unitStatementFilePath: documentKeys?.unitStatementKey,
@@ -2267,54 +2329,10 @@ if(branchName=="Branch Name*"){
         //   laPanPath:documentKeys?.laPanCardKey,
         //   laAadharPath:documentKeys?.laAadharCardKey,
       };
-
-      // let link = `https://microservice.valuenable.in/generate-otp`;
-      // let link = `https://dev-microservice.valuenable.in/generate-otp`;
-      // let link = `http://localhost:3001/web/api/create-laip-lead`;
-      // let link = `https://api-dev.valuenable.in/webhook/api/create-laip-lead`;
-      let link = `https://api-dev.valuenable.in/webhook/generate-otp`;
-
-
-      // let link = `https://uat-microservice.valuenable.in/generate-otp`;
-
-      // $("#otpModal").modal("show");
-
-      $.ajax({
-        type: "POST",
-        url: link,
-        data: {
-          ...payload,
-          customerMobileNumber,
-        //   panFilePath: documentKeys?.panCardKey,
-        //   unitStatementFilePath: documentKeys?.unitStatementKey,
-        //   policyDocumentPath: documentKeys?.policyDocument,
-        //   signedAadharPath: documentKeys?.aadharCardKey,
-        //   laPhotoPath:documentKeys?.laPhotoKey,
-        //   laPanPath:documentKeys?.laPanCardKey,
-        //   laAadharPath:documentKeys?.laAadharCardKey,
-
-          // cancelCheckPath:documentKeys?.cancelCheckKey,
-          // applicantPhotoPath:documentKeys?.applicantPhotoKey
-
-        },
-        dataType: "json",
-        encode: true,
-      })
-        .done((data) => {
-
-          console.log("data", data);
-          if (data.status === "success") {
-            // var sentMessagePopup = document.getElementById('sentMessageModal');
-            // var sentMes = new bootstrap.Modal(sentMessagePopup);
-            // sentMes.show();
-            onApiSuccess()
-          } else {
-            // document.getElementById("otpModal").style.display = "none";
-          }
-        })
-        .fail((error) => {
-          alert(error?.responseJSON?.message);
-        });
+payload.push(payloads);
+        console.log("payload", payload);
+          confirmationModelInstance.show()
+     
     });
 
     async function uploadFile(url, file) {
@@ -2548,7 +2566,7 @@ if(branchNameResp=="Branch Name*"){
 
       // console.log("customerObj", customerObj);
 
-      payload = {
+      payloadData = {
         ...customerObj,
         // panFilePath: documentKeys?.panCardKey,
           unitStatementFilePath: documentKeys?.unitStatementKey,
@@ -2558,50 +2576,9 @@ if(branchNameResp=="Branch Name*"){
         //   laPanPath:documentKeys?.laPanCardKey,
         //   laAadharPath:documentKeys?.laAadharCardKey,
       };
-      console.log(payload)
-      // let link = `https://microservice.valuenable.in/generate-otp`;
-      // let link = `https://dev-microservice.valuenable.in/generate-otp`;
-      // let link = `http://localhost:3001/web/api/create-laip-lead`;
-      // let link = `https://api-dev.valuenable.in/webhook/api/create-laip-lead`;
-      let link = `https://api-dev.valuenable.in/webhook/generate-otp`;
-
-      // let link = `https://uat-microservice.valuenable.in/generate-otp`;
-
-      // $("#resOtpModal").modal("show");
-
-      $.ajax({
-        type: "POST",
-        url: link,
-        data: {
-          ...payload,
-        //   customerMobileNumber: customersMobileNumber,
-        //   panFilePath: documentKeys?.panCardKey,
-        //   unitStatementFilePath: documentKeys?.unitStatementKey,
-        //   policyDocumentPath: documentKeys?.policyDocument,
-        //   signedAadharPath: documentKeys?.aadharCardKey,
-        //   laPhotoPath:documentKeys?.laPhotoKey,
-        //   laPanPath:documentKeys?.laPanCardKey,
-        //   laAadharPath:documentKeys?.laAadharCardKey,
-          // cancelCheckPath:documentKeys?.cancelCheckKey,
-          // applicantPhotoPath:documentKeys?.applicantPhotoKey
-        },
-        dataType: "json",
-        encode: true,
-      })
-        .done((data) => {
-          console.log("data", data);
-          if (data.status === "success") {
-            // var sentMessagePopup = document.getElementById('sentMessageModal');
-            // var sentMes = new bootstrap.Modal(sentMessagePopup);
-            // sentMes.show();
-            onApiSuccess()
-          } else {
-            // alert("Something went wrong");
-          }
-        })
-        .fail((error) => {
-          alert(error?.responseJSON?.message);
-        });
+       payload.push(payloadData);
+            confirmationModelInstance.show()
+      
     });
 
     $("#advisorForm").submit((event) => {
@@ -2708,16 +2685,145 @@ if(branchNameResp=="Branch Name*"){
         });
     });
 
-    function resetField() {
-      document.getElementById("advisorName").value = "";
+    function resetField(buttonType) {
+         if(buttonType=="multi_policy"){
+         if(payload.length==4){
+         alert("Maximum 4 policy can be processed at a time.");
+         return;
+      }
+        
+      }
+      if(ocrJourneyType=="nonAssisted"){
+          const validateMessage = document.getElementById("validateMessage");
+        const ocrMessage = document.getElementById("ocrMessage");
+        validateMessage.style.display = "none";
+        ocrMessage.style.display = "block";
+
+
+
+        document.getElementById("loader-container").style.display = "flex";
+
+        let link = `http://localhost:3001/web/v1/generate-lead`
+        // let link = `https://api-dev.valuenable.in/webhook/v1/generate-lead`
+console.log(payload)
+            $.ajax({
+        type: "POST",
+        url: link,
+        data: {
+ "policy_number": payload[0].policyNumber,
+ "company_code":payload[0].companyName,
+"email": payload[0].customerEmail,
+"name": payload[0].customerFirstName,
+"dob": payload[0].customerDOB,
+"mobile": payload[0].customerMobileNumber,
+"la_name": "",
+"la_email": "",
+"la_mobile": "",
+ "unit_statement_key": payload[0].unitStatementFilePath,
+ "policy_bond_key": payload[0].policyDocumentPath,
+ "touchpoint": payload[0].branchName,
+ "refrenceId":payload[0].leadId?payload[0].leadId:null,
+},
+        dataType: "json",
+        encode: true,
+      }).done((data) => {
+
+        window.location.href = data.link
+
+      var sentMessageModal=document.getElementById('sentMessageModal');
+            var messageModal= new bootstrap.Modal(sentMessageModal);
+            messageModal.hide()
+            payload = [];
+                resetFieldForCustomer();
+      resetFieldForMobile();
+      resetSelectionMob()
+      resetSelection()
+      }).fail((error) => {
+        console
+          alert(error?.responseJSON?.message);
+          document.getElementById("loader-container").style.display = "none";
+          
+        });
+
+}else{
+   document.getElementById("advisorName").value = "";
       document.getElementById("advisorMobileNumber").value = "";
       document.getElementById("advisorEmail").value = "";
       resetFieldForCustomer();
       resetFieldForMobile();
       resetSelectionMob()
       resetSelection()
+          confirmationModelInstance.hide()
+
+       var sentMessageModal=document.getElementById('sentMessageModal');
+            var messageModal= new bootstrap.Modal(sentMessageModal);
+            messageModal.hide()
+            if(buttonType!="multi_policy"){
+               window.location.reload(true);
+            }
+   
+}
+
+      
+      
     }
 
+     function generateOtp(){
+// let link = `https://microservice.valuenable.in/generate-otp`;
+      // let link = `https://dev-microservice.valuenable.in/generate-otp`;
+      let link = `http://localhost:3001/web/generate-otp`;
+      // let link = `https://api-dev.valuenable.in/webhook/generate-otp`;
+
+      // let link = `https://uat-microservice.valuenable.in/generate-otp`;
+      let generateOtpPayload=payload[0];
+     $.ajax({
+        type: "POST",
+        url: link,
+        data: {
+         ...generateOtpPayload
+        },
+        dataType: "json",
+        encode: true,
+      })
+        .done((data) => {
+
+          console.log("data", data);
+          if (data.status === "success") {
+          confirmationModelInstance.hide()
+            onApiSuccess()
+
+          } else {
+            document.getElementById("otpModal").style.display = "none";
+          }
+        })
+        .fail((error) => {
+          alert(error?.responseJSON?.message);
+        });
+    }
+     function handleAssistedJourney(type) {
+      if(payload.length>1||type==="assisted"){
+        generateOtp()
+        
+      }else{
+        let journeyTypeButtonBox = document.getElementById('journeyType');
+        let confirmationModelButtons = document.getElementById('confirmationModelButtons');
+        let journeyTypeText = document.getElementById('journeyTypeText');
+        let confirmationText = document.getElementById('confirmationText');
+  
+  
+        journeyTypeButtonBox.style.display = "block";
+        confirmationModelButtons.style.display = "none";
+        journeyTypeText.style.display = "block";
+        confirmationText.style.display = "none";
+      }
+    }
+
+
+     function handleNonAssistedJourney(type) {
+      ocrJourneyType=type;
+      generateOtp()
+      
+    }
     function resetFieldForCustomer() {
       document.getElementById("companyName").value = "PNB MetLife India Insurance Co. Ltd";
       document.getElementById("prodctType").value = "Product Name*";
@@ -2837,10 +2943,10 @@ if(branchNameResp=="Branch Name*"){
 
       let mobileNumber;
 
-      if (payload.detailsFor === "customer") {
-        mobileNumber = payload.customerMobileNumber;
+      if (payload[0].detailsFor === "customer") {
+        mobileNumber = payload[0].customerMobileNumber;
       } else {
-        mobileNumber = payload.mobileNumber;
+        mobileNumber = payload[0].mobileNumber;
       }
 
       // console.log("Testing resend otp", mobileNumber);
@@ -2883,10 +2989,10 @@ if(branchNameResp=="Branch Name*"){
 
       let mobileNumber;
 
-      if (payload.detailsFor === "customer") {
-        mobileNumber = payload.customerMobileNumber;
+      if (payload[0].detailsFor === "customer") {
+        mobileNumber = payload[0].customerMobileNumber;
       } else {
-        mobileNumber = payload.mobileNumber;
+        mobileNumber = payload[0].mobileNumber;
       }
 
       // console.log("Testing resend otp", mobileNumber);
@@ -2924,30 +3030,6 @@ if(branchNameResp=="Branch Name*"){
         });
     }
 
-    function generateLead(payload) {
-  const link = `https://api-dev.valuenable.in/webhook/v1/generate-lead`;
-
-  return $.ajax({
-    type: "POST",
-    url: link,
-    data: {
-      "policy_number": payload.policyNumber,
-      "company_code": payload.companyName,
-      "email": payload.customerEmail,
-      "name": payload.customerFirstName,
-      "dob": payload.customerDOB,
-      "mobile": payload.customerMobileNumber,
-      "la_name": "",
-      "la_email": "",
-      "la_mobile": "",
-      "unit_statement": payload.unitStatementFilePath,
-      "policy_bond": payload.policyDocumentPath,
-      "branch_name": payload.branchName,
-    },
-    dataType: "json",
-    encode: true,
-  });
-}
 
 
     function otpVerification() {
@@ -2956,8 +3038,9 @@ if(branchNameResp=="Branch Name*"){
 
       // let link = `https://microservice.valuenable.in/verify-otp`;
       // let link = `https://dev-microservice.valuenable.in/verify-otp`;
-      // let link = `http://localhost:3001/web/verify-otp`
-      let link = `https://api-dev.valuenable.in/webhook/verify-otp`
+      // let link = `https://api-dev.valuenable.in/webhook/verify-otp`
+      let link = `http://localhost:3001/web/verify-otp`
+
 
       // let link = `https://uat-microservice.valuenable.in/verify-otp`;
 
@@ -2965,7 +3048,7 @@ if(branchNameResp=="Branch Name*"){
         type: "POST",
         url: link,
         data: {
-          ...payload,
+          payload,
           otp,
         },
         dataType: "json",
@@ -2997,7 +3080,7 @@ if(branchNameResp=="Branch Name*"){
             var messageModal= new bootstrap.Modal(sentMessageModal);
             messageModal.show()
 
-            payload = {};
+            payload = [];
            
           } else {
             alert("Please enter the OTP");
@@ -3015,8 +3098,9 @@ if(branchNameResp=="Branch Name*"){
 
       // let link = `https://microservice.valuenable.in/verify-otp`;
       // let link = `https://dev-microservice.valuenable.in/verify-otp`;
-      // let link = `http://localhost:3001/verify-otp`
-      let link = `https://api-dev.valuenable.in/webhook/verify-otp`
+           let link = `http://localhost:3001/web/verify-otp`
+
+      // let link = `https://api-dev.valuenable.in/webhook/verify-otp`
 
       // let link = `https://uat-microservice.valuenable.in/verify-otp`
 
@@ -3025,7 +3109,7 @@ if(branchNameResp=="Branch Name*"){
         type: "POST",
         url: link,
         data: {
-          ...payload,
+          payload,
           otp,
         },
         dataType: "json",
@@ -3065,7 +3149,7 @@ if(branchNameResp=="Branch Name*"){
             sentMes.show();
             
 
-            payload = {};
+            payload = [];
             
           } else {
             alert("Please enter the OTP");

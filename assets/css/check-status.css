@@ -668,6 +668,14 @@ font-style: normal;
 font-weight: 500;
 line-height: 23.58px; /* 23.58px */
 }
+.mandate-stage-text {
+    color: #ffc107;
+font-family: Montserrat;
+font-size: 18px;
+font-style: normal;
+font-weight: 500;
+line-height: 23.58px; /* 23.58px */
+}
 /* Responsive */
 @media (max-width: 768px) {
     .main-content {
