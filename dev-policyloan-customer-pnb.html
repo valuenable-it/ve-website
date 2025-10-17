@@ -1556,6 +1556,65 @@
         </div>
       </div>
     </div>
+      <div class="modal fade" id="confirmationModel" tabindex="-1" role="dialog" aria-labelledby="confirmationModelLabel"
+      aria-hidden="true" style="padding-right: 0px !important">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="position-relative" id="otp-div">
+              <div class="card p-2 text-center" style="width: 100%">
+                <h6 style="
+                      color: #000;
+                      font-size: 18px;
+                      font-weight: 600;
+                      text-align: center;
+                      margin-bottom: 20px;display: block;
+                    " id="confirmationText">
+                  Would you like to add another policy?
+                </h6>
+
+                <h6 style="
+                      color: #000;
+                      font-size: 18px;
+                      font-weight: 600;
+                      text-align: center;
+                      margin-bottom: 20px;display: none;
+                    " id="journeyTypeText">
+                  Please select the type of journey you want to proceed with.
+                </h6>
+                <!-- <h5 class="mt-2">
+                  <b>-Team ValuEnable</b>
+                </h5> -->
+                <div class="mt-4" style="display: block" id="confirmationModelButtons">
+                  <button class="btn btn-success px-4 validate"  aria-hidden="true"
+                    onclick="resetField('multi_policy')">
+                    Yes
+                  </button>
+                  
+                  <button class="btn btn-danger px-4 validate" onclick="handleAssistedJourney('assisted')"
+                    >
+                    No
+                  </button>
+                </div>
+
+                <div class="mt-4" style="display: none" id="journeyType">
+                  <button class="btn btn-danger px-4 validate"
+                    onclick="handleAssistedJourney('assisted')">
+                    Assisted 
+                  </button>
+                  
+                  <button onclick="handleNonAssistedJourney('nonAssisted')" class="btn btn-danger px-4 validate"
+                    >
+                    Non-Assisted
+                  </button>
+                </div>
+                <div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
   <footer>
     <div class="footer">
@@ -1661,6 +1720,8 @@
      let laCheckBoxClick,laCheckBoxMobClick;
     var openOtpModal = document.getElementById('otpModal');
     var otpModalInstance = new bootstrap.Modal(openOtpModal);
+      let openConfirmationModel=document.getElementById('confirmationModel');
+      let confirmationModelInstance= new bootstrap.Modal(openConfirmationModel);
       $(document).ready(function() {
       console.log(branchNameResp)
             $('#branchNameResp').select2({
@@ -1871,7 +1932,8 @@ otpModalInstance.show();
     }
    
     console.log(documentKeys)
-    let payload = {};
+    let payload = [];
+    let ocrJourneyType="";
 
     $("#maxUserForm").submit((event) => {
       console.log("maxUserForm submit called");
@@ -1883,7 +1945,7 @@ otpModalInstance.show();
     //   let prodctType = document.getElementById("prodctType").value;
     //   let branchName = document.getElementById("branchName").value;
 
-      let customerName = document.getElementById("customerName").value;
+      let customerName = "METLIFE";
       let customerMobileNumber = document.getElementById(
         "customerMobileNumber"
       ).value;
@@ -2064,7 +2126,7 @@ otpModalInstance.show();
 
       // console.log("customerObj", customerObj);
 
-      payload = {
+      payloads = {
         ...customerObj,
         //   panFilePath: documentKeys?.panCardKey,
         //   unitStatementFilePath: documentKeys?.unitStatementKey,
@@ -2074,52 +2136,10 @@ otpModalInstance.show();
         //   laPanPath:documentKeys?.laPanCardKey,
         //   laAadharPath:documentKeys?.laAadharCardKey,
       };
-
-      // let link = `https://microservice.valuenable.in/generate-otp`;
-      // let link = `https://dev-microservice.valuenable.in/generate-otp`;
-      // let link = `http://localhost:3001/web/api/create-laip-lead`;
-      let link = `https://api-dev.valuenable.in/webhook/api/create-laip-lead`;
-
-
-      // let link = `https://uat-microservice.valuenable.in/generate-otp`;
-
-      // $("#otpModal").modal("show");
-
-      $.ajax({
-        type: "POST",
-        url: link,
-        data: {
-          ...payload,
-          customerMobileNumber,
-        //   panFilePath: documentKeys?.panCardKey,
-        //   unitStatementFilePath: documentKeys?.unitStatementKey,
-        //   policyDocumentPath: documentKeys?.policyDocument,
-        //   signedAadharPath: documentKeys?.aadharCardKey,
-        //   laPhotoPath:documentKeys?.laPhotoKey,
-        //   laPanPath:documentKeys?.laPanCardKey,
-        //   laAadharPath:documentKeys?.laAadharCardKey,
-
-          // cancelCheckPath:documentKeys?.cancelCheckKey,
-          // applicantPhotoPath:documentKeys?.applicantPhotoKey
-
-        },
-        dataType: "json",
-        encode: true,
-      })
-        .done((data) => {
-
-          console.log("data", data);
-          if (data.status === "success") {
-            var sentMessagePopup = document.getElementById('sentMessageModal');
-            var sentMes = new bootstrap.Modal(sentMessagePopup);
-            sentMes.show();
-          } else {
-            document.getElementById("otpModal").style.display = "none";
-          }
-        })
-        .fail((error) => {
-          alert(error?.responseJSON?.message);
-        });
+        payload.push(payloads);
+        console.log("payload", payload);
+            confirmationModelInstance.show()
+      
     });
 
     async function uploadFile(url, file) {
@@ -2172,7 +2192,7 @@ console.log(response)
 
       startTime();
 
-      let companysName ="METLIFE";
+      let companysName = "METLIFE";
     //   let prodctsType = document.getElementById("prodctsType").value;
     //   let branchNameResp = document.getElementById("branchNameResp").value;
 
@@ -2353,7 +2373,7 @@ console.log(response)
 
       // console.log("customerObj", customerObj);
 
-      payload = {
+      payloadData = {
         ...customerObj,
         // panFilePath: documentKeys?.panCardKey,
         //   unitStatementFilePath: documentKeys?.unitStatementKey,
@@ -2363,49 +2383,9 @@ console.log(response)
         //   laPanPath:documentKeys?.laPanCardKey,
         //   laAadharPath:documentKeys?.laAadharCardKey,
       };
-      console.log(payload)
-      // let link = `https://microservice.valuenable.in/generate-otp`;
-      // let link = `https://dev-microservice.valuenable.in/generate-otp`;
-      // let link = `http://localhost:3001/web/api/create-laip-lead`;
-      let link = `https://api-dev.valuenable.in/webhook/api/create-laip-lead`;
-
-      // let link = `https://uat-microservice.valuenable.in/generate-otp`;
-
-      // $("#resOtpModal").modal("show");
-
-      $.ajax({
-        type: "POST",
-        url: link,
-        data: {
-          ...payload,
-        //   customerMobileNumber: customersMobileNumber,
-        //   panFilePath: documentKeys?.panCardKey,
-        //   unitStatementFilePath: documentKeys?.unitStatementKey,
-        //   policyDocumentPath: documentKeys?.policyDocument,
-        //   signedAadharPath: documentKeys?.aadharCardKey,
-        //   laPhotoPath:documentKeys?.laPhotoKey,
-        //   laPanPath:documentKeys?.laPanCardKey,
-        //   laAadharPath:documentKeys?.laAadharCardKey,
-          // cancelCheckPath:documentKeys?.cancelCheckKey,
-          // applicantPhotoPath:documentKeys?.applicantPhotoKey
-        },
-        dataType: "json",
-        encode: true,
-      })
-        .done((data) => {
-          console.log("data", data);
-          if (data.status === "success") {
-            var sentMessagePopup = document.getElementById('sentMessageModal');
-            var sentMes = new bootstrap.Modal(sentMessagePopup);
-            sentMes.show();
-            // onApiSuccess()
-          } else {
-            // alert("Something went wrong");
-          }
-        })
-        .fail((error) => {
-          alert(error?.responseJSON?.message);
-        });
+       payload.push(payloadData);
+            confirmationModelInstance.show()
+      
     });
 
     $("#advisorForm").submit((event) => {
@@ -2512,7 +2492,14 @@ console.log(response)
         });
     });
 
-    function resetField() {
+    function resetField(buttonType) {
+      if(buttonType=="multi_policy"){
+         if(payload.length==4){
+         alert("Maximum 4 policy can be processed at a time.");
+         return;
+      }
+        
+      }
       document.getElementById("advisorName").value = "";
       document.getElementById("advisorMobileNumber").value = "";
       document.getElementById("advisorEmail").value = "";
@@ -2520,7 +2507,83 @@ console.log(response)
       resetFieldForMobile();
       resetSelectionMob()
       resetSelection()
+confirmationModelInstance.hide()
+
+       if(buttonType!="multi_policy"){
+               window.location.reload(true);
+            }
     }
+
+    const saveLead=()=>{
+      
+      // let link = `https://api.valuenable.in/webhook/api/create-laip-lead`;
+      let link = `http://localhost:3001/web/api/create-laip-lead`;
+
+      // let link = `https://api-dev.valuenable.in/webhook/generate-otp`;
+
+
+      $.ajax({
+        type: "POST",
+        url: link,
+        data: {
+          payload,
+        //   customerMobileNumber: customersMobileNumber,
+        //   panFilePath: documentKeys?.panCardKey,
+        //   unitStatementFilePath: documentKeys?.unitStatementKey,
+        //   policyDocumentPath: documentKeys?.policyDocument,
+        //   signedAadharPath: documentKeys?.aadharCardKey,
+        //   laPhotoPath:documentKeys?.laPhotoKey,
+        //   laPanPath:documentKeys?.laPanCardKey,
+        //   laAadharPath:documentKeys?.laAadharCardKey,
+          // cancelCheckPath:documentKeys?.cancelCheckKey,
+          // applicantPhotoPath:documentKeys?.applicantPhotoKey
+        },
+        dataType: "json",
+        encode: true,
+      })
+        .done((data) => {
+          console.log("data", data);
+          if (data.status === "success") {
+          confirmationModelInstance.hide()
+            var sentMessagePopup = document.getElementById('sentMessageModal');
+            var sentMes = new bootstrap.Modal(sentMessagePopup);
+            sentMes.show();
+            // onApiSuccess()
+          } else {
+            // alert("Something went wrong");
+          }
+        })
+        .fail((error) => {
+          alert(error?.responseJSON?.message);
+        });
+    }
+
+    function handleAssistedJourney(type) {
+      if(payload.length>1||type==="assisted"){
+        saveLead()
+        
+      }
+      // else{
+      //   let journeyTypeButtonBox = document.getElementById('journeyType');
+      //   let confirmationModelButtons = document.getElementById('confirmationModelButtons');
+      //   let journeyTypeText = document.getElementById('journeyTypeText');
+      //   let confirmationText = document.getElementById('confirmationText');
+  
+  
+      //   journeyTypeButtonBox.style.display = "block";
+      //   confirmationModelButtons.style.display = "none";
+      //   journeyTypeText.style.display = "block";
+      //   confirmationText.style.display = "none";
+      // }
+    }
+
+
+     function handleNonAssistedJourney(type) {
+      ocrJourneyType=type;
+      generateOtp()
+      
+    }
+
 
     function resetFieldForCustomer() {
       document.getElementById("companyName").value = "PNB MetLife India Insurance Co. Ltd";
