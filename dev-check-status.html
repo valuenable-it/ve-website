@@ -1668,7 +1668,7 @@
               is_physical_mandate,
               is_unit_statement_uploaded,
               is_policy_bond_uploaded,
-            } = res.data.data || {};
+            } = res.data || {};
             let continueBtn = document.getElementById("continue-button");
             if (continueBtn && (isContinueJourney || !v_kyc))
               continueBtn.style.display = "block";
