@@ -2964,6 +2964,7 @@ console.log(payload)
             is_valid_mobile=false;
             
           resetOTPInputField();
+          resetOTPInputsField()
           } else {
             document.getElementById("otpModal").style.display = "none";
           }
@@ -3105,7 +3106,7 @@ console.log(payload)
     }
 
     function resetOTPInputsField() {
-      let inputs = document.querySelectorAll("#email-otp inputs");
+      let inputs = document.querySelectorAll("#email-otp input");
       for (var i = 0; i < inputs.length; i++) {
         inputs[i].value = "";
       }
@@ -3276,16 +3277,20 @@ return;
 
     // Step 2 → If email is verified but mobile not yet verified
     if (is_valid_email && !is_valid_mobile) {
-      const mobileResponse = await $.ajax({
-        type: "POST",
-        url: mobileOtpLink,
-        data: {
-          payload,
-          otp,
-        },
-        dataType: "json",
-        encode: true,
-      });
+      const requestData = {
+  payload: payload,
+  otp: otp
+};
+
+const mobileResponse = await $.ajax({
+  type: "POST",
+  url: mobileOtpLink,
+  data: JSON.stringify(requestData),  
+  contentType: "application/json",   
+  dataType: "json",
+});
+
+console.log(mobileResponse);
 
       if (mobileResponse.status === "success") {
         is_valid_mobile = true;
@@ -3325,6 +3330,18 @@ return;
     }
   } catch (error) {
     console.error("OTP verification error:", error);
+    if(error?.responseJSON?.code=="ER_DUP_ENTRY"){
+      is_valid_email = false;
+    is_valid_mobile = false;
+
+    const emailInputFields = document.querySelectorAll(".email-otp-input");
+    emailInputFields.forEach((input) => {
+      input.disabled = false;
+      input.style.color = "black";
+      input.style.fontWeight = "400"; // back to original
+    });
+    }
+
     const message =
       error?.responseJSON?.message ||
       "OTP verification failed, please try again.";
