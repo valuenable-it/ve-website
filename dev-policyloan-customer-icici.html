@@ -647,20 +647,28 @@
                         
                         <div class="col-md-4 col-sm-6">
                           <label id="unitStatementLebelId" style="display: none;">Unit Statement</label>
-                          <div class="form-group" style="display: flex; align-items: center">
+                          <div class="form-group" style="display: flex; align-items: center;margin-bottom: 0px;">
                             <input name="user" type="file" style="display: none" id="attachment"
                               onchange="handleFileUpload(this.files)" />
 
                             <input type="text" class="form-control" placeholder=" Unit Statement"
                               id="selectedFileName" readonly />
                             <span onclick="openFileUploader()"><i class="fa fa-upload" aria-hidden="true"></i></span>
+                            
+                          </div>
+                          <div style="display: inline-flex
+;
+    width: 95%;
+    justify-content: flex-end;margin-top: 10px;margin-bottom: 10px;">
+<a href="pdf/IPRU_Unit_Statement_sample.pdf" style="font-size: 10px;" id="unitStatementDownloadLinkMob" download="IPRU_Unit_Statement_sample.pdf">Sample Unit Statement</a>
                           </div>
 
+                          
                         </div>
 
                         <div class="col-md-4 col-sm-6">
                           <label id="policybondlebelId" style="display: none;">Policy Bond</label>
-                          <div class="form-group" style="display: flex; align-items: center">
+                          <div class="form-group" style="display: flex; align-items: center;margin-bottom: 0px;">
                             <input name="user" type="file" style="display: none" id="uploadPolicyDocumentMob"
                               onchange="handelUploadPolicyMob(this.files)" />
 
@@ -668,7 +676,12 @@
                               id="uploadPolicyDocumentFileMob" readonly />
                             <span onclick="openUploadPolicyMob()"><i class="fa fa-upload" aria-hidden="true"></i></span>
                           </div>
-
+<div style="display: inline-flex
+;
+    width: 95%;
+    justify-content: flex-end;margin-top: 10px;margin-bottom: 10px">
+<a href="pdf/IPRU_Policy_Bond_sample.pdf" style="font-size: 10px;" id="unitStatementDownloadLinkMob" download="IPRU_Policy_Bond_sample.pdf" >Sample Policy Bond</a>
+                          </div>
                         </div>
                         <!-- <div class="col-md-4 col-sm-6">
                           <div class="form-group" style="display: flex; align-items: center">
@@ -1297,7 +1310,7 @@
                     <div class="row">
                       <div class="col-md-4 col-sm-6">
                         <label id="unitStatementLebel" style="display: none;">Unit Statement</label>
-                        <div class="form-group" style="display: flex; align-items: center">
+                        <div class="form-group" style="display: flex; align-items: center;margin-bottom: 0px;">
                           <input name="user" type="file" style="display: none" id="attachments"
                             onchange="handleFileUploads(this.files)" />
 
@@ -1305,10 +1318,17 @@
                             id="selectedFileNames" readonly />
                           <span onclick="openFileUploaders()" id="unitStatementIcon"><i class="fa fa-upload" aria-hidden="true"></i></span>
                         </div>
+                         <div style="display: inline-flex
+;
+    width: 95%;
+    justify-content: flex-end;margin-top: 5px;
+    margin-bottom: 5px;">
+<a href="pdf/IPRU_Unit_Statement_sample.pdf" style="font-size: 10px;" id="unitStatementDownloadLinkMob" download="IPRU_Unit_Statement_sample.pdf">Sample Unit Statement</a>
+                          </div>
                       </div>
                       <div class="col-md-4 col-sm-6">
                         <label id="policybondlebel" style="display: none;">Policy Bond</label>
-                        <div class="form-group" style="display: flex; align-items: center">
+                        <div class="form-group" style="display: flex; align-items: center;margin-bottom: 0px;">
                           <input name="user" type="file" style="display: none" id="uploadPolicyDocument"
                             onchange="handelUploadPolicy(this.files)" />
 
@@ -1316,7 +1336,13 @@
                             id="uploadPolicyDocumentFile" readonly />
                           <span onclick="openUploadPolicy()"><i class="fa fa-upload" aria-hidden="true"></i></span>
                         </div>
-
+<div style="display: inline-flex
+;
+    width: 95%;
+    justify-content: flex-end;margin-top: 5px;
+    margin-bottom: 5px;">
+<a href="pdf/IPRU_Policy_Bond_sample.pdf" style="font-size: 10px;cursor: pointer;" id="unitStatementDownloadLinkMob" download="IPRU_Policy_Bond_sample.pdf" >Sample Policy Bond</a>
+                          </div>
                       </div>
                       <!-- <div class="col-md-4 col-sm-6">
                         <div class="form-group" style="display: flex; align-items: center">
@@ -3442,9 +3468,51 @@ console.log(mobileResponse);
     function openFileUploaderPancard() {
       document.getElementById("attachment-pan").click();
     }
-    function handleFileUpload(files) {
+
+async function validatePDF(file) {
+  if (!file) {
+    alert("No file selected");
+    return false;
+  }
+
+  if (file.type !== "application/pdf") {
+    alert("Please upload your file in PDF format.");
+    return false;
+  }
+
+  try {
+    const arrayBuffer = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+    const numPages = pdf.numPages;
+
+    const MIN_PAGES = 2;
+    if (numPages < MIN_PAGES) {
+      alert(
+        `The uploaded file must contain a minimum of 2 pages`
+      );
+      return false;
+    }
+
+    return true;
+
+  } catch (error) {
+    console.error("Error reading PDF:", error);
+    alert("Unable to read the PDF file. Please try again.");
+    return false;
+  }
+}
+
+
+   async function handleFileUpload(files) {
       var fileName = files[0].name;
       let unitStatementLebelId=document.getElementById("unitStatementLebelId");
+         const isValid = await validatePDF(files[0]);
+  if (!isValid){ 
+    return
+  };
+
+
+      
       if(fileName){
         unitStatementLebelId.style.display = "block"; 
         let attachmentsFile = document.getElementById("attachment");
@@ -3499,9 +3567,13 @@ console.log(mobileResponse);
       document.getElementById("attachment-pancard").click();
     }
   
-    function handleFileUploads(files) {
+    async function handleFileUploads(files) {
       var fileName = files[0].name;
       let unitStatementLebel=document.getElementById("unitStatementLebel");
+       const isValid = await validatePDF(files[0]);
+  if (!isValid){ 
+    return
+  };
       if(fileName){
         unitStatementLebel.style.display = "block"; 
         let attachmentsFile = document.getElementById("attachments");
@@ -4055,6 +4127,8 @@ function toggleFileUpload() {
 
  
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+
 </body>
 
 </html>
