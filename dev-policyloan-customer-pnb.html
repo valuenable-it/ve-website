@@ -2523,25 +2523,15 @@ confirmationModelInstance.hide()
 
       // let link = `https://api-dev.valuenable.in/webhook/generate-otp`;
 
-
+      const requestData = {
+      payload: payload,
+      };
       $.ajax({
-        type: "POST",
-        url: link,
-        data: {
-          payload,
-        //   customerMobileNumber: customersMobileNumber,
-        //   panFilePath: documentKeys?.panCardKey,
-        //   unitStatementFilePath: documentKeys?.unitStatementKey,
-        //   policyDocumentPath: documentKeys?.policyDocument,
-        //   signedAadharPath: documentKeys?.aadharCardKey,
-        //   laPhotoPath:documentKeys?.laPhotoKey,
-        //   laPanPath:documentKeys?.laPanCardKey,
-        //   laAadharPath:documentKeys?.laAadharCardKey,
-          // cancelCheckPath:documentKeys?.cancelCheckKey,
-          // applicantPhotoPath:documentKeys?.applicantPhotoKey
-        },
-        dataType: "json",
-        encode: true,
+         type: "POST",
+          url: link,
+          data: JSON.stringify(requestData),  
+          contentType: "application/json",   
+          dataType: "json",
       })
         .done((data) => {
           console.log("data", data);
