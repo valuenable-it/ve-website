@@ -1945,7 +1945,9 @@ otpModalInstance.show();
     //   let prodctType = document.getElementById("prodctType").value;
     //   let branchName = document.getElementById("branchName").value;
 
-      let customerName = "METLIFE";
+      let customerName =  document.getElementById(
+        "customerName"
+      ).value;
       let customerMobileNumber = document.getElementById(
         "customerMobileNumber"
       ).value;
@@ -2516,8 +2518,8 @@ confirmationModelInstance.hide()
 
     const saveLead=()=>{
       
-      // let link = `https://api.valuenable.in/webhook/api/create-laip-lead`;
-      let link = `http://localhost:3001/web/api/create-laip-lead`;
+      let link = `https://api-dev.valuenable.in/webhook/api/create-laip-lead`;
+      // let link = `http://localhost:3001/web/api/create-laip-lead`;
 
       // let link = `https://api-dev.valuenable.in/webhook/generate-otp`;
 
