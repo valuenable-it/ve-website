@@ -3580,12 +3580,12 @@ function toggleFileUpload() {
           'api-key':"0e0db1c3abfe0387e209e4bd96b2c81ebdbf60b2"
         },
         success: function (response) {
-          let formattedDate = JSON.parse(response);
-          if (formattedDate.status === "success" && Array.isArray(formattedDate.data)) {
+          // let formattedDate = JSON.parse(response);
+          if (response.status === "success" && Array.isArray(response.data)) {
             $("#branchName").empty().append('<option value="">Select Branch*</option>');
             $("#branchNameResp").empty().append('<option value="">Select Branch*</option>');
 
-            $.each(formattedDate.data, function (index, branch) {
+            $.each(response.data, function (index, branch) {
               $("#branchName").append(
                 $("<option>", {
                   value: branch.id,                // Send this ID to backend
@@ -3593,7 +3593,7 @@ function toggleFileUpload() {
                 })
               );
             });
-            $.each(formattedDate.data, function (index, branch) {
+            $.each(response.data, function (index, branch) {
               $("#branchNameResp").append(
                 $("<option>", {
                   value: branch.id,                // Send this ID to backend
