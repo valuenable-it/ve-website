@@ -3576,9 +3576,6 @@ function toggleFileUpload() {
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify({ companyCode: "IPRU" }),
-        headers:{
-          'api-key':"0e0db1c3abfe0387e209e4bd96b2c81ebdbf60b2"
-        },
         success: function (response) {
           // let formattedDate = JSON.parse(response);
           if (response.status === "success" && Array.isArray(response.data)) {
