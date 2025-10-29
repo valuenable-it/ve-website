@@ -3473,7 +3473,7 @@ function toggleFileUpload() {
         contentType: "application/json",
         data: JSON.stringify({ companyCode: "TATA" }),
         success: function (response) {
-          response = JSON.parse(response);
+          // response = JSON.parse(response);
           if (response.status === "success" && Array.isArray(response.data)) {
             $("#branchName").empty().append('<option value="">Select Branch*</option>');
             $("#branchNameResp").empty().append('<option value="">Select Branch*</option>');
