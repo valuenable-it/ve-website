@@ -3100,22 +3100,20 @@ if (documentKeys?.laPhotoKey == "") {
       const inputs = getAllInputValues();
       const otp = inputs.join("");
 
-      // let link = `https://microservice.valuenable.in/verify-otp`;
-      // let link = `https://dev-microservice.valuenable.in/verify-otp`;
       // let link = `http://localhost:3001/web/verify-otp`
       let link = `https://api-uat.valuenable.in/webhook/verify-otp`
 
-      // let link = `https://uat-microservice.valuenable.in/verify-otp`;
 
       $.ajax({
         type: "POST",
         url: link,
         data: {
-          ...payload,
+          payload,
           otp,
         },
         dataType: "json",
         encode: true,
+        contentType: "application/json", 
       })
         .done((data) => {
           // console.log("data", data);
@@ -3145,23 +3143,21 @@ if (documentKeys?.laPhotoKey == "") {
       console.log(inputs);
       const otp = inputs.join("");
 
-      // let link = `https://microservice.valuenable.in/verify-otp`;
-      // let link = `https://dev-microservice.valuenable.in/verify-otp`;
       // let link = `http://localhost:3001/verify-otp`
       let link = `https://api-uat.valuenable.in/webhook/verify-otp`
 
-      // let link = `https://uat-microservice.valuenable.in/verify-otp`
 
 
       $.ajax({
         type: "POST",
         url: link,
-        data: {
+        data: JSON.stringify({
           ...payload,
           otp,
-        },
+        }),
         dataType: "json",
         encode: true,
+        contentType: "application/json", 
       })
         .done((data) => {
           console.log("data", data);
