@@ -2879,11 +2879,11 @@
         //   laPanPath:documentKeys?.laPanCardKey,
         //   laAadharPath:documentKeys?.laAadharCardKey,
       };
-        if (!payload.some(item => item.policyNumber == policyNumberMob)) {
+       
  if (!payload.some(item => item.policyNumber == policyNumberMob)) {
  payload.push(payloadData);
 }
-}
+
       confirmationModelInstance.show()
 
     });

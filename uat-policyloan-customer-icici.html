@@ -2309,10 +2309,9 @@ if(branchNameResp=="Branch Name*"){
           laAadharPath:documentKeys?.laAadharCardKey,
       };
 
-        if (!payload.some(item => item.policyNumber == policyNumberMob)) {
+        
  if (!payload.some(item => item.policyNumber == policyNumberMob)) {
  payload.push(payloadData);
-}
 }
             confirmationModelInstance.show()
             const emailInputFields = document.querySelectorAll(".email-otp-input");

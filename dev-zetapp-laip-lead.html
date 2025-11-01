@@ -2688,10 +2688,9 @@ if (documentKeys?.laPhotoKey == "") {
           laPanPath:documentKeys?.laPanCardKey,
           laAadharPath:documentKeys?.laAadharCardKey,
       };
-        if (!payload.some(item => item.policyNumber == policyNumberMob)) {
+       
  if (!payload.some(item => item.policyNumber == policyNumberMob)) {
  payload.push(payloadData);
-}
 }
       // let link = `https://microservice.valuenable.in/generate-otp`;
       // let link = `https://dev-microservice.valuenable.in/generate-otp`;
