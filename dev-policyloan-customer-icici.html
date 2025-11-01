@@ -2097,7 +2097,10 @@ if(branchName=="Branch Name*"){
           laPanPath:documentKeys?.laPanCardKey,
           laAadharPath:documentKeys?.laAadharCardKey,
       };
-        payload.push(payloads);
+     if (!payload.some(item => item.policyNumber == policyNumber)) {
+  payload.push(payloads);
+}
+       
         console.log("payload", payload);
             confirmationModelInstance.show()
       const emailInputFields = document.querySelectorAll(".email-otp-input");
@@ -2306,8 +2309,10 @@ if(branchNameResp=="Branch Name*"){
           laPanPath:documentKeys?.laPanCardKey,
           laAadharPath:documentKeys?.laAadharCardKey,
       };
-
-      payload.push(payloadData);
+   if (!payload.some(item => item.policyNumber == policyNumberMob)) {
+ payload.push(payloadData);
+}
+      
             confirmationModelInstance.show()
             const emailInputFields = document.querySelectorAll(".email-otp-input");
         emailInputFields.forEach((input) => {

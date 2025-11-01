@@ -2385,7 +2385,9 @@ console.log(response)
         //   laPanPath:documentKeys?.laPanCardKey,
         //   laAadharPath:documentKeys?.laAadharCardKey,
       };
-       payload.push(payloadData);
+         if (!payload.some(item => item.policyNumber == policyNumberMob)) {
+ payload.push(payloadData);
+}
             confirmationModelInstance.show()
       
     });
