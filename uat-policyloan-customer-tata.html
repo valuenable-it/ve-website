@@ -2264,7 +2264,7 @@ if(branchNameResp=="Branch Name*"){
       // let link = `https://microservice.valuenable.in/generate-otp`;
       // let link = `https://dev-microservice.valuenable.in/generate-otp`;
       // let link = `http://localhost:3001/web/generate-otp`;
-      let link = `https://api-uat.valuenable.in/webhook/generate-otp`;
+      let link = `https://api.valuenable.in/webhook/generate-otp`;
 
       // let link = `https://uat-microservice.valuenable.in/generate-otp`;
 
@@ -2295,7 +2295,7 @@ if(branchNameResp=="Branch Name*"){
         document.getElementById("loader-container").style.display = "flex";
 
         // let link = `http://localhost:3001/web/v1/generate-lead`
-        let link = `https://api-uat.valuenable.in/webhook/v1/generate-lead`
+        let link = `https://api.valuenable.in/webhook/v1/generate-lead`
 console.log(payload)
             $.ajax({
         type: "POST",
@@ -2363,7 +2363,7 @@ console.log(payload)
 // let link = `https://microservice.valuenable.in/generate-otp`;
       // let link = `https://dev-microservice.valuenable.in/generate-otp`;
       // let link = `http://localhost:3001/web/generate-otp`;
-      let link = `https://api-uat.valuenable.in/webhook/generate-otp`;
+      let link = `https://api.valuenable.in/webhook/generate-otp`;
 
       // let link = `https://uat-microservice.valuenable.in/generate-otp`;
       let generateOtpPayload=payload[0];
@@ -2557,7 +2557,7 @@ console.log(payload)
       // let link = `https://microservice.valuenable.in/generate-otp`;
       // let link = `https://dev-microservice.valuenable.in/generate-otp`;
       // let link = `http://localhost:3001/web/generate-otp`;
-      let link = `https://api-uat.valuenable.in/webhook/generate-otp`;
+      let link = `https://api.valuenable.in/webhook/generate-otp`;
 
 
 
@@ -2608,7 +2608,7 @@ console.log(payload)
       // let link = `https://microservice.valuenable.in/generate-otp`;
       // let link = `https://dev-microservice.valuenable.in/generate-otp`;
       // let link = `http://localhost:3001/web/generate-otp`;
-      let link = `https://api-uat.valuenable.in/webhook/generate-otp`;
+      let link = `https://api.valuenable.in/webhook/generate-otp`;
 
 
 
@@ -2649,8 +2649,8 @@ alert("Please enter a valid Mobile OTP");
 return;
 }
 
-  const emailOtpLink = `https://api-uat.valuenable.in/webhook/verify-email-otp`;
-  const mobileOtpLink = `https://api-uat.valuenable.in/webhook/verify-otp`;
+  const emailOtpLink = `https://api.valuenable.in/webhook/verify-email-otp`;
+  const mobileOtpLink = `https://api.valuenable.in/webhook/verify-otp`;
 
   //  const emailOtpLink = `http://localhost:3001/web/verify-email-otp`;
   // const mobileOtpLink = `http://localhost:3001/web/verify-otp`;
@@ -3392,7 +3392,7 @@ console.log(mobileResponse);
       // let link = `https://uat-microservice.valuenable.in/get-document-url`
       
       // let link = `http://localhost:3001/get-document-url`
-      let link = `https://api-uat.valuenable.in/webhook/get-document-url`
+      let link = `https://api.valuenable.in/webhook/get-document-url`
 
 
   return $.ajax({
@@ -3475,7 +3475,7 @@ function toggleFileUpload() {
     }
 
 //  let API_URL = 'http://localhost:3001/web/get-branch'; // Replace with your actual API endpoint
-    let API_URL = 'https://api-uat.valuenable.in/webhook/get-branch'; // Replace with your actual API endpoint
+    let API_URL = 'https://api.valuenable.in/webhook/get-branch'; // Replace with your actual API endpoint
  
     $(document).ready(function () {
       // Call API to get branches

@@ -2186,7 +2186,7 @@ otpModalInstance.show();
     }
    
     console.log(documentKeys)
-    let payload = {};
+    let payload = [];
 
     $("#maxUserForm").submit((event) => {
       console.log("maxUserForm submit called");
@@ -2372,7 +2372,7 @@ if (documentKeys?.laPhotoKey == "") {
         motherName: motherName,
         policyNumber:policyNumber,
         detailsFor: "customer",
-        branchName:source?source:null,
+        branchName:1,
         laName,
         laEmail,
         laPhone,
@@ -2383,7 +2383,7 @@ if (documentKeys?.laPhotoKey == "") {
 
       // console.log("customerObj", customerObj);
 
-      payload = {
+      payloads = {
         ...customerObj,
           panFilePath: documentKeys?.panCardKey,
           unitStatementFilePath: documentKeys?.unitStatementKey,
@@ -2394,6 +2394,9 @@ if (documentKeys?.laPhotoKey == "") {
           laAadharPath:documentKeys?.laAadharCardKey,
       };
 
+       if (!payload.some(item => item.policyNumber == policyNumber)) {
+  payload.push(payloads);
+}
       // let link = `https://microservice.valuenable.in/generate-otp`;
       // let link = `https://dev-microservice.valuenable.in/generate-otp`;
       // let link = `http://localhost:3001/web/generate-otp`;
@@ -2407,7 +2410,7 @@ if (documentKeys?.laPhotoKey == "") {
         type: "POST",
         url: link,
         data: {
-          ...payload,
+          ...payload[0],
           customerMobileNumber,
           panFilePath: documentKeys?.panCardKey,
           unitStatementFilePath: documentKeys?.unitStatementKey,
@@ -2664,7 +2667,7 @@ if (documentKeys?.laPhotoKey == "") {
         motherName:mothersName,
         policyNumber:policyNumberMob,
         detailsFor: "customer",
-        branchName:source?source:null,
+        branchName:1,
         laName:laNameMob,
         laEmail:laEmailMob,
         laPhone:laEmailMob,
@@ -2675,7 +2678,7 @@ if (documentKeys?.laPhotoKey == "") {
 
       // console.log("customerObj", customerObj);
 
-      payload = {
+      payloadData = {
         ...customerObj,
         panFilePath: documentKeys?.panCardKey,
           unitStatementFilePath: documentKeys?.unitStatementKey,
@@ -2685,7 +2688,11 @@ if (documentKeys?.laPhotoKey == "") {
           laPanPath:documentKeys?.laPanCardKey,
           laAadharPath:documentKeys?.laAadharCardKey,
       };
-      console.log(payload)
+        
+ if (!payload.some(item => item.policyNumber == policyNumberMob)) {
+ payload.push(payloadData);
+}
+
       // let link = `https://microservice.valuenable.in/generate-otp`;
       // let link = `https://dev-microservice.valuenable.in/generate-otp`;
       // let link = `http://localhost:3001/web/generate-otp`;
@@ -2699,7 +2706,7 @@ if (documentKeys?.laPhotoKey == "") {
         type: "POST",
         url: link,
         data: {
-          ...payload,
+          ...payload[0],
           customerMobileNumber: customersMobileNumber,
           panFilePath: documentKeys?.panCardKey,
           unitStatementFilePath: documentKeys?.unitStatementKey,
@@ -2849,19 +2856,19 @@ if (documentKeys?.laPhotoKey == "") {
         type: "POST",
         url: link,
         data: {
- "policy_number": payload.policyNumber,
- "company_code":payload.companyName,
-"email": payload.customerEmail,
-"name": payload.customerFirstName,
-"dob": payload.customerDOB,
-"mobile": payload.customerMobileNumber,
+ "policy_number": payload[0].policyNumber,
+ "company_code":payload[0].companyName,
+"email": payload[0].customerEmail,
+"name": payload[0].customerFirstName,
+"dob": payload[0].customerDOB,
+"mobile": payload[0].customerMobileNumber,
 "la_name": "",
 "la_email": "",
 "la_mobile": "",
- "unit_statement_key": payload.unitStatementFilePath,
- "policy_bond_key": payload.policyDocumentPath,
- "touchpoint": payload.branchName,
- "refrenceId":payload.leadId?payload.leadId:null,
+ "unit_statement_key": payload[0].unitStatementFilePath,
+ "policy_bond_key": payload[0].policyDocumentPath,
+ "touchpoint": payload[0].branchName,
+ "refrenceId":payload[0].leadId?payload[0].leadId:null,
 },
         dataType: "json",
         encode: true,
@@ -2881,7 +2888,7 @@ if (documentKeys?.laPhotoKey == "") {
       var sentMessageModal=document.getElementById('sentMessageModal');
             var messageModal= new bootstrap.Modal(sentMessageModal);
             messageModal.hide()
-            payload = {};
+            payload = [];
       }).fail((error) => {
         console
           alert(error?.responseJSON?.message);
@@ -3009,10 +3016,10 @@ if (documentKeys?.laPhotoKey == "") {
 
       let mobileNumber;
 
-      if (payload.detailsFor === "customer") {
-        mobileNumber = payload.customerMobileNumber;
+      if (payload[0].detailsFor === "customer") {
+        mobileNumber = payload[0].customerMobileNumber;
       } else {
-        mobileNumber = payload.mobileNumber;
+        mobileNumber = payload[0].mobileNumber;
       }
 
       // console.log("Testing resend otp", mobileNumber);
@@ -3055,10 +3062,10 @@ if (documentKeys?.laPhotoKey == "") {
 
       let mobileNumber;
 
-      if (payload.detailsFor === "customer") {
-        mobileNumber = payload.customerMobileNumber;
+      if (payload[0].detailsFor === "customer") {
+        mobileNumber = payload[0].customerMobileNumber;
       } else {
-        mobileNumber = payload.mobileNumber;
+        mobileNumber = payload[0].mobileNumber;
       }
 
       // console.log("Testing resend otp", mobileNumber);
@@ -3100,22 +3107,20 @@ if (documentKeys?.laPhotoKey == "") {
       const inputs = getAllInputValues();
       const otp = inputs.join("");
 
-      // let link = `https://microservice.valuenable.in/verify-otp`;
-      // let link = `https://dev-microservice.valuenable.in/verify-otp`;
       // let link = `http://localhost:3001/web/verify-otp`
       let link = `https://api.valuenable.in/webhook/verify-otp`
 
-      // let link = `https://uat-microservice.valuenable.in/verify-otp`;
 
       $.ajax({
         type: "POST",
         url: link,
-        data: {
-          ...payload,
+        data: JSON.stringify({
+          payload,
           otp,
-        },
+        }),
         dataType: "json",
         encode: true,
+        contentType: "application/json", 
       })
         .done((data) => {
           // console.log("data", data);
@@ -3145,23 +3150,19 @@ if (documentKeys?.laPhotoKey == "") {
       console.log(inputs);
       const otp = inputs.join("");
 
-      // let link = `https://microservice.valuenable.in/verify-otp`;
-      // let link = `https://dev-microservice.valuenable.in/verify-otp`;
       // let link = `http://localhost:3001/verify-otp`
       let link = `https://api.valuenable.in/webhook/verify-otp`
-
-      // let link = `https://uat-microservice.valuenable.in/verify-otp`
-
 
       $.ajax({
         type: "POST",
         url: link,
-        data: {
-          ...payload,
+        data: JSON.stringify({
+          payload,
           otp,
-        },
+        }),
         dataType: "json",
         encode: true,
+        contentType: "application/json", 
       })
         .done((data) => {
           console.log("data", data);
@@ -3844,7 +3845,6 @@ if (documentKeys?.laPhotoKey == "") {
 
   function uploadDocument(documentName, fileInput) {
     // let link = `https://microservice.valuenable.in/get-document-url`;
-      // let link = `https://dev-microservice.valuenable.in/verify-otp`;
       // let link = `https://uat-microservice.valuenable.in/get-document-url`
       
       // let link = `http://localhost:3001/get-document-url`
