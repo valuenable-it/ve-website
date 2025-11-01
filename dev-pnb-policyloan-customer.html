@@ -2630,7 +2630,9 @@
         //   laPanPath:documentKeys?.laPanCardKey,
         //   laAadharPath:documentKeys?.laAadharCardKey,
       };
-      payload.push(payloads);
+       if (!payload.some(item => item.policyNumber == policyNumber)) {
+  payload.push(payloads);
+}
       console.log("payload", payload);
       confirmationModelInstance.show()
 
@@ -2877,9 +2879,11 @@
         //   laPanPath:documentKeys?.laPanCardKey,
         //   laAadharPath:documentKeys?.laAadharCardKey,
       };
-        if (!payload.some(item => item.policyNumber == policyNumberMob)) {
+       
+ if (!payload.some(item => item.policyNumber == policyNumberMob)) {
  payload.push(payloadData);
 }
+
       confirmationModelInstance.show()
 
     });
