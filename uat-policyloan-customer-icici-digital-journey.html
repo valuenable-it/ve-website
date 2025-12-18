@@ -1901,7 +1901,7 @@ console.log(payload)
 
       let companyName = "IPRU";
       let prodctType = document.getElementById("prodctType").value;
-      let branchName = 374;
+      let branchName = 371;
 
       let customerName = document.getElementById("customerName").value;
       let customerMobileNumber = document.getElementById(
@@ -2117,7 +2117,7 @@ console.log(response)
 startTimer()
       let companysName = "IPRU";
       let prodctsType = document.getElementById("prodctsType").value;
-      let branchNameResp = 374;
+      let branchNameResp = 371;
 
       let customersName = document.getElementById("customersName").value;
       let customersMobileNumber = document.getElementById(
@@ -2290,7 +2290,7 @@ if (documentKeys?.laPhotoKey == "") {
       // let link = `https://microservice.valuenable.in/generate-otp`;
       // let link = `https://dev-microservice.valuenable.in/generate-otp`;
       // let link = `http://localhost:3001/web/generate-otp`;
-      let link = `https://api-dev.valuenable.in/webhook/generate-otp`;
+      let link = `https://api-uat.valuenable.in/webhook/generate-otp`;
 
       // let link = `https://uat-microservice.valuenable.in/generate-otp`;
 
@@ -2321,7 +2321,7 @@ if (documentKeys?.laPhotoKey == "") {
         document.getElementById("loader-container").style.display = "flex";
 
         // let link = `http://localhost:3001/web/v1/generate-lead`
-        let link = `https://api-dev.valuenable.in/webhook/v1/generate-lead`
+        let link = `https://api-uat.valuenable.in/webhook/v1/generate-lead`
 console.log(payload)
             $.ajax({
         type: "POST",
@@ -2385,7 +2385,7 @@ console.log(payload)
 // let link = `https://microservice.valuenable.in/generate-otp`;
       // let link = `https://dev-microservice.valuenable.in/generate-otp`;
       // let link = `http://localhost:3001/web/generate-otp`;
-      let link = `https://api-dev.valuenable.in/webhook/generate-otp`;
+      let link = `https://api-uat.valuenable.in/webhook/generate-otp`;
 
       // let link = `https://uat-microservice.valuenable.in/generate-otp`;
       let generateOtpPayload=payload[0];
@@ -2577,7 +2577,7 @@ console.log(payload)
       // let link = `https://microservice.valuenable.in/generate-otp`;
       // let link = `https://dev-microservice.valuenable.in/generate-otp`;
       // let link = `http://localhost:3001/web/generate-otp`;
-      let link = `https://api-dev.valuenable.in/webhook/generate-otp`;
+      let link = `https://api-uat.valuenable.in/webhook/generate-otp`;
 
 
 
@@ -2628,7 +2628,7 @@ console.log(payload)
       // let link = `https://microservice.valuenable.in/generate-otp`;
       // let link = `https://dev-microservice.valuenable.in/generate-otp`;
       // let link = `http://localhost:3001/web/generate-otp`;
-      let link = `https://api-dev.valuenable.in/webhook/generate-otp`;
+      let link = `https://api-uat.valuenable.in/webhook/generate-otp`;
 
 
 
@@ -2669,8 +2669,8 @@ alert("Please enter a valid Email OTP");
 return;
 }
 
-  const emailOtpLink = `https://api-dev.valuenable.in/webhook/verify-email-otp`;
-  const mobileOtpLink = `https://api-dev.valuenable.in/webhook/verify-otp`;
+  const emailOtpLink = `https://api-uat.valuenable.in/webhook/verify-email-otp`;
+  const mobileOtpLink = `https://api-uat.valuenable.in/webhook/verify-otp`;
 
   //  const emailOtpLink = `http://localhost:3001/web/verify-email-otp`;
   // const mobileOtpLink = `http://localhost:3001/web/verify-otp`;
@@ -3459,7 +3459,7 @@ async function validatePDF(file) {
       // let link = `https://uat-microservice.valuenable.in/get-document-url`
       
       // let link = `http://localhost:3001/get-document-url`
-      let link = `https://api-dev.valuenable.in/webhook/get-document-url`
+      let link = `https://api-uat.valuenable.in/webhook/get-document-url`
 
 
   return $.ajax({
