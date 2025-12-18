@@ -255,14 +255,14 @@
                           </select>
                         </div>
                       </div>
-                      <div class="col-md-12">
+                      <!-- <div class="col-md-12">
                         <div class="form-group">
                           <select class="form-control" id="branchNameResp">
                             <option value="">Branch Name*</option>
                             
                           </select>
                         </div>
-                      </div>
+                      </div> -->
                     </div>
                     
                     <div class="mt-3 col-md-12 mb-2 ">
@@ -1575,13 +1575,6 @@
     var otpModalInstance = new bootstrap.Modal(openOtpModal);
       let openConfirmationModel=document.getElementById('confirmationModel');
       let confirmationModelInstance= new bootstrap.Modal(openConfirmationModel);
-      $(document).ready(function() {
-      console.log(branchNameResp)
-            $('#branchNameResp').select2({
-                placeholder: "Branch Name*",
-                allowClear: true
-            });
-        });
        
 //paste handle 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1714,9 +1707,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
   }
 });
-            function resetSelectionMob() {
-                $('#branchNameResp').val(null).trigger('change');
-            }
         function onApiSuccess() {
 //           var otpModal = document.getElementById('otpModal');
 // var modal = new bootstrap.Modal(otpModal);
@@ -2127,7 +2117,7 @@ console.log(response)
 startTimer()
       let companysName = "IPRU";
       let prodctsType = document.getElementById("prodctsType").value;
-      let branchNameResp = document.getElementById("branchNameResp").value;
+      let branchNameResp = 374;
 
       let customersName = document.getElementById("customersName").value;
       let customersMobileNumber = document.getElementById(
@@ -2176,7 +2166,6 @@ startTimer()
       if (
         companysName == "" ||
         prodctsType == "" ||
-        branchNameResp == "" ||
         customersName == "" ||
         customersMobileNumber == "" ||
         customersEmail == "" ||
@@ -2222,10 +2211,6 @@ if (documentKeys?.laPhotoKey == "") {
 }
 }
 
-if(branchNameResp=="Branch Name*"){
-  alert("Please select Branch Name.");
-    return;
-}
       if (customersEmail !== "") {
         if (!validateEmail("customersEmail")) {
           alert("Please enter a valid email address");
@@ -2368,7 +2353,6 @@ console.log(payload)
             payload = [];
                 resetFieldForCustomer();
       resetFieldForMobile();
-      resetSelectionMob()
       }).fail((error) => {
         console
           alert(error?.responseJSON?.message);
@@ -2379,7 +2363,6 @@ console.log(payload)
 }else{
     resetFieldForCustomer();
       resetFieldForMobile();
-      resetSelectionMob()
           confirmationModelInstance.hide()
 
        var sentMessageModal=document.getElementById('sentMessageModal');
@@ -2500,7 +2483,6 @@ console.log(payload)
     function resetFieldForMobile() {
       document.getElementById("companysName").value = "ICICI Prudential Life Insurance Co. Ltd";
       document.getElementById("prodctsType").value = "Product Name*";
-      document.getElementById("branchNameResp").value = "";
       // document.getElementById("genderResp").value = "LA Gender (If Applicable)";
       document.getElementById("customersName").value = "";
       document.getElementById("customersMobileNumber").value = "";
