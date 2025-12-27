@@ -675,13 +675,13 @@
                           </select>
                         </div>
                       </div>
-                      <div class="col-md-12">
+                      <!-- <div class="col-md-12">
                         <div class="form-group">
                           <select class="form-control" id="branchName">
                             <option value="">Branch Name*</option>
                           </select>
                         </div>
-                      </div>
+                      </div> -->
                       <div class="mt-3 col-md-12 mb-2">
                         <div class="row">
                           <div class="col-md-4 col-sm-6">
@@ -1493,7 +1493,7 @@
                     Yes
                   </button>
                   
-                  <button class="btn btn-danger px-4 validate" onclick="handleAssistedJourney('assisted')"
+                  <button class="btn btn-danger px-4 validate" onclick="handleAssistedJourney()"
                     >
                     No
                   </button>
@@ -1657,15 +1657,6 @@
                 allowClear: true
             });
         });
-
-        $(document).ready(function() {
-      console.log(branchNameResp)
-            $('#branchName').select2({
-                placeholder: "Branch Name*",
-                allowClear: true
-            });
-        });
-
        
 //paste handle 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1798,11 +1789,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
   }
 });
-
-
-        function resetSelection() {
-                $('#branchName').val(null).trigger('change');
-            }
             function resetSelectionMob() {
                 $('#branchNameResp').val(null).trigger('change');
             }
@@ -2009,7 +1995,7 @@ console.log(payload)
 
       let companyName = "IPRU";
       let prodctType = document.getElementById("prodctType").value;
-      let branchName = document.getElementById("branchName").value;
+      let branchName = 374;
 
       let customerName = document.getElementById("customerName").value;
       let customerMobileNumber = document.getElementById(
@@ -2058,7 +2044,6 @@ console.log(payload)
       if (
         companyName == "" ||
         prodctType == "" ||
-        branchName == "" ||
         customerName == "" ||
         customerMobileNumber == "" ||
         customerEmail == "" ||
@@ -2105,10 +2090,6 @@ if (documentKeys?.laPhotoKey == "") {
 }
 }
 
-if(branchName=="Branch Name*"){
-  alert("Please select Branch Name.");
-    return;
-}
 
       if (customerEmail !== "") {
         if (!validateEmail("customerEmail")) {
@@ -2475,7 +2456,7 @@ console.log("ocr payload",payload)
 "la_mobile": "",
  "unit_statement_key": payload[0].unitStatementFilePath,
  "policy_bond_key": payload[0].policyDocumentPath,
- "touchpoint": payload[0].branchName,
+ "touchpoint": "Digital Journey",
  "refrenceId":payload[0].leadId?payload[0].leadId:null,
 },
         dataType: "json",
@@ -2491,7 +2472,6 @@ console.log("ocr payload",payload)
                 resetFieldForCustomer();
       resetFieldForMobile();
       resetSelectionMob()
-      resetSelection()
       }).fail((error) => {
         console
           alert(error?.responseJSON?.message);
@@ -2503,7 +2483,6 @@ console.log("ocr payload",payload)
     resetFieldForCustomer();
       resetFieldForMobile();
       resetSelectionMob()
-      resetSelection()
           confirmationModelInstance.hide()
 
        var sentMessageModal=document.getElementById('sentMessageModal');
@@ -2532,12 +2511,10 @@ console.log("ocr payload",payload)
       let generateOtpPayload=payload[0];
      $.ajax({
         type: "POST",
-        url: link,
-        data: {
-         ...generateOtpPayload
-        },
-        dataType: "json",
-        encode: true,
+  url: link,
+  data: JSON.stringify(generateOtpPayload),
+  contentType: "application/json", 
+  dataType: "json",
       })
         .done((data) => {
 
@@ -2586,7 +2563,6 @@ console.log("ocr payload",payload)
     function resetFieldForCustomer() {
       document.getElementById("companyName").value = "ICICI Prudential Life Insurance Co. Ltd";
       document.getElementById("prodctType").value = "Product Name*";
-      document.getElementById("branchName").value = "";
       document.getElementById("customerName").value = "";
       document.getElementById("customerMobileNumber").value = "";
       document.getElementById("customerEmail").value = "";
@@ -2732,6 +2708,7 @@ console.log("ocr payload",payload)
         },
         dataType: "json",
         encode: true,
+        contentType: "application/json",
       })
         .done((data) => {
           // console.log("data", data);
@@ -2783,6 +2760,7 @@ console.log("ocr payload",payload)
         },
         dataType: "json",
         encode: true,
+        contentType: "application/json",
       })
         .done((data) => {
           // console.log("data", data);
@@ -2823,13 +2801,13 @@ return;
     if (!is_valid_email) {
       const emailResponse = await $.ajax({
         type: "POST",
-        url: emailOtpLink,
-        data: {
-          ...payload[0],
-          otp: emailOtp,
-        },
-        dataType: "json",
-        encode: true,
+  url: emailOtpLink,
+  data: JSON.stringify({
+    ...payload[0],
+    otp: emailOtp,
+  }),
+  contentType: "application/json", // ✅ now correct
+  dataType: "json",
       });
 
       if (emailResponse.status === "success") {
@@ -4025,6 +4003,7 @@ function toggleFileUpload() {
     });
 
 
+     
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
 
