@@ -2451,8 +2451,8 @@ function randomIdWithTime() {
 
         document.getElementById("loader-container").style.display = "flex";
 let randomId=randomIdWithTime()
-        let link = `http://localhost:3001/web/v1/generate-lead`
-        // let link = `https://api-dev.valuenable.in/webhook/v1/generate-lead`
+        // let link = `http://localhost:3001/web/v1/generate-lead`
+        let link = `https://api-dev.valuenable.in/webhook/v1/generate-lead`
 console.log("ocr payload",payload)
             $.ajax({
         type: "POST",
