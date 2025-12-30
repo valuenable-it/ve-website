@@ -947,7 +947,7 @@
     </div>
 
       <div id="customer-details-faq" class="inner-wrapper  partner-with-us section" style="margin-top: 20px">
-      <div class="innerpage section">
+      <div class="section">
         <div class="container">
           <div class="innercontainerwrap section">
 <!-- <div id="tableWrapper" class="inner-wrapper  partner-with-us section" style="width:100%; overflow-x:auto;"> -->
@@ -1638,6 +1638,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
   <script>
+    let branchDetail=[]
     let is_valid_email=false;
     let is_valid_mobile=false;
      let laCheckBoxClick,laCheckBoxMobClick;
@@ -1798,6 +1799,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
             function resetSelectionMob() {
                 $('#branchNameResp').val(null).trigger('change');
+            }
+            function resetSelectionDesk() {
+                $('#branchName').val(null).trigger('change');
             }
         function onApiSuccess() {
 //           var otpModal = document.getElementById('otpModal');
@@ -2423,7 +2427,9 @@ if(branchNameResp=="Branch Name*"){
 
       
     });
-
+function randomIdWithTime() {
+  return `${Date.now()}-${Math.random().toString(36).substr(2, 6)}`;
+}
 
     function resetField(buttonType) {
 
@@ -2444,9 +2450,9 @@ if(branchNameResp=="Branch Name*"){
 
 
         document.getElementById("loader-container").style.display = "flex";
-
-        // let link = `http://localhost:3001/web/v1/generate-lead`
-        let link = `https://api-dev.valuenable.in/webhook/v1/generate-lead`
+let randomId=randomIdWithTime()
+        let link = `http://localhost:3001/web/v1/generate-lead`
+        // let link = `https://api-dev.valuenable.in/webhook/v1/generate-lead`
 console.log("ocr payload",payload)
             $.ajax({
         type: "POST",
@@ -2463,14 +2469,16 @@ console.log("ocr payload",payload)
 "la_mobile": "",
  "unit_statement_key": payload[0].unitStatementFilePath,
  "policy_bond_key": payload[0].policyDocumentPath,
- "touchpoint": "Digital Journey",
+ "touchpoint": payload[0].branchName,
  "refrenceId":payload[0].leadId?payload[0].leadId:null,
+ "identifier":randomId
 },
         dataType: "json",
         encode: true,
       }).done((data) => {
 
         window.location.href = data.link
+      
 
       var sentMessageModal=document.getElementById('sentMessageModal');
             var messageModal= new bootstrap.Modal(sentMessageModal);
@@ -2478,11 +2486,34 @@ console.log("ocr payload",payload)
             payload = [];
                 resetFieldForCustomer();
       resetFieldForMobile();
-      resetSelectionMob()
+      resetSelectionMob();
+      resetSelectionDesk();
       }).fail((error) => {
         console
-          alert(error?.responseJSON?.message);
           document.getElementById("loader-container").style.display = "none";
+          // if (error.response) {
+      
+      if (error.status ==504) {
+        callCheckStatus(randomId,1);
+
+      } else { 
+        
+ alert(error?.responseJSON?.message || "Something went wrong.");
+             let validateMessage=document.getElementById("validateMessage");
+             const ocrMessage = document.getElementById("ocrMessage");
+        validateMessage.style.display = "block";
+        ocrMessage.style.display = "none";
+
+  validateMessage.innerText="Unable to read the document. Thank you for your application. Our customer service representative will contact you."     
+
+}
+    // } else if (error.request) {
+
+    //   alert("No response from server. Please check your internet connection.");
+    // } else {
+    //   alert(error.message);
+    // }
+          
           
         });
 
@@ -2490,6 +2521,7 @@ console.log("ocr payload",payload)
     resetFieldForCustomer();
       resetFieldForMobile();
       resetSelectionMob()
+      resetSelectionDesk()
           confirmationModelInstance.hide()
 
        var sentMessageModal=document.getElementById('sentMessageModal');
@@ -2507,6 +2539,43 @@ console.log("ocr payload",payload)
   
 
     }
+
+    
+    function callCheckStatus(referenceId, attempt) {
+
+  if (attempt > 5) {
+    alert("Request timed out. Please try again later.");
+    document.getElementById("loader-container").style.display = "none";
+    return;
+  }
+
+  setTimeout(function () {
+
+    document.getElementById("loader-container").style.display = "flex";
+
+    $.ajax({
+      type: "GET",
+      url: "https://api-dev.valuenable.in/bitly/status",
+      data: { refId: referenceId },
+      dataType: "json"
+    })
+    .done(function (response, textStatus, jqXHR) {
+
+      if ( jqXHR.status == 200) {
+        window.location.href = response.external_url;
+        document.getElementById("loader-container").style.display = "none";
+      } 
+      else {
+        callCheckStatus(referenceId, attempt + 1);
+      }
+
+    })
+    .fail(function () {
+      callCheckStatus(referenceId, attempt + 1);
+    });
+
+  }, 3000);
+}
 
     function generateOtp(){
 // let link = `https://microservice.valuenable.in/generate-otp`;
@@ -2920,7 +2989,6 @@ console.log(mobileResponse);
   }
 }
 
-const BASE_FILE_URL = "https://your-domain.com/api/files/download/";
 
 function displayPoliciesInTable() {
   console.log("payload in table", payload);
@@ -2942,7 +3010,7 @@ function displayPoliciesInTable() {
   ${hasValue("policyNumber") ? "<th>Policy Number</th>" : ""}
   ${hasValue("companyName") ? "<th>Company Name</th>" : ""}
   ${hasValue("productName") ? "<th>Product Name</th>" : ""}
-  ${hasValue("customerFirstName") ? "<th>Customer First Name</th>" : ""}
+  ${hasValue("customerFirstName") ? "<th>Customer Name</th>" : ""}
   ${hasValue("customerLastName") ? "<th>Customer Last Name</th>" : ""}
   ${hasValue("customerDOB") ? "<th>DOB</th>" : ""}
   ${hasValue("customerMobileNumber") ? "<th>Mobile</th>" : ""}
@@ -2952,7 +3020,7 @@ function displayPoliciesInTable() {
   ${hasValue("laEmail") ? "<th>LA Email</th>" : ""}
   ${hasValue("laPhone") ? "<th>LA Phone</th>" : ""}
   ${hasValue("unitStatementFilePath") ? "<th>Unit Statement</th>" : ""}
-  ${hasValue("policyDocumentPath") ? "<th>Policy Document</th>" : ""}
+  ${hasValue("policyDocumentPath") ? "<th>Policy Bond</th>" : ""}
   ${hasValue("laPhotoPath") ? "<th>LA Photo</th>" : ""}
   ${hasValue("laPanPath") ? "<th>LA PAN</th>" : ""}
   ${hasValue("laAadharPath") ? "<th>LA Aadhar</th>" : ""}
@@ -2983,7 +3051,7 @@ payload.forEach((item, index) => {
     ${hasValue("customerDOB") ? `<td>${item.customerDOB || "-"}</td>` : ""}
     ${hasValue("customerMobileNumber") ? `<td>${item.customerMobileNumber || "-"}</td>` : ""}
     ${hasValue("customerEmail") ? `<td>${item.customerEmail || "-"}</td>` : ""}
-    ${hasValue("branchName") ? `<td>${item.branchName || "-"}</td>` : ""}
+    ${hasValue("branchName") ? `<td>${branchDetail.find((e)=>e?.id==item?.branchName)?.branch_name || "-"}</td>` : ""}
     ${hasValue("laName") ? `<td>${item.laName || "-"}</td>` : ""}
     ${hasValue("laEmail") ? `<td>${item.laEmail || "-"}</td>` : ""}
     ${hasValue("laPhone") ? `<td>${item.laPhone || "-"}</td>` : ""}
@@ -3982,7 +4050,7 @@ function toggleFileUpload() {
           if (response.status === "success" && Array.isArray(response.data)) {
             $("#branchName").empty().append('<option value="">Select Branch*</option>');
             $("#branchNameResp").empty().append('<option value="">Select Branch*</option>');
-
+branchDetail=response.data;
             $.each(response.data, function (index, branch) {
               $("#branchName").append(
                 $("<option>", {
