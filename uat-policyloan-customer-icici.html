@@ -53,6 +53,11 @@
     type="text/css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"
     type="text/css" />
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 
   <!-- Theme Styles -->
   <link href="css/style.css" rel="stylesheet" type="text/css" />
@@ -129,6 +134,42 @@
   cursor: pointer;
   font-size: 16px;
   font-weight: 600;
+}
+
+/* File Preview Styles */
+.file-preview-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+.file-preview-item h5 {
+  color: #13322b;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+#filePreviewModal .modal-body {
+  height: 80vh;
+  overflow: auto;
+  background: #fff;
+}
+
+#pdfCanvas {
+  width: 100%;
+  display: block;
+  margin: auto;
+}
+
+.preview-image {
+  max-width: 100%;
+  max-height: 70vh;
+  display: block;
+  margin: auto;
+  object-fit: contain;
 }
   </style>
 </head>
@@ -766,6 +807,7 @@
     margin-bottom: 5px;">
 <a href="pdf/IPRU_Unit_Statement_sample.pdf" style="font-size: 10px;" id="unitStatementDownloadLinkMob" download="IPRU_Unit_Statement_sample.pdf">Sample Unit Statement</a>
                           </div>
+                          <div id="preview-unit-statement" class="file-preview-content" style="display:none; margin-top: 10px;"></div>
                       </div>
                       <div class="col-md-4 col-sm-6">
                         <label id="policybondlebel" style="display: none;">Policy Bond</label>
@@ -784,6 +826,7 @@
     margin-bottom: 5px;">
 <a href="pdf/IPRU_Policy_Bond_sample.pdf" style="font-size: 10px;cursor: pointer;" id="unitStatementDownloadLinkMob" download="IPRU_Policy_Bond_sample.pdf" >Sample Policy Bond</a>
                           </div>
+                          <div id="preview-policy-bond" class="file-preview-content" style="display:none; margin-top: 10px;"></div>
                       </div>
                       <!-- <div class="col-md-4 col-sm-6">
                         <div class="form-group" style="display: flex; align-items: center">
@@ -821,6 +864,7 @@
                           <span onclick="openLaPanFile()"><i class="fa fa-upload"
                               aria-hidden="true"></i></span>
                         </div>
+                        <div id="preview-la-pan-card" class="file-preview-content" style="display:none; margin-top: 10px;"></div>
                       </div>
                       <div class="col-md-4 col-sm-6" id="laAadharBox" style="display: none;">
                         <label id="laAadharlabel" style="display: none;">Aadhar</label>
@@ -833,6 +877,7 @@
                           <span onclick="openLaAadharFile()"><i class="fa fa-upload"
                               aria-hidden="true"></i></span>
                         </div>
+                        <div id="preview-la-aadhar-card" class="file-preview-content" style="display:none; margin-top: 10px;"></div>
                       </div>
 
                       <div class="col-md-4 col-sm-6" style="display: none;" id="laPhotoBox">
@@ -846,6 +891,7 @@
                           <span onclick="openLaPhoto()"><i class="fa fa-upload"
                               aria-hidden="true"></i></span>
                         </div>
+                        <div id="preview-la-photo" class="file-preview-content" style="display:none; margin-top: 10px;"></div>
                       </div>
                       <!-- <div class="col-md-4 col-sm-6">
                         <div class="form-group" style="display: flex; align-items: center">
@@ -895,8 +941,32 @@
           </div>
         </div>
       </div>
+
+      
     </div>
     </div>
+
+      <div id="customer-details-faq" class="inner-wrapper  partner-with-us section" style="margin-top: 20px">
+      <div class="section">
+        <div class="container">
+          <div class="innercontainerwrap section">
+<!-- <div id="tableWrapper" class="inner-wrapper  partner-with-us section" style="width:100%; overflow-x:auto;"> -->
+<div style="width:100%; overflow-x:auto;">
+  <table id="policyTable"
+    style="width:100%; min-width:1400px; border-collapse:collapse; font-family:Arial,sans-serif;">
+    <thead id="policyTableHead"></thead>
+  <tbody id="policyTableBody"></tbody>
+  </table>
+</div>
+
+
+
+<!-- </div> -->
+          </div>
+        </div>
+      </div>
+
+</div>
 
     <div id="customer-details-faq" class="inner-wrapper mgt206 partner-with-us section" style="margin-top: 40px">
       <div class="innerpage section">
@@ -1251,26 +1321,7 @@
                         </div>
                       </div>
                     </div>
-                    <!-- <div class="card">
-                                    <div class="card-header" id="faqHeading-14">
-                                       <div class="mb-0">
-                                          <h5 class="faq-title" data-bs-toggle="collapse"
-                                             data-bs-target="#faqCollapse-14" data-aria-expanded="false"
-                                             data-aria-controls="faqCollapse-14">
-                                             <div class="FAQ">
-                                                <div class="FAQ-pointer">13.</div>
-                                                <div class="FAQ-h5">What are the Benefit of Interest only Loan v/s EMI Loan ?</div>
-                                             </div>
-                                          </h5>
-                                       </div>
-                                    </div>
-                                    <div id="faqCollapse-14" class="collapse" aria-labelledby="faqHeading-14"
-                                       data-parent="#accordion">
-                                       <div class="card-body">
-                                          <p>Under an interest-only loan, you only pay the interest during the period of the loan and the principal is paid in one shot at loan closure. Under a EMI loan, one part of instalment goes towards interest payment and another part goes towards principal re-payment, effectively leading to a higher outgo during the tenure of the loan. Policy Loan are typically issued as an interest only loan. </p>
-                                       </div>
-                                    </div>
-                                 </div> -->
+                    
                   </div>
                 </div>
               </div>
@@ -1442,7 +1493,7 @@
                     Yes
                   </button>
                   
-                  <button class="btn btn-danger px-4 validate" onclick="handleAssistedJourney('assisted')"
+                  <button class="btn btn-danger px-4 validate" onclick="handleAssistedJourney()"
                     >
                     No
                   </button>
@@ -1466,6 +1517,25 @@
         </div>
       </div>
     </div>
+
+    <!-- File Preview Modal -->
+    <div class="modal fade" id="filePreviewModal" tabindex="-1" role="dialog" aria-labelledby="filePreviewModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="filePreviewModalLabel">File Preview</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="filePreviewModalBody" style="min-height: 400px; text-align: center;">
+            <!-- Preview content will be inserted here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
   </section>
   <footer>
     <div class="footer">
@@ -1568,6 +1638,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
   <script>
+    let branchDetail=[]
     let is_valid_email=false;
     let is_valid_mobile=false;
      let laCheckBoxClick,laCheckBoxMobClick;
@@ -1575,7 +1646,12 @@
     var otpModalInstance = new bootstrap.Modal(openOtpModal);
       let openConfirmationModel=document.getElementById('confirmationModel');
       let confirmationModelInstance= new bootstrap.Modal(openConfirmationModel);
-      $(document).ready(function() {
+      
+      // Initialize file preview modal
+      var filePreviewModalElement = document.getElementById('filePreviewModal');
+      var filePreviewModalInstance = new bootstrap.Modal(filePreviewModalElement);
+      
+   $(document).ready(function() {
       console.log(branchNameResp)
             $('#branchNameResp').select2({
                 placeholder: "Branch Name*",
@@ -1590,8 +1666,6 @@
                 allowClear: true
             });
         });
-
-       
 //paste handle 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -1723,13 +1797,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
   }
 });
-
-
-        function resetSelection() {
-                $('#branchName').val(null).trigger('change');
-            }
             function resetSelectionMob() {
                 $('#branchNameResp').val(null).trigger('change');
+            }
+            function resetSelectionDesk() {
+                $('#branchName').val(null).trigger('change');
             }
         function onApiSuccess() {
 //           var otpModal = document.getElementById('otpModal');
@@ -1884,6 +1956,14 @@ otpModalInstance.show();
   laAadharCardKey:""
 }
 
+let uploadedDocumentFile={
+  unitStatementFile:"",
+  policyDocumentFile:"",
+  laPhotoFile:"",
+  laPanCardFile:"",
+  laAadharCardFile:""
+}
+
     function isValid_Pincode(pincode) {
       let regex = new RegExp("^[1-9][0-9]{5}$");
 
@@ -1916,6 +1996,7 @@ otpModalInstance.show();
     let ocrJourneyType="";
 console.log(payload)
     $("#maxUserForm").submit((event) => {
+      displayPoliciesInTable();
       console.log("maxUserForm submit called");
       event.preventDefault();
 
@@ -1974,7 +2055,6 @@ console.log(payload)
       if (
         companyName == "" ||
         prodctType == "" ||
-        branchName == "" ||
         customerName == "" ||
         customerMobileNumber == "" ||
         customerEmail == "" ||
@@ -2021,10 +2101,6 @@ if (documentKeys?.laPhotoKey == "") {
 }
 }
 
-if(branchName=="Branch Name*"){
-  alert("Please select Branch Name.");
-    return;
-}
 
       if (customerEmail !== "") {
         if (!validateEmail("customerEmail")) {
@@ -2096,11 +2172,24 @@ if(branchName=="Branch Name*"){
           laPhotoPath:documentKeys?.laPhotoKey,
           laPanPath:documentKeys?.laPanCardKey,
           laAadharPath:documentKeys?.laAadharCardKey,
+
+          unitStatementFile: uploadedDocumentFile?.unitStatementFile,
+          policyDocumentFile: uploadedDocumentFile?.policyDocumentFile,
+          laPhotoFile:uploadedDocumentFile?.laPhotoFile,
+          laPanFile:uploadedDocumentFile?.laPanCardFile,
+          laAadharFile:uploadedDocumentFile?.laAadharCardFile,
+
       };
-         if (!payload.some(item => item.policyNumber == policyNumber)) {
+     
+   if (!payload.some(item => item.policyNumber == policyNumber)) {
   payload.push(payloads);
 }
+       
         console.log("payload", payload);
+        
+        // Display the updated payload in the table
+        displayPoliciesInTable();
+        
             confirmationModelInstance.show()
       const emailInputFields = document.querySelectorAll(".email-otp-input");
         emailInputFields.forEach((input) => {
@@ -2292,6 +2381,12 @@ if(branchNameResp=="Branch Name*"){
         laName:laNameMob,
         laEmail:laEmailMob,
         laPhone:laEmailMob,
+
+        unitStatementFile: uploadedDocumentFile?.unitStatementFile,
+          policyDocumentFile: uploadedDocumentFile?.policyDocumentFile,
+          laPhotoFile:uploadedDocumentFile?.laPhotoFile,
+          laPanFile:uploadedDocumentFile?.laPanCardFile,
+          laAadharFile:uploadedDocumentFile?.laAadharCardFile,
         // laDOB:laDOBResp,
         // laGender:laGenderResp
       };
@@ -2309,10 +2404,13 @@ if(branchNameResp=="Branch Name*"){
           laAadharPath:documentKeys?.laAadharCardKey,
       };
 
-        
  if (!payload.some(item => item.policyNumber == policyNumberMob)) {
  payload.push(payloadData);
 }
+      
+        // Display the updated payload in the table
+        displayPoliciesInTable();
+
             confirmationModelInstance.show()
             const emailInputFields = document.querySelectorAll(".email-otp-input");
         emailInputFields.forEach((input) => {
@@ -2329,7 +2427,9 @@ if(branchNameResp=="Branch Name*"){
 
       
     });
-
+function randomIdWithTime() {
+  return `${Date.now()}-${Math.random().toString(36).substr(2, 6)}`;
+}
 
     function resetField(buttonType) {
 
@@ -2350,10 +2450,10 @@ if(branchNameResp=="Branch Name*"){
 
 
         document.getElementById("loader-container").style.display = "flex";
-
+let randomId=randomIdWithTime()
         // let link = `http://localhost:3001/web/v1/generate-lead`
         let link = `https://api-uat.valuenable.in/webhook/v1/generate-lead`
-console.log(payload)
+console.log("ocr payload",payload)
             $.ajax({
         type: "POST",
         url: link,
@@ -2371,12 +2471,14 @@ console.log(payload)
  "policy_bond_key": payload[0].policyDocumentPath,
  "touchpoint": payload[0].branchName,
  "refrenceId":payload[0].leadId?payload[0].leadId:null,
+ "identifier":randomId
 },
         dataType: "json",
         encode: true,
       }).done((data) => {
 
         window.location.href = data.link
+      
 
       var sentMessageModal=document.getElementById('sentMessageModal');
             var messageModal= new bootstrap.Modal(sentMessageModal);
@@ -2384,12 +2486,34 @@ console.log(payload)
             payload = [];
                 resetFieldForCustomer();
       resetFieldForMobile();
-      resetSelectionMob()
-      resetSelection()
+      resetSelectionMob();
+      resetSelectionDesk();
       }).fail((error) => {
         console
-          alert(error?.responseJSON?.message);
           document.getElementById("loader-container").style.display = "none";
+          // if (error.response) {
+      
+      if (error.status ==504) {
+        callCheckStatus(randomId,1);
+
+      } else { 
+        
+ alert(error?.responseJSON?.message || "Something went wrong.");
+             let validateMessage=document.getElementById("validateMessage");
+             const ocrMessage = document.getElementById("ocrMessage");
+        validateMessage.style.display = "block";
+        ocrMessage.style.display = "none";
+
+  validateMessage.innerText="Unable to read the document. Thank you for your application. Our customer service representative will contact you."     
+
+}
+    // } else if (error.request) {
+
+    //   alert("No response from server. Please check your internet connection.");
+    // } else {
+    //   alert(error.message);
+    // }
+          
           
         });
 
@@ -2397,7 +2521,7 @@ console.log(payload)
     resetFieldForCustomer();
       resetFieldForMobile();
       resetSelectionMob()
-      resetSelection()
+      resetSelectionDesk()
           confirmationModelInstance.hide()
 
        var sentMessageModal=document.getElementById('sentMessageModal');
@@ -2416,6 +2540,43 @@ console.log(payload)
 
     }
 
+    
+    function callCheckStatus(referenceId, attempt) {
+
+  if (attempt > 5) {
+    alert("Request timed out. Please try again later.");
+    document.getElementById("loader-container").style.display = "none";
+    return;
+  }
+
+  setTimeout(function () {
+
+    document.getElementById("loader-container").style.display = "flex";
+
+    $.ajax({
+      type: "GET",
+      url: "https://api-uat.valuenable.in/bitly/status",
+      data: { refId: referenceId },
+      dataType: "json"
+    })
+    .done(function (response, textStatus, jqXHR) {
+
+      if ( jqXHR.status == 200) {
+        window.location.href = response.external_url;
+        document.getElementById("loader-container").style.display = "none";
+      } 
+      else {
+        callCheckStatus(referenceId, attempt + 1);
+      }
+
+    })
+    .fail(function () {
+      callCheckStatus(referenceId, attempt + 1);
+    });
+
+  }, 3000);
+}
+
     function generateOtp(){
 // let link = `https://microservice.valuenable.in/generate-otp`;
       // let link = `https://dev-microservice.valuenable.in/generate-otp`;
@@ -2426,12 +2587,10 @@ console.log(payload)
       let generateOtpPayload=payload[0];
      $.ajax({
         type: "POST",
-        url: link,
-        data: {
-         ...generateOtpPayload
-        },
-        dataType: "json",
-        encode: true,
+  url: link,
+  data: JSON.stringify(generateOtpPayload),
+  contentType: "application/json", 
+  dataType: "json",
       })
         .done((data) => {
 
@@ -2480,7 +2639,6 @@ console.log(payload)
     function resetFieldForCustomer() {
       document.getElementById("companyName").value = "ICICI Prudential Life Insurance Co. Ltd";
       document.getElementById("prodctType").value = "Product Name*";
-      document.getElementById("branchName").value = "";
       document.getElementById("customerName").value = "";
       document.getElementById("customerMobileNumber").value = "";
       document.getElementById("customerEmail").value = "";
@@ -2626,6 +2784,7 @@ console.log(payload)
         },
         dataType: "json",
         encode: true,
+        contentType: "application/json",
       })
         .done((data) => {
           // console.log("data", data);
@@ -2677,6 +2836,7 @@ console.log(payload)
         },
         dataType: "json",
         encode: true,
+        contentType: "application/json",
       })
         .done((data) => {
           // console.log("data", data);
@@ -2717,13 +2877,13 @@ return;
     if (!is_valid_email) {
       const emailResponse = await $.ajax({
         type: "POST",
-        url: emailOtpLink,
-        data: {
-          ...payload[0],
-          otp: emailOtp,
-        },
-        dataType: "json",
-        encode: true,
+  url: emailOtpLink,
+  data: JSON.stringify({
+    ...payload[0],
+    otp: emailOtp,
+  }),
+  contentType: "application/json", // ✅ now correct
+  dataType: "json",
       });
 
       if (emailResponse.status === "success") {
@@ -2798,11 +2958,12 @@ console.log(mobileResponse);
               validateMessage.innerText="OTP successfully validated."}
               else{
                 validateMessage.innerText="Thank You for your Application.Our Customer service representative will connect with you."
+                payload = [];
               }
             var messageModal= new bootstrap.Modal(sentMessageModal);
             messageModal.show()
 
-      payload = {};
+      
       is_valid_email = false;
       is_valid_mobile = false;
       console.log("Both OTPs verified successfully");
@@ -2827,6 +2988,169 @@ console.log(mobileResponse);
     alert(message);
   }
 }
+
+
+function displayPoliciesInTable() {
+  console.log("payload in table", payload);
+  
+  const thead = document.getElementById("policyTableHead");
+  const tbody = document.getElementById("policyTableBody");
+
+  function hasValue(field) {
+    return payload.some(item => item[field]);
+  }
+
+  // Clear existing table content
+  tbody.innerHTML = "";
+
+  thead.innerHTML = `
+<tr>
+  <th>Sr No.</th>
+
+  ${hasValue("policyNumber") ? "<th>Policy Number</th>" : ""}
+  ${hasValue("companyName") ? "<th>Company Name</th>" : ""}
+  ${hasValue("productName") ? "<th>Product Name</th>" : ""}
+  ${hasValue("customerFirstName") ? "<th>Customer Name</th>" : ""}
+  ${hasValue("customerLastName") ? "<th>Customer Last Name</th>" : ""}
+  ${hasValue("customerDOB") ? "<th>DOB</th>" : ""}
+  ${hasValue("customerMobileNumber") ? "<th>Mobile</th>" : ""}
+  ${hasValue("customerEmail") ? "<th>Email</th>" : ""}
+  ${hasValue("branchName") ? "<th>Branch</th>" : ""}
+  ${hasValue("laName") ? "<th>LA Name</th>" : ""}
+  ${hasValue("laEmail") ? "<th>LA Email</th>" : ""}
+  ${hasValue("laPhone") ? "<th>LA Phone</th>" : ""}
+  ${hasValue("unitStatementFilePath") ? "<th>Unit Statement</th>" : ""}
+  ${hasValue("policyDocumentPath") ? "<th>Policy Bond</th>" : ""}
+  ${hasValue("laPhotoPath") ? "<th>LA Photo</th>" : ""}
+  ${hasValue("laPanPath") ? "<th>LA PAN</th>" : ""}
+  ${hasValue("laAadharPath") ? "<th>LA Aadhar</th>" : ""}
+</tr>
+`;
+thead.querySelectorAll("th").forEach(th => {
+  th.style.cssText = `
+    padding:14px 18px;
+    background:#f5f5f5;
+    font-weight:700;
+    text-align:left;
+    white-space:nowrap;
+    border-bottom:2px solid #ddd;
+  `;
+});
+
+payload.forEach((item, index) => {
+  const tr = document.createElement("tr");
+
+  tr.innerHTML = `
+    <td>${index + 1}</td>
+
+    ${hasValue("policyNumber") ? `<td>${item.policyNumber || "-"}</td>` : ""}
+    ${hasValue("companyName") ? `<td>${item.companyName || "-"}</td>` : ""}
+    ${hasValue("productName") ? `<td>${item.productName || "-"}</td>` : ""}
+    ${hasValue("customerFirstName") ? `<td>${item.customerFirstName || "-"}</td>` : ""}
+    ${hasValue("customerLastName") ? `<td>${item.customerLastName || "-"}</td>` : ""}
+    ${hasValue("customerDOB") ? `<td>${item.customerDOB || "-"}</td>` : ""}
+    ${hasValue("customerMobileNumber") ? `<td>${item.customerMobileNumber || "-"}</td>` : ""}
+    ${hasValue("customerEmail") ? `<td>${item.customerEmail || "-"}</td>` : ""}
+    ${hasValue("branchName") ? `<td>${branchDetail.find((e)=>e?.id==item?.branchName)?.branch_name || "-"}</td>` : ""}
+    ${hasValue("laName") ? `<td>${item.laName || "-"}</td>` : ""}
+    ${hasValue("laEmail") ? `<td>${item.laEmail || "-"}</td>` : ""}
+    ${hasValue("laPhone") ? `<td>${item.laPhone || "-"}</td>` : ""}
+
+
+  ${
+  hasValue("unitStatementFile")
+    ? `<td>${
+        item.unitStatementFile
+          ? `<i class="fa fa-eye"
+               data-label="Unit Statement"
+               onclick="openFilePreviewModal('${item.policyNumber}', 'unitStatementFile', 'Unit Statement')"
+               style="cursor:pointer;color:#2979BF">
+             </i>`
+          : "-"
+      }</td>`
+    : ""
+}
+
+
+${
+  hasValue("policyDocumentFile")
+    ? `<td>${
+        item.policyDocumentFile
+          ? `<i class="fa fa-eye"
+               data-label="Policy Bond"
+               onclick="openFilePreviewModal('${item.policyNumber}','policyDocumentFile','Policy Bond')"
+               style="cursor:pointer;color:#2979BF">
+             </i>`
+          : "-"
+      }</td>`
+    : ""
+}
+
+
+${
+  hasValue("laPhotoFile")
+    ? `<td>${
+        item.laPhotoFile
+          ? `<i class="fa fa-eye"
+               data-label="LA Photo"
+               onclick="openFilePreviewModal('${item.policyNumber}','laPhotoFile','LA Photo')"
+               style="cursor:pointer;color:#2979BF">
+             </i>`
+          : "-"
+      }</td>`
+    : ""
+}
+
+${
+  hasValue("laPanFile")
+    ? `<td>${
+        item.laPanFile
+          ? `<i class="fa fa-eye"
+               data-label="LA PAN Card"
+               onclick="openFilePreviewModal('${item.policyNumber}','laPanFile','LA PAN Card')"
+               style="cursor:pointer;color:#2979BF">
+             </i>`
+          : "-"
+      }</td>`
+    : ""
+}
+
+
+${
+  hasValue("laAadharFile")
+    ? `<td>${
+        item.laAadharFile
+          ? `<i class="fa fa-eye"
+               data-label="LA Aadhar Card"
+               onclick="openFilePreviewModal('${item.policyNumber}','laAadharFile','LA Aadhar Card')"
+               style="cursor:pointer;color:#2979BF">
+             </i>`
+          : "-"
+      }</td>`
+    : ""
+}
+
+  `;
+
+  tr.querySelectorAll("td").forEach(td => {
+    td.style.cssText = `
+      padding:12px 18px;
+      white-space:nowrap;
+      border-bottom:1px solid #eee;
+      vertical-align:middle;
+      text-align:left;
+    `;
+  });
+
+  tbody.appendChild(tr);
+});
+
+  function downloadFile(path) {
+    window.open(BASE_FILE_URL + path, "_blank");
+  }
+}
+// End of displayPoliciesInTable function
+
 
 
 
@@ -2958,6 +3282,11 @@ async function validatePDF(file) {
 
    async function handleFileUpload(files) {
       var fileName = files[0].name;
+      
+      // Add file preview
+
+      uploadedDocumentFile.unitStatementFile = files[0];
+      
       let unitStatementLebelId=document.getElementById("unitStatementLebelId");
          const isValid = await validatePDF(files[0]);
   if (!isValid){ 
@@ -3013,6 +3342,101 @@ async function validatePDF(file) {
       }
       document.getElementById("selectedFilePan").value = fileName;
     }
+
+
+
+    // Store uploaded files for preview
+    let uploadedFilesPreview = {};
+
+    // Function to open file preview modal
+
+
+    function openFilePreviewModal(policynumber,fileType,label) {
+      const modalBody = document.getElementById("filePreviewModalBody");
+      const modalTitle = document.getElementById("filePreviewModalLabel");
+      
+      
+      modalTitle.textContent = label + " - Preview";
+      modalBody.innerHTML = '<div style="padding: 20px;"><i class="fa fa-spinner fa-spin" style="font-size: 32px;"></i><p>Loading preview...</p></div>';
+      
+      // Show the modal using Bootstrap modal instance
+      filePreviewModalInstance.show();
+      
+      // Check if we have the file stored locally for preview
+      const storedFile = payload.find(item => item.policyNumber == policynumber)[fileType];
+      
+      if (storedFile) {
+        displayFileInModal(storedFile, label);
+      } else {
+        // If file is already uploaded, show download option
+        modalBody.innerHTML = `
+          <div style="padding: 40px;">
+            <i class="fa fa-file-o" style="font-size: 64px; color: #da1e37; margin-bottom: 20px;"></i>
+            <h5>${label}</h5>
+            <p style="color: #666;">File has been uploaded successfully</p>
+            <p style="color: #999; font-size: 12px;">File Key: ${filePath}</p>
+          </div>
+        `;
+      }
+    }
+
+    function renderPDF(url) {
+  const canvas = document.getElementById("pdfCanvas");
+  const ctx = canvas.getContext("2d");
+
+  pdfjsLib.getDocument(url).promise.then(pdf => {
+    pdf.getPage(1).then(page => {
+      const viewport = page.getViewport({ scale: 1.5 });
+
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+
+      page.render({
+        canvasContext: ctx,
+        viewport: viewport
+      });
+    });
+  }).catch(() => {
+    canvas.outerHTML = `
+      <div style="text-align:center;padding:40px">
+        <p>Unable to preview PDF</p>
+        <a href="${url}" target="_blank">Open PDF</a>
+      </div>
+    `;
+  });
+}
+
+    // Function to display file in modal
+    function displayFileInModal(file, label) {
+      const modalBody = document.getElementById("filePreviewModalBody");
+      const fileType = file.type;
+      const fileURL = URL.createObjectURL(file);
+      modalBody.innerHTML = "";
+      
+      if (fileType.startsWith('image/')) {
+        // Image preview
+        modalBody.innerHTML = `
+          <img src="${fileURL}" alt="${label}" style="max-width: 100%; height: auto; max-height: 500px; object-fit: contain;" />
+        `;
+      } else if (fileType === 'application/pdf') {
+        // PDF preview
+      modalBody.innerHTML = `
+      <canvas id="pdfCanvas"></canvas>
+    `;
+    renderPDF(fileURL);
+      } else {
+        // Other file types
+        modalBody.innerHTML = `
+          <div style="padding: 40px;">
+            <i class="fa fa-file-o" style="font-size: 64px; color: #da1e37; margin-bottom: 20px;"></i>
+            <h5>${file.name}</h5>
+            <p style="color: #666;">Size: ${(file.size / 1024).toFixed(2)} KB</p>
+            <p style="color: #666;">Type: ${file.type || 'Unknown'}</p>
+          </div>
+        `;
+      }
+    }
+
     function openFileUploaders() {
       document.getElementById("attachments").click();
     }
@@ -3023,6 +3447,9 @@ async function validatePDF(file) {
     async function handleFileUploads(files) {
       var fileName = files[0].name;
       let unitStatementLebel=document.getElementById("unitStatementLebel");
+      
+      uploadedDocumentFile.unitStatementFile = files[0];
+      
        const isValid = await validatePDF(files[0]);
   if (!isValid){ 
     return
@@ -3081,6 +3508,10 @@ async function validatePDF(file) {
     function handelUploadPolicy(files) {
       var fileName = files[0].name;
       console.log(files)
+      
+      // Add file preview
+     uploadedDocumentFile.policyDocumentFile = files[0];
+      
       let policybondlebel=document.getElementById("policybondlebel");
       if(fileName){
         policybondlebel.style.display = "block"; 
@@ -3140,6 +3571,10 @@ async function validatePDF(file) {
    
     function handelUploadPolicyMob(files) {
       var fileName = files[0].name;
+      
+      // Add file preview
+      uploadedDocumentFile.policyDocumentFile = files[0];
+      
       let policybondlebelId = document.getElementById("policybondlebelId");
       if(fileName){
         policybondlebelId.style.display = "block"; 
@@ -3176,6 +3611,10 @@ async function validatePDF(file) {
     }
     function handelSignedAadharCopyMob(files) {
       var fileName = files[0].name;
+      
+      // Add file preview
+      uploadedDocumentFile.laAadharCardFile = files[0];
+      
       if(fileName){
         let attachmentsFile = document.getElementById("signedAadharCopyMob");
         uploadDocument("aadharCard",attachmentsFile.files[0].type).then((result) => {
@@ -3202,6 +3641,9 @@ async function validatePDF(file) {
         function handelLaPhotoMob(files){
       console.log(files)
       var fileName = files[0].name;
+      
+      // Add file preview
+uploadedDocumentFile.laPhotoFile = files[0];      
       let laPhotolabelMob = document.getElementById("laPhotolabelMob");
 
       if(fileName){
@@ -3236,6 +3678,9 @@ async function validatePDF(file) {
     function handelLaPanMob(files){
       console.log(files)
       var fileName = files[0].name;
+      
+      // Add file preview
+uploadedDocumentFile.laPanCardFile = files[0];      
       let laPanlabelMob = document.getElementById("laPanlabelMob");
 
       if(fileName){
@@ -3271,6 +3716,9 @@ async function validatePDF(file) {
     function handelLaAadharMob(files){
       console.log(files)
       var fileName = files[0].name;
+      
+      // Add file preview
+uploadedDocumentFile.laAadharCardFile = files[0];      
       let laAadharlabelMob = document.getElementById("laAadharlabelMob");
 
       if(fileName){
@@ -3309,6 +3757,9 @@ async function validatePDF(file) {
     function handelLaAadhar(files){
       console.log(files)
       var fileName = files[0].name;
+      
+      // Add file preview
+uploadedDocumentFile.laAadharCardFile = files[0];      
       let laAadharlabel=document.getElementById("laAadharlabel");
       if(fileName){
         laAadharlabel.style.display = "block"; 
@@ -3342,6 +3793,9 @@ async function validatePDF(file) {
     function handelLaPhoto(files){
       console.log(files)
       var fileName = files[0].name;
+      
+      // Add file preview
+uploadedDocumentFile.laPhotoFile = files[0];      
       let laPhotolabel=document.getElementById("laPhotolabel");
       if(fileName){
         laPhotolabel.style.display = "block"; 
@@ -3383,6 +3837,9 @@ async function validatePDF(file) {
     function handelLaPan(files){
       console.log(files)
       var fileName = files[0].name;
+      
+      // Add file preview
+uploadedDocumentFile.laPanCardFile = files[0];      
       let laPanlabel=document.getElementById("laPanlabel");
       if(fileName){
         laPanlabel.style.display = "block"; 
@@ -3593,7 +4050,7 @@ function toggleFileUpload() {
           if (response.status === "success" && Array.isArray(response.data)) {
             $("#branchName").empty().append('<option value="">Select Branch*</option>');
             $("#branchNameResp").empty().append('<option value="">Select Branch*</option>');
-
+branchDetail=response.data;
             $.each(response.data, function (index, branch) {
               $("#branchName").append(
                 $("<option>", {
@@ -3619,6 +4076,9 @@ function toggleFileUpload() {
         }
       });      
     });
+
+
+     
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
 
