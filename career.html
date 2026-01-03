@@ -394,6 +394,22 @@
                                                     placeholder="Summary *"
                                                     id="message"></textarea>
                                             </li>
+                                              <div class="checker-container" style="margin-left: 29px;width: 100%;">
+             <div class="checker-container" style="margin-left: 29px;width: 100%; display: flex; align-items: center; gap: 10px;">
+    <input
+        type="checkbox"
+        id="myCheckbox1"
+        checked
+        onclick="this.checked=true;"
+    >
+    <label for="myCheckbox1" class="checkbox-label">
+        I, hereby authorize ValuEnable to contact me.
+    </label>
+</div>
+
+            </div>
+                                         
+
                                             <li>
                                                 <input type="submit"
                                                     class=" form-control btn-main submit-btn"
@@ -913,6 +929,13 @@
     <script src="js/main.js"></script>
 
     <script>
+
+         let isChecked = false; // variable
+
+  function handleCheckboxChange(checkbox) {
+    isChecked = checkbox.checked;
+    console.log("Checkbox value:", isChecked);
+  }
         $("#careerForm").submit(async (event) => {
         event.preventDefault();
 
