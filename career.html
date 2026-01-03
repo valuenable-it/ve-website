@@ -83,6 +83,18 @@
     <!-- End Head -->
     <!-- Body -->
 
+    <style>
+        input[type="checkbox"] {
+    vertical-align: top;
+    appearance: auto !important;
+    /* -webkit-appearance: checkbox !important; */
+    width: 16px;
+    height: 16px;
+    opacity: 1;
+    position: relative;
+}
+    </style>
+
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T2P5GVZ"
             height="0"
@@ -394,20 +406,22 @@
                                                     placeholder="Summary *"
                                                     id="message"></textarea>
                                             </li>
-                                              <div class="checker-container" style="margin-left: 29px;width: 100%;">
-             <div class="checker-container" style="margin-left: 29px;width: 100%; display: flex; align-items: center; gap: 10px;">
-    <input
-        type="checkbox"
-        id="myCheckbox1"
-        checked
-        onclick="this.checked=true;"
-    >
-    <label for="myCheckbox1" class="checkbox-label">
-        I, hereby authorize ValuEnable to contact me.
-    </label>
-</div>
+                                            <li>
 
-            </div>
+                                                <div class="checker-container" style="width: 100%; display: flex; align-items: center; gap: 10px;">
+                                       <input
+                                           type="checkbox"
+                                           class="form-control btn-main submit-btn"
+                                           id="consentCheck" onchange="handleCheckboxChange()"
+                                       >
+                                       <label for="consentCheck" class="checkbox-label">
+                                           I consent to the collection and processing of my personal data for recruitment purposes in accordance with the Privacy Policy.
+                                   
+                                       </label>
+                                   </div>
+                                            </li>
+
+          
                                          
 
                                             <li>
@@ -931,14 +945,16 @@
     <script>
 
          let isChecked = false; // variable
-
-  function handleCheckboxChange(checkbox) {
-    isChecked = checkbox.checked;
-    console.log("Checkbox value:", isChecked);
+  function handleCheckboxChange() {
+    isChecked = document.getElementById("consentCheck").checked;
+    console.log(isChecked)
   }
         $("#careerForm").submit(async (event) => {
         event.preventDefault();
-
+if(!isChecked){
+    alert("Please select consent")
+    return
+}
         let name = document.getElementById("name").value.trim();
         let email = document.getElementById("email").value.trim();
         let mobile = document.getElementById("mobile").value.trim();
