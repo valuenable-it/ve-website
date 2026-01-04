@@ -469,7 +469,7 @@
                                            class="form-control btn-main submit-btn"
                                            id="consentCheck" onchange="handleCheckboxChange()"
                                        >
-                                       <label for="consentCheck" class="checkbox-label-consent">
+                                       <label for="consentCheck" style="color: #666464;" class="checkbox-label-consent">
                                            I consent to the collection and processing of my personal data for recruitment purposes in accordance with the Privacy Policy.
                                    
                                        </label>
@@ -1007,7 +1007,7 @@
         $("#careerForm").submit(async (event) => {
         event.preventDefault();
 if(!isChecked){
-    alert("Please select consent")
+    alert("Please check the consent checkbox to proceed.")
     return
 }
         let name = document.getElementById("name").value.trim();
