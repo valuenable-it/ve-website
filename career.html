@@ -83,6 +83,73 @@
     <!-- End Head -->
     <!-- Body -->
 
+    <style>
+        input[type="checkbox"] {
+    vertical-align: top;
+    appearance: auto !important;
+    /* -webkit-appearance: checkbox !important; */
+    width: 16px;
+    height: 16px;
+    opacity: 1;
+    position: relative;
+}
+
+    .consent-list-li{
+        margin-top: 9px;
+    margin-bottom: 0px;
+    padding: 0px !important;
+  }
+    .consent-submit-btn{
+    margin-bottom: 10px;
+  }
+
+@media (min-width: 577px) and (max-width: 992px) {
+   input[type="checkbox"] {
+       width: 32px !important;
+       
+  }
+  .checkbox-label-consent{
+    font-size: 10px !important;
+  }
+
+}
+@media (max-width: 375px) {
+       input[type="checkbox"] {
+       width: 32px !important;
+  }
+    .checkbox-label-consent{
+    font-size: 10px !important;
+  }
+
+}
+@media (max-width: 425px) {
+           input[type="checkbox"] {
+       width: 32px !important;
+  }
+    .checkbox-label-consent{
+    font-size: 10px !important;
+  }
+}
+@media (max-width: 320px) {
+               input[type="checkbox"] {
+       width: 32px !important;
+  }
+    .checkbox-label-consent{
+    font-size: 10px !important;
+  }
+}
+@media (max-width: 768px) {
+                   input[type="checkbox"] {
+       width: 32px !important;
+  }
+    .checkbox-label-consent{
+    font-size: 10px !important;
+  }
+
+}
+
+    </style>
+
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T2P5GVZ"
             height="0"
@@ -394,7 +461,25 @@
                                                     placeholder="Summary *"
                                                     id="message"></textarea>
                                             </li>
-                                            <li>
+                                            <li class="consent-list-li">
+
+                                                <div class="checker-container" style="width: 100%; display: flex; align-items: center; gap: 10px;">
+                                       <input
+                                           type="checkbox"
+                                           class="form-control btn-main submit-btn"
+                                           id="consentCheck" onchange="handleCheckboxChange()"
+                                       >
+                                       <label for="consentCheck" style="color: #666464;" class="checkbox-label-consent">
+                                           I consent to the collection and processing of my personal data for recruitment purposes in accordance with the Privacy Policy.
+                                   
+                                       </label>
+                                   </div>
+                                            </li>
+
+          
+                                         
+
+                                            <li class="consent-submit-btn">
                                                 <input type="submit"
                                                     class=" form-control btn-main submit-btn"
                                                     placeholder="submit"
@@ -913,9 +998,18 @@
     <script src="js/main.js"></script>
 
     <script>
+
+         let isChecked = false; // variable
+  function handleCheckboxChange() {
+    isChecked = document.getElementById("consentCheck").checked;
+    console.log(isChecked)
+  }
         $("#careerForm").submit(async (event) => {
         event.preventDefault();
-
+if(!isChecked){
+    alert("Please check the consent checkbox to proceed.")
+    return
+}
         let name = document.getElementById("name").value.trim();
         let email = document.getElementById("email").value.trim();
         let mobile = document.getElementById("mobile").value.trim();
