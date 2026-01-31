@@ -136,6 +136,33 @@
   font-weight: 600;
 }
 
+  /* Journey selection radio-card styles */
+  .journey-options {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: stretch;
+    margin-top: 8px;
+  }
+  .journey-option {
+    flex: 1 1 220px;
+    border: 2px solid #e9e9e9;
+    border-radius: 8px;
+    padding: 18px 14px;
+    text-align: center;
+    cursor: pointer;
+    background: #fff;
+    transition: all 150ms ease-in-out;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+  }
+  .journey-option:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+  .journey-option input[type="radio"] { display:none; }
+  .journey-option .title { font-weight:700; margin-bottom:6px; color:#333; }
+  .journey-option .desc { color:#666; font-size:13px; }
+  .journey-option.selected { border-color:#d9534f; background: #fff7f7; }
+  .journey-actions { display:flex; gap:10px; justify-content:center; margin-top:14px; }
+  .journey-actions .btn { min-width:140px; }
+
 /* File Preview Styles */
 .file-preview-item {
   margin-bottom: 20px;
@@ -1482,7 +1509,7 @@
                       text-align: center;
                       margin-bottom: 20px;display: none;
                     " id="journeyTypeText">
-                  Please select the type of journey you want to proceed with.
+                  Please choose your preferred mode of processing.
                 </h6>
                 <!-- <h5 class="mt-2">
                   <b>-Team ValuEnable</b>
@@ -1493,22 +1520,40 @@
                     Yes
                   </button>
                   
-                  <button class="btn btn-danger px-4 validate" onclick="handleAssistedJourney()"
+                  <button class="btn btn-danger px-4 validate" onclick="showJourneyType()"
                     >
                     No
                   </button>
                 </div>
 
+                <!-- Add-policy section (hidden by default). When shown it toggles under the same modal -->
+                <div class="mt-3" style="display: none; text-align:center;" id="addPolicySection">
+                  <p style="font-weight:600; margin-bottom:12px">Add another policy — enter details below</p>
+                  <div>
+                    <button class="btn btn-secondary px-3" onclick="collapseAddPolicy()">Close</button>
+                  </div>
+                </div>
+
+                <!-- Journey type (Need assistance / Do it yourself) -->
                 <div class="mt-4" style="display: none" id="journeyType">
-                  <button class="btn btn-danger px-4 validate"
-                    onclick="handleAssistedJourney('assisted')">
-                    Assisted 
-                  </button>
-                  
-                  <button onclick="handleNonAssistedJourney('nonAssisted')" class="btn btn-danger px-4 validate"
-                    >
-                    Non-Assisted
-                  </button>
+                  <div class="journey-options" role="radiogroup" aria-label="Choose processing mode">
+                    <label class="journey-option" for="journey-assisted" tabindex="0" onclick="selectJourney('assisted', this)">
+                      <input type="radio" id="journey-assisted" name="journeyTypeRadio" value="assisted" />
+                      <div class="title">Need assistance</div>
+                      <!-- <div class="desc">Our team will process the policy for you.</div> -->
+                    </label>
+
+                    <label class="journey-option" for="journey-diy" tabindex="0" onclick="selectJourney('nonAssisted', this)">
+                      <input type="radio" id="journey-diy" name="journeyTypeRadio" value="nonAssisted" />
+                      <div class="title">Do it yourself</div>
+                      <!-- <div class="desc">Upload documents and complete the process yourself.</div> -->
+                    </label>
+                  </div>
+
+                  <div class="journey-actions">
+                    <button class="btn btn-outline-secondary" onclick="journeyBack()">Back</button>
+                    <button class="btn btn-danger" onclick="handleJourneyConfirm()">Continue</button>
+                  </div>
                 </div>
                 <div></div>
               </div>
@@ -1641,6 +1686,7 @@
     let branchDetail=[]
     let is_valid_email=false;
     let is_valid_mobile=false;
+    let is_diy=0;
      let laCheckBoxClick,laCheckBoxMobClick;
     var openOtpModal = document.getElementById('otpModal');
     var otpModalInstance = new bootstrap.Modal(openOtpModal);
@@ -2636,6 +2682,93 @@ console.log("ocr payload",payload)
       generateOtp()
       
     }
+
+    // Show the add-policy section inside the confirmation modal
+    function showAddPolicy(){
+      // preserve previous behaviour: reset fields for adding another policy
+      try{ resetField('multi_policy'); }catch(e){/* ignore */}
+
+      const addSection = document.getElementById('addPolicySection');
+      const journeyBox = document.getElementById('journeyType');
+      const confirmationButtons = document.getElementById('confirmationModelButtons');
+      const confirmationText = document.getElementById('confirmationText');
+      const journeyText = document.getElementById('journeyTypeText');
+
+      if(addSection) addSection.style.display = 'block';
+      if(journeyBox) journeyBox.style.display = 'none';
+      if(confirmationButtons) confirmationButtons.style.display = 'none';
+      if(confirmationText) confirmationText.style.display = 'none';
+      if(journeyText) journeyText.style.display = 'none';
+    }
+
+    function collapseAddPolicy(){
+      const addSection = document.getElementById('addPolicySection');
+      const confirmationButtons = document.getElementById('confirmationModelButtons');
+      const confirmationText = document.getElementById('confirmationText');
+
+      if(addSection) addSection.style.display = 'none';
+      if(confirmationButtons) confirmationButtons.style.display = 'block';
+      if(confirmationText) confirmationText.style.display = 'block';
+    }
+
+    // Show journey type inside same modal (keeps existing assisted/non-assisted flow)
+    function showJourneyType(){
+      if(payload.length>1){
+        generateOtp()
+        return;
+      }
+      const journeyTypeButtonBox = document.getElementById('journeyType');
+      const confirmationModelButtons = document.getElementById('confirmationModelButtons');
+      const journeyTypeText = document.getElementById('journeyTypeText');
+      const confirmationText = document.getElementById('confirmationText');
+      const addSection = document.getElementById('addPolicySection');
+
+      if(journeyTypeButtonBox) journeyTypeButtonBox.style.display = 'block';
+      if(confirmationModelButtons) confirmationModelButtons.style.display = 'none';
+      if(journeyTypeText) journeyTypeText.style.display = 'block';
+      if(confirmationText) confirmationText.style.display = 'none';
+      if(addSection) addSection.style.display = 'none';
+    }
+
+    // Select a journey option visually
+    function selectJourney(type, el){
+      // type: 'assisted' or 'nonAssisted'
+      document.querySelectorAll('.journey-option').forEach(node => node.classList.remove('selected'));
+      if(el && el.classList) el.classList.add('selected');
+      // set the radio value
+      const radio = document.querySelector(`input[name="journeyTypeRadio"][value="${type}"]`);
+      if(radio) radio.checked = true;
+    }
+
+    function handleJourneyConfirm(){
+      const selected = document.querySelector('input[name="journeyTypeRadio"]:checked');
+      if(!selected){
+        alert('Please choose an option to continue');
+        return;
+      }
+      const val = selected.value;
+      // call existing handlers to preserve behaviour
+      if(val === 'assisted'){
+        is_diy=0
+        handleAssistedJourney('assisted');
+      } else if(val === 'nonAssisted'){
+        is_diy=1
+        handleNonAssistedJourney('nonAssisted');
+      }
+    }
+
+    function journeyBack(){
+      // hide journey UI and restore confirmation buttons
+      const journeyTypeButtonBox = document.getElementById('journeyType');
+      const confirmationModelButtons = document.getElementById('confirmationModelButtons');
+      const journeyTypeText = document.getElementById('journeyTypeText');
+      const confirmationText = document.getElementById('confirmationText');
+
+      if(journeyTypeButtonBox) journeyTypeButtonBox.style.display = 'none';
+      if(confirmationModelButtons) confirmationModelButtons.style.display = 'block';
+      if(journeyTypeText) journeyTypeText.style.display = 'none';
+      if(confirmationText) confirmationText.style.display = 'block';
+    }
     function resetFieldForCustomer() {
       document.getElementById("companyName").value = "ICICI Prudential Life Insurance Co. Ltd";
       document.getElementById("prodctType").value = "Product Name*";
@@ -2918,7 +3051,8 @@ return;
     if (is_valid_email && !is_valid_mobile) {
       const requestData = {
   payload: payload,
-  otp: otp
+  otp: otp,
+  is_diy:is_diy
 };
 
 const mobileResponse = await $.ajax({
