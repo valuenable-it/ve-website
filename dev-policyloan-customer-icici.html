@@ -345,7 +345,11 @@
                           <div class="form-group">
                             <input name="user" placeholder="Mobile Number*" type="text" class="form-control"
                               id="customersMobileNumber" onkeyup="validatePhoneNumber('customersMobileNumber')" />
-                          </div>
+                            small style="font-size:11px; color:#e09366;">
+         Mobile no has to be linked with Aadhar and Bank
+      </small>
+                            </div>
+                          
                         </div>
                         <div class="col-md-4 col-sm-6">
                           <div class="form-group">
@@ -721,6 +725,9 @@
                             <div class="form-group">
                               <input name="user" placeholder="Mobile Number*" type="text" class="form-control"
                                 id="customerMobileNumber" onkeyup="validatePhoneNumber('customerMobileNumber')" />
+                                <small style="font-size:11px; color:#e09366;">
+         Mobile no has to be linked with Aadhar and Bank
+      </small>
                             </div>
                           </div>
                           <div class="col-md-4 col-sm-6">
@@ -1549,7 +1556,9 @@
                       <!-- <div class="desc">Upload documents and complete the process yourself.</div> -->
                     </label>
                   </div>
-
+                  <div id="equityMessage" style="display:none; font-size:12px; color:#6c757d; margin-top:8px;">
+                  Please ensure your funds are not Pure Debt to proceed with DIY
+                    </div>
                   <div class="journey-actions">
                     <button class="btn btn-outline-secondary" onclick="journeyBack()">Back</button>
                     <button class="btn btn-danger" onclick="handleJourneyConfirm()">Continue</button>
@@ -2544,13 +2553,13 @@ console.log("ocr payload",payload)
 
       } else { 
         
- alert(error?.responseJSON?.message || "Something went wrong.");
+//  alert(error?.responseJSON?.message || "Something went wrong.");
              let validateMessage=document.getElementById("validateMessage");
              const ocrMessage = document.getElementById("ocrMessage");
         validateMessage.style.display = "block";
         ocrMessage.style.display = "none";
 
-  validateMessage.innerText="Unable to read the document. Thank you for your application. Our customer service representative will contact you."     
+  validateMessage.innerText="There was an issue with your data. Our CSE will contact you shortly."     
 
 }
     // } else if (error.request) {
@@ -2713,7 +2722,7 @@ console.log("ocr payload",payload)
 
     // Show journey type inside same modal (keeps existing assisted/non-assisted flow)
     function showJourneyType(){
-      if(payload.length>1){
+      if(payload.length>1 || laCheckBoxClick || laCheckBoxMobClick){
         generateOtp()
         return;
       }
@@ -2738,6 +2747,12 @@ console.log("ocr payload",payload)
       // set the radio value
       const radio = document.querySelector(`input[name="journeyTypeRadio"][value="${type}"]`);
       if(radio) radio.checked = true;
+
+      // show message only for Do it yourself
+  const msg = document.getElementById("equityMessage");
+  if(msg){
+    msg.style.display = (type === "nonAssisted") ? "block" : "none";
+  }
     }
 
     function handleJourneyConfirm(){
