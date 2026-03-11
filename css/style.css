@@ -2774,7 +2774,7 @@ form ul {
           left: -10px;
           top: 30px; }
       .footer .footer-wrap .links-wrap ul {
-        padding-top: 40px;
+      margin-top: 10px;
         float: left;
         width: 100%;
         column-gap: 30px; }
@@ -5018,27 +5018,26 @@ font-size: 20px !important;
     border-top-right-radius: 50px; }
     .footer .logo {
       width: 200px;
-      margin: 0 auto;
       display: block; }
     .footer .footer-wrap {
       padding: 0%; }
-      .footer .footer-wrap .links-wrap h5:before {
+      /* .footer .footer-wrap .links-wrap h5:before {
         display: none; }
       .footer .footer-wrap .links-wrap ul {
-        display: none; }
+        display: none; } */
       .footer .footer-wrap .col-12 {
         -ms-flex: 0 0 100%;
         flex: 0 0 100%;
-        max-width: 100%;
-        text-align: center; }
+        /* text-align: center; */
+       }
       .footer .footer-wrap .information-raw {
         padding-left: 0px;
         padding-top: 20px; }
       .footer .footer-wrap .links-wrap {
         padding-left: 0%;
         display: block; }
-      .footer .footer-wrap .link-block {
-        display: none; }
+      /* .footer .footer-wrap .link-block {
+        display: none; } */
       .footer .footer-wrap ul.socials li {
         width: 5%; }
   /*-----footer-end---*/
@@ -7475,6 +7474,63 @@ letter-spacing: -0.4px;
       font-size: 12px !important;
     font-family: "Poppins", sans-serif !important;
  }
+.our-brand{
+  display: block !important;
+}
+.investors{
+  display: block !important;
+}
+.term-list-item{
+margin-top: 0px !important;
+}
+    .our-brand-mobile {
+        padding-left: 15px;
+    }
+
+    .our-brand-mobile h5 {
+    margin-top: 1px !important;
+    }
+
+    .our-brand-mobile img {
+   margin-top: 29px !important;
+        margin-left: 0 !important;
+    }
+
+    .investors-mobile {
+        padding-left: 15px;
+    }
+
+    .investors-mobile h5 {
+margin-top: 47px !important;
+    }
+
+    .investors-mobile .investors-logos {
+        display: inline-flex;
+        align-items: center;
+        gap: 15px;
+        margin-top: 15px !important;
+    }
+        .footer .footer-wrap {
+              margin-left: 5px !important;
+        }
+
+    .investors-mobile .investors-logos img {
+           margin-left: -23px !important;
+        width: auto;
+        max-width: 120px;
+    }
+    .footer .footer-wrap .links-wrap {
+    padding-top: 45px !important;
+}
+.investors-logos{
+width: 102px;
+}
+ .our-brand-mobile{
+display: none !important;
+ }
+  .investors-mobile{
+display: none !important;
+ }
 }
 /* @media (max-width: 1026px) {
   
@@ -7489,7 +7545,6 @@ letter-spacing: -0.4px;
     padding: 70px 15px 25px;
     margin-top: 100px;
   }
-
   .circle {
     width: 76px;
         height: 76px;
@@ -7527,8 +7582,234 @@ letter-spacing: -0.4px;
  .wealth-imgs{
   width: 150px !important;
  }
+.our-brand{
+  display: none !important;
 }
+.investors{
+  display: none !important;
+}
+.term-list-item{
+margin-top: 0px !important;
+}
+    .our-brand-mobile {
+        display: block !important;
+        padding-left: 15px;
+    }
 
+    .our-brand-mobile h5 {
+    margin-top: 1px !important;
+    }
+
+    .our-brand-mobile img {
+   margin-top: 29px !important;
+        margin-left: 0 !important;
+    }
+
+    .investors-mobile {
+        display: block !important;
+        padding-left: 15px;
+    }
+
+    .investors-mobile h5 {
+margin-top: 47px !important;
+    }
+
+    .investors-mobile .investors-logos {
+        display: inline-flex;
+        align-items: center;
+        gap: 15px;
+        margin-top: 15px !important;
+    }
+        .footer .footer-wrap {
+              margin-left: 5px !important;
+        }
+
+    .investors-mobile .investors-logos img {
+           margin-left: -23px !important;
+        width: auto;
+        max-width: 120px;
+    }
+    .footer .footer-wrap .links-wrap {
+    padding-top: 45px !important;
+}
+    .sliq-announcement-banner {
+        margin-top: 60px;
+               padding: 8px 0;
+        min-height: auto;
+    }
+
+    .sliq-banner-content {
+        justify-content: flex-start;
+        padding: 20px 20px;
+        min-height: auto;
+        align-items: flex-start;
+    }
+
+    .sliq-text {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .sliq-highlight-heading {
+        font-size: 20px;
+        line-height: 130%;
+        letter-spacing: -0.5px;
+    }
+
+    .sliq-highlight {
+        font-size: 20px;
+        line-height: 130%;
+    }
+
+    .lending-platfrom-p {
+        font-size: 16px;
+        line-height: 140%;
+        margin-top: 8px;
+        margin-bottom: 16px;
+    }
+
+    .sliq-visit-btn {
+        font-size: 0.9rem;
+        padding: 8px 18px;
+        display: inline-block;
+    }
+    .sliq-announcement-banner {
+        margin-top: 60px;
+               padding: 8px 0;
+        min-height: auto;
+    }
+
+    .sliq-banner-content {
+        justify-content: flex-start;
+        padding: 20px 20px;
+        min-height: auto;
+        align-items: flex-start;
+    }
+
+    .sliq-text {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .sliq-highlight-heading {
+        font-size: 20px;
+        line-height: 130%;
+        letter-spacing: -0.5px;
+    }
+
+    .sliq-highlight {
+        font-size: 20px;
+        line-height: 130%;
+    }
+
+    .lending-platfrom-p {
+        font-size: 16px;
+        line-height: 140%;
+        margin-top: 8px;
+        margin-bottom: 16px;
+    }
+
+    .sliq-visit-btn {
+        font-size: 0.9rem;
+        padding: 8px 18px;
+        display: inline-block;
+    }
+
+}
+@media (max-width: 576px) {
+  .our-brand{
+  display: none !important;
+}
+.investors{
+  display: none !important;
+}
+.term-list-item{
+margin-top: 0px !important;
+}
+    .our-brand-mobile {
+        display: block !important;
+        padding-left: 15px;
+    }
+
+    .our-brand-mobile h5 {
+    margin-top: 1px !important;
+    }
+
+    .our-brand-mobile img {
+   margin-top: 29px !important;
+        margin-left: 0 !important;
+    }
+
+    .investors-mobile {
+        display: block !important;
+        padding-left: 15px;
+    }
+
+    .investors-mobile h5 {
+margin-top: 47px !important;
+    }
+
+    .investors-mobile .investors-logos {
+        display: inline-flex;
+        align-items: center;
+        gap: 15px;
+        margin-top: 15px !important;
+    }
+        .footer .footer-wrap {
+              margin-left: 5px !important;
+        }
+
+    .investors-mobile .investors-logos img {
+           margin-left: -23px !important;
+        width: auto;
+        max-width: 120px;
+    }
+    .footer .footer-wrap .links-wrap {
+    padding-top: 45px !important;
+}
+    .sliq-announcement-banner {
+        margin-top: 60px;
+               padding: 8px 0;
+        min-height: auto;
+    }
+
+    .sliq-banner-content {
+        justify-content: flex-start;
+        padding: 20px 20px;
+        min-height: auto;
+        align-items: flex-start;
+    }
+
+    .sliq-text {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .sliq-highlight-heading {
+        font-size: 20px;
+        line-height: 130%;
+        letter-spacing: -0.5px;
+    }
+
+    .sliq-highlight {
+        font-size: 20px;
+        line-height: 130%;
+    }
+
+    .lending-platfrom-p {
+        font-size: 16px;
+        line-height: 140%;
+        margin-top: 8px;
+        margin-bottom: 16px;
+    }
+
+    .sliq-visit-btn {
+        font-size: 0.9rem;
+        padding: 8px 18px;
+        display: inline-block;
+    }
+
+}
 @media (max-width: 375px) {
   .circle {
     width: 76px;
@@ -7563,8 +7844,99 @@ letter-spacing: -0.4px;
       font-size: 12px !important;
     font-family: "Poppins", sans-serif !important;
  }
+ .our-brand{
+  display: none !important;
+ }
+ .investors{
+   display: none !important;
 }
+.term-list-item{
+margin-top: 0px !important;
+}
+    .our-brand-mobile {
+        display: block !important;
+        padding-left: 15px;
+    }
 
+    .our-brand-mobile h5 {
+    margin-top: 1px !important;
+    }
+
+    .our-brand-mobile img {
+   margin-top: 29px !important;
+        margin-left: 0 !important;
+    }
+
+    .investors-mobile {
+        display: block !important;
+        padding-left: 15px;
+    }
+
+    .investors-mobile h5 {
+margin-top: 47px !important;
+    }
+
+    .investors-mobile .investors-logos {
+        display: inline-flex;
+        align-items: center;
+        gap: 15px;
+        margin-top: 15px !important;
+    }
+        .footer .footer-wrap {
+              margin-left: 5px !important;
+        }
+
+    .investors-mobile .investors-logos img {
+           margin-left: -23px !important;
+        width: auto;
+        max-width: 120px;
+    }
+    .footer .footer-wrap .links-wrap {
+    padding-top: 45px !important;
+}
+    .sliq-announcement-banner {
+        margin-top: 60px;
+               padding: 8px 0;
+        min-height: auto;
+    }
+
+    .sliq-banner-content {
+        justify-content: flex-start;
+        padding: 20px 20px;
+        min-height: auto;
+        align-items: flex-start;
+    }
+
+    .sliq-text {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .sliq-highlight-heading {
+        font-size: 20px;
+        line-height: 130%;
+        letter-spacing: -0.5px;
+    }
+
+    .sliq-highlight {
+        font-size: 20px;
+        line-height: 130%;
+    }
+
+    .lending-platfrom-p {
+        font-size: 16px;
+        line-height: 140%;
+        margin-top: 8px;
+        margin-bottom: 16px;
+    }
+
+    .sliq-visit-btn {
+        font-size: 0.9rem;
+        padding: 8px 18px;
+        display: inline-block;
+    }
+
+}
 @media (max-width: 320px) {
   .circle {
     width: 76px;
@@ -7600,6 +7972,98 @@ letter-spacing: -0.4px;
       font-size: 12px !important;
     font-family: "Poppins", sans-serif !important;
  }
+  .our-brand{
+  display: none !important;
+ }
+ .investors{
+   display: none !important;
+}
+.term-list-item{
+margin-top: 0px !important;
+}
+    .our-brand-mobile {
+        display: block !important;
+        padding-left: 15px;
+    }
+
+    .our-brand-mobile h5 {
+    margin-top: 1px !important;
+    }
+
+    .our-brand-mobile img {
+   margin-top: 29px !important;
+        margin-left: 0 !important;
+    }
+
+    .investors-mobile {
+        display: block !important;
+        padding-left: 15px;
+    }
+
+    .investors-mobile h5 {
+margin-top: 47px !important;
+    }
+
+    .investors-mobile .investors-logos {
+        display: inline-flex;
+        align-items: center;
+        gap: 15px;
+        margin-top: 15px !important;
+    }
+        .footer .footer-wrap {
+              margin-left: 5px !important;
+        }
+
+    .investors-mobile .investors-logos img {
+           margin-left: -23px !important;
+        width: auto;
+        max-width: 120px;
+    }
+    .footer .footer-wrap .links-wrap {
+    padding-top: 45px !important;
+}
+    .sliq-announcement-banner {
+        margin-top: 60px;
+               padding: 8px 0;
+        min-height: auto;
+    }
+
+    .sliq-banner-content {
+        justify-content: flex-start;
+        padding: 20px 20px;
+        min-height: auto;
+        align-items: flex-start;
+    }
+
+    .sliq-text {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .sliq-highlight-heading {
+        font-size: 20px;
+        line-height: 130%;
+        letter-spacing: -0.5px;
+    }
+
+    .sliq-highlight {
+        font-size: 20px;
+        line-height: 130%;
+    }
+
+    .lending-platfrom-p {
+        font-size: 16px;
+        line-height: 140%;
+        margin-top: 8px;
+        margin-bottom: 16px;
+    }
+
+    .sliq-visit-btn {
+        font-size: 0.9rem;
+        padding: 8px 18px;
+        display: inline-block;
+    }
+
 }
 
 
@@ -7636,4 +8100,22 @@ letter-spacing: -0.4px;
 
 .zet_partner_Logo_mobile{
   display: none ;
+}
+ .our-brand{
+  display: block ;
+ }
+ .investors{
+   display: block;
+}
+.term-list-item li{
+margin-top: -40px;
+}
+.our-brand-mobile{
+  display: none;
+}
+.investors-mobile{
+    display: none;
+}
+.investors-logos{
+display: inline-flex; gap: 1px; margin-top: 33px;
 }
