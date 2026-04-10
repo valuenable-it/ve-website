@@ -477,7 +477,17 @@ display: none !important;;
 }/* .checkbox{
 		margin-top: -10px !important;
 	} */
+.journey-actions .btn {
+min-width: 0px !important;
+}
 
+.journeytypetext{
+ font-size: 16px !important;	
+}
+.journey-option {
+padding: 6px 10px !important;
+font-size: 15px !important;
+}
 
 	
 }
@@ -602,6 +612,16 @@ display: none !important;;
 .zet_partner_Logo_resp{
 display: none !important;;
 }
+.journey-actions .btn {
+min-width: 0px !important;
+}
+.journeytypetext{
+ font-size: 16px !important;	
+}
+.journey-option {
+padding: 6px 10px !important;
+font-size: 15px !important;
+}
 }
 
 
@@ -694,6 +714,15 @@ display: none !important;;
 .zet_partner_Logo_resp{
 display: none !important;;
 }
-	/* */
-	
+.journey-actions .btn {
+min-width: 0px !important;
+}
+.journeytypetext{
+ font-size: 16px !important;	
+}
+.journey-option {
+padding: 6px 10px !important;
+font-size: 15px !important;
+}
+
 }
