@@ -81,21 +81,6 @@
     .title-text-main {
       margin-top: 10px;
     }
-label[for="journey-diy"] {
-  opacity: 0.45;
-  background: #f0f0f0;
-  border-color: #ccc;
-  cursor: not-allowed ;
-  pointer-events: all;
-}
-
-label[for="journey-diy"] * {
-  pointer-events: none;
-}
-
-#journey-diy {
-  pointer-events: none;
-}
 .journeytypetext{
 color: #000;
 font-size: 18px;
@@ -103,6 +88,8 @@ font-weight: 600;
 text-align: center;
 margin-bottom: 20px;display: none;
 }
+
+
     @media screen and (max-width: 768px) {
       .max-logo {
         width: 201px;
@@ -158,7 +145,7 @@ margin-bottom: 20px;display: none;
 }
 
   /* Journey selection radio-card styles */
-  .journey-options {
+.journey-options {
     display: flex;
     gap: 12px;
     justify-content: center;
@@ -1543,7 +1530,8 @@ margin-bottom: 20px;display: none;
                   Would you like to add another policy?
                 </h6>
 
-                <h6 class="journeytypetext"  id="journeyTypeText">
+                <h6
+                class="journeytypetext"  id="journeyTypeText">
                   Please choose your preferred mode of processing.
                 </h6>
                 <!-- <h5 class="mt-2">
@@ -1773,7 +1761,6 @@ margin-bottom: 20px;display: none;
     var otpModalInstance = new bootstrap.Modal(openOtpModal);
       let openConfirmationModel=document.getElementById('confirmationModel');
       let confirmationModelInstance= new bootstrap.Modal(openConfirmationModel);
-      
       // Initialize file preview modal
       var filePreviewModalElement = document.getElementById('filePreviewModal');
       var filePreviewModalInstance = new bootstrap.Modal(filePreviewModalElement);
@@ -2816,7 +2803,7 @@ console.log("ocr payload",payload)
 
     // Select a journey option visually
     function selectJourney(type, el){
-     if (type === 'nonAssisted') return;
+    //  if (type === 'nonAssisted') return;
       // type: 'assisted' or 'nonAssisted'
       document.querySelectorAll('.journey-option').forEach(node => node.classList.remove('selected'));
       if(el && el.classList) el.classList.add('selected');
