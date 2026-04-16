@@ -81,21 +81,7 @@
     .title-text-main {
       margin-top: 10px;
     }
-label[for="journey-diy"] {
-  opacity: 0.45;
-  background: #f0f0f0;
-  border-color: #ccc;
-  cursor: not-allowed ;
-  pointer-events: all;
-}
 
-label[for="journey-diy"] * {
-  pointer-events: none;
-}
-
-#journey-diy {
-  pointer-events: none;
-}
 .journeytypetext{
 color: #000;
 font-size: 18px;
@@ -2816,7 +2802,7 @@ console.log("ocr payload",payload)
 
     // Select a journey option visually
     function selectJourney(type, el){
-     if (type === 'nonAssisted') return;
+    //  if (type === 'nonAssisted') return;
       // type: 'assisted' or 'nonAssisted'
       document.querySelectorAll('.journey-option').forEach(node => node.classList.remove('selected'));
       if(el && el.classList) el.classList.add('selected');
