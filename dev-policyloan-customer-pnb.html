@@ -53,6 +53,11 @@
     type="text/css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"
     type="text/css" />
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 
   <!-- Theme Styles -->
   <link href="css/style.css" rel="stylesheet" type="text/css" />
@@ -76,6 +81,14 @@
     .title-text-main {
       margin-top: 10px;
     }
+.journeytypetext{
+color: #000;
+font-size: 18px;
+font-weight: 600;
+text-align: center;
+margin-bottom: 20px;display: none;
+}
+
 
     @media screen and (max-width: 768px) {
       .max-logo {
@@ -90,10 +103,11 @@
         width: 65%;
       }
 
-      .title-text-main h2 {
+         .title-text-main h2 {
         line-height: 1;
-        margin-top: 60px;
-      }
+        margin-top: 56px;
+    }
+
     }
 
     @media (max-width: 768px) {
@@ -122,6 +136,76 @@
     .FAQ {
       display: flex;
     }
+
+    #resend-email-button{
+  color: #da1e37;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+  /* Journey selection radio-card styles */
+.journey-options {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: stretch;
+    margin-top: 8px;
+  }
+  .journey-option {
+    flex: 1 1 220px;
+    border: 2px solid #e9e9e9;
+    border-radius: 8px;
+    padding: 18px 14px;
+    text-align: center;
+    cursor: pointer;
+    background: #fff;
+    transition: all 150ms ease-in-out;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+  }
+  .journey-option:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+  .journey-option input[type="radio"] { display:none; }
+  .journey-option .title { font-weight:700; margin-bottom:6px; color:#333; }
+  .journey-option .desc { color:#666; font-size:13px; }
+  .journey-option.selected { border-color:#d9534f; background: #fff7f7; }
+  .journey-actions { display:flex; gap:10px; justify-content:center; margin-top:14px; }
+  .journey-actions .btn { min-width:140px; }
+
+/* File Preview Styles */
+.file-preview-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+.file-preview-item h5 {
+  color: #13322b;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+#filePreviewModal .modal-body {
+  height: 80vh;
+  overflow: auto;
+  background: #fff;
+}
+
+#pdfCanvas {
+  width: 100%;
+  display: block;
+  margin: auto;
+}
+
+.preview-image {
+  max-width: 100%;
+  max-height: 70vh;
+  display: block;
+  margin: auto;
+  object-fit: contain;
+}
   </style>
 </head>
 <!-- Body -->
@@ -211,14 +295,12 @@
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <input name="user" placeholder="PNB MetLife India Insurance Co. Ltd*" type="text"
+                          <input name="user" placeholder="PNB MetLife India Insurance Co. Ltd" type="text"
                             class="form-control" id="companysName" readonly
                             value="PNB MetLife India Insurance Co. Ltd" />
 
                         </div>
                       </div>
-
-                     
                     </div>
                     
                     <div class="mt-3 col-md-12 mb-2 ">
@@ -233,28 +315,32 @@
                           <div class="form-group">
                             <input name="user" placeholder="Mobile Number*" type="text" class="form-control"
                               id="customersMobileNumber" onkeyup="validatePhoneNumber('customersMobileNumber')" />
-                          </div>
+                            <small style="font-size:11px; color:#e09366;">
+         Mobile no has to be linked with Aadhar and Bank
+      </small>
+                            </div>
+                          
                         </div>
-                        <!-- <div class="col-md-4 col-sm-6">
+                        <div class="col-md-4 col-sm-6">
                           <div class="form-group">
                             <input name="user" placeholder="Email ID*" type="text" class="form-control" id="customersEmail"
                               onkeyup="validateEmail('customersEmail')" />
                           </div>
-                        </div> -->
+                        </div>
                       </div>
                     </div>
 
                     <div class="mt-3 col-md-12 mb-2">
                       <div class="row dob-row">
 
+                        
                         <!-- <div class="col-md-4 col-sm-6">
                           <div class="form-group">
-                            
-                            <input name="user" onkeyup="validateDate('customersDOB')" id="customersDOB"
-                              class="form-control" type="date" required placeholder="DOB*">
+                            <input name="user" placeholder="Mother Full Name*" type="text" class="form-control"
+                            pattern="[A-Za-z]" title="Only text are allowed" id="mothersName"/>
+                              
                           </div>
                         </div> -->
-                        
                         <div class="col-md-4 col-sm-6">
                           <div class="form-group">
                             <input name="user" placeholder="Enter Your Policy Number*" type="text" class="form-control"
@@ -262,106 +348,20 @@
                               
                           </div>
                         </div>
-                        <!-- <div class="col-md-4 col-sm-6" style="display: none;" id="respLaNameBox">
-                          <div class="form-group">
-                            <input name="user" placeholder="LA Name" type="text" class="form-control"
-                            id="laNameMob"/>
-                              
-                          </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6" style="display: none;" id="respLaEmailBox">
-                          <div class="form-group">
-                            <input name="user" placeholder="LA Email" type="text" class="form-control"
-                            id="laEmailMob" onkeyup="validateEmail('laEmailMob')"/>
-                              
-                          </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6" style="display: none;" id="respLaMobileBox">
-                          <div class="form-group">
-                            <input name="user" placeholder="LA Mobile" type="text" class="form-control"
-                            id="laPhoneMob" onkeyup="validatePhoneNumber('laPhoneMob')"/>
-                              
-                          </div>
-                        </div>
-                        
-                        <div style="width: 100%; margin-top: 20px;margin-bottom: 20px;">
-                          <form  class="checker-container" style="display: flex;gap: 8px;">
-                            <input type="checkbox" id="laCheckBoxResp" onchange="toggleFileUpload()">
-                            <label for="" class="checkbox-label" style="font-size: 14px !important;margin-top: -22px !important;">If Life Assured is different then the policyholder </label>
-                          </form>
-            
-                        </div> -->
-                        <!-- <div style="color: red;  margin-top: -4px; text-align: center;  margin-bottom: 12px; margin-left: 74px;">Upload Documents</div>
-                        
-                        <div class="col-md-4 col-sm-6">
-                          <label id="unitStatementLebelId" style="display: none;">Unit Statement</label>
-                          <div class="form-group" style="display: flex; align-items: center">
-                            <input name="user" type="file" style="display: none" id="attachment"
-                              onchange="handleFileUpload(this.files)" />
-
-                            <input type="text" class="form-control" placeholder=" Unit Statement"
-                              id="selectedFileName" readonly />
-                            <span onclick="openFileUploader()"><i class="fa fa-upload" aria-hidden="true"></i></span>
-                          </div>
-
-                        </div>
-
-                        <div class="col-md-4 col-sm-6">
-                          <label id="policybondlebelId" style="display: none;">Policy Bond</label>
-                          <div class="form-group" style="display: flex; align-items: center">
-                            <input name="user" type="file" style="display: none" id="uploadPolicyDocumentMob"
-                              onchange="handelUploadPolicyMob(this.files)" />
-
-                            <input type="text" class="form-control" placeholder=" Policy Bond"
-                              id="uploadPolicyDocumentFileMob" readonly />
-                            <span onclick="openUploadPolicyMob()"><i class="fa fa-upload" aria-hidden="true"></i></span>
-                          </div>
-
-                        </div>
-                        
-                        <div class="col-md-4 col-sm-6" style="display: none;" id="laPhotoBoxresp">
-                          <label id="laPhotolabelMob" style="display: none;">Photo</label>
-                          <div class="form-group" style="display: flex; align-items: center">
-                            <input name="user" type="file" style="display: none" id="laPhotoMob"
-                              onchange="handelLaPhotoMob(this.files)" />
-
-                            <input type="text" class="form-control" placeholder="LA Photo"
-                              id="laPhotoIdMob" readonly />
-                            <span onclick="openPhotoMob()"><i class="fa fa-upload"
-                                aria-hidden="true"></i></span>
-                          </div>
-                        </div>
-
-
-                   
-                         <div class="col-md-4 col-sm-6" style="display: none;" id="respLaPanBox">
-                          <label id="laPanlabelMob" style="display: none;">Pan</label>
-
-                          <div class="form-group" style="display: flex; align-items: center">
-                            <input name="user" type="file" style="display: none" id="laPanCardMob"
-                              onchange="handelLaPanMob(this.files)" />
-
-                            <input type="text" class="form-control" placeholder="LA signed pan card"
-                              id="laPanFileMob" readonly />
-                            <span onclick="openLaPanFileMob()"><i class="fa fa-upload"
-                                aria-hidden="true"></i></span>
-                          </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6" style="display: none;" id="respLaAadharBox">
-                          <label id="laAadharlabelMob" style="display: none;">Aadhar</label>
-                          <div class="form-group" style="display: flex; align-items: center">
-                            <input name="user" type="file" style="display: none" id="laAadharMob"
-                              onchange="handelLaAadharMob(this.files)" />
-
-                            <input type="text" class="form-control" placeholder="LA signed Aadhar card"
-                              id="laAadharFileMob" readonly />
-                            <span onclick="openLaAadharFileMob()"><i class="fa fa-upload"
-                                aria-hidden="true"></i></span>
-                          </div>
-                        </div> -->
-                       
                       </div>
                     </div>
+
+            
+
+
+
+
+
+
+
+
+
+
 
 
                 </div>
@@ -445,100 +445,10 @@
         
         <div class="contacts-raws">
           <div class="policy-form-box policy-form-box-responshive">
-            <div class="filter-box-div">
-              <div class="f-toggle-btn-div">
-                <div style="display: none" class="f-toggle-btn t-btn-01" onclick="toggleButton(this)">
-                  Advisor Details
-                </div>
-                <div class="f-toggle-btn t-btn-02" onclick="toggleButton(this)">
-                  Submit Your Details
-                </div>
-              </div>
-            </div>
+           
 
-            <div id="loan-policy-advisor-details-div">
-              <div class="filter-box">
-                <div class="panel" style="display: block">
-                  <div class="formbox-policy">
-                    <div class="row">
-                      <div class="mt-3 col-md-12 mb-2">
-                        <div class="row">
-                          <div class="col-md-4 col-sm-6">
-                            <div class="form-group">
-                              <input name="user" placeholder="Advisor Name*" type="text" class="form-control"
-                                pattern="[A-Za-z]" title="Only text are allowed" id="advisorName" />
-                            </div>
-                          </div>
-                          <div class="col-md-4 col-sm-6">
-                            <div class="form-group">
-                              <input name="user" placeholder="Mobile*" type="text" class="form-control"
-                                id="advisorMobileNumber" onkeyup="validatePhoneNumber('advisorMobileNumber')" />
-                            </div>
-                          </div>
-                          <div class="col-md-4 col-sm-6">
-                            <div class="form-group">
-                              <input name="user" placeholder="Email" type="text" class="form-control" id="advisorEmail"
-                                onkeyup="validateEmail('advisorEmail')" />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                     
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="table-responsive advisor-table">
-                <div class="table-h-text">Referral Payout</div>
-                <table class="table table-bordered">
-                  <thead style="background-color: #2b3a67">
-                    <tr>
-                      <th scope="col">Sr. No</th>
-                      <th scope="col">
-                        Cumulative Monthly Loan Amount (in Rs)
-                      </th>
-                      <th scope="col">Payout</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>0 - 25 lacs</td>
-                      <td>0.25%</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>25.01 - 50 lacs</td>
-                      <td>0.35%</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>50.01 - 75 lacs</td>
-                      <td>0.45%</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">4</th>
-                      <td>75.01 and Above</td>
-                      <td>0.50%</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <form id="advisorForm">
-                <!-- data-bs-toggle="modal"  data-bs-target="#otpModal" -->
-                <div style="display: flex; justify-content: center">
-                  <button type="submit" class="form-control btn-main submit-btn"
-                    style="padding: 10px 60px; font-size: 20px">
-                    Submit
-                  </button>
-                </div>
-              </form>
-            </div>
-
-            <div id="loan-policy-customer-details-div">
+         
+            <div id="loan-policy-customer-details-div" style="margin-top: 30px;">
               <div class="filter-box">
                 <!-- <button class="accordion">Customer Details
                               </button> -->
@@ -553,7 +463,7 @@
 
                       </div>
 
-                     
+                    
                       <div class="mt-3 col-md-12 mb-2">
                         <div class="row">
                           <div class="col-md-4 col-sm-6">
@@ -566,141 +476,33 @@
                             <div class="form-group">
                               <input name="user" placeholder="Mobile Number*" type="text" class="form-control"
                                 id="customerMobileNumber" onkeyup="validatePhoneNumber('customerMobileNumber')" />
+                                <small style="font-size:11px; color:#e09366;">
+         Mobile no has to be linked with Aadhar and Bank
+      </small>
                             </div>
                           </div>
                           <div class="col-md-4 col-sm-6">
                             <div class="form-group">
-                              <input name="user" placeholder="Enter Your Policy Number" type="text" class="form-control"
-                               id="policyNumber"/>
-                                
-                            </div>
-                          </div>
-                          <!-- <div class="col-md-4 col-sm-6">
-                            <div class="form-group">
                               <input name="user" placeholder="Email ID*" type="text" class="form-control"
                                 id="customerEmail" onkeyup="validateEmail('customerEmail')" />
                             </div>
-                          </div> -->
-                        </div>
-                      </div>
-
-                      <div class="mt-3 col-md-12 mb-2 ">
-                        <div class="row">
-                          <!-- <div class="col-md-4 col-sm-6">
+                          </div>
+                           <div class="col-md-4 col-sm-6">
                             <div class="form-group">
-
-                             
-                              <input name="daterange" onkeyup="validateDate('customerDOB')" id="customerDOB"
-                                class="form-control" type="date" required placeholder="DOB*">
-                            </div>
-                          </div> -->
-                         
-                          <!-- <div class="col-md-4 col-sm-6">
-                            <div class="form-group">
-                              <input name="user" placeholder="Enter Your Policy Number" type="text" class="form-control"
+                              <input name="user" placeholder="Enter Your Policy Number*" type="text" class="form-control"
                                id="policyNumber"/>
                                 
                             </div>
-                          </div> -->
-                          <!-- <div class="col-md-4 col-sm-6" style="display: none;" id="laNameBox">
-                            <div class="form-group">
-                              <input name="user" placeholder="LA Name" type="text" class="form-control"
-                               id="laName"/>
-                                
-                            </div>
                           </div>
-                          <div class="col-md-4 col-sm-6" style="display: none;" id="laEmailBox">
-                            <div class="form-group">
-                              <input name="user" placeholder="LA Email" type="text" class="form-control"
-                               id="laEmail" onkeyup="validateEmail('laEmail')"/>
-                                
-                            </div>
-                          </div>
-                          <div class="col-md-4 col-sm-6" style="display: none;" id="laPhoneBox">
-                            <div class="form-group">
-                              <input name="user" placeholder="LA Mobile" type="text" class="form-control"
-                               id="laPhone" onkeyup="validatePhoneNumber('laPhone')"/>
-                                
-                            </div>
-                          </div> -->
-
-                    
                         </div>
                       </div>
+
+                      
                     
                     </div>
-                    <!-- <div style="width: 100%; margin-top: 20px;margin-bottom: 20px;">
-                      <form style="display: flex;gap: 10px;">
-                        <input type="checkbox" id="laCheckBox" onchange="toggleFileUpload()">
-                        <label for="" class="checkbox-label">If Life Assured is different then the policyholder </label>
-                      </form>
-    
-                    </div> -->
-                    <!-- <div style="color: #da1e37; font-weight: bold; margin-top: -11px; border-bottom: 2px solid; width: 165px; margin-bottom: 12px;">Upload Documents</div> -->
-                    <!-- <div class="row">
-                      <div class="col-md-4 col-sm-6">
-                        <label id="unitStatementLebel" style="display: none;">Unit Statement</label>
-                        <div class="form-group" style="display: flex; align-items: center">
-                          <input name="user" type="file" style="display: none" id="attachments"
-                            onchange="handleFileUploads(this.files)" />
-
-                          <input type="text" class="form-control" placeholder=" Unit Statement"
-                            id="selectedFileNames" readonly />
-                          <span onclick="openFileUploaders()" id="unitStatementIcon"><i class="fa fa-upload" aria-hidden="true"></i></span>
-                        </div>
-                      </div>
-                      <div class="col-md-4 col-sm-6">
-                        <label id="policybondlebel" style="display: none;">Policy Bond</label>
-                        <div class="form-group" style="display: flex; align-items: center">
-                          <input name="user" type="file" style="display: none" id="uploadPolicyDocument"
-                            onchange="handelUploadPolicy(this.files)" />
-
-                          <input type="text" class="form-control" placeholder=" Policy Bond"
-                            id="uploadPolicyDocumentFile" readonly />
-                          <span onclick="openUploadPolicy()"><i class="fa fa-upload" aria-hidden="true"></i></span>
-                        </div>
-
-                      </div>
-                      
-                      <div class="col-md-4 col-sm-6" id="laPanBox" style="display: none;">
-                        <label id="laPanlabel" style="display: none;">Pan</label>
-                        <div class="form-group" style="display: flex; align-items: center">
-                          <input name="user" type="file" style="display: none" id="laPanCard"
-                            onchange="handelLaPan(this.files)" />
-
-                          <input type="text" class="form-control" placeholder="LA signed pan card"
-                            id="laPanFile" readonly />
-                          <span onclick="openLaPanFile()"><i class="fa fa-upload"
-                              aria-hidden="true"></i></span>
-                        </div>
-                      </div>
-                      <div class="col-md-4 col-sm-6" id="laAadharBox" style="display: none;">
-                        <label id="laAadharlabel" style="display: none;">Aadhar</label>
-                        <div class="form-group" style="display: flex; align-items: center">
-                          <input name="user" type="file" style="display: none" id="laAadhar"
-                            onchange="handelLaAadhar(this.files)" />
-
-                          <input type="text" class="form-control" placeholder="LA signed Aadhar card"
-                            id="laAadharFile" readonly />
-                          <span onclick="openLaAadharFile()"><i class="fa fa-upload"
-                              aria-hidden="true"></i></span>
-                        </div>
-                      </div>
-
-                      <div class="col-md-4 col-sm-6" style="display: none;" id="laPhotoBox">
-                        <label id="laPhotolabel" style="display: none;">Photo</label>
-                        <div class="form-group" style="display: flex; align-items: center">
-                          <input name="user" type="file" style="display: none" id="laPhoto"
-                            onchange="handelLaPhoto(this.files)" />
-
-                          <input type="text" class="form-control" placeholder="LA Photo"
-                            id="laPhotoFile" readonly />
-                          <span onclick="openLaPhoto()"><i class="fa fa-upload"
-                              aria-hidden="true"></i></span>
-                        </div>
-                      </div>
-                     
-                      </div> -->
+                    
+                    
+                    
                   </div>
                 </div>
                 <div style="margin-left: 29px; width: 100%;">
@@ -726,329 +528,33 @@
           </div>
         </div>
       </div>
+
+      
     </div>
     </div>
-    <div id="advisor-details-faq" class="inner-wrapper mgt206 partner-with-us section" style="margin-top: 40px">
-      <div class="innerpage section">
+
+      <div id="customer-details-faq" class="inner-wrapper  partner-with-us section" style="margin-top: 20px">
+      <div class="section">
         <div class="container">
           <div class="innercontainerwrap section">
-            <div class="id-link" id="faq"></div>
-            <div class="faqwrap section pdtb8090">
-              <div class="titlebox">
-                <h2>FAQs</h2>
-              </div>
-              <div class="searchbox">
-                <h4>How Can We Help ?</h4>
-              </div>
-              <div class="tab-content section" id="myTabContent">
-                <div role="tabpanel" class="tab-pane fade active show" id="tab-1">
-                  <div class="faq" id="accordion1">
-                    <div class="card">
-                      <div class="card-header" id="faqHeading-a1">
-                        <div class="mb-0">
-                          <h5 class="faq-title show" data-bs-toggle="collapse" data-bs-target="#faqCollapse-a1"
-                            data-aria-expanded="true" data-aria-controls="faqCollapse-a1" aria-expanded="false">
-                            <div class="FAQ">
-                              <div class="FAQ-pointer">1.</div>
-                              <div class="FAQ-h5">Who are we ?</div>
-                            </div>
-                          </h5>
-                        </div>
-                      </div>
-                      <div id="faqCollapse-a1" class="collapse show" aria-labelledby="faqHeading-a1"
-                        data-parent="#accordion1">
-                        <div class="card-body">
-                          <p>
-                            ValuEnable acts as facilitator between life
-                            insurance customers who are interested to avail
-                            loan against their life insurance policies and
-                            with financial institutions who are willing to
-                            lend. We provide platform to chose best loan
-                            offers from multiple lenders and facilitate
-                            hassle free and swift processing of loans to
-                            avail funds faster.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div class="card-header" id="faqHeading-a2">
-                        <div class="mb-0">
-                          <h5 class="faq-title show" data-bs-toggle="collapse" data-bs-target="#faqCollapse-a2"
-                            data-aria-expanded="true" data-aria-controls="faqCollapse-a2" aria-expanded="false">
-                            <div class="FAQ">
-                              <div class="FAQ-pointer">2.</div>
-                              <div class="FAQ-h5">
-                                What is Policy Loan ?
-                              </div>
-                            </div>
-                          </h5>
-                        </div>
-                      </div>
-                      <div id="faqCollapse-a2" class="collapse show" aria-labelledby="faqHeading-a2"
-                        data-parent="#accordion1" style="display: none">
-                        <div class="card-body">
-                          <p>
-                            Under a Policy Loan, your life insurance policy
-                            is used as an asset. The policy's cash value
-                            acts as a collateral for the loan issued by the
-                            Lender.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div class="card-header" id="faqHeading-a3">
-                        <div class="mb-0">
-                          <h5 class="faq-title" data-bs-toggle="collapse" data-bs-target="#faqCollapse-a3"
-                            data-aria-expanded="false" data-aria-controls="faqCollapse-a3" aria-expanded="false">
-                            <div class="FAQ">
-                              <div class="FAQ-pointer">3.</div>
-                              <div class="FAQ-h5">How do you benefit ?</div>
-                            </div>
-                          </h5>
-                        </div>
-                      </div>
-                      <div id="faqCollapse-a3" class="collapse" aria-labelledby="faqHeading-a3"
-                        data-parent="#accordion1">
-                        <div class="card-body">
-                          <p>
-                            We help you to retain your client &amp; for
-                            same, you get rewarded. Refer to referral payout
-                            table details mentioned above.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div class="card-header" id="faqHeading-a4">
-                        <div class="mb-0">
-                          <h5 class="faq-title" data-bs-toggle="collapse" data-bs-target="#faqCollapse-a4"
-                            data-aria-expanded="false" data-aria-controls="faqCollapse-a4" aria-expanded="false">
-                            <div class="FAQ">
-                              <div class="FAQ-pointer">4.</div>
-                              <div class="FAQ-h5">
-                                Why should your policy holders choose us ?
-                              </div>
-                            </div>
-                          </h5>
-                        </div>
-                      </div>
-                      <div id="faqCollapse-a4" class="collapse show" aria-labelledby="faqHeading-a4"
-                        data-parent="#accordion1" style="display: none">
-                        <div class="card-body">
-                          <p>
-                            Policy holders gets a O/D, a/c with multiple
-                            Banking facilities (Net Banking, Debit card,
-                            chequebook etc). Also he is been charged on
-                            utilised amount only & not on entire sanction
-                            limit. Additionally he pays only interest on the
-                            utilised funds.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div class="card-header" id="faqHeading-a5">
-                        <div class="mb-0">
-                          <h5 class="faq-title" data-bs-toggle="collapse" data-bs-target="#faqCollapse-a5"
-                            data-aria-expanded="false" data-aria-controls="faqCollapse-a5" aria-expanded="false">
-                            <div class="FAQ">
-                              <div class="FAQ-pointer">5.</div>
-                              <div class="FAQ-h5">
-                                What will be your role ?
-                              </div>
-                            </div>
-                          </h5>
-                        </div>
-                      </div>
-                      <div id="faqCollapse-a5" class="collapse" aria-labelledby="faqHeading-a5"
-                        data-parent="#accordion1">
-                        <div class="card-body">
-                          <ul style="
-                                  font-size: 18px;
-                                  color: #2e2e2e;
-                                  font-weight: 400;
-                                  line-height: 136%;
-                                ">
-                            <li>
-                              <b>A.</b> You need to register with us as a
-                              Channel partner by filling the above details.
-                            </li>
-                            <li>
-                              <b>B.</b> You need to share client policy
-                              details post registration along with his KYC &
-                              surrender Quote.
-                            </li>
-                            <li>
-                              <b>C.</b> Our Representative will call the
-                              client &amp; get same processed with our
-                              banker relationship partner.
-                            </li>
-                            <li>
-                              <b>D.</b> Our representative will stay in
-                              touch with you in case of any help &amp; keep
-                              you posted on status.
-                            </li>
-                            <li>
-                              <b>E.</b> Once loan is disbursed, we will
-                              share the payout accordingly.
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div class="card-header" id="faqHeading-a6">
-                        <div class="mb-0">
-                          <h5 class="faq-title" data-bs-toggle="collapse" data-bs-target="#faqCollapse-a6"
-                            data-aria-expanded="false" data-aria-controls="faqCollapse-a6">
-                            <div class="FAQ">
-                              <div class="FAQ-pointer">6.</div>
-                              <div class="FAQ-h5">
-                                What all lender options are currently
-                                available ?
-                              </div>
-                            </div>
-                          </h5>
-                        </div>
-                      </div>
-                      <div id="faqCollapse-a6" class="collapse" aria-labelledby="faqHeading-a6"
-                        data-parent="#accordion1">
-                        <div class="card-body">
-                          <p>
-                            We are currently working with Axis Bank, which
-                            is rated as one of the Best Banks in India. We
-                            intend to on-board 2 more banks & 2 NBFCs in the
-                            near future.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div class="card-header" id="faqHeading-a7">
-                        <div class="mb-0">
-                          <h5 class="faq-title" data-bs-toggle="collapse" data-bs-target="#faqCollapse-a7"
-                            data-aria-expanded="false" data-aria-controls="faqCollapse-a7">
-                            <div class="FAQ">
-                              <div class="FAQ-pointer">7.</div>
-                              <div class="FAQ-h5">
-                                Does the applicant need to visit/go anywhere
-                                to complete the process ?
-                              </div>
-                            </div>
-                          </h5>
-                        </div>
-                      </div>
-                      <div id="faqCollapse-a7" class="collapse" aria-labelledby="faqHeading-a7"
-                        data-parent="#accordion1">
-                        <div class="card-body">
-                          <p>
-                            The answer to this is simply No. To take a loan
-                            on your policy you do not need to go anywhere,
-                            the procedure would be hassle free provided at
-                            your door step and/or digitally via our
-                            platform.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div class="card-header" id="faqHeading-a8">
-                        <div class="mb-0">
-                          <h5 class="faq-title" data-bs-toggle="collapse" data-bs-target="#faqCollapse-a8"
-                            data-aria-expanded="false" data-aria-controls="faqCollapse-a8">
-                            <div class="FAQ">
-                              <div class="FAQ-pointer">8.</div>
-                              <div class="FAQ-h5">
-                                What are the benefits of Overdraft v/s
-                                Normal Loan ?
-                              </div>
-                            </div>
-                          </h5>
-                        </div>
-                      </div>
-                      <div id="faqCollapse-a8" class="collapse" aria-labelledby="faqHeading-a8"
-                        data-parent="#accordion1">
-                        <div class="card-body">
-                          <p>
-                            In Overdraft account you can withdraw funds only
-                            to the extent required and not the entire loan
-                            amount. Interest is charged only on the amount
-                            utilised. Under Term Loan, however a fixed
-                            amount of money is paid out and interest is
-                            charged on the entire amount. Policy Loan is
-                            issued as an overdraft Loan.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div class="card-header" id="faqHeading-a9">
-                        <div class="mb-0">
-                          <h5 class="faq-title" data-bs-toggle="collapse" data-bs-target="#faqCollapse-a9"
-                            data-aria-expanded="false" data-aria-controls="faqCollapse-a9" aria-expanded="false">
-                            <div class="FAQ">
-                              <div class="FAQ-pointer">9.</div>
-                              <div class="FAQ-h9">
-                                What are the kind of Policy, loan can be
-                                funded on ?
-                              </div>
-                            </div>
-                          </h5>
-                        </div>
-                      </div>
-                      <div id="faqCollapse-a9" class="collapse" aria-labelledby="faqHeading-a9"
-                        data-parent="#accordion1">
-                        <div class="card-body">
-                          <p>
-                            Loan can be funded on Life Insurance product
-                            which has Surrender value & Lumpsum amount is
-                            been paid to Policy Holder after fixed term.
-                          </p>
-                          <p>
-                            For ex: - Endowment Policy, ULIP Policy. loan
-                            can’t be funded on Term plan or any of the
-                            general insurance policy.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div class="card-header" id="faqHeading-a10">
-                        <div class="mb-0">
-                          <h5 class="faq-title" data-bs-toggle="collapse" data-bs-target="#faqCollapse-a10"
-                            data-aria-expanded="false" data-aria-controls="faqCollapse-a10" aria-expanded="false">
-                            <div class="FAQ">
-                              <div class="FAQ-pointer">10.</div>
-                              <div class="FAQ-h5">
-                                How do I share leads with you ?
-                              </div>
-                            </div>
-                          </h5>
-                        </div>
-                      </div>
-                      <div id="faqCollapse-a10" class="collapse" aria-labelledby="faqHeading-a10"
-                        data-parent="#accordion1">
-                        <div class="card-body">
-                          <p>
-                            Get your self registered with us &amp; we will
-                            contact you for Connector agreement signing.
-                            Post that you can share leads with us. For
-                            details you can contact us at the given contact
-                            mention in the page.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+<!-- <div id="tableWrapper" class="inner-wrapper  partner-with-us section" style="width:100%; overflow-x:auto;"> -->
+<div style="width:100%; overflow-x:auto;">
+  <table id="policyTable"
+    style="width:100%; min-width:1400px; border-collapse:collapse; font-family:Arial,sans-serif;">
+    <thead id="policyTableHead"></thead>
+  <tbody id="policyTableBody"></tbody>
+  </table>
+</div>
+
+
+
+<!-- </div> -->
           </div>
         </div>
       </div>
-    </div>
+
+</div>
+
     <div id="customer-details-faq" class="inner-wrapper mgt206 partner-with-us section" style="margin-top: 40px">
       <div class="innerpage section">
         <div class="container">
@@ -1402,26 +908,7 @@
                         </div>
                       </div>
                     </div>
-                    <!-- <div class="card">
-                                    <div class="card-header" id="faqHeading-14">
-                                       <div class="mb-0">
-                                          <h5 class="faq-title" data-bs-toggle="collapse"
-                                             data-bs-target="#faqCollapse-14" data-aria-expanded="false"
-                                             data-aria-controls="faqCollapse-14">
-                                             <div class="FAQ">
-                                                <div class="FAQ-pointer">13.</div>
-                                                <div class="FAQ-h5">What are the Benefit of Interest only Loan v/s EMI Loan ?</div>
-                                             </div>
-                                          </h5>
-                                       </div>
-                                    </div>
-                                    <div id="faqCollapse-14" class="collapse" aria-labelledby="faqHeading-14"
-                                       data-parent="#accordion">
-                                       <div class="card-body">
-                                          <p>Under an interest-only loan, you only pay the interest during the period of the loan and the principal is paid in one shot at loan closure. Under a EMI loan, one part of instalment goes towards interest payment and another part goes towards principal re-payment, effectively leading to a higher outgo during the tenure of the loan. Policy Loan are typically issued as an interest only loan. </p>
-                                       </div>
-                                    </div>
-                                 </div> -->
+                    
                   </div>
                 </div>
               </div>
@@ -1439,47 +926,7 @@
   
     </div>
 
-    <!-- responsive form modal -->
-    <div class="modal fade" id="resOtpModal" tabindex="-1" role="dialog" aria-labelledby="otpModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-            <div class="position-relative" id="otp-div">
-              <div class="card p-2 text-center">
-                <h6 style="font-size: 18px; font-weight: 600; color: #2e2e2e">
-                  Please enter the OTP <br />
-                  to verify your Mobile number
-                </h6>
-                <div id="resOtp" class="inputs d-flex flex-row justify-content-center mt-3">
-                  <input class="m-2 text-center form-control rounded" type="text" id="firstInput" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded" type="text" id="secondInput" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded" type="text" id="thirdInput" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded" type="text" id="fourthInput" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded" type="text" id="fifthInput" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded" type="text" id="sixthInput" maxlength="1" />
-                </div>
-                <div class="mt-4" style="display: block">
-                  <button class="btn btn-danger px-4 validate" onclick="otpResVerification()">
-                    Validate
-                  </button>
-                </div>
-                <div class="resend-otp-div">
-                  <div class="resend-text">Not received your OTP ?</div>
-                  <div class="timer-text-div">
-                    <span id="resend-button-res" onclick="resendOtpNumber()">
-                      Resend OTP
-                    </span>
-                    <span id="otp-timer" style="display: none">00:30</span>
-                  </div>
-                </div>
-                <div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+ 
 
     <!-- Modal -->
     <div class="modal fade" id="otpModal" tabindex="-1" role="dialog" aria-labelledby="otpModalLabel"
@@ -1489,25 +936,24 @@
           <div class="modal-body">
             <div class="position-relative" id="otp-div">
               <div class="card p-2 text-center">
-                <h6 style="font-size: 18px; font-weight: 600; color: #2e2e2e">
-                  Please enter the OTP <br />
-                  to verify your Mobile number
+                
+                
+                <h6 style="font-size: 18px; font-weight: 600; color: #2e2e2e" id="otpHeading">
+                  Please enter the OTP to verify your mobile no.
                 </h6>
                 <div id="otp" class="inputs d-flex flex-row justify-content-center mt-3">
-                  <input class="m-2 text-center form-control rounded" type="text" id="first" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded" type="text" id="second" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded" type="text" id="third" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded" type="text" id="fourth" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded" type="text" id="fifth" maxlength="1" />
-                  <input class="m-2 text-center form-control rounded" type="text" id="sixth" maxlength="1" />
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="first" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="second" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="third" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="fourth" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="fifth" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
+                  <input class="m-2 text-center form-control rounded otp-input" type="text" id="sixth" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
+                  <!-- <i class="fa fa-check" id="mobile-check" aria-hidden="true" style="margin: auto;
+    color: #008000;display: none;"></i> -->
                 </div>
-                <div class="mt-4" style="display: block">
-                  <button class="btn btn-danger px-4 validate" onclick="otpVerification()">
-                    Validate
-                  </button>
-                </div>
+
                 <div class="resend-otp-div">
-                  <div class="resend-text">Not received your OTP ?</div>
+                  <div class="resend-text">Not received your Mobile OTP ?</div>
                   <div class="timer-text-div">
                     <span id="resend-button" onclick="resendOtp()">
                       Resend OTP
@@ -1515,6 +961,37 @@
                     <span id="timer" style="display: none">00:30</span>
                   </div>
                 </div>
+<hr>
+
+                <h6 style="font-size: 18px; font-weight: 600; color: #2e2e2e" id="otpHeading">
+                  Please enter the OTP to verify your Email ID
+                </h6>
+                <div id="email-otp" class="inputs d-flex flex-row justify-content-center mt-3">
+                  <input class="m-2 text-center form-control rounded email-otp-input" type="text" id="first" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
+                  <input class="m-2 text-center form-control rounded email-otp-input" type="text" id="second" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
+                  <input class="m-2 text-center form-control rounded email-otp-input" type="text" id="third" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
+                  <input class="m-2 text-center form-control rounded email-otp-input" type="text" id="fourth" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
+                  <input class="m-2 text-center form-control rounded email-otp-input" type="text" id="fifth" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
+                  <input class="m-2 text-center form-control rounded email-otp-input" type="text" id="sixth" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
+                  <!-- <i class="fa fa-check" id="email-check" aria-hidden="true" style="margin: auto;
+    color: #008000;display: none;"></i> -->
+
+                </div>
+                <div class="resend-otp-div" id="emailResendDiv">
+                  <div class="resend-text">Not received your Email OTP ?</div>
+                  <div class="timer-text-div">
+                    <span id="resend-email-button" onclick="resendEmailOtp()">
+                      Resend OTP
+                    </span>
+                    <span id="email-timer" style="display: none">00:30</span>
+                  </div>
+                </div>
+                <div class="mt-4" style="display: block">
+                  <button class="btn btn-danger px-4 validate" onclick="otpVerification()">
+                    Validate
+                  </button>
+                </div>
+                
                 <div></div>
               </div>
             </div>
@@ -1522,6 +999,7 @@
         </div>
       </div>
     </div>
+    
 
     <div class="modal fade" id="sentMessageModal" tabindex="-1" role="dialog" aria-labelledby="sentMessageModalLabel"
       aria-hidden="true" style="padding-right: 0px !important">
@@ -1529,22 +1007,33 @@
         <div class="modal-content">
           <div class="modal-body">
             <div class="position-relative" id="otp-div">
-              <div class="card p-2 text-center" style="width: 100%">
-                <h6 style="
+              <div class="card p-2 text-center" style="width: 100%" >
+                <h6 id="validateMessage" style="
                       color: #000;
                       font-size: 18px;
                       font-weight: 600;
                       text-align: center;
                       margin-bottom: 20px;
                     ">
-                  Thank You for your Application.Our Customer service representative will connect with you.
+                  Thank You for your Application. Our Customer service representative will connect with you.
+                  
+                </h6>
+                <h6 id="ocrMessage" style="
+                      color: #000;
+                      font-size: 18px;
+                      font-weight: 600;
+                      text-align: center;
+                      margin-bottom: 20px;
+                      display: none;
+                    ">
+                 Please wait while we are trying to read your documents.
                   
                 </h6>
                 <h5 class="mt-2">
                   <b>-Team ValuEnable</b>
                 </h5>
                 <div class="mt-4" style="display: block !important">
-                  <button class="btn btn-danger px-4 validate" data-dismiss="modal" aria-hidden="true"
+                  <button class="btn btn-danger px-4 validate"  aria-hidden="true"
                     onclick="resetField()">
                     Okay
                   </button>
@@ -1556,7 +1045,7 @@
         </div>
       </div>
     </div>
-      <div class="modal fade" id="confirmationModel" tabindex="-1" role="dialog" aria-labelledby="confirmationModelLabel"
+     <div class="modal fade" id="confirmationModel" tabindex="-1" role="dialog" aria-labelledby="confirmationModelLabel"
       aria-hidden="true" style="padding-right: 0px !important">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -1573,14 +1062,9 @@
                   Would you like to add another policy?
                 </h6>
 
-                <h6 style="
-                      color: #000;
-                      font-size: 18px;
-                      font-weight: 600;
-                      text-align: center;
-                      margin-bottom: 20px;display: none;
-                    " id="journeyTypeText">
-                  Please select the type of journey you want to proceed with.
+                <h6
+                class="journeytypetext"  id="journeyTypeText">
+                  Please choose your preferred mode of processing.
                 </h6>
                 <!-- <h5 class="mt-2">
                   <b>-Team ValuEnable</b>
@@ -1591,22 +1075,42 @@
                     Yes
                   </button>
                   
-                  <button class="btn btn-danger px-4 validate" onclick="handleAssistedJourney('assisted')"
+                  <button class="btn btn-danger px-4 validate" onclick="showJourneyType()"
                     >
                     No
                   </button>
                 </div>
 
+                <!-- Add-policy section (hidden by default). When shown it toggles under the same modal -->
+                <div class="mt-3" style="display: none; text-align:center;" id="addPolicySection">
+                  <p style="font-weight:600; margin-bottom:12px">Add another policy — enter details below</p>
+                  <div>
+                    <button class="btn btn-secondary px-3" onclick="collapseAddPolicy()">Close</button>
+                  </div>
+                </div>
+
+                <!-- Journey type (Need assistance / Do it yourself) -->
                 <div class="mt-4" style="display: none" id="journeyType">
-                  <button class="btn btn-danger px-4 validate"
-                    onclick="handleAssistedJourney('assisted')">
-                    Assisted 
-                  </button>
-                  
-                  <button onclick="handleNonAssistedJourney('nonAssisted')" class="btn btn-danger px-4 validate"
-                    >
-                    Non-Assisted
-                  </button>
+                  <div class="journey-options" role="radiogroup" aria-label="Choose processing mode">
+                    <label class="journey-option" for="journey-assisted" tabindex="0" onclick="selectJourney('assisted', this)">
+                      <input type="radio" id="journey-assisted" name="journeyTypeRadio" value="assisted" />
+                      <div class="title">Need assistance</div>
+                      <!-- <div class="desc">Our team will process the policy for you.</div> -->
+                    </label>
+
+                    <label class="journey-option" for="journey-diy" tabindex="0" onclick="selectJourney('nonAssisted', this)">
+                      <input type="radio" id="journey-diy" name="journeyTypeRadio" value="nonAssisted" />
+                      <div class="title">Do it yourself</div>
+                      <!-- <div class="desc">Upload documents and complete the process yourself.</div> -->
+                    </label>
+                  </div>
+                  <div id="equityMessage" style="display:none; font-size:12px; color:#6c757d; margin-top:8px;">
+                  Please ensure your funds are not Pure Debt to proceed with DIY
+                    </div>
+                  <div class="journey-actions">
+                    <button class="btn btn-outline-secondary" onclick="journeyBack()">Back</button>
+                    <button class="btn btn-danger" onclick="handleJourneyConfirm()">Continue</button>
+                  </div>
                 </div>
                 <div></div>
               </div>
@@ -1615,91 +1119,154 @@
         </div>
       </div>
     </div>
-  </section>
-  <footer>
-    <div class="footer">
-      <div class="container">
-        <div class="row footer-wrap">
-          <div class="col-sm-4 col-12">
-            <div class="logo">
-              <a href="https://www.valuenable.in/">
-                <img src="images/logo.png" alt="ValuEnable" />
-              </a>
-            </div>
-            <div class="information-raw">
-              <ul>
-                <li>Address: Unit S-220A, Eastern Business District (Neptune Magnet Mall), LBS Marg, Bhandup West, Mumbai - 400078.</li>
-                <li><span>Office Timings:</span> 9AM-8PM</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-sm-5 col-12">
-            <div class="links-wrap section link-block">
-              <h5>Quick Links</h5>
-              <ul>
-                <li>
-                  <a href="https://www.valuenable.in/" target="_blank">Home</a>
-                </li>
-                <!-- <li>
-                           <a href="https://www.valuenable.in/our-solutions.html"
-                              target="_blank">Our Solutions</a>
-                        </li> -->
-                <li>
-                  <a href="https://www.valuenable.in/partner-with-us.html" target="_blank">Partner With Us</a>
-                </li>
 
-                <li>
-                  <a href="https://www.valuenable.in/career.html" target="_blank">Careers & Blogs</a>
-                </li>
-                <li>
-                  <a href="https://www.valuenable.in/about-us.html" target="_blank">About Us</a>
-                </li>
-                <li><a href="gro-details.html">GRO details</a></li>
-                <!-- <li>
-                           <a href="https://www.valuenable.in/contact.html"
-                              target="_blank">Contact Us</a>
-                        </li> -->
-                <!-- <li>
-                           <a href="https://www.valuenable.in/blog.html"
-                              target="_blank">Blogs</a>
-                        </li> -->
-              </ul>
-            </div>
+    <!-- File Preview Modal -->
+    <div class="modal fade" id="filePreviewModal" tabindex="-1" role="dialog" aria-labelledby="filePreviewModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="filePreviewModalLabel">File Preview</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-          <div class="col-sm-3 col-12">
-            <div class="links-wrap section">
-              <h5 class="footter-sec">
-                <a style="color: #2b3a67" id="link-add" onclick="adjustHeight()">
-                  Privacy Policy</a>
-              </h5>
-
-              <ul>
-                <li>
-                  <a href="https://www.valuenable.in/privacy.html" target="_blank">Policy</a>
-                </li>
-
-              </ul>
-              <ul>
-                <li style="margin-top: -40px;">
-                  <a href="https://www.valuenable.in/terms-condition.html" target="_blank">T&C</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-12 text-center">
-            <ul class="socials">
-              <li>
-                <a href="https://www.linkedin.com/company/valuenable/?viewAsMember=true" target="_blank"
-                  rel="noopener noreferrer">
-                  <i class="fa fa-linkedin" aria-hidden="true"></i>
-                </a>
-              </li>
-            </ul>
+          <div class="modal-body" id="filePreviewModalBody" style="min-height: 400px; text-align: center;">
+            <!-- Preview content will be inserted here -->
           </div>
         </div>
       </div>
     </div>
-  </footer>
+
+  </section>
+   <footer>
+        <div class="footer">
+            <div class="container">
+                <div class="row footer-wrap">
+                    <div class="col-sm-4 col-12">
+                        <div class="logo">
+                            <a href="index.html">
+                                <img src="images/logo.png" alt="ValuEnable" />
+                            </a>
+                        </div>
+                        <div class="information-raw">
+                            <ul>
+                                <li>
+                                    Address: Unit S-220A, Eastern Business District (Neptune Magnet Mall), LBS Marg,
+                                    Bhandup West, Mumbai - 400078.
+                                </li>
+                                <!-- <li>
+                                    <span>
+                                        Call us:
+                                    </span>
+                                    <a href="tel:+919136611230">
+                                        +91 9136611230
+                                    </a>
+                                </li> -->
+                                <li>
+                                    <span>Email:</span>
+                                    <a href="#">info@valuenable.in</a>
+                                </li>
+                                <li>
+                                    <span>Office Timings:</span> 9AM-8PM
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-5 col-12">
+                        <div class="links-wrap section link-block">
+                            <h5>Quick Links</h5>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <!-- <li><a href="our-solutions.html">Our Solutions</a></li> -->
+                                <li><a href="partner-with-us.html">Partner With Us</a></li>
+                                <li><a href="about-us.html">About Us</a></li>
+
+                                <li><a href="career.html">Careers & Blogs</a></li>
+                                <li><a href="digital-las.html">Digital LAS</a></li>
+                                <li><a href="gro-details.html">GRO details</a></li>
+                                  <!-- <li><a style="color: black;" href="digital-las.html">Our Brands</a></li> -->
+                                   
+
+                                <!-- <li><a href="contact.html">Contact Us</a></li> -->
+                                <!-- <li><a href="blog.html">Blogs</a></li> -->
+           <div class="our-brand">
+                        <h5 style="margin-top: 70px;" class="section-title">Our Brand</h5>
+                        <a href="https://sliqfin.com/" target="_blank">
+                            <img style="margin-top: 33px;" src="images/sliq.svg" alt="SliQ" />
+                        </a>
+                    </div>
+                            </ul>
+                        </div>
+                    
+                    </div>
+                    
+                    <div class="col-sm-3 col-12">
+                        <div class="links-wrap section">
+                            <h5><a style="color: #2b3a67;" id="link-add" onclick="adjustHeight()"> Privacy Policy</a>
+                            </h5>
+                            <ul>
+                                <li><a href="privacy.html">Policy</a></li>
+                            </ul>
+                            <ul>
+                                <li class="term-list-item">
+                                    <a href="https://www.valuenable.in/terms-condition.html" target="_blank">T&C</a>
+                                </li>
+                                               <div class="investors">
+                        <h5 class="section-title" style="margin-top: 89px;">Investors</h5>
+                        <div  class="investors-logos" >
+                            <img style="margin-left: -40px;" src="images/rainmatter-logo.png" alt="Rainmatter" />
+                            <img src="images/start-up-india-logo.png" alt="Startup India" />
+                        </div>
+                    </div>
+                            </ul>
+                        </div>
+               
+                    </div>
+                      <div class="links-wrap section link-block">
+                                  <div class="our-brand-mobile">
+                        <h5 style="margin-top: 27px;" class="section-title">Our Brand</h5>
+                        <a href="https://sliqfin.com/" target="_blank">
+                            <img style="margin-top: 33px; width: 125px;" src="images/sliq.svg" alt="SliQ" />
+                        </a>
+                    </div>
+                                                      <div class="investors-mobile">
+                        <h5 class="section-title" style="margin-top: 89px;">Investors</h5>
+                        <div  class="investors-logos" style=" margin-top: 33px;">
+                            <img style="margin-left: -40px; width: 89px;" src="images/rainmatter-logo.png" alt="Rainmatter" />
+                            <img src="images/start-up-india-logo.png" alt="Startup India" />
+                        </div>
+                    </div>
+                      </div>
+                    <div class="col-12 text-center">
+                        <ul class="socials">
+                            <!-- <li>
+                                <a href="#" target="_blank" rel="noopener noreferrer"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            </li> -->
+                            <!-- <li>
+                                <a href="#" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank" rel="noopener noreferrer"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank" rel="noopener noreferrer"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                            </li> -->
+                            <li>
+                                <a href="https://www.linkedin.com/company/valuenable/?viewAsMember=true" target="_blank"
+                                    rel="noopener noreferrer">
+                                    <i class="fa fa-linkedin" aria-hidden="true"></i>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+        </div>
+    </footer>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
@@ -1717,32 +1284,170 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
   <script>
+    let branchDetail=[]
+    let is_valid_email=false;
+    let is_valid_mobile=false;
+    let is_diy=0;
      let laCheckBoxClick,laCheckBoxMobClick;
     var openOtpModal = document.getElementById('otpModal');
     var otpModalInstance = new bootstrap.Modal(openOtpModal);
       let openConfirmationModel=document.getElementById('confirmationModel');
       let confirmationModelInstance= new bootstrap.Modal(openConfirmationModel);
-      $(document).ready(function() {
-      console.log(branchNameResp)
-            $('#branchNameResp').select2({
-                placeholder: "Branch Name*",
-                allowClear: true
-            });
-        });
+      // Initialize file preview modal
+      var filePreviewModalElement = document.getElementById('filePreviewModal');
+      var filePreviewModalInstance = new bootstrap.Modal(filePreviewModalElement);
+      
+//    $(document).ready(function() {
+//       console.log(branchNameResp)
+//             $('#branchNameResp').select2({
+//                 placeholder: "Branch Name*",
+//                 allowClear: true
+//             });
+//         });
 
-        $(document).ready(function() {
-      console.log(branchNameResp)
-            $('#branchName').select2({
-                placeholder: "Branch Name*",
-                allowClear: true
-            });
-        });
+    //     $(document).ready(function() {
+    //   console.log(branchNameResp)
+    //         $('#branchName').select2({
+    //             placeholder: "Branch Name*",
+    //             allowClear: true
+    //         });
+    //     });
+//paste handle 
+document.addEventListener('DOMContentLoaded', () => {
 
-        function resetSelection() {
-                $('#branchName').val(null).trigger('change');
-            }
+  const inputs = document.querySelectorAll('.otp-input'); 
+
+  // Detect mobile/touch devices
+  const isMobile = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+
+  inputs.forEach((input, index) => {
+    // Prevent 'v' from being typed on Ctrl+V
+    input.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && (e.key === 'v' || e.key === 'V')) {
+        e.preventDefault(); // Prevent 'v' from typing
+        navigator.clipboard.readText().then(pastedText => {
+          handlePaste(pastedText, index);
+        });
+      }
+
+      // Backspace to previous field
+      if (e.key === 'Backspace' && input.value === '' && index > 0) {
+        inputs[index - 1].focus();
+      }
+    });
+
+    // Right click or long press (both desktop and mobile)
+    input.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const pastedText = e.clipboardData.getData('text');
+      if(isMobile){
+        setTimeout(() => {
+          handlePaste(pastedText, index);
+        },0);
+      } else {
+        handlePaste(pastedText, index);
+      }     
+    });
+
+    // Move to next on input
+    input.addEventListener('input', () => {
+      if (input.value.length === 1 && index < inputs.length - 1) {
+        inputs[index + 1].focus();
+      }
+    });
+  });
+
+  function handlePaste(pastedText, startIndex) {
+    const digits = pastedText.replace(/\D/g, '').split('');
+    digits.forEach((digit, offset) => {
+      const targetIndex = startIndex + offset;
+      if (inputs[targetIndex]) {
+        inputs[targetIndex].value = digit;
+      }
+    });
+
+    const lastIndex = Math.min(startIndex + digits.length - 1, inputs.length - 1);
+    if (lastIndex >= 0) inputs[lastIndex].focus();
+
+    logCurrentOTP();
+  }
+
+  function logCurrentOTP() {
+    const otp = Array.from(inputs).map(input => input.value).join('');
+    
+  }
+});
+//email otp
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  const inputs = document.querySelectorAll('.email-otp-input'); 
+
+  // Detect mobile/touch devices
+  const isMobile = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+
+  inputs.forEach((input, index) => {
+    // Prevent 'v' from being typed on Ctrl+V
+    input.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && (e.key === 'v' || e.key === 'V')) {
+        e.preventDefault(); // Prevent 'v' from typing
+        navigator.clipboard.readText().then(pastedText => {
+          handlePaste(pastedText, index);
+        });
+      }
+
+      // Backspace to previous field
+      if (e.key === 'Backspace' && input.value === '' && index > 0) {
+        inputs[index - 1].focus();
+      }
+    });
+
+    // Right click or long press (both desktop and mobile)
+    input.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const pastedText = e.clipboardData.getData('text');
+      if(isMobile){
+        setTimeout(() => {
+          handlePaste(pastedText, index);
+        },0);
+      } else {
+        handlePaste(pastedText, index);
+      }     
+    });
+
+    // Move to next on input
+    input.addEventListener('input', () => {
+      if (input.value.length === 1 && index < inputs.length - 1) {
+        inputs[index + 1].focus();
+      }
+    });
+  });
+
+  function handlePaste(pastedText, startIndex) {
+    const digits = pastedText.replace(/\D/g, '').split('');
+    digits.forEach((digit, offset) => {
+      const targetIndex = startIndex + offset;
+      if (inputs[targetIndex]) {
+        inputs[targetIndex].value = digit;
+      }
+    });
+
+    const lastIndex = Math.min(startIndex + digits.length - 1, inputs.length - 1);
+    if (lastIndex >= 0) inputs[lastIndex].focus();
+
+    logCurrentOTP();
+  }
+
+  function logCurrentOTP() {
+    const otp = Array.from(inputs).map(input => input.value).join('');
+    
+  }
+});
             function resetSelectionMob() {
                 $('#branchNameResp').val(null).trigger('change');
+            }
+            function resetSelectionDesk() {
+                $('#branchName').val(null).trigger('change');
             }
         function onApiSuccess() {
 //           var otpModal = document.getElementById('otpModal');
@@ -1776,32 +1481,39 @@ otpModalInstance.show();
 
       OTPInput();
     });
-
-    document.addEventListener('DOMContentLoaded', (event) => {
-      function OTPInput() {
-        const inputs = document.querySelectorAll('#resOtp input');
-        inputs.forEach((input, index) => {
-          input.addEventListener('input', (event) => {
-            if (input.value.length === 1) {
-              if (index !== inputs.length - 1) {
-                inputs[index + 1].focus();
+//email otp
+   document.addEventListener("DOMContentLoaded", function (event) {
+      function EmailOTPInput() {
+        const inputs = document.querySelectorAll("#email-otp > *[id]");
+        for (let i = 0; i < inputs.length; i++) {
+          inputs[i].addEventListener("keydown", function (event) {
+            if (event.key === "Backspace") {
+              inputs[i].value = "";
+              if (i !== 0) inputs[i - 1].focus();
+            } else {
+              if (i === inputs.length - 1 && inputs[i].value !== "") {
+                return true;
+              } else if (event.keyCode > 47 && event.keyCode < 58) {
+                inputs[i].value = event.key;
+                if (i !== inputs.length - 1) inputs[i + 1].focus();
+                event.preventDefault();
+              } else if (event.keyCode > 64 && event.keyCode < 91) {
+                inputs[i].value = String.fromCharCode(event.keyCode);
+                if (i !== inputs.length - 1) inputs[i + 1].focus();
+                event.preventDefault();
               }
             }
           });
-
-          input.addEventListener('keydown', (event) => {
-            if (event.key === 'Backspace') {
-              input.value = '';
-              if (index !== 0) inputs[index - 1].focus();
-            } else if (/[^0-9]/.test(event.key) && event.key !== 'Tab') {
-              event.preventDefault(); // Prevent any non-numeric input
-            }
-          });
-        });
+        }
       }
 
-      OTPInput();
+      EmailOTPInput();
     });
+
+
+
+
+    
     function isValid_Mobile_Number(mobile_number) {
       let regex = new RegExp("^[6-9][0-9]{9}$");
 
@@ -1878,20 +1590,6 @@ otpModalInstance.show();
       return res;
     }
 
-    // function convertAndDisplay() {
-    //    let surrenderValueInput = document.getElementById('surrenderValue');
-    //    let number = parseInt(surrenderValueInput.value.replace(/,/g, ''), 10);
-
-    //    if (!isNaN(number)) {
-    //       let indianFormat = convertToIndianFormat(number);
-    //       surrenderValueInput.value = indianFormat;
-    //       document.getElementById('surrenderValue').setCustomValidity("");
-    //    } else {
-    //       surrenderValueInput.value = '';
-    //       document.getElementById('surrenderValue').setCustomValidity("Please enter a valid surrender value");
-    //       document.getElementById('surrenderValue').reportValidity();
-    //    }
-    // }
     let documentKeys={
   unitStatementKey:"",
   panCardKey:"",
@@ -1902,6 +1600,14 @@ otpModalInstance.show();
   laPhotoKey:"",
   laPanCardKey:"",
   laAadharCardKey:""
+}
+
+let uploadedDocumentFile={
+  unitStatementFile:"",
+  policyDocumentFile:"",
+  laPhotoFile:"",
+  laPanCardFile:"",
+  laAadharCardFile:""
 }
 
     function isValid_Pincode(pincode) {
@@ -1934,25 +1640,26 @@ otpModalInstance.show();
     console.log(documentKeys)
     let payload = [];
     let ocrJourneyType="";
-
+console.log(payload)
     $("#maxUserForm").submit((event) => {
+    //   displayPoliciesInTable();
       console.log("maxUserForm submit called");
       event.preventDefault();
 
       startTimer();
+      startEmailOtpTimer();
+
 
       let companyName = "METLIFE";
     //   let prodctType = document.getElementById("prodctType").value;
     //   let branchName = document.getElementById("branchName").value;
 
-      let customerName =  document.getElementById(
-        "customerName"
-      ).value;
+      let customerName = document.getElementById("customerName").value;
       let customerMobileNumber = document.getElementById(
         "customerMobileNumber"
       ).value;
       console.log(customerMobileNumber)
-    //   let customerEmail = document.getElementById("customerEmail").value;
+      let customerEmail = document.getElementById("customerEmail").value;
     //   let customerDOB = document.getElementById("customerDOB").value;
     //   let attachmentsFile = document.getElementById("attachments");
       // let attachmentPancard = document.getElementById("attachment-pancard");
@@ -1971,7 +1678,7 @@ otpModalInstance.show();
       // let laGender = document.getElementById("gender").value;
     //   let laPanCard= document.getElementById("laPanCard");
     //   let laAadhar= document.getElementById("laAadhar");
-
+    //   let laDOB = document.getElementById("laDOB").value;
 //       if(laCheckBoxClick){
 //   if (
 //     laName == "" ||
@@ -1994,10 +1701,9 @@ otpModalInstance.show();
       if (
         companyName == "" ||
         // prodctType == "" ||
-        // branchName == "" ||
-        customerName == "" ||
+        // customerName == "" ||
         customerMobileNumber == "" ||
-        // customerEmail == "" ||
+        customerEmail == "" ||
         // customerDOB == ""||
         // motherName == ""||
         policyNumber==""
@@ -2040,28 +1746,14 @@ otpModalInstance.show();
 //     return;
 // }
 // }
-// if (documentKeys?.aadharCardKey =="") {
-//     alert("Aadhar Document Not Uploaded Successfully. Please select again.");
-//     return;
-// }
-// if(branchName=="Branch Name*"){
-//   alert("Please select Branch Name.");
-//     return;
-// }
-// if (documentKeys?.applicantPhotoKey =="") {
-//     alert("applicant Photo  Not Uploaded Successfully. Please select again.");
-//     return;
-// }
-// if (documentKeys?.cancelCheckKey =="") {
-//     alert("cancel Check  Not Uploaded Successfully. Please select again.");
-//     return;
-// }
-    //   if (customerEmail !== "") {
-    //     if (!validateEmail("customerEmail")) {
-    //       alert("Please enter a valid email address");
-    //       return;
-    //     }
-    //   }
+
+
+      if (customerEmail !== "") {
+        if (!validateEmail("customerEmail")) {
+          alert("Please enter a valid email address");
+          return;
+        }
+      }
 
       if (!validatePhoneNumber("customerMobileNumber")) {
         alert("Please enter a valid mobile number");
@@ -2081,18 +1773,7 @@ otpModalInstance.show();
     //     alert("Please select a Upload Policy Bond ");
     //     return;
     //   }
-      // if (!SignedAadharCopyDesk.files[0]) {
-      //   alert("Please select a Signed Aadhar Copy");
-      //   return;
-      // }
-      // if (!applicantPhoto.files[0]) {
-      //   alert("Please select a Applicant photo  ");
-      //   return;
-      // }
-      // if (!cancelCheckData.files[0]) {
-      //   alert("Please select a Cancel check ");
-      //   return;
-      // }
+      
   
 
       let [customerFirstName, customerLastName] = customerName.split(" ") || [
@@ -2114,7 +1795,7 @@ otpModalInstance.show();
         customerFirstName: customerName,
         customerLastName: "",
         customerMobileNumber,
-        // customerEmail,
+        customerEmail,
         // motherName: motherName,
         policyNumber:policyNumber,
         detailsFor: "customer",
@@ -2122,13 +1803,14 @@ otpModalInstance.show();
         // laName,
         // laEmail,
         // laPhone,
+        // laDOB: laDOB, 
         // laDOB:laDOB,
         // laGender:laGender
       };
 
       // console.log("customerObj", customerObj);
 
-      payloads = {
+      let payloads = {
         ...customerObj,
         //   panFilePath: documentKeys?.panCardKey,
         //   unitStatementFilePath: documentKeys?.unitStatementKey,
@@ -2137,38 +1819,39 @@ otpModalInstance.show();
         //   laPhotoPath:documentKeys?.laPhotoKey,
         //   laPanPath:documentKeys?.laPanCardKey,
         //   laAadharPath:documentKeys?.laAadharCardKey,
+
+        //   unitStatementFile: uploadedDocumentFile?.unitStatementFile,
+        //   policyDocumentFile: uploadedDocumentFile?.policyDocumentFile,
+        //   laPhotoFile:uploadedDocumentFile?.laPhotoFile,
+        //   laPanFile:uploadedDocumentFile?.laPanCardFile,
+        //   laAadharFile:uploadedDocumentFile?.laAadharCardFile,
+
       };
-         if (!payload.some(item => item.policyNumber == policyNumber)) {
+     
+   if (!payload.some(item => item.policyNumber == policyNumber)) {
   payload.push(payloads);
 }
+       
         console.log("payload", payload);
-            confirmationModelInstance.show()
-      
+        generateOtp()
+        
+        // Display the updated payload in the table
+        // displayPoliciesInTable();
+        
+            // confirmationModelInstance.show()
+      const emailInputFields = document.querySelectorAll(".email-otp-input");
+        emailInputFields.forEach((input) => {
+  input.disabled = false;
+        })
+
+      // $("#otpModal").modal("show");
+
+ 
     });
 
     async function uploadFile(url, file) {
 console.log(url,file)
-      // if (!file) {
-      //     alert('Please select a file to upload');
-      //     return;
-      // }
-
-      // return new Promise((resolve, reject) => {
-      // $.ajax({
-      //     type: 'PUT',
-      //     url: url,
-      //     data: file,
-      //     processData: false,
-      //     contentType: 'application/octet-stream',
-      //     success: function(response) {
-      //         resolve(response);
-      //     },
-      //     error: function(error) {
-      //         reject(error);   
-      //     }
-      // });
-      // });
-
+      
       try {
         const response = await fetch(url, {
           method: 'PUT',
@@ -2194,8 +1877,8 @@ console.log(response)
       console.log("maxUsersForm submit called");
       event.preventDefault();
 
-      startTime();
-
+      startEmailOtpTimer();
+startTimer()
       let companysName = "METLIFE";
     //   let prodctsType = document.getElementById("prodctsType").value;
     //   let branchNameResp = document.getElementById("branchNameResp").value;
@@ -2204,7 +1887,7 @@ console.log(response)
       let customersMobileNumber = document.getElementById(
         "customersMobileNumber"
       ).value;
-    //   let customersEmail = document.getElementById("customersEmail").value;
+      let customersEmail = document.getElementById("customersEmail").value;
     //   let customersDOB = document.getElementById("customersDOB").value;
     //   let attachmentsFile = document.getElementById("attachment");
     //   let attachmentPancard = document.getElementById("attachment-pan");
@@ -2218,11 +1901,12 @@ console.log(response)
 
       // let applicantPhotos= document.getElementById("applicantIdMob");
       // let cancelCheckDatas= document.getElementById("cancelCheckIds");
-      //let mothersName= document.getElementById("mothersName")?.value;
+    //   let mothersName= document.getElementById("mothersName")?.value;
       let policyNumberMob= document.getElementById("policyNumberMob").value;
     //   let laNameMob= document.getElementById("laNameMob").value;
     //   let laEmailMob= document.getElementById("laEmailMob").value;
     //   let laPhoneMob= document.getElementById("laPhoneMob").value;
+    //   let laDOBResp = document.getElementById("laDOBResp").value;
       // let laDOBResp = document.getElementById("laDOBResp").value;
       // let laGenderResp = document.getElementById("genderResp").value;
 
@@ -2250,7 +1934,7 @@ console.log(response)
         // branchNameResp == "" ||
         customersName == "" ||
         customersMobileNumber == "" ||
-        // customersEmail == "" ||
+        customersEmail == "" ||
         // customersDOB == ""|| 
         // mothersName == ""||
         policyNumberMob==""
@@ -2292,28 +1976,17 @@ console.log(response)
 //     return;
 // }
 // }
-// if (documentKeys?.aadharCardKey == "") {
-//     alert("Aadhar Document Not Uploaded Successfully. Please select again.");
-//     return;
-// }
-// if (documentKeys?.applicantPhotoKey =="") {
-//     alert("applicant Photo  Not Uploaded Successfully. Please select again.");
-//     return;
-// }
-// if (documentKeys?.cancelCheckKey =="") {
-//     alert("cancel Check  Not Uploaded Successfully. Please select again.");
-//     return;
-// }
+
 // if(branchNameResp=="Branch Name*"){
 //   alert("Please select Branch Name.");
 //     return;
 // }
-//       if (customersEmail !== "") {
-//         if (!validateEmail("customersEmail")) {
-//           alert("Please enter a valid email address");
-//           return;
-//         }
-//       }
+      if (customersEmail !== "") {
+        if (!validateEmail("customersEmail")) {
+          alert("Please enter a valid email address");
+          return;
+        }
+      }
 
       if (!validatePhoneNumber("customersMobileNumber")) {
         alert("Please enter a valid mobile number");
@@ -2325,27 +1998,13 @@ console.log(response)
     //     return;
     //   }
 
-      // if (!attachmentPancard.files[0]) {
-      //   alert("Please select a PAN/Passport/Driving License file");
-      //   return;
-      // }
-      // if (!SignedAadharCopyMob.files[0]) {
-      //   alert("Please select a Signed Aadhar Copy");
-      //   return;
-      // }
+     
 
     //   if (!UploadPolicyMob.files[0]) {
     //     alert("Please select a Upload Policy Bond ");
     //     return; 
     //   }
-      // if (!applicantPhotos.files[0]) {
-      //   alert("Please select a Applicant photo  ");
-      //   return;
-      // }
-      // if (!cancelCheckDatas.files[0]) {
-      //   alert("Please select a Cancel check ");
-      //   return;
-      // }
+     
       let [customerFirstName, customerLastName] = customersName.split(
         " "
       ) || ["", ""];
@@ -2363,7 +2022,7 @@ console.log(response)
         // customerDOB: customersDOB,
         customerLastName: "",
         customerMobileNumber: customersMobileNumber,
-        // customerEmail: customersEmail,
+        customerEmail: customersEmail,
         // motherName:mothersName,
         policyNumber:policyNumberMob,
         detailsFor: "customer",
@@ -2371,13 +2030,20 @@ console.log(response)
         // laName:laNameMob,
         // laEmail:laEmailMob,
         // laPhone:laEmailMob,
+
+        // unitStatementFile: uploadedDocumentFile?.unitStatementFile,
+        //   policyDocumentFile: uploadedDocumentFile?.policyDocumentFile,
+        //   laPhotoFile:uploadedDocumentFile?.laPhotoFile,
+        //   laPanFile:uploadedDocumentFile?.laPanCardFile,
+        //   laAadharFile:uploadedDocumentFile?.laAadharCardFile,
+        //   laDOB: laDOBResp, 
         // laDOB:laDOBResp,
         // laGender:laGenderResp
       };
 
       // console.log("customerObj", customerObj);
 
-      payloadData = {
+      let payloadData = {
         ...customerObj,
         // panFilePath: documentKeys?.panCardKey,
         //   unitStatementFilePath: documentKeys?.unitStatementKey,
@@ -2387,119 +2053,37 @@ console.log(response)
         //   laPanPath:documentKeys?.laPanCardKey,
         //   laAadharPath:documentKeys?.laAadharCardKey,
       };
-         
+
  if (!payload.some(item => item.policyNumber == policyNumberMob)) {
  payload.push(payloadData);
 }
-            confirmationModelInstance.show()
+      
+        // Display the updated payload in the table
+        // displayPoliciesInTable();
+
+        generateOtp()
+            // confirmationModelInstance.show()
+            const emailInputFields = document.querySelectorAll(".email-otp-input");
+        emailInputFields.forEach((input) => {
+  input.disabled = false;
+        })
+      // let link = `https://microservice.valuenable.in/generate-otp`;
+      // let link = `https://dev-microservice.valuenable.in/generate-otp`;
+      // let link = `http://localhost:3001/web/generate-otp`;
+      let link = `https://api-dev.valuenable.in/webhook/generate-otp`;
+
+      // let link = `https://uat-microservice.valuenable.in/generate-otp`;
+
+      // $("#resOtpModal").modal("show");
+
       
     });
-
-    $("#advisorForm").submit((event) => {
-      // console.log("Advisor Form submit called");
-      event.preventDefault();
-
-      startTimer();
-
-      let advisorCompanyName =
-        document.getElementById("advisorCompanyName").value;
-      let advisorName = document.getElementById("advisorName").value;
-      let advisorMobileNumber = document.getElementById(
-        "advisorMobileNumber"
-      ).value;
-      let advisorEmail = document.getElementById("advisorEmail").value;
-      let advisorPinCode = document.getElementById("advisorPinCode").value;
-
-      if (
-        advisorCompanyName == "" ||
-        advisorName == "" ||
-        advisorMobileNumber == "" ||
-        advisorPinCode == ""
-      ) {
-        alert(
-          "Please ensure all required fields are filled and valid in order for us to process your request."
-        );
-        return;
-      }
-
-      if (advisorCompanyName === "Associated Insurance Company*") {
-        alert("Please select a company.");
-        return;
-      }
-
-      // console.log("advisor Email ", advisorEmail )
-
-      if (advisorEmail !== "") {
-        if (!validateEmail("advisorEmail")) {
-          alert("Please enter a valid email address");
-          return;
-        }
-      }
-
-      if (!validatePhoneNumber("advisorMobileNumber")) {
-        alert("Please enter a valid mobile number");
-        return;
-      }
-
-      if (!validatePincodeInput("advisorPinCode")) {
-        alert("Please enter a valid pincode");
-        return;
-      }
-
-      let [advisorFirstName, advisorLastName] = advisorName.split(" ") || [
-        "",
-        "",
-      ];
-
-      if (advisorLastName === undefined) {
-        advisorLastName = "";
-      }
-
-      let advisorObj = {
-        companyName: advisorCompanyName,
-        firstName: advisorFirstName,
-        lastName: advisorLastName,
-        mobileNumber: advisorMobileNumber,
-        email: advisorEmail,
-        pincode: advisorPinCode,
-        detailsFor: "advisor",
-      };
-
-      console.log("advisorObj", advisorObj);
-
-      payload = {
-        ...advisorObj,
-      };
-
-      let link = `https://microservice.valuenable.in/generate-otp`;
-
-      // $('#otpModal').modal('show');
-
-      $.ajax({
-        type: "POST",
-        url: link,
-        data: {
-          customerMobileNumber: advisorMobileNumber,
-          ...payload,
-        },
-        dataType: "json",
-        encode: true,
-      })
-        .done((data) => {
-          // console.log("data", data);
-          if (data.status === "success") {
-            // $('#otpModal').modal('show');
-            $("#sentMessageModal").modal("show");
-          } else {
-            // alert("Something went wrong");
-          }
-        })
-        .fail((error) => {
-          // alert(`Something went wrong`);
-        });
-    });
+function randomIdWithTime() {
+  return `${Date.now()}-${Math.random().toString(36).substr(2, 6)}`;
+}
 
     function resetField(buttonType) {
+
       if(buttonType=="multi_policy"){
          if(payload.length==4){
          alert("Maximum 4 policy can be processed at a time.");
@@ -2507,47 +2091,171 @@ console.log(response)
       }
         
       }
-      document.getElementById("advisorName").value = "";
-      document.getElementById("advisorMobileNumber").value = "";
-      document.getElementById("advisorEmail").value = "";
-      resetFieldForCustomer();
+
+      if(ocrJourneyType=="nonAssisted"){
+          const validateMessage = document.getElementById("validateMessage");
+        const ocrMessage = document.getElementById("ocrMessage");
+        validateMessage.style.display = "none";
+        ocrMessage.style.display = "block";
+
+
+
+        document.getElementById("loader-container").style.display = "flex";
+let randomId=randomIdWithTime()
+        // let link = `http://localhost:3001/web/v1/generate-lead`
+        let link = `https://api-dev.valuenable.in/webhook/v1/generate-lead`
+console.log("ocr payload",payload)
+            $.ajax({
+        type: "POST",
+        url: link,
+        data: {
+ "policy_number": payload[0].policyNumber,
+ "company_code":payload[0].companyName,
+"email": payload[0].customerEmail,
+"name": payload[0].customerFirstName,
+"dob": payload[0].customerDOB,
+"mobile": payload[0].customerMobileNumber,
+"la_name": "",
+"la_email": "",
+"la_mobile": "",
+ "unit_statement_key": payload[0].unitStatementFilePath,
+ "policy_bond_key": payload[0].policyDocumentPath,
+ "touchpoint": payload[0].branchName,
+ "refrenceId":payload[0].leadId?payload[0].leadId:null,
+ "identifier":randomId
+},
+        dataType: "json",
+        encode: true,
+      }).done((data) => {
+
+        window.location.href = data.link
+      
+
+      var sentMessageModal=document.getElementById('sentMessageModal');
+            var messageModal= new bootstrap.Modal(sentMessageModal);
+            messageModal.hide()
+            payload = [];
+                resetFieldForCustomer();
+      resetFieldForMobile();
+      resetSelectionMob();
+      resetSelectionDesk();
+      }).fail((error) => {
+        console
+          document.getElementById("loader-container").style.display = "none";
+          // if (error.response) {
+      
+      if (error.status ==504) {
+        callCheckStatus(randomId,1);
+
+      } else { 
+        
+//  alert(error?.responseJSON?.message || "Something went wrong.");
+             let validateMessage=document.getElementById("validateMessage");
+             const ocrMessage = document.getElementById("ocrMessage");
+        validateMessage.style.display = "block";
+        ocrMessage.style.display = "none";
+
+  validateMessage.innerText="There was an issue with your data. Our CSE will contact you shortly."     
+
+}
+    // } else if (error.request) {
+
+    //   alert("No response from server. Please check your internet connection.");
+    // } else {
+    //   alert(error.message);
+    // }
+          
+          
+        });
+
+}else{
+    resetFieldForCustomer();
       resetFieldForMobile();
       resetSelectionMob()
-      resetSelection()
-confirmationModelInstance.hide()
+      resetSelectionDesk()
+          confirmationModelInstance.hide()
 
-       if(buttonType!="multi_policy"){
+       var sentMessageModal=document.getElementById('sentMessageModal');
+            var messageModal= new bootstrap.Modal(sentMessageModal);
+            messageModal.hide()
+            if(buttonType!="multi_policy"){
                window.location.reload(true);
             }
+   
+}
+     
+
+
+
+  
+
     }
 
-    const saveLead=()=>{
-      
-      let link = `https://api-dev.valuenable.in/webhook/api/create-laip-lead`;
-      // let link = `http://localhost:3001/web/api/create-laip-lead`;
+    
+    function callCheckStatus(referenceId, attempt) {
 
-      // let link = `https://api-dev.valuenable.in/webhook/generate-otp`;
+  if (attempt > 5) {
+    alert("Request timed out. Please try again later.");
+    document.getElementById("loader-container").style.display = "none";
+    return;
+  }
 
-      const requestData = {
-      payload: payload,
-      };
-      $.ajax({
-         type: "POST",
-          url: link,
-          data: JSON.stringify(requestData),  
-          contentType: "application/json",   
-          dataType: "json",
+  setTimeout(function () {
+
+    document.getElementById("loader-container").style.display = "flex";
+
+    $.ajax({
+      type: "GET",
+      url: "https://api-dev.valuenable.in/bitly/status",
+      data: { refId: referenceId },
+      dataType: "json"
+    })
+    .done(function (response, textStatus, jqXHR) {
+
+      if ( jqXHR.status == 200) {
+        window.location.href = response.external_url;
+        document.getElementById("loader-container").style.display = "none";
+      } 
+      else {
+        callCheckStatus(referenceId, attempt + 1);
+      }
+
+    })
+    .fail(function () {
+      callCheckStatus(referenceId, attempt + 1);
+    });
+
+  }, 3000);
+}
+
+    function generateOtp(){
+// let link = `https://microservice.valuenable.in/generate-otp`;
+      // let link = `https://dev-microservice.valuenable.in/generate-otp`;
+      // let link = `http://localhost:3001/web/generate-otp`;
+      let link = `https://api-dev.valuenable.in/webhook/generate-otp`;
+
+      // let link = `https://uat-microservice.valuenable.in/generate-otp`;
+      let generateOtpPayload=payload[0];
+     $.ajax({
+        type: "POST",
+  url: link,
+  data: JSON.stringify(generateOtpPayload),
+  contentType: "application/json", 
+  dataType: "json",
       })
         .done((data) => {
+
           console.log("data", data);
           if (data.status === "success") {
           confirmationModelInstance.hide()
-            var sentMessagePopup = document.getElementById('sentMessageModal');
-            var sentMes = new bootstrap.Modal(sentMessagePopup);
-            sentMes.show();
-            // onApiSuccess()
+            onApiSuccess()
+            is_valid_email=false;
+            is_valid_mobile=false;
+            
+          resetOTPInputField();
+          resetOTPInputsField()
           } else {
-            // alert("Something went wrong");
+            document.getElementById("otpModal").style.display = "none";
           }
         })
         .fail((error) => {
@@ -2557,21 +2265,20 @@ confirmationModelInstance.hide()
 
     function handleAssistedJourney(type) {
       if(payload.length>1||type==="assisted"){
-        saveLead()
+        generateOtp()
         
+      }else{
+        let journeyTypeButtonBox = document.getElementById('journeyType');
+        let confirmationModelButtons = document.getElementById('confirmationModelButtons');
+        let journeyTypeText = document.getElementById('journeyTypeText');
+        let confirmationText = document.getElementById('confirmationText');
+  
+  
+        journeyTypeButtonBox.style.display = "block";
+        confirmationModelButtons.style.display = "none";
+        journeyTypeText.style.display = "block";
+        confirmationText.style.display = "none";
       }
-      // else{
-      //   let journeyTypeButtonBox = document.getElementById('journeyType');
-      //   let confirmationModelButtons = document.getElementById('confirmationModelButtons');
-      //   let journeyTypeText = document.getElementById('journeyTypeText');
-      //   let confirmationText = document.getElementById('confirmationText');
-  
-  
-      //   journeyTypeButtonBox.style.display = "block";
-      //   confirmationModelButtons.style.display = "none";
-      //   journeyTypeText.style.display = "block";
-      //   confirmationText.style.display = "none";
-      // }
     }
 
 
@@ -2581,23 +2288,117 @@ confirmationModelInstance.hide()
       
     }
 
+    // Show the add-policy section inside the confirmation modal
+    function showAddPolicy(){
+      // preserve previous behaviour: reset fields for adding another policy
+      try{ resetField('multi_policy'); }catch(e){/* ignore */}
 
+      const addSection = document.getElementById('addPolicySection');
+      const journeyBox = document.getElementById('journeyType');
+      const confirmationButtons = document.getElementById('confirmationModelButtons');
+      const confirmationText = document.getElementById('confirmationText');
+      const journeyText = document.getElementById('journeyTypeText');
+
+      if(addSection) addSection.style.display = 'block';
+      if(journeyBox) journeyBox.style.display = 'none';
+      if(confirmationButtons) confirmationButtons.style.display = 'none';
+      if(confirmationText) confirmationText.style.display = 'none';
+      if(journeyText) journeyText.style.display = 'none';
+    }
+
+    function collapseAddPolicy(){
+      const addSection = document.getElementById('addPolicySection');
+      const confirmationButtons = document.getElementById('confirmationModelButtons');
+      const confirmationText = document.getElementById('confirmationText');
+
+      if(addSection) addSection.style.display = 'none';
+      if(confirmationButtons) confirmationButtons.style.display = 'block';
+      if(confirmationText) confirmationText.style.display = 'block';
+    }
+
+    // Show journey type inside same modal (keeps existing assisted/non-assisted flow)
+    function showJourneyType(){
+        generateOtp()
+
+
+    //   if(payload.length>1 || laCheckBoxClick || laCheckBoxMobClick){
+    //     generateOtp()
+    //     return;
+    //   }
+    //   const journeyTypeButtonBox = document.getElementById('journeyType');
+    //   const confirmationModelButtons = document.getElementById('confirmationModelButtons');
+    //   const journeyTypeText = document.getElementById('journeyTypeText');
+    //   const confirmationText = document.getElementById('confirmationText');
+    //   const addSection = document.getElementById('addPolicySection');
+
+    //   if(journeyTypeButtonBox) journeyTypeButtonBox.style.display = 'block';
+    //   if(confirmationModelButtons) confirmationModelButtons.style.display = 'none';
+    //   if(journeyTypeText) journeyTypeText.style.display = 'block';
+    //   if(confirmationText) confirmationText.style.display = 'none';
+    //   if(addSection) addSection.style.display = 'none';
+    }
+
+    // Select a journey option visually
+    function selectJourney(type, el){
+    //  if (type === 'nonAssisted') return;
+      // type: 'assisted' or 'nonAssisted'
+      document.querySelectorAll('.journey-option').forEach(node => node.classList.remove('selected'));
+      if(el && el.classList) el.classList.add('selected');
+      // set the radio value
+      const radio = document.querySelector(`input[name="journeyTypeRadio"][value="${type}"]`);
+      if(radio) radio.checked = true;
+
+      // show message only for Do it yourself
+  const msg = document.getElementById("equityMessage");
+  if(msg){
+    msg.style.display = (type === "nonAssisted") ? "block" : "none";
+  }
+    }
+
+    function handleJourneyConfirm(){
+      const selected = document.querySelector('input[name="journeyTypeRadio"]:checked');
+      if(!selected){
+        alert('Please choose an option to continue');
+        return;
+      }
+      const val = selected.value;
+      // call existing handlers to preserve behaviour
+      if(val === 'assisted'){
+        is_diy=0
+        handleAssistedJourney('assisted');
+      } else if(val === 'nonAssisted'){
+        is_diy=1
+        handleNonAssistedJourney('nonAssisted');
+      }
+    }
+
+    function journeyBack(){
+      // hide journey UI and restore confirmation buttons
+      const journeyTypeButtonBox = document.getElementById('journeyType');
+      const confirmationModelButtons = document.getElementById('confirmationModelButtons');
+      const journeyTypeText = document.getElementById('journeyTypeText');
+      const confirmationText = document.getElementById('confirmationText');
+
+      if(journeyTypeButtonBox) journeyTypeButtonBox.style.display = 'none';
+      if(confirmationModelButtons) confirmationModelButtons.style.display = 'block';
+      if(journeyTypeText) journeyTypeText.style.display = 'none';
+      if(confirmationText) confirmationText.style.display = 'block';
+    }
     function resetFieldForCustomer() {
       document.getElementById("companyName").value = "PNB MetLife India Insurance Co. Ltd";
-      // document.getElementById("prodctType").value = "Product Name*";
-      // document.getElementById("branchName").value = "";
+    //   document.getElementById("prodctType").value = "Product Name*";
       document.getElementById("customerName").value = "";
       document.getElementById("customerMobileNumber").value = "";
-      // document.getElementById("customerEmail").value = "";
-      // document.getElementById("customerDOB").value = "";
-      // document.getElementById("attachments").value = "";
+      document.getElementById("customerEmail").value = "";
+    //   document.getElementById("customerDOB").value = "";
+    //   document.getElementById("attachments").value = "";
       // document.getElementById("attachment-pancard").value = "";
-      // document.getElementById("selectedFileNames").value = "";
-      // document.getElementById("selectedFileNames").value = "";
+    //   document.getElementById("selectedFileNames").value = "";
+    //   document.getElementById("selectedFileNames").value = "";
       // document.getElementById("selectedFilePancard").value = "";
-      // document.getElementById("uploadPolicyDocument").value = "";
+    //   document.getElementById("uploadPolicyDocument").value = "";
       // document.getElementById("signedAadhar").value = "";
-      //document.getElementById("uploadPolicyDocumentFile").value = "";
+    //   document.getElementById("uploadPolicyDocumentFile").value = "";
       // document.getElementById("signedAadharFile").value = "";
       // document.getElementById("laPhotoFile").value = "";
       // document.getElementById("laPhoto").value = "";
@@ -2614,30 +2415,31 @@ confirmationModelInstance.hide()
       // document.getElementById("cancelCheckIdFile").value = "";
       // document.getElementById("motherName").value = "";
       document.getElementById("policyNumber").value = "";
-      // document.getElementById("laName").value = "";
-      // document.getElementById("laEmail").value = "";
-      // document.getElementById("laPhone").value = "";
+    //   document.getElementById("laName").value = "";
+    //   document.getElementById("laEmail").value = "";
+    //   document.getElementById("laPhone").value = "";
+    //   document.getElementById("laDOB").value = "";
       // document.getElementById("laDOB").value = "";
       // document.getElementById("gender").value = "LA Gender (If Applicable)";
      
     }
     function resetFieldForMobile() {
       document.getElementById("companysName").value = "PNB MetLife India Insurance Co. Ltd";
-      // document.getElementById("prodctsType").value = "Product Name*";
-      // document.getElementById("branchNameResp").value = "";
+    //   document.getElementById("prodctsType").value = "Product Name*";
+    //   document.getElementById("branchNameResp").value = "";
       // document.getElementById("genderResp").value = "LA Gender (If Applicable)";
       document.getElementById("customersName").value = "";
       document.getElementById("customersMobileNumber").value = "";
-      // document.getElementById("customersEmail").value = "";
-      // document.getElementById("customersDOB").value = "";
-      // document.getElementById("attachment").value = "";
+      document.getElementById("customersEmail").value = "";
+    //   document.getElementById("customersDOB").value = "";
+    //   document.getElementById("attachment").value = "";
       // document.getElementById("attachment-pan").value = "";
-      //document.getElementById("selectedFileName").value = "";
+    //   document.getElementById("selectedFileName").value = "";
       // document.getElementById("selectedFilePan").value = "";
-      // document.getElementById("selectedFileNames").value = "";
-      // document.getElementById("uploadPolicyDocumentMob").value = "";
+    //   document.getElementById("selectedFileNames").value = "";
+    //   document.getElementById("uploadPolicyDocumentMob").value = "";
       // document.getElementById("signedAadharCopyMob").value = "";
-      //document.getElementById("uploadPolicyDocumentFileMob").value = "";
+    //   document.getElementById("uploadPolicyDocumentFileMob").value = "";
       // document.getElementById("signedAadharCopyFileMob").value = "";
       // document.getElementById("applicantIdMob").value = "";
       // document.getElementById("cancelCheckIds").value = "";
@@ -2647,15 +2449,15 @@ confirmationModelInstance.hide()
       document.getElementById("policyNumberMob").value = "";
       // document.getElementById("laPhotoIdMob").value = "";
       // document.getElementById("laPhotoMob").value = "";
-      // document.getElementById("laNameMob").value = "";
-      // document.getElementById("laEmailMob").value = "";
-      // document.getElementById("laPhoneMob").value = "";
+    //   document.getElementById("laNameMob").value = "";
+    //   document.getElementById("laEmailMob").value = "";
+    //   document.getElementById("laPhoneMob").value = "";
       // document.getElementById("laDOBResp").value = "";
       // document.getElementById("laPanCardMob").value = "";
       // document.getElementById("laPanFileMob").value = "";
       // document.getElementById("laAadharMob").value = "";
       // document.getElementById("laAadharFileMob").value = "";
-
+    //   document.getElementById("laDOBResp").value = "";
 
       
     }
@@ -2677,8 +2479,8 @@ confirmationModelInstance.hide()
         inputs[i].value = "";
       }
     }
-    function getAllOtpInputValues() {
-      let inputs = document.querySelectorAll("#resOtp input");
+    function getEmailOtpInputValues() {
+      let inputs = document.querySelectorAll("#email-otp input");
       console.log(inputs);
       let values = [];
 
@@ -2690,7 +2492,7 @@ confirmationModelInstance.hide()
     }
 
     function resetOTPInputsField() {
-      let inputs = document.querySelectorAll("#otp inputs");
+      let inputs = document.querySelectorAll("#email-otp input");
       for (var i = 0; i < inputs.length; i++) {
         inputs[i].value = "";
       }
@@ -2701,10 +2503,10 @@ confirmationModelInstance.hide()
 
       let mobileNumber;
 
-      if (payload.detailsFor === "customer") {
-        mobileNumber = payload.customerMobileNumber;
+      if (payload[0].detailsFor === "customer") {
+        mobileNumber = payload[0].customerMobileNumber;
       } else {
-        mobileNumber = payload.mobileNumber;
+        mobileNumber = payload[0].mobileNumber;
       }
 
       // console.log("Testing resend otp", mobileNumber);
@@ -2712,11 +2514,13 @@ confirmationModelInstance.hide()
       let newPayload = {
         mobileNumber,
         detailsFor: "resendOtp",
+        type:"mobile",
+        customerEmail:payload?.customerEmail
       };
 
       // let link = `https://microservice.valuenable.in/generate-otp`;
       // let link = `https://dev-microservice.valuenable.in/generate-otp`;
-      // let link = `http://localhost:3001/generate-otp`;
+      // let link = `http://localhost:3001/web/generate-otp`;
       let link = `https://api-dev.valuenable.in/webhook/generate-otp`;
 
 
@@ -2729,6 +2533,7 @@ confirmationModelInstance.hide()
         },
         dataType: "json",
         encode: true,
+        contentType: "application/json",
       })
         .done((data) => {
           // console.log("data", data);
@@ -2742,15 +2547,18 @@ confirmationModelInstance.hide()
         });
     }
 
-    function resendOtpNumber() {
-      startTime();
+    
+
+    function resendEmailOtp() {
+            startEmailOtpTimer();
+
 
       let mobileNumber;
 
-      if (payload.detailsFor === "customer") {
-        mobileNumber = payload.customerMobileNumber;
+      if (payload[0].detailsFor === "customer") {
+        mobileNumber = payload[0].customerMobileNumber;
       } else {
-        mobileNumber = payload.mobileNumber;
+        mobileNumber = payload[0].mobileNumber;
       }
 
       // console.log("Testing resend otp", mobileNumber);
@@ -2758,11 +2566,13 @@ confirmationModelInstance.hide()
       let newPayload = {
         mobileNumber,
         detailsFor: "resendOtp",
+        type:"email",
+        customerEmail:payload?.customerEmail
       };
 
       // let link = `https://microservice.valuenable.in/generate-otp`;
       // let link = `https://dev-microservice.valuenable.in/generate-otp`;
-      // let link = `http://localhost:3001/generate-otp`;
+      // let link = `http://localhost:3001/web/generate-otp`;
       let link = `https://api-dev.valuenable.in/webhook/generate-otp`;
 
 
@@ -2775,6 +2585,7 @@ confirmationModelInstance.hide()
         },
         dataType: "json",
         encode: true,
+        contentType: "application/json",
       })
         .done((data) => {
           // console.log("data", data);
@@ -2788,193 +2599,221 @@ confirmationModelInstance.hide()
         });
     }
 
-    function generateLead(payload) {
-  const link = `https://api-dev.valuenable.in/webhook/v1/generate-lead`;
 
-  return $.ajax({
-    type: "POST",
-    url: link,
-    data: {
-      "policy_number": payload.policyNumber,
-      "company_code": payload.companyName,
-      "email": payload.customerEmail,
-      "name": payload.customerFirstName,
-      "dob": payload.customerDOB,
-      "mobile": payload.customerMobileNumber,
-      "la_name": "",
-      "la_email": "",
-      "la_mobile": "",
-      "unit_statement": payload.unitStatementFilePath,
-      "policy_bond": payload.policyDocumentPath,
-      "branch_name": payload.branchName,
-    },
-    dataType: "json",
-    encode: true,
-  });
+
+async function otpVerification() {
+  const inputs = getAllInputValues();
+  const otp = inputs.join("");
+  const emailInputs = getEmailOtpInputValues();
+  const emailOtp = emailInputs.join("");
+if(!otp||otp.length<6){
+alert("Please enter a valid Mobile OTP");
+return;
+}
+if(!emailOtp||emailOtp.length<6){
+alert("Please enter a valid Email OTP");
+return;
 }
 
+  const emailOtpLink = `https://api-dev.valuenable.in/webhook/verify-email-otp`;
+  const mobileOtpLink = `https://api-dev.valuenable.in/webhook/verify-otp`;
 
-    function otpVerification() {
-      const inputs = getAllInputValues();
-      const otp = inputs.join("");
+  //  const emailOtpLink = `http://localhost:3001/web/verify-email-otp`;
+  // const mobileOtpLink = `http://localhost:3001/web/verify-otp`;
 
-      // let link = `https://microservice.valuenable.in/verify-otp`;
-      // let link = `https://dev-microservice.valuenable.in/verify-otp`;
-      // let link = `http://localhost:3001/web/verify-otp`
-      let link = `https://api-dev.valuenable.in/webhook/verify-otp`
-
-      // let link = `https://uat-microservice.valuenable.in/verify-otp`;
-
-      $.ajax({
+  try {
+    // Step 1 → If email not yet verified
+    if (!is_valid_email) {
+      const emailResponse = await $.ajax({
         type: "POST",
-        url: link,
-        data: {
-          ...payload,
-          otp,
-        },
-        dataType: "json",
-        encode: true,
-      })
-        .done((data) => {
-          // console.log("data", data);
-          if (data.status === "success") {
+  url: emailOtpLink,
+  data: JSON.stringify({
+    ...payload[0],
+    otp: emailOtp,
+  }),
+  contentType: "application/json", // ✅ now correct
+  dataType: "json",
+      });
 
-  //           generateLead(payload)
-  // .done((data) => {
-  //   window.location.href = data.link;
-  //   resetOTPInputField();
-  //   otpModalInstance.hide();
-    
-  //   const sentMessageModal = document.getElementById('sentMessageModal');
-  //   const messageModal = new bootstrap.Modal(sentMessageModal);
-  //   messageModal.show();
+      if (emailResponse.status === "success") {
+        is_valid_email = true;
+        // Hide resend button safely (only if exists)
+        const resendButtonElement = document.getElementById("emailResendDiv");
+        const emailCheck = document.getElementById("email-check");
 
-  //   payload = {};
-  // })
-  // .fail((error) => {
-  //   alert(error?.responseJSON?.message);
-  // });
+        
+        if (resendButtonElement) {
+          resendButtonElement.style.display = "none";
+        }
+        if(emailCheck){
+          emailCheck.style.display = "block";
+        }
 
-            resetOTPInputField();
+        // Disable email input fields
+        const emailInputFields = document.querySelectorAll(".email-otp-input");
+        emailInputFields.forEach((input) => {
+  input.disabled = true;
+  // input.style.color = "black";        // ✅ Make text black
+  // input.style.fontWeight = "600";     // optional: make text bold
+});
+        console.log("Email OTP verified successfully");
+      } else {
+        alert("Invalid Email OTP, please try again.");
+        return;
+      }
+    }
+
+    // Step 2 → If email is verified but mobile not yet verified
+    if (is_valid_email && !is_valid_mobile) {
+      const requestData = {
+  payload: payload,
+  otp: otp,
+  is_diy:is_diy
+};
+
+const mobileResponse = await $.ajax({
+  type: "POST",
+  url: mobileOtpLink,
+  data: JSON.stringify(requestData),  
+  contentType: "application/json",   
+  dataType: "json",
+});
+
+console.log(mobileResponse);
+
+      if (mobileResponse.status === "success") {
+        is_valid_mobile = true;
+                const mobileCheck = document.getElementById("mobile-check");
+                 if(mobileCheck){
+          mobileCheck.style.display = "block";
+        }
+
+        console.log("Mobile OTP verified successfully");
+      } else {
+        alert("Invalid Mobile OTP, please try again.");
+        return;
+      }
+    }
+
+    // Step 3 → If both verified successfully
+    if (is_valid_email && is_valid_mobile) {
+      resetOTPInputField();
+      otpModalInstance.hide();
+
+      resetOTPInputField();
             otpModalInstance.hide(); 
             var sentMessageModal=document.getElementById('sentMessageModal');
+            let validateMessage=document.getElementById("validateMessage");
+            if(ocrJourneyType=="nonAssisted"){
+              validateMessage.innerText="OTP successfully validated."}
+              else{
+                validateMessage.innerText="Thank You for your Application.Our Customer service representative will connect with you."
+                payload = [];
+              }
             var messageModal= new bootstrap.Modal(sentMessageModal);
             messageModal.show()
 
-            payload = {};
-           
-          } else {
-            alert("Please enter the OTP");
-          }
-        })
-        .fail((error) => {
-          alert(error?.responseJSON?.message);
-        });
+      
+      is_valid_email = false;
+      is_valid_mobile = false;
+      console.log("Both OTPs verified successfully");
+    }
+  } catch (error) {
+    console.error("OTP verification error:", error);
+    if(error?.responseJSON?.code=="ER_DUP_ENTRY"){
+      is_valid_email = false;
+    is_valid_mobile = false;
+
+    const emailInputFields = document.querySelectorAll(".email-otp-input");
+    emailInputFields.forEach((input) => {
+      input.disabled = false;
+      input.style.color = "black";
+      input.style.fontWeight = "400"; // back to original
+    });
     }
 
-    function otpResVerification() {
-      const inputs = getAllOtpInputValues();
-      console.log(inputs);
-      const otp = inputs.join("");
-
-      // let link = `https://microservice.valuenable.in/verify-otp`;
-      // let link = `https://dev-microservice.valuenable.in/verify-otp`;
-      // let link = `http://localhost:3001/verify-otp`
-      let link = `https://api-dev.valuenable.in/webhook/verify-otp`
-
-      // let link = `https://uat-microservice.valuenable.in/verify-otp`
+    const message =
+      error?.responseJSON?.message ||
+      "OTP verification failed, please try again.";
+    alert(message);
+  }
+}
 
 
-      $.ajax({
-        type: "POST",
-        url: link,
-        data: {
-          ...payload,
-          otp,
-        },
-        dataType: "json",
-        encode: true,
-      })
-        .done((data) => {
-          console.log("data", data);
-          if (data.status === "success") {
+function displayPoliciesInTable() {
+  console.log("payload in table", payload);
+  
+  const thead = document.getElementById("policyTableHead");
+  const tbody = document.getElementById("policyTableBody");
 
-         
-  //           generateLead(payload)
-  // .done((data) => {
-  //   window.location.href = data.link;
-  //   resetOTPInputField();
-  //   otpModalInstance.hide();
-    
-  //   const sentMessageModal = document.getElementById('sentMessageModal');
-  //   const messageModal = new bootstrap.Modal(sentMessageModal);
-  //   messageModal.show();
+  function hasValue(field) {
+    return payload.some(item => item[field]);
+  }
 
-  //   payload = {};
-  // })
-  // .fail((error) => {
-  //   alert(error?.responseJSON?.message);
-  // });
+  // Clear existing table content
+  tbody.innerHTML = "";
+
+  thead.innerHTML = `
+<tr>
+  <th>Sr No.</th>
+
+  ${hasValue("policyNumber") ? "<th>Policy Number</th>" : ""}
+  ${hasValue("companyName") ? "<th>Company Name</th>" : ""}
+  ${hasValue("customerFirstName") ? "<th>Customer Name</th>" : ""}
+  ${hasValue("customerMobileNumber") ? "<th>Mobile</th>" : ""}
+  ${hasValue("customerEmail") ? "<th>Email</th>" : ""}
+</tr>
+`;
+thead.querySelectorAll("th").forEach(th => {
+  th.style.cssText = `
+    padding:14px 18px;
+    background:#f5f5f5;
+    font-weight:700;
+    text-align:left;
+    white-space:nowrap;
+    border-bottom:2px solid #ddd;
+  `;
+});
+
+payload.forEach((item, index) => {
+  const tr = document.createElement("tr");
+
+  tr.innerHTML = `
+    <td>${index + 1}</td>
+
+    ${hasValue("policyNumber") ? `<td>${item.policyNumber || "-"}</td>` : ""}
+    ${hasValue("companyName") ? `<td>${item.companyName || "-"}</td>` : ""}
+    ${hasValue("customerFirstName") ? `<td>${item.customerFirstName || "-"}</td>` : ""}
+    ${hasValue("customerMobileNumber") ? `<td>${item.customerMobileNumber || "-"}</td>` : ""}
+    ${hasValue("customerEmail") ? `<td>${item.customerEmail || "-"}</td>` : ""}
+}
+
+
+  `;
+
+  tr.querySelectorAll("td").forEach(td => {
+    td.style.cssText = `
+      padding:12px 18px;
+      white-space:nowrap;
+      border-bottom:1px solid #eee;
+      vertical-align:middle;
+      text-align:left;
+    `;
+  });
+
+  tbody.appendChild(tr);
+});
+
+  function downloadFile(path) {
+    window.open(BASE_FILE_URL + path, "_blank");
+  }
+}
+// End of displayPoliciesInTable function
 
 
 
-            resetOTPInputsField();
 
-            var resotpModal = document.getElementById('otpModal');
-            var resmodal = new bootstrap.Modal(resotpModal);
-            resmodal.hide(); 
 
-            var sentMessagePopup = document.getElementById('sentMessageModal');
-            var sentMes = new bootstrap.Modal(sentMessagePopup);
-            sentMes.show();
-            
-
-            payload = {};
-            
-          } else {
-            alert("Please enter the OTP");
-          }
-        })
-        .fail((error) => {
-          alert("Please enter the OTP");
-        });
-    }
-
-    function toggleButton(button) {
-      const buttons = document.querySelectorAll(".f-toggle-btn");
-      const contentDivs = document.querySelectorAll(
-        'div[id^="loan-policy-"]'
-      );
-
-      const advisorFaqsDivs = document.getElementById("advisor-details-faq");
-      const customerFaqsDivs = document.getElementById(
-        "customer-details-faq"
-      );
-
-      buttons.forEach((btn) => {
-        btn.classList.remove("active");
-      });
-
-      button.classList.add("active");
-
-      const activeButtonIndex = Array.from(buttons).indexOf(button);
-
-      contentDivs.forEach((div, index) => {
-        if (index === activeButtonIndex) {
-          div.style.display = "block";
-        } else {
-          div.style.display = "none";
-        }
-      });
-
-      if (activeButtonIndex === 0) {
-        advisorFaqsDivs.style.display = "block";
-        customerFaqsDivs.style.display = "none";
-      } else {
-        advisorFaqsDivs.style.display = "none";
-        customerFaqsDivs.style.display = "block";
-      }
-    }
 
     let initialCountdown = 15;
     let countdown = initialCountdown;
@@ -3004,9 +2843,9 @@ confirmationModelInstance.hide()
     }
 
     function updateTime() {
-      const timerElement = document.getElementById("otp-timer");
+      const timerElement = document.getElementById("email-timer");
       const resendButtonElement =
-        document.getElementById("resend-button-res");
+        document.getElementById("resend-email-button");
 
       if (otpCountDown >= 0) {
         const minutes = Math.floor(otpCountDown / 60);
@@ -3023,10 +2862,10 @@ confirmationModelInstance.hide()
       }
     }
 
-    function startTime() {
-      const timerElement = document.getElementById("otp-timer");
+    function startEmailOtpTimer() {
+      const timerElement = document.getElementById("email-timer");
       const resendButtonElement =
-        document.getElementById("resend-button-res");
+        document.getElementById("resend-email-button");
 
       otpCountDown = initialCountdownOtp;
 
@@ -3065,9 +2904,56 @@ confirmationModelInstance.hide()
     function openFileUploaderPancard() {
       document.getElementById("attachment-pan").click();
     }
-    function handleFileUpload(files) {
+
+async function validatePDF(file) {
+  if (!file) {
+    alert("No file selected");
+    return false;
+  }
+
+  if (file.type !== "application/pdf") {
+    alert("Please upload your file in PDF format.");
+    return false;
+  }
+
+  try {
+    const arrayBuffer = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+    const numPages = pdf.numPages;
+
+    const MIN_PAGES = 2;
+    if (numPages < MIN_PAGES) {
+      alert(
+        `The uploaded file must contain a minimum of 2 pages`
+      );
+      return false;
+    }
+
+    return true;
+
+  } catch (error) {
+    console.error("Error reading PDF:", error);
+    alert("Unable to read the PDF file. Please try again.");
+    return false;
+  }
+}
+
+
+   async function handleFileUpload(files) {
       var fileName = files[0].name;
+      
+      // Add file preview
+
+      uploadedDocumentFile.unitStatementFile = files[0];
+      
       let unitStatementLebelId=document.getElementById("unitStatementLebelId");
+         const isValid = await validatePDF(files[0]);
+  if (!isValid){ 
+    return
+  };
+
+
+      
       if(fileName){
         unitStatementLebelId.style.display = "block"; 
         let attachmentsFile = document.getElementById("attachment");
@@ -3115,6 +3001,101 @@ confirmationModelInstance.hide()
       }
       document.getElementById("selectedFilePan").value = fileName;
     }
+
+
+
+    // Store uploaded files for preview
+    let uploadedFilesPreview = {};
+
+    // Function to open file preview modal
+
+
+    function openFilePreviewModal(policynumber,fileType,label) {
+      const modalBody = document.getElementById("filePreviewModalBody");
+      const modalTitle = document.getElementById("filePreviewModalLabel");
+      
+      
+      modalTitle.textContent = label + " - Preview";
+      modalBody.innerHTML = '<div style="padding: 20px;"><i class="fa fa-spinner fa-spin" style="font-size: 32px;"></i><p>Loading preview...</p></div>';
+      
+      // Show the modal using Bootstrap modal instance
+      filePreviewModalInstance.show();
+      
+      // Check if we have the file stored locally for preview
+      const storedFile = payload.find(item => item.policyNumber == policynumber)[fileType];
+      
+      if (storedFile) {
+        displayFileInModal(storedFile, label);
+      } else {
+        // If file is already uploaded, show download option
+        modalBody.innerHTML = `
+          <div style="padding: 40px;">
+            <i class="fa fa-file-o" style="font-size: 64px; color: #da1e37; margin-bottom: 20px;"></i>
+            <h5>${label}</h5>
+            <p style="color: #666;">File has been uploaded successfully</p>
+            <p style="color: #999; font-size: 12px;">File Key: ${filePath}</p>
+          </div>
+        `;
+      }
+    }
+
+    function renderPDF(url) {
+  const canvas = document.getElementById("pdfCanvas");
+  const ctx = canvas.getContext("2d");
+
+  pdfjsLib.getDocument(url).promise.then(pdf => {
+    pdf.getPage(1).then(page => {
+      const viewport = page.getViewport({ scale: 1.5 });
+
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+
+      page.render({
+        canvasContext: ctx,
+        viewport: viewport
+      });
+    });
+  }).catch(() => {
+    canvas.outerHTML = `
+      <div style="text-align:center;padding:40px">
+        <p>Unable to preview PDF</p>
+        <a href="${url}" target="_blank">Open PDF</a>
+      </div>
+    `;
+  });
+}
+
+    // Function to display file in modal
+    function displayFileInModal(file, label) {
+      const modalBody = document.getElementById("filePreviewModalBody");
+      const fileType = file.type;
+      const fileURL = URL.createObjectURL(file);
+      modalBody.innerHTML = "";
+      
+      if (fileType.startsWith('image/')) {
+        // Image preview
+        modalBody.innerHTML = `
+          <img src="${fileURL}" alt="${label}" style="max-width: 100%; height: auto; max-height: 500px; object-fit: contain;" />
+        `;
+      } else if (fileType === 'application/pdf') {
+        // PDF preview
+      modalBody.innerHTML = `
+      <canvas id="pdfCanvas"></canvas>
+    `;
+    renderPDF(fileURL);
+      } else {
+        // Other file types
+        modalBody.innerHTML = `
+          <div style="padding: 40px;">
+            <i class="fa fa-file-o" style="font-size: 64px; color: #da1e37; margin-bottom: 20px;"></i>
+            <h5>${file.name}</h5>
+            <p style="color: #666;">Size: ${(file.size / 1024).toFixed(2)} KB</p>
+            <p style="color: #666;">Type: ${file.type || 'Unknown'}</p>
+          </div>
+        `;
+      }
+    }
+
     function openFileUploaders() {
       document.getElementById("attachments").click();
     }
@@ -3122,9 +3103,16 @@ confirmationModelInstance.hide()
       document.getElementById("attachment-pancard").click();
     }
   
-    function handleFileUploads(files) {
+    async function handleFileUploads(files) {
       var fileName = files[0].name;
       let unitStatementLebel=document.getElementById("unitStatementLebel");
+      
+      uploadedDocumentFile.unitStatementFile = files[0];
+      
+       const isValid = await validatePDF(files[0]);
+  if (!isValid){ 
+    return
+  };
       if(fileName){
         unitStatementLebel.style.display = "block"; 
         let attachmentsFile = document.getElementById("attachments");
@@ -3179,6 +3167,10 @@ confirmationModelInstance.hide()
     function handelUploadPolicy(files) {
       var fileName = files[0].name;
       console.log(files)
+      
+      // Add file preview
+     uploadedDocumentFile.policyDocumentFile = files[0];
+      
       let policybondlebel=document.getElementById("policybondlebel");
       if(fileName){
         policybondlebel.style.display = "block"; 
@@ -3238,6 +3230,10 @@ confirmationModelInstance.hide()
    
     function handelUploadPolicyMob(files) {
       var fileName = files[0].name;
+      
+      // Add file preview
+      uploadedDocumentFile.policyDocumentFile = files[0];
+      
       let policybondlebelId = document.getElementById("policybondlebelId");
       if(fileName){
         policybondlebelId.style.display = "block"; 
@@ -3274,6 +3270,10 @@ confirmationModelInstance.hide()
     }
     function handelSignedAadharCopyMob(files) {
       var fileName = files[0].name;
+      
+      // Add file preview
+      uploadedDocumentFile.laAadharCardFile = files[0];
+      
       if(fileName){
         let attachmentsFile = document.getElementById("signedAadharCopyMob");
         uploadDocument("aadharCard",attachmentsFile.files[0].type).then((result) => {
@@ -3296,124 +3296,13 @@ confirmationModelInstance.hide()
       document.getElementById("signedAadharCopyFileMob").value = fileName;
     }
 
-//     function handelUploadPhoto(files){
-//       console.log(files)
-//       var fileName = files[0].name;
-//       if(fileName){
-//         let attachmentsFile = document.getElementById("applicantIdDesk");
-//         uploadDocument("applicantPhoto",attachmentsFile.files[0].type).then((result) => {
-//           console.log(result)
-//       if (result.status=="success") {
-//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
-//               .then(response => {
-//                 documentKeys.applicantPhotoKey = result.uploadKey;
-//               })
-//               .catch(error => {
-//                 console.error('Upload error:', error);
-                
-//             alert("Photo upload failed. Please try again.");
-//             return;
-
-//               })
-//   }
-// })
-//       }
-//       document.getElementById("applicantIdDeskFile").value = fileName;
-//     }
-//     function openApplicantPhoto(){
-//  document.getElementById("applicantIdDesk").click();
-//     }
-//     function handelCancelCheck(files){
-//       console.log(files)
-//       var fileName = files[0].name;
-//       if(fileName){
-//         let attachmentsFile = document.getElementById("cancelCheckId");
-//         uploadDocument("cancelCheck",attachmentsFile.files[0].type).then((result) => {
-//           console.log(result)
-//       if (result.status=="success") {
-//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
-//               .then(response => {
-//                 documentKeys.cancelCheckKey = result.uploadKey;
-//               })
-//               .catch(error => {
-//                 console.error('Upload error:', error);
-                
-//             alert("cancel Check upload failed. Please try again.");
-//             return;
-
-//               })
-//   }
-// })
-//       }
-//       document.getElementById("cancelCheckIdFile").value = fileName;
-//     }
-//     function openCancelCheck(){
-//  document.getElementById("cancelCheckId").click();
-//     }
-
-//     function handelUploadPhotos(files){
-//       console.log(files)
-//       var fileName = files[0].name;
-//       if(fileName){
-//         let attachmentsFile = document.getElementById("applicantIdMob");
-//         uploadDocument("applicantPhoto",attachmentsFile.files[0].type).then((result) => {
-//           console.log(result)
-//       if (result.status=="success") {
-//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
-//               .then(response => {
-//                 documentKeys.applicantPhotoKey = result.uploadKey;
-//               })
-//               .catch(error => {
-//                 console.error('Upload error:', error);
-                
-//             alert("Photo upload failed. Please try again.");
-//             return;
-
-//               })
-//   }
-// })
-//       }
-//       document.getElementById("applicantIdMobFile").value = fileName;
-//     }
-//     function openApplicantPhotos(){
-//  document.getElementById("applicantIdMob").click();
-//     }
-
-//     function handelCancelsChecks(files){
-//       console.log(files)
-//       var fileName = files[0].name;
-//       if(fileName){
-//         let attachmentsFile = document.getElementById("cancelCheckIds");
-//         uploadDocument("cancelCheck",attachmentsFile.files[0].type).then((result) => {
-//           console.log(result)
-//       if (result.status=="success") {
-//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
-//               .then(response => {
-//                 documentKeys.cancelCheckKey = result.uploadKey;
-//               })
-//               .catch(error => {
-//                 console.error('Upload error:', error);
-                
-//             alert("cancel Check upload failed. Please try again.");
-//             return;
-
-//               })
-//   }
-// })
-//       }
-//       document.getElementById("cancelCheckIdFiles").value = fileName;
-//     }
-//     function openCancelsChecks(){
-//  document.getElementById("cancelCheckIds").click();
-//     }
-
-
-// 
-
 
         function handelLaPhotoMob(files){
       console.log(files)
       var fileName = files[0].name;
+      
+      // Add file preview
+uploadedDocumentFile.laPhotoFile = files[0];      
       let laPhotolabelMob = document.getElementById("laPhotolabelMob");
 
       if(fileName){
@@ -3448,6 +3337,9 @@ confirmationModelInstance.hide()
     function handelLaPanMob(files){
       console.log(files)
       var fileName = files[0].name;
+      
+      // Add file preview
+uploadedDocumentFile.laPanCardFile = files[0];      
       let laPanlabelMob = document.getElementById("laPanlabelMob");
 
       if(fileName){
@@ -3483,6 +3375,9 @@ confirmationModelInstance.hide()
     function handelLaAadharMob(files){
       console.log(files)
       var fileName = files[0].name;
+      
+      // Add file preview
+uploadedDocumentFile.laAadharCardFile = files[0];      
       let laAadharlabelMob = document.getElementById("laAadharlabelMob");
 
       if(fileName){
@@ -3518,39 +3413,12 @@ confirmationModelInstance.hide()
 
 
 
-
-//     function handelLaPan(files){
-//       console.log(files)
-//       var fileName = files[0].name;
-//       if(fileName){
-//         let attachmentsFile = document.getElementById("laPanCard");
-//         uploadDocument("laPan",attachmentsFile.files[0].type).then((result) => {
-//           console.log(result)
-//       if (result.status=="success") {
-//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
-//               .then(response => {
-//                 documentKeys.laPanCardKey = result.uploadKey;
-//               })
-//               .catch(error => {
-//                 console.error('Upload error:', error);
-                
-//             alert("Photo upload failed. Please try again.");
-//             return;
-
-//               })
-//   }
-// })
-//       }
-//       document.getElementById("laPanFile").value = fileName;
-//     }
-//     function openLaPanFile(){
-//  document.getElementById("laPanCard").click();
-//     }
-
-
     function handelLaAadhar(files){
       console.log(files)
       var fileName = files[0].name;
+      
+      // Add file preview
+uploadedDocumentFile.laAadharCardFile = files[0];      
       let laAadharlabel=document.getElementById("laAadharlabel");
       if(fileName){
         laAadharlabel.style.display = "block"; 
@@ -3584,6 +3452,9 @@ confirmationModelInstance.hide()
     function handelLaPhoto(files){
       console.log(files)
       var fileName = files[0].name;
+      
+      // Add file preview
+uploadedDocumentFile.laPhotoFile = files[0];      
       let laPhotolabel=document.getElementById("laPhotolabel");
       if(fileName){
         laPhotolabel.style.display = "block"; 
@@ -3615,62 +3486,6 @@ confirmationModelInstance.hide()
     }
 
 
-    
-
-
-//     function handelLaPanMob(files){
-//       console.log(files)
-//       var fileName = files[0].name;
-//       if(fileName){
-//         let attachmentsFile = document.getElementById("laPanCardMob");
-//         uploadDocument("laPan",attachmentsFile.files[0].type).then((result) => {
-//           console.log(result)
-//       if (result.status=="success") {
-//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
-//               .then(response => {
-//                 documentKeys.laPanCardKey = result.uploadKey;
-//               })
-//               .catch(error => {
-//                 console.error('Upload error:', error);
-                
-//             alert("Photo upload failed. Please try again.");
-//             return;
-
-//               })
-//   }
-// })
-//       }
-//       document.getElementById("laPanFileMob").value = fileName;
-//     }
-//     function openLaPanFileMob(){
-//  document.getElementById("laPanCardMob").click();
-//     }
-
-
-//     function handelLaAadharMob(files){
-//       console.log(files)
-//       var fileName = files[0].name;
-//       if(fileName){
-//         let attachmentsFile = document.getElementById("laAadharMob");
-//         uploadDocument("laAadhar",attachmentsFile.files[0].type).then((result) => {
-//           console.log(result)
-//       if (result.status=="success") {
-//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
-//               .then(response => {
-//                 documentKeys.laAadharCardKey = result.uploadKey;
-//               })
-//               .catch(error => {
-//                 console.error('Upload error:', error);
-                
-//             alert("Photo upload failed. Please try again.");
-//             return;
-
-//               })
-//   }
-// })
-//       }
-//       document.getElementById("laAadharFileMob").value = fileName;
-//     }
     function openLaAadharFileMob(){
  document.getElementById("laAadharMob").click();
     }
@@ -3678,10 +3493,12 @@ confirmationModelInstance.hide()
 
 
 
-
     function handelLaPan(files){
       console.log(files)
       var fileName = files[0].name;
+      
+      // Add file preview
+uploadedDocumentFile.laPanCardFile = files[0];      
       let laPanlabel=document.getElementById("laPanlabel");
       if(fileName){
         laPanlabel.style.display = "block"; 
@@ -3710,36 +3527,7 @@ confirmationModelInstance.hide()
     function openLaPanFile(){
  document.getElementById("laPanCard").click();
     }
-
-
-//     function handelLaAadhar(files){
-//       console.log(files)
-//       var fileName = files[0].name;
-//       if(fileName){
-//         let attachmentsFile = document.getElementById("laAadhar");
-//         uploadDocument("laAadhar",attachmentsFile.files[0].type).then((result) => {
-//           console.log(result)
-//       if (result.status=="success") {
-//         uploadFile(result.uploadUrl, attachmentsFile.files[0])
-//               .then(response => {
-//                 documentKeys.laAadharCardKey = result.uploadKey;
-//               })
-//               .catch(error => {
-//                 console.error('Upload error:', error);
-                
-//             alert("Photo upload failed. Please try again.");
-//             return;
-
-//               })
-//   }
-// })
-//       }
-//       document.getElementById("laAadharFile").value = fileName;
-//     }
-//     function openLaAadharFile(){
-//  document.getElementById("laAadhar").click();
-//     }
-    toggleButton(document.querySelector(".f-toggle-btn.t-btn-02"));
+    // toggleButton(document.querySelector(".f-toggle-btn.t-btn-02"));
     $(function () {
       $("#customerDOB").datepicker();
     });
@@ -3761,28 +3549,28 @@ confirmationModelInstance.hide()
       this.showPicker();
     });
     const dropArea = document.querySelector(".drop_box"),
-      button = dropArea?.querySelector("button"),
-      dragText = dropArea.querySelector("header"),
-      input = dropArea.querySelector("input");
+      button = dropArea?.querySelector("button");
+      // dragText = dropArea.querySelector("header"),
+      // input = dropArea.querySelector("input");
     let file;
     var filename;
 
-    button.onclick = () => {
-      input.click();
-    };
+    // button.onclick = () => {
+    //   input.click();
+    // };
 
-    input.addEventListener("change", function (e) {
-      var fileName = e.target.files[0].name;
-      let filedata = `
-    <form action="" method="post">
-    <div class="form">
-    <h4>${fileName}</h4>
-    <input type="email" placeholder="Enter email upload file">
-    <button class="btn">Upload</button>
-    </div>
-    </form>`;
-      dropArea.innerHTML = filedata;
-    });
+    // input.addEventListener("change", function (e) {
+    //   var fileName = e.target.files[0].name;
+    //   let filedata = `
+    // <form action="" method="post">
+    // <div class="form">
+    // <h4>${fileName}</h4>
+    // <input type="email" placeholder="Enter email upload file">
+    // <button class="btn">Upload</button>
+    // </div>
+    // </form>`;
+    //   dropArea.innerHTML = filedata;
+    // });
     document.addEventListener('DOMContentLoaded', (event) => {
       const inputs = document.querySelectorAll('#resOtp input');
 
@@ -3867,7 +3655,8 @@ function toggleFileUpload() {
         const phoneGroup = document.getElementById("laPhoneBox");
         const laPhotoBoxresp = document.getElementById("laPhotoBoxresp");
         const laPhotoBox = document.getElementById("laPhotoBox");
-
+        const laDOBBox = document.getElementById("laDOBBox");
+        const respLaDOBBox = document.getElementById("respLaDOBBox");
         
         if (isChecked) {
             panCardGroup.style.display = "block"; 
@@ -3876,6 +3665,7 @@ function toggleFileUpload() {
             emailGroup.style.display = "block"; 
             phoneGroup.style.display = "block"; 
             laPhotoBox.style.display = "block"; 
+            laDOBBox.style.display = "block";
 
         } else {
             panCardGroup.style.display = "none"; 
@@ -3884,7 +3674,7 @@ function toggleFileUpload() {
             emailGroup.style.display = "none"; 
             phoneGroup.style.display = "none"; 
             laPhotoBox.style.display = "none"; 
-
+            laDOBBox.style.display = "none";
         }
 
         if (laCheckBoxResp) {
@@ -3894,7 +3684,7 @@ function toggleFileUpload() {
           respLaMobileBox.style.display = "block"; 
           respLaEmailBox.style.display = "block"; 
           laPhotoBoxresp.style.display = "block"; 
-
+          respLaDOBBox.style.display = "block"; 
         } else {
           respLaPanBox.style.display = "none"; 
           respLaAadharBox.style.display = "none"; 
@@ -3902,12 +3692,16 @@ function toggleFileUpload() {
           respLaMobileBox.style.display = "none"; 
           respLaEmailBox.style.display = "none"; 
           laPhotoBoxresp.style.display = "none"; 
+          respLaDOBBox.style.display = "none";
 
         }
     }
 
- 
+
+     
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+
 </body>
 
 </html>
