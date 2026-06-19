@@ -1558,11 +1558,25 @@ margin-bottom: 20px;display: none;
                 <!-- Journey type (Need assistance / Do it yourself) -->
                 <div class="mt-4" style="display: none" id="journeyType">
                   <div class="journey-options" role="radiogroup" aria-label="Choose processing mode">
-                    <label class="journey-option" for="journey-assisted" tabindex="0" onclick="selectJourney('assisted', this)">
+                    <!-- <label class="journey-option" for="journey-assisted" tabindex="0" onclick="selectJourney('assisted', this)">
                       <input type="radio" id="journey-assisted" name="journeyTypeRadio" value="assisted" />
                       <div class="title">Need assistance</div>
-                      <!-- <div class="desc">Our team will process the policy for you.</div> -->
-                    </label>
+                      <div class="desc">Our team will process the policy for you.</div> 
+                    </label> -->
+                    <label
+  class="journey-option"
+  for="journey-assisted"
+  style="opacity:0.5; cursor:not-allowed; pointer-events:none;"
+>
+  <input
+    type="radio"
+    id="journey-assisted"
+    name="journeyTypeRadio"
+    value="assisted"
+    disabled
+  />
+  <div class="title">Need assistance</div>
+</label>
 
                     <label class="journey-option" for="journey-diy" tabindex="0" onclick="selectJourney('nonAssisted', this)">
                       <input type="radio" id="journey-diy" name="journeyTypeRadio" value="nonAssisted" />
