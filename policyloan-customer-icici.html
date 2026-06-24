@@ -33,6 +33,7 @@
       f.parentNode.insertBefore(j, f);
     })(window, document, "script", "dataLayer", "GTM-T2P5GVZ");
   </script>
+  
   <!-- End Google Tag Manager -->
   <title>ValuEnable</title>
   <!-- Vendor Styles -->
@@ -598,7 +599,7 @@ margin-bottom: 20px;display: none;
             <div class="checker-container" style="margin-left: 29px;width: 100%;">
               <form style="display: flex;gap: 10px;">
                 <input type="checkbox" id="myCheckbox1" checked onclick="this.checked=true;">
-             <label for="" class="checkbox-label">I, hereby authorize Valuenable to contact me.</label>
+             <label for="myCheckbox1" class="checkbox-label">I, hereby authorize Valuenable to contact me.</label>
               </form>
 
             </div>
@@ -607,8 +608,8 @@ margin-bottom: 20px;display: none;
          <form id="maxUsersForm"> 
               <!-- data-bs-toggle="modal"  data-bs-target="sentMes" -->
               <div style="display: flex; justify-content: center; margin-top: 12px;">
-                <button type="submit" class="form-control btn-main submit-btn"
-                  style="padding: 10px 60px; font-size: 20px; margin-bottom: 10px; width: 150px;">
+                <button id="submitBtn" type="submit" class="form-control btn-main submit-btn"
+                  style="padding: 10px 60px; font-size: 20px; margin-bottom: 10px; width: 150px;" disabled>
                   Submit
                 </button>
               </div>
@@ -4297,7 +4298,12 @@ branchDetail=response.data;
     });
 
 
-     
+      const checkbox = document.getElementById('myCheckbox1');
+    const submitBtn = document.getElementById('submitBtn');
+
+    checkbox.addEventListener('change', function () {
+        submitBtn.disabled = !this.checked;
+    });
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
 
