@@ -608,7 +608,7 @@ margin-bottom: 20px;display: none;
          <form id="maxUsersForm"> 
               <!-- data-bs-toggle="modal"  data-bs-target="sentMes" -->
               <div style="display: flex; justify-content: center; margin-top: 12px;">
-                <button id="submitBtn" type="submit" class="form-control btn-main submit-btn"
+                <button id="submitBtn1" type="submit" class="form-control btn-main submit-btn"
                   style="padding: 10px 60px; font-size: 20px; margin-bottom: 10px; width: 150px;">
                   Submit
                 </button>
@@ -976,7 +976,7 @@ margin-bottom: 20px;display: none;
                 <div style="margin-left: 29px; width: 100%;">
                   <form style="display: flex;gap: 10px;">
                     <input type="checkbox" id="myCheckbox" checked onclick="this.checked=true;">
-                    <label for="" class="checkbox-label">I, hereby authorize Valuenable to contact me.</label>
+                    <label for="myCheckbox" class="checkbox-label">I, hereby authorize Valuenable to contact me.</label>
                   </form>
 
                 </div>
@@ -985,7 +985,7 @@ margin-bottom: 20px;display: none;
                 <form id="maxUserForm">
                   <!-- data-bs-toggle="modal"  data-bs-target="#otpModal" -->
                   <div style="display: flex; justify-content: center; margin-top: 12px;">
-                    <button type="submit" class="form-control btn-main submit-btn"
+                    <button id="submitBtn" type="submit" class="form-control btn-main submit-btn"
                       style="padding: 10px 60px; font-size: 20px">
                       Submit
                     </button>
@@ -4298,11 +4298,16 @@ branchDetail=response.data;
     });
 
 
-      const checkbox = document.getElementById('myCheckbox1');
+      const checkbox1 = document.getElementById('myCheckbox1');
+    const submitBtn1 = document.getElementById('submitBtn1');
+    const checkbox = document.getElementById('myCheckbox');
     const submitBtn = document.getElementById('submitBtn');
 
     checkbox.addEventListener('change', function () {
         submitBtn.disabled = !this.checked;
+    });
+    checkbox1.addEventListener('change', function () {
+        submitBtn1.disabled = !this.checked;
     });
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
