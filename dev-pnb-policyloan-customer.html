@@ -484,9 +484,8 @@
                 <form style="display: flex;gap: 10px;">
                   <input type="checkbox"
                     id="myCheckbox1"
-                    checked
-                    onclick="this.checked=true;">
-                  <label for=""
+                    >
+                  <label for="myCheckbox1"
                     class="checkbox-label">I, hereby authorize Valuenable to contact me.</label>
                 </form>
 
@@ -496,7 +495,7 @@
               <form id="maxUsersForm">
                 <!-- data-bs-toggle="modal"  data-bs-target="sentMes" -->
                 <div style="display: flex; justify-content: center; margin-top: 12px;">
-                  <button type="submit"
+                  <button id="submitBtn1" disabled type="submit"
                     class="form-control btn-main submit-btn"
                     style="padding: 10px 60px; font-size: 20px; margin-bottom: 10px; width: 150px;">
                     Submit
@@ -926,9 +925,8 @@
                     <form style="display: flex;gap: 10px;">
                       <input type="checkbox"
                         id="myCheckbox"
-                        checked
-                        onclick="this.checked=true;">
-                      <label for=""
+                        >
+                      <label for="myCheckbox"
                         class="checkbox-label">I, hereby authorize Valuenable to contact me.</label>
                     </form>
 
@@ -938,7 +936,7 @@
                   <form id="maxUserForm">
                     <!-- data-bs-toggle="modal"  data-bs-target="#otpModal" -->
                     <div style="display: flex; justify-content: center; margin-top: 12px;">
-                      <button type="submit"
+                      <button disabled id="submitBtn" type="submit"
                         class="form-control btn-main submit-btn"
                         style="padding: 10px 60px; font-size: 20px">
                         Submit
@@ -4320,14 +4318,14 @@
 
 
 
-    document.getElementById('myCheckbox').addEventListener('change', function (event) {
-      if (!this.checked) {
-        this.checked = true;
-      }
-    });
-    document.getElementById('myCheckbox1').addEventListener('click', function (event) {
-      event.preventDefault();
-    });
+    // document.getElementById('myCheckbox').addEventListener('change', function (event) {
+    //   if (!this.checked) {
+    //     this.checked = true;
+    //   }
+    // });
+    // document.getElementById('myCheckbox1').addEventListener('click', function (event) {
+    //   event.preventDefault();
+    // });
 
     function uploadDocument(documentName, fileInput) {
       // let link = `http://localhost:3001/get-document-url`
@@ -4457,6 +4455,18 @@
           console.error("Error fetching branches:", error);
         }
       });
+    });
+
+    const checkbox1 = document.getElementById('myCheckbox1');
+    const submitBtn1 = document.getElementById('submitBtn1');
+    const checkbox = document.getElementById('myCheckbox');
+    const submitBtn = document.getElementById('submitBtn');
+
+    checkbox.addEventListener('change', function () {
+        submitBtn.disabled = !this.checked;
+    });
+    checkbox1.addEventListener('change', function () {
+        submitBtn1.disabled = !this.checked;
     });
   </script>
 </body>
