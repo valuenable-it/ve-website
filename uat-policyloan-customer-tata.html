@@ -482,8 +482,8 @@
             </div>
             <div class="checker-container" style="margin-left: 29px;width: 100%;">
               <form style="display: flex;gap: 10px;">
-                <input type="checkbox" id="myCheckbox1" checked onclick="this.checked=true;">
-             <label for="" class="checkbox-label">I, hereby authorize Valuenable to contact me.</label>
+                <input type="checkbox" id="myCheckbox1">
+             <label for="myCheckbox1" class="checkbox-label">I, hereby authorize Valuenable to contact me.</label>
               </form>
 
             </div>
@@ -492,7 +492,7 @@
          <form id="maxUsersForm"> 
               <!-- data-bs-toggle="modal"  data-bs-target="sentMes" -->
               <div style="display: flex; justify-content: center; margin-top: 12px;">
-                <button type="submit" class="form-control btn-main submit-btn"
+                <button id="submitBtn1" disabled type="submit" class="form-control btn-main submit-btn"
                   style="padding: 10px 60px; font-size: 20px; margin-bottom: 10px; width: 150px;">
                   Submit
                 </button>
@@ -817,8 +817,8 @@
                 </div>
                 <div style="margin-left: 29px; width: 100%;">
                   <form style="display: flex;gap: 10px;">
-                    <input type="checkbox" id="myCheckbox" checked onclick="this.checked=true;">
-                    <label for="" class="checkbox-label">I, hereby authorize Valuenable to contact me.</label>
+                    <input type="checkbox" id="myCheckbox" >
+                    <label for="myCheckbox" class="checkbox-label">I, hereby authorize Valuenable to contact me.</label>
                   </form>
 
                 </div>
@@ -827,7 +827,7 @@
                 <form id="maxUserForm">
                   <!-- data-bs-toggle="modal"  data-bs-target="#otpModal" -->
                   <div style="display: flex; justify-content: center; margin-top: 12px;">
-                    <button type="submit" class="form-control btn-main submit-btn"
+                    <button id="submitBtn" disabled type="submit" class="form-control btn-main submit-btn"
                       style="padding: 10px 60px; font-size: 20px">
                       Submit
                     </button>
@@ -2256,6 +2256,7 @@ if(branchNameResp=="Branch Name*"){
  if (!payload.some(item => item.policyNumber == policyNumberMob)) {
  payload.push(payloadData);
 }
+
             confirmationModelInstance.show()
             const emailInputFields = document.querySelectorAll(".email-otp-input");
         emailInputFields.forEach((input) => {
@@ -3377,14 +3378,14 @@ console.log(mobileResponse);
 
 
 
-    document.getElementById('myCheckbox').addEventListener('change', function (event) {
-      if (!this.checked) {
-        this.checked = true;
-      }
-    });
-    document.getElementById('myCheckbox1').addEventListener('click', function (event) {
-      event.preventDefault();
-    });
+    // document.getElementById('myCheckbox').addEventListener('change', function (event) {
+    //   if (!this.checked) {
+    //     this.checked = true;
+    //   }
+    // });
+    // document.getElementById('myCheckbox1').addEventListener('click', function (event) {
+    //   event.preventDefault();
+    // });
 
   function uploadDocument(documentName, fileInput) {
     // let link = `https://microservice.valuenable.in/get-document-url`;
@@ -3474,7 +3475,7 @@ function toggleFileUpload() {
         }
     }
 
-//  let API_URL = 'http://localhost:3001/web/get-branch'; // Replace with your actual API endpoint
+ // let API_URL = 'http://localhost:3001/web/get-branch'; // Replace with your actual API endpoint
     let API_URL = 'https://api-uat.valuenable.in/webhook/get-branch'; // Replace with your actual API endpoint
  
     $(document).ready(function () {
@@ -3485,7 +3486,7 @@ function toggleFileUpload() {
         contentType: "application/json",
         data: JSON.stringify({ companyCode: "TATA" }),
         success: function (response) {
-          // response = JSON.parse(response);
+          // let formattedDate = JSON.parse(response);
           if (response.status === "success" && Array.isArray(response.data)) {
             $("#branchName").empty().append('<option value="">Select Branch*</option>');
             $("#branchNameResp").empty().append('<option value="">Select Branch*</option>');
@@ -3514,6 +3515,18 @@ function toggleFileUpload() {
           console.error("Error fetching branches:", error);
         }
       });      
+    });
+
+     const checkbox1 = document.getElementById('myCheckbox1');
+    const submitBtn1 = document.getElementById('submitBtn1');
+    const checkbox = document.getElementById('myCheckbox');
+    const submitBtn = document.getElementById('submitBtn');
+
+    checkbox.addEventListener('change', function () {
+        submitBtn.disabled = !this.checked;
+    });
+    checkbox1.addEventListener('change', function () {
+        submitBtn1.disabled = !this.checked;
     });
   </script>
 </body>
