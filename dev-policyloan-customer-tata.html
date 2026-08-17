@@ -57,6 +57,7 @@
   <!-- Theme Styles -->
   <link href="css/style.css" rel="stylesheet" type="text/css" />
   <!-- Favicon -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 
 
 
@@ -324,23 +325,12 @@
                               
                           </div>
                         </div>
-                        <!-- <div class="col-md-4 col-sm-6">
+                        <div class="col-md-4 col-sm-6" style="display: none;" id="respLaDOBBox">
                           <div class="form-group">
-
-                            <input name="ladaterange" onkeyup="validateDate('laDOBResp')" id="laDOBResp"
-                              class="form-control" type="date" required placeholder="LA DOB (If Applicable)">
+                            <input name="ladaterange" onchange="checkLaAge('laDOBResp')" onkeyup="validateDate('laDOBResp'); checkLaAge('laDOBResp')" id="laDOBResp"
+                              class="form-control" type="date" required placeholder="LA DOB">
                           </div>
                         </div>
-                        <div class="col-md-4 col-sm-6">
-                          <div class="form-group">
-                            <select class="form-control" id="genderResp">
-                              <option>LA Gender (If Applicable)</option>
-                              <option>Male</option>
-                              <option>Female</option>
-                              <option>Other</option>
-                            </select>
-                          </div>
-                        </div> -->
                         <div style="width: 100%; margin-top: 20px;margin-bottom: 20px;">
                           <form  class="checker-container" style="display: flex;gap: 8px;">
                             <input type="checkbox" id="laCheckBoxResp" onchange="toggleFileUpload()">
@@ -399,7 +389,7 @@
                                 aria-hidden="true"></i></span>
                           </div>
                         </div> -->
-                        <div class="col-md-4 col-sm-6" style="display: none;" id="laPhotoBoxresp">
+                        <!-- <div class="col-md-4 col-sm-6" style="display: none;" id="laPhotoBoxresp">
                           <label id="laPhotolabelMob" style="display: none;">Photo</label>
                           <div class="form-group" style="display: flex; align-items: center">
                             <input name="user" type="file" style="display: none" id="laPhotoMob"
@@ -437,6 +427,17 @@
                               id="laAadharFileMob" readonly />
                             <span onclick="openLaAadharFileMob()"><i class="fa fa-upload"
                                 aria-hidden="true"></i></span>
+                          </div>
+                        </div> -->
+                        <div class="col-md-4 col-sm-6" id="respLaMinorDocBox" style="display: none;">
+                          <label id="respLaMinorDocLabel" style="display: none;">LA DOB Proof Mobile</label>
+                          <div class="form-group" style="display: flex; align-items: center; margin-bottom: 0px;">
+                            <input name="user" type="file" style="display: none" id="laMinorDocMob"
+                              onchange="handleLaMinorDocUploadMob(this.files)" />
+
+                            <input type="text" class="form-control" placeholder=" LA DOB Proof Mobile"
+                              id="laMinorDocFileMob" readonly />
+                            <span onclick="openLaMinorDocUploaderMob()"><i class="fa fa-upload" aria-hidden="true"></i></span>
                           </div>
                         </div>
                         <!-- <div class="col-md-4 col-sm-6">
@@ -675,6 +676,12 @@
                             </div>
                           </div>
 
+                          <div class="col-md-4 col-sm-6" style="display: none;" id="laDOBBox">
+                             <div class="form-group">
+                               <input name="ladaterange" onchange="checkLaAge('laDOB')" onkeyup="validateDate('laDOB'); checkLaAge('laDOB')" id="laDOB"
+                                 class="form-control" type="date" required placeholder="LA DOB">
+                             </div>
+                           </div>
                           <!-- <div class="col-md-4 col-sm-6">
                             <div class="form-group">
 
@@ -728,6 +735,18 @@
                         </div>
 
                       </div>
+                      <div class="col-md-4 col-sm-6" id="laMinorDocBox" style="display: none;">
+                        <label id="laMinorDocLabel" style="display: none;">LA DOB Proof</label>
+                        <div class="form-group" style="display: flex; align-items: center; margin-bottom: 0px;">
+                          <input name="user" type="file" style="display: none" id="laMinorDoc"
+                            onchange="handleLaMinorDocUpload(this.files)" />
+
+                          <input type="text" class="form-control" placeholder=" LA DOB Proof"
+                            id="laMinorDocFile" readonly />
+                          <span onclick="openLaMinorDocUploader()"><i class="fa fa-upload" aria-hidden="true"></i></span>
+                        </div>
+                        <div id="preview-la-minor-doc" class="file-preview-content" style="display:none; margin-top: 10px;"></div>
+                      </div>
                       <!-- <div class="col-md-4 col-sm-6">
                         <div class="form-group" style="display: flex; align-items: center">
                           <input name="user" type="file" style="display: none;" id="attachment-pancard"
@@ -753,7 +772,7 @@
                         </div>
                       </div> -->
                       
-                      <div class="col-md-4 col-sm-6" id="laPanBox" style="display: none;">
+                      <!-- <div class="col-md-4 col-sm-6" id="laPanBox" style="display: none;">
                         <label id="laPanlabel" style="display: none;">Pan</label>
                         <div class="form-group" style="display: flex; align-items: center">
                           <input name="user" type="file" style="display: none" id="laPanCard"
@@ -789,7 +808,7 @@
                           <span onclick="openLaPhoto()"><i class="fa fa-upload"
                               aria-hidden="true"></i></span>
                         </div>
-                      </div>
+                      </div> -->
                       <!-- <div class="col-md-4 col-sm-6">
                         <div class="form-group" style="display: flex; align-items: center">
                           <input name="user" type="file" style="display: none" id="applicantIdDesk"
@@ -1824,7 +1843,8 @@ otpModalInstance.show();
   cancelCheckKey:"",
   laPhotoKey:"",
   laPanCardKey:"",
-  laAadharCardKey:""
+  laAadharCardKey:"",
+  laMinorDocKey:""
 }
 
     function isValid_Pincode(pincode) {
@@ -1890,7 +1910,7 @@ console.log(payload)
       let laName= document.getElementById("laName").value;
       let laEmail= document.getElementById("laEmail").value;
       let laPhone= document.getElementById("laPhone").value;
-      // let laDOB = document.getElementById("laDOB").value;
+      let laDOB = document.getElementById("laDOB").value;
       // let laGender = document.getElementById("gender").value;
       let laPanCard= document.getElementById("laPanCard");
       let laAadhar= document.getElementById("laAadhar");
@@ -1950,17 +1970,16 @@ if (documentKeys?.policyDocument =="") {
 if(laCheckBoxClick){
  
 
-if (documentKeys?.laPanCardKey == "") {
-    alert("LA Pan Card Not Uploaded Successfully. Please select again.");
-    return;
-}
-if (documentKeys?.laAadharCardKey == "") {
-    alert("LA aadhar Not Uploaded Successfully. Please select again.");
-    return;
-}
-if (documentKeys?.laPhotoKey == "") {
-    alert("LA Photo Not Uploaded Successfully. Please select again.");
-    return;
+if (isMinorAge("laDOB")) {
+    let laMinorDocInput = document.getElementById("laMinorDoc");
+    if (!laMinorDocInput || !laMinorDocInput.files[0]) {
+        alert("Please select a LA DOB Proof file");
+        return;
+    }
+    if (documentKeys?.laMinorDocKey == "") {
+        alert("LA DOB Proof Not Uploaded Successfully. Please select again.");
+        return;
+    }
 }
 }
 
@@ -2024,7 +2043,7 @@ if(branchName=="Branch Name*"){
         laName,
         laEmail,
         laPhone,
-        // laDOB:laDOB,
+        laDOB: laDOB,
         // laGender:laGender
       };
 
@@ -2038,7 +2057,8 @@ if(branchName=="Branch Name*"){
           signedAadharPath: documentKeys?.aadharCardKey,
           laPhotoPath:documentKeys?.laPhotoKey,
           laPanPath:documentKeys?.laPanCardKey,
-          laAadharPath:documentKeys?.laAadharCardKey,
+          laAadharPath:documentKeys?.laMinorDocKey || documentKeys?.laAadharCardKey,
+          laMinorDocPath:documentKeys?.laMinorDocKey,
       };
          if (!payload.some(item => item.policyNumber == policyNumber)) {
   payload.push(payloads);
@@ -2112,7 +2132,7 @@ startTimer()
       let laNameMob= document.getElementById("laNameMob").value;
       let laEmailMob= document.getElementById("laEmailMob").value;
       let laPhoneMob= document.getElementById("laPhoneMob").value;
-      // let laDOBResp = document.getElementById("laDOBResp").value;
+      let laDOBResp = document.getElementById("laDOBResp").value;
       // let laGenderResp = document.getElementById("genderResp").value;
 
 
@@ -2167,18 +2187,16 @@ if (documentKeys?.policyDocument == "") {
 if(laCheckBoxMobClick){
   
 
-if (documentKeys?.laPanCardKey == "") {
-    alert("LA Pan Card Not Uploaded Successfully. Please select again.");
-    return;
-}
-if (documentKeys?.laAadharCardKey == "") {
-    alert("LA aadhar Not Uploaded Successfully. Please select again.");
-    return;
-}
-
-if (documentKeys?.laPhotoKey == "") {
-    alert("LA Photo Not Uploaded Successfully. Please select again.");
-    return;
+if (isMinorAge("laDOBResp")) {
+    let laMinorDocMobInput = document.getElementById("laMinorDocMob");
+    if (!laMinorDocMobInput || !laMinorDocMobInput.files[0]) {
+        alert("Please select a LA DOB Proof Mobile file");
+        return;
+    }
+    if (documentKeys?.laMinorDocKey == "") {
+        alert("LA DOB Proof Mobile Not Uploaded Successfully. Please select again.");
+        return;
+    }
 }
 }
 
@@ -2235,7 +2253,7 @@ if(branchNameResp=="Branch Name*"){
         laName:laNameMob,
         laEmail:laEmailMob,
         laPhone:laEmailMob,
-        // laDOB:laDOBResp,
+        laDOB: laDOBResp,
         // laGender:laGenderResp
       };
 
@@ -2249,7 +2267,8 @@ if(branchNameResp=="Branch Name*"){
           signedAadharPath: documentKeys?.aadharCardKey,
           laPhotoPath:documentKeys?.laPhotoKey,
           laPanPath:documentKeys?.laPanCardKey,
-          laAadharPath:documentKeys?.laAadharCardKey,
+          laAadharPath:documentKeys?.laMinorDocKey || documentKeys?.laAadharCardKey,
+          laMinorDocPath:documentKeys?.laMinorDocKey,
       };
 
         
@@ -2438,13 +2457,17 @@ console.log(payload)
       // document.getElementById("signedAadhar").value = "";
       document.getElementById("uploadPolicyDocumentFile").value = "";
       // document.getElementById("signedAadharFile").value = "";
-      document.getElementById("laPhotoFile").value = "";
-      document.getElementById("laPhoto").value = "";
-      document.getElementById("laPanCard").value = "";
-      document.getElementById("laPanFile").value = "";
-      document.getElementById("laAadharFile").value = "";
-      document.getElementById("laAadhar").value = "";
-
+      // document.getElementById("laPhotoFile").value = "";
+      // document.getElementById("laPhoto").value = "";
+      // document.getElementById("laPanCard").value = "";
+      // document.getElementById("laPanFile").value = "";
+      // document.getElementById("laAadharFile").value = "";
+      // document.getElementById("laAadhar").value = "";
+      
+      const laMinorDoc = document.getElementById("laMinorDoc");
+      if (laMinorDoc) laMinorDoc.value = "";
+      const laMinorDocFile = document.getElementById("laMinorDocFile");
+      if (laMinorDocFile) laMinorDocFile.value = "";
 
 
       // document.getElementById("applicantIdDesk").value = "";
@@ -2456,7 +2479,7 @@ console.log(payload)
       document.getElementById("laName").value = "";
       document.getElementById("laEmail").value = "";
       document.getElementById("laPhone").value = "";
-      // document.getElementById("laDOB").value = "";
+      document.getElementById("laDOB").value = "";
       // document.getElementById("gender").value = "LA Gender (If Applicable)";
      
     }
@@ -2484,18 +2507,21 @@ console.log(payload)
       // document.getElementById("applicantIdMobFile").value = "";
       // document.getElementById("mothersName").value = "";
       document.getElementById("policyNumberMob").value = "";
-      document.getElementById("laPhotoIdMob").value = "";
-      document.getElementById("laPhotoMob").value = "";
+      // document.getElementById("laPhotoIdMob").value = "";
+      // document.getElementById("laPhotoMob").value = "";
       document.getElementById("laNameMob").value = "";
       document.getElementById("laEmailMob").value = "";
       document.getElementById("laPhoneMob").value = "";
-      // document.getElementById("laDOBResp").value = "";
-      document.getElementById("laPanCardMob").value = "";
-      document.getElementById("laPanFileMob").value = "";
-      document.getElementById("laAadharMob").value = "";
-      document.getElementById("laAadharFileMob").value = "";
-
-
+      document.getElementById("laDOBResp").value = "";
+      // document.getElementById("laPanCardMob").value = "";
+      // document.getElementById("laPanFileMob").value = "";
+      // document.getElementById("laAadharMob").value = "";
+      // document.getElementById("laAadharFileMob").value = "";
+      
+      const laMinorDocMob = document.getElementById("laMinorDocMob");
+      if (laMinorDocMob) laMinorDocMob.value = "";
+      const laMinorDocFileMob = document.getElementById("laMinorDocFileMob");
+      if (laMinorDocFileMob) laMinorDocFileMob.value = "";
       
     }
 
@@ -3424,53 +3450,208 @@ console.log(mobileResponse);
       return null;
     });
 }
+
+async function validatePDF(file, skipPageCountCheck = false) {
+  if (!file) {
+    alert("No file selected");
+    return false;
+  }
+
+  if (file.type !== "application/pdf") {
+    alert("Please upload your file in PDF format.");
+    return false;
+  }
+
+  try {
+    const arrayBuffer = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+    const numPages = pdf.numPages;
+
+    if (!skipPageCountCheck) {
+      const MIN_PAGES = 2;
+      if (numPages < MIN_PAGES) {
+        alert(
+          `The uploaded file must contain a minimum of 2 pages`
+        );
+        return false;
+      }
+    }
+
+    return true;
+
+  } catch (error) {
+    console.error("Error reading PDF:", error);
+    alert("Unable to read the PDF file. Please try again.");
+    return false;
+  }
+}
+
+function checkLaAge(inputId) {
+  var input = document.getElementById(inputId);
+  if (!input) return;
+  var dobValue = input.value;
+  var targetBox = (inputId === 'laDOBResp') ? document.getElementById("respLaMinorDocBox") : document.getElementById("laMinorDocBox");
+  
+  if (!dobValue) {
+    if (targetBox) targetBox.style.display = "none";
+    return;
+  }
+
+  var dob = new Date(dobValue);
+  if (isNaN(dob.getTime())) {
+    if (targetBox) targetBox.style.display = "none";
+    return;
+  }
+
+  var today = new Date();
+  var age = today.getFullYear() - dob.getFullYear();
+  var m = today.getMonth() - dob.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+    age--;
+  }
+
+  if (age < 18) {
+    if (targetBox) targetBox.style.display = "block";
+  } else {
+    if (targetBox) targetBox.style.display = "none";
+  }
+}
+
+function isMinorAge(inputId) {
+  var input = document.getElementById(inputId);
+  if (!input || !input.value) return false;
+  var dob = new Date(input.value);
+  if (isNaN(dob.getTime())) return false;
+  var today = new Date();
+  var age = today.getFullYear() - dob.getFullYear();
+  var m = today.getMonth() - dob.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+    age--;
+  }
+  return age < 18;
+}
+
+function openLaMinorDocUploader() {
+  document.getElementById("laMinorDoc").click();
+}
+
+function openLaMinorDocUploaderMob() {
+  document.getElementById("laMinorDocMob").click();
+}
+
+async function handleLaMinorDocUpload(files) {
+  if (!files || !files[0]) return;
+  var fileName = files[0].name;
+  var label = document.getElementById("laMinorDocLabel");
+
+  const isValid = await validatePDF(files[0], true);
+  if (!isValid) {
+    document.getElementById("laMinorDoc").value = "";
+    document.getElementById("laMinorDocFile").value = "";
+    if (label) label.style.display = "none";
+    return;
+  }
+
+  if (fileName) {
+    if (label) label.style.display = "block";
+    let attachmentsFile = document.getElementById("laMinorDoc");
+    uploadDocument("laMinorDoc", attachmentsFile.files[0].type).then((result) => {
+      console.log(result);
+      if (result.status == "success") {
+        uploadFile(result.uploadUrl, attachmentsFile.files[0])
+          .then(response => {
+            documentKeys.laMinorDocKey = result.uploadKey;
+          })
+          .catch(error => {
+            console.error('Upload error:', error);
+            alert("LA DOB Proof upload failed. Please try again.");
+            return;
+          });
+      }
+    });
+  } else {
+    if (label) label.style.display = "none";
+  }
+  document.getElementById("laMinorDocFile").value = fileName;
+}
+
+async function handleLaMinorDocUploadMob(files) {
+  if (!files || !files[0]) return;
+  var fileName = files[0].name;
+  var label = document.getElementById("respLaMinorDocLabel");
+
+  const isValid = await validatePDF(files[0], true);
+  if (!isValid) {
+    document.getElementById("laMinorDocMob").value = "";
+    document.getElementById("laMinorDocFileMob").value = "";
+    if (label) label.style.display = "none";
+    return;
+  }
+
+  if (fileName) {
+    if (label) label.style.display = "block";
+    let attachmentsFile = document.getElementById("laMinorDocMob");
+    uploadDocument("laMinorDoc", attachmentsFile.files[0].type).then((result) => {
+      console.log(result);
+      if (result.status == "success") {
+        uploadFile(result.uploadUrl, attachmentsFile.files[0])
+          .then(response => {
+            documentKeys.laMinorDocKey = result.uploadKey;
+          })
+          .catch(error => {
+            console.error('Upload error:', error);
+            alert("LA DOB Proof Mobile upload failed. Please try again.");
+            return;
+          });
+      }
+    });
+  } else {
+    if (label) label.style.display = "none";
+  }
+  document.getElementById("laMinorDocFileMob").value = fileName;
+}
+
 function toggleFileUpload() {
         const isChecked = document.getElementById("laCheckBox").checked;
         const laCheckBoxResp = document.getElementById("laCheckBoxResp").checked;
         laCheckBoxClick=isChecked;
         laCheckBoxMobClick=laCheckBoxResp;
-        const panCardGroup = document.getElementById("laPanBox");
-        const aadharGroup = document.getElementById("laAadharBox");
         const nameGroup = document.getElementById("laNameBox");
         const emailGroup = document.getElementById("laEmailBox");
         const phoneGroup = document.getElementById("laPhoneBox");
-        const laPhotoBoxresp = document.getElementById("laPhotoBoxresp");
-        const laPhotoBox = document.getElementById("laPhotoBox");
-
+        const laDOBBox = document.getElementById("laDOBBox");
+        const respLaDOBBox = document.getElementById("respLaDOBBox");
         
         if (isChecked) {
-            panCardGroup.style.display = "block"; 
-            aadharGroup.style.display = "block"; 
             nameGroup.style.display = "block"; 
             emailGroup.style.display = "block"; 
             phoneGroup.style.display = "block"; 
-            laPhotoBox.style.display = "block"; 
+            laDOBBox.style.display = "block";
+            checkLaAge('laDOB');
 
         } else {
-            panCardGroup.style.display = "none"; 
-            aadharGroup.style.display = "none"; 
             nameGroup.style.display = "none"; 
             emailGroup.style.display = "none"; 
             phoneGroup.style.display = "none"; 
-            laPhotoBox.style.display = "none"; 
-
+            laDOBBox.style.display = "none";
+            const laMinorDocBox = document.getElementById("laMinorDocBox");
+            if (laMinorDocBox) laMinorDocBox.style.display = "none";
         }
 
         if (laCheckBoxResp) {
-          respLaPanBox.style.display = "block"; 
-          respLaAadharBox.style.display = "block"; 
           respLaNameBox.style.display = "block"; 
           respLaMobileBox.style.display = "block"; 
           respLaEmailBox.style.display = "block"; 
-          laPhotoBoxresp.style.display = "block"; 
+          respLaDOBBox.style.display = "block";
+          checkLaAge('laDOBResp');
 
         } else {
-          respLaPanBox.style.display = "none"; 
-          respLaAadharBox.style.display = "none"; 
           respLaNameBox.style.display = "none"; 
           respLaMobileBox.style.display = "none"; 
           respLaEmailBox.style.display = "none"; 
-          laPhotoBoxresp.style.display = "none"; 
+          respLaDOBBox.style.display = "none";
+          const respLaMinorDocBox = document.getElementById("respLaMinorDocBox");
+          if (respLaMinorDocBox) respLaMinorDocBox.style.display = "none";
 
         }
     }
