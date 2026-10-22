@@ -961,7 +961,7 @@ margin-bottom: 20px;display: none;
                     <span id="timer" style="display: none">00:30</span>
                   </div>
                 </div>
-<!-- EMAIL OTP UI - COMMENTED OUT
+<!--
 <hr>
 
                 <h6 style="font-size: 18px; font-weight: 600; color: #2e2e2e" id="otpHeading">
@@ -987,7 +987,7 @@ margin-bottom: 20px;display: none;
                     <span id="email-timer" style="display: none">00:30</span>
                   </div>
                 </div>
-END EMAIL OTP UI -->
+-->
                 <div class="mt-4" style="display: block">
                   <button class="btn btn-danger px-4 validate" onclick="otpVerification()">
                     Validate
@@ -1379,7 +1379,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
   }
 });
-//email otp - COMMENTED OUT
 
 /*document.addEventListener('DOMContentLoaded', () => {
 
@@ -1483,7 +1482,6 @@ otpModalInstance.show();
 
       OTPInput();
     });
-//email otp - COMMENTED OUT
    /*document.addEventListener("DOMContentLoaded", function (event) {
       function EmailOTPInput() {
         const inputs = document.querySelectorAll("#email-otp > *[id]");
@@ -1649,8 +1647,7 @@ console.log(payload)
       event.preventDefault();
 
       startTimer();
-      // startEmailOtpTimer(); // EMAIL OTP - COMMENTED OUT
-
+      // startEmailOtpTimer(); 
 
       let companyName = "METLIFE";
     //   let prodctType = document.getElementById("prodctType").value;
@@ -1841,8 +1838,7 @@ console.log(payload)
         // displayPoliciesInTable();
         
             // confirmationModelInstance.show()
-      // EMAIL OTP - COMMENTED OUT
-      // const emailInputFields = document.querySelectorAll(".email-otp-input");
+            // const emailInputFields = document.querySelectorAll(".email-otp-input");
       // emailInputFields.forEach((input) => {
       //   input.disabled = false;
       // })
@@ -1880,8 +1876,7 @@ console.log(response)
       console.log("maxUsersForm submit called");
       event.preventDefault();
 
-      // startEmailOtpTimer(); // EMAIL OTP - COMMENTED OUT
-startTimer()
+      // startEmailOtpTimer(); startTimer()
       let companysName = "METLIFE";
     //   let prodctsType = document.getElementById("prodctsType").value;
     //   let branchNameResp = document.getElementById("branchNameResp").value;
@@ -2066,8 +2061,7 @@ startTimer()
 
         generateOtp()
             // confirmationModelInstance.show()
-            // EMAIL OTP - COMMENTED OUT
-            // const emailInputFields = document.querySelectorAll(".email-otp-input");
+                        // const emailInputFields = document.querySelectorAll(".email-otp-input");
             // emailInputFields.forEach((input) => {
             //   input.disabled = false;
             // })
@@ -2239,8 +2233,7 @@ console.log("ocr payload",payload)
       let link = `https://api-dev.valuenable.in/webhook/generate-otp`;
 
       // let link = `https://uat-microservice.valuenable.in/generate-otp`;
-      // EMAIL OTP - customerEmail excluded so server only sends mobile OTP
-      const { customerEmail: _excludedEmail, ...generateOtpPayload } = payload[0];
+            const { customerEmail: _excludedEmail, ...generateOtpPayload } = payload[0];
      $.ajax({
         type: "POST",
   url: link,
@@ -2554,8 +2547,7 @@ console.log("ocr payload",payload)
 
     
 
-    // EMAIL OTP - COMMENTED OUT
-    /*function resendEmailOtp() {
+        /*function resendEmailOtp() {
             startEmailOtpTimer();
 
 
@@ -2610,29 +2602,25 @@ console.log("ocr payload",payload)
 async function otpVerification() {
   const inputs = getAllInputValues();
   const otp = inputs.join("");
-  // EMAIL OTP - COMMENTED OUT
-  // const emailInputs = getEmailOtpInputValues();
+    // const emailInputs = getEmailOtpInputValues();
   // const emailOtp = emailInputs.join("");
 if(!otp||otp.length<6){
 alert("Please enter a valid Mobile OTP");
 return;
 }
-// EMAIL OTP - COMMENTED OUT
 // if(!emailOtp||emailOtp.length<6){
 // alert("Please enter a valid Email OTP");
 // return;
 // }
 
-  // EMAIL OTP - COMMENTED OUT
-  // const emailOtpLink = `https://api-dev.valuenable.in/webhook/verify-email-otp`;
+    // const emailOtpLink = `https://api-dev.valuenable.in/webhook/verify-email-otp`;
   const mobileOtpLink = `https://api-dev.valuenable.in/webhook/verify-otp`;
 
   //  const emailOtpLink = `http://localhost:3001/web/verify-email-otp`;
   // const mobileOtpLink = `http://localhost:3001/web/verify-otp`;
 
   try {
-    // EMAIL OTP - COMMENTED OUT (Step 1: email verify)
-    // if (!is_valid_email) {
+        // if (!is_valid_email) {
     //   const emailResponse = await $.ajax({
     //     type: "POST",
     //     url: emailOtpLink,
@@ -2722,8 +2710,7 @@ console.log(mobileResponse);
     }
   } catch (error) {
     console.error("OTP verification error:", error);
-    // EMAIL OTP - COMMENTED OUT
-    // if(error?.responseJSON?.code=="ER_DUP_ENTRY"){
+        // if(error?.responseJSON?.code=="ER_DUP_ENTRY"){
     //   is_valid_email = false;
     //   is_valid_mobile = false;
     //   const emailInputFields = document.querySelectorAll(".email-otp-input");
