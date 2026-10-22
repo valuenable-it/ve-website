@@ -961,6 +961,7 @@ margin-bottom: 20px;display: none;
                     <span id="timer" style="display: none">00:30</span>
                   </div>
                 </div>
+<!--
 <hr>
 
                 <h6 style="font-size: 18px; font-weight: 600; color: #2e2e2e" id="otpHeading">
@@ -973,8 +974,8 @@ margin-bottom: 20px;display: none;
                   <input class="m-2 text-center form-control rounded email-otp-input" type="text" id="fourth" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
                   <input class="m-2 text-center form-control rounded email-otp-input" type="text" id="fifth" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
                   <input class="m-2 text-center form-control rounded email-otp-input" type="text" id="sixth" maxlength="1"  inputmode="numeric" pattern="[0-9]*"/>
-                  <!-- <i class="fa fa-check" id="email-check" aria-hidden="true" style="margin: auto;
-    color: #008000;display: none;"></i> -->
+                  &lt;!&ndash; <i class="fa fa-check" id="email-check" aria-hidden="true" style="margin: auto;
+    color: #008000;display: none;"></i> &ndash;&gt;
 
                 </div>
                 <div class="resend-otp-div" id="emailResendDiv">
@@ -986,6 +987,7 @@ margin-bottom: 20px;display: none;
                     <span id="email-timer" style="display: none">00:30</span>
                   </div>
                 </div>
+-->
                 <div class="mt-4" style="display: block">
                   <button class="btn btn-danger px-4 validate" onclick="otpVerification()">
                     Validate
@@ -1377,9 +1379,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
   }
 });
-//email otp
 
-document.addEventListener('DOMContentLoaded', () => {
+/*document.addEventListener('DOMContentLoaded', () => {
 
   const inputs = document.querySelectorAll('.email-otp-input'); 
 
@@ -1442,7 +1443,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const otp = Array.from(inputs).map(input => input.value).join('');
     
   }
-});
+});*/
             function resetSelectionMob() {
                 $('#branchNameResp').val(null).trigger('change');
             }
@@ -1481,8 +1482,7 @@ otpModalInstance.show();
 
       OTPInput();
     });
-//email otp
-   document.addEventListener("DOMContentLoaded", function (event) {
+   /*document.addEventListener("DOMContentLoaded", function (event) {
       function EmailOTPInput() {
         const inputs = document.querySelectorAll("#email-otp > *[id]");
         for (let i = 0; i < inputs.length; i++) {
@@ -1508,7 +1508,7 @@ otpModalInstance.show();
       }
 
       EmailOTPInput();
-    });
+    });*/
 
 
 
@@ -1647,8 +1647,7 @@ console.log(payload)
       event.preventDefault();
 
       startTimer();
-      startEmailOtpTimer();
-
+      // startEmailOtpTimer(); 
 
       let companyName = "METLIFE";
     //   let prodctType = document.getElementById("prodctType").value;
@@ -1839,10 +1838,10 @@ console.log(payload)
         // displayPoliciesInTable();
         
             // confirmationModelInstance.show()
-      const emailInputFields = document.querySelectorAll(".email-otp-input");
-        emailInputFields.forEach((input) => {
-  input.disabled = false;
-        })
+            // const emailInputFields = document.querySelectorAll(".email-otp-input");
+      // emailInputFields.forEach((input) => {
+      //   input.disabled = false;
+      // })
 
       // $("#otpModal").modal("show");
 
@@ -1877,8 +1876,7 @@ console.log(response)
       console.log("maxUsersForm submit called");
       event.preventDefault();
 
-      startEmailOtpTimer();
-startTimer()
+      // startEmailOtpTimer(); startTimer()
       let companysName = "METLIFE";
     //   let prodctsType = document.getElementById("prodctsType").value;
     //   let branchNameResp = document.getElementById("branchNameResp").value;
@@ -2063,10 +2061,10 @@ startTimer()
 
         generateOtp()
             // confirmationModelInstance.show()
-            const emailInputFields = document.querySelectorAll(".email-otp-input");
-        emailInputFields.forEach((input) => {
-  input.disabled = false;
-        })
+                        // const emailInputFields = document.querySelectorAll(".email-otp-input");
+            // emailInputFields.forEach((input) => {
+            //   input.disabled = false;
+            // })
       // let link = `https://microservice.valuenable.in/generate-otp`;
       // let link = `https://dev-microservice.valuenable.in/generate-otp`;
       // let link = `http://localhost:3001/web/generate-otp`;
@@ -2235,7 +2233,7 @@ console.log("ocr payload",payload)
       let link = `https://api-dev.valuenable.in/webhook/generate-otp`;
 
       // let link = `https://uat-microservice.valuenable.in/generate-otp`;
-      let generateOtpPayload=payload[0];
+            const { customerEmail: _excludedEmail, ...generateOtpPayload } = payload[0];
      $.ajax({
         type: "POST",
   url: link,
@@ -2549,7 +2547,7 @@ console.log("ocr payload",payload)
 
     
 
-    function resendEmailOtp() {
+        /*function resendEmailOtp() {
             startEmailOtpTimer();
 
 
@@ -2597,74 +2595,66 @@ console.log("ocr payload",payload)
         .fail((error) => {
           // alert(`Something went wrong`);
         });
-    }
+    }*/
 
 
 
 async function otpVerification() {
   const inputs = getAllInputValues();
   const otp = inputs.join("");
-  const emailInputs = getEmailOtpInputValues();
-  const emailOtp = emailInputs.join("");
+    // const emailInputs = getEmailOtpInputValues();
+  // const emailOtp = emailInputs.join("");
 if(!otp||otp.length<6){
 alert("Please enter a valid Mobile OTP");
 return;
 }
-if(!emailOtp||emailOtp.length<6){
-alert("Please enter a valid Email OTP");
-return;
-}
+// if(!emailOtp||emailOtp.length<6){
+// alert("Please enter a valid Email OTP");
+// return;
+// }
 
-  const emailOtpLink = `https://api-dev.valuenable.in/webhook/verify-email-otp`;
+    // const emailOtpLink = `https://api-dev.valuenable.in/webhook/verify-email-otp`;
   const mobileOtpLink = `https://api-dev.valuenable.in/webhook/verify-otp`;
 
   //  const emailOtpLink = `http://localhost:3001/web/verify-email-otp`;
   // const mobileOtpLink = `http://localhost:3001/web/verify-otp`;
 
   try {
-    // Step 1 → If email not yet verified
-    if (!is_valid_email) {
-      const emailResponse = await $.ajax({
-        type: "POST",
-  url: emailOtpLink,
-  data: JSON.stringify({
-    ...payload[0],
-    otp: emailOtp,
-  }),
-  contentType: "application/json", // ✅ now correct
-  dataType: "json",
-      });
+        // if (!is_valid_email) {
+    //   const emailResponse = await $.ajax({
+    //     type: "POST",
+    //     url: emailOtpLink,
+    //     data: JSON.stringify({
+    //       ...payload[0],
+    //       otp: emailOtp,
+    //     }),
+    //     contentType: "application/json",
+    //     dataType: "json",
+    //   });
 
-      if (emailResponse.status === "success") {
-        is_valid_email = true;
-        // Hide resend button safely (only if exists)
-        const resendButtonElement = document.getElementById("emailResendDiv");
-        const emailCheck = document.getElementById("email-check");
+    //   if (emailResponse.status === "success") {
+    //     is_valid_email = true;
+    //     const resendButtonElement = document.getElementById("emailResendDiv");
+    //     const emailCheck = document.getElementById("email-check");
+    //     if (resendButtonElement) {
+    //       resendButtonElement.style.display = "none";
+    //     }
+    //     if(emailCheck){
+    //       emailCheck.style.display = "block";
+    //     }
+    //     const emailInputFields = document.querySelectorAll(".email-otp-input");
+    //     emailInputFields.forEach((input) => {
+    //       input.disabled = true;
+    //     });
+    //     console.log("Email OTP verified successfully");
+    //   } else {
+    //     alert("Invalid Email OTP, please try again.");
+    //     return;
+    //   }
+    // }
 
-        
-        if (resendButtonElement) {
-          resendButtonElement.style.display = "none";
-        }
-        if(emailCheck){
-          emailCheck.style.display = "block";
-        }
-
-        // Disable email input fields
-        const emailInputFields = document.querySelectorAll(".email-otp-input");
-        emailInputFields.forEach((input) => {
-  input.disabled = true;
-  // input.style.color = "black";        // ✅ Make text black
-  // input.style.fontWeight = "600";     // optional: make text bold
-});
-        console.log("Email OTP verified successfully");
-      } else {
-        alert("Invalid Email OTP, please try again.");
-        return;
-      }
-    }
-
-    // Step 2 → If email is verified but mobile not yet verified
-    if (is_valid_email && !is_valid_mobile) {
+    // Step 2 → Mobile OTP verify (email check removed, direct mobile verify)
+    if (!is_valid_mobile) {
       const requestData = {
   payload: payload,
   otp: otp,
@@ -2695,8 +2685,8 @@ console.log(mobileResponse);
       }
     }
 
-    // Step 3 → If both verified successfully
-    if (is_valid_email && is_valid_mobile) {
+    // Step 3 → If mobile verified successfully (email check removed)
+    if (is_valid_mobile) {
       resetOTPInputField();
       otpModalInstance.hide();
 
@@ -2716,20 +2706,22 @@ console.log(mobileResponse);
       
       is_valid_email = false;
       is_valid_mobile = false;
-      console.log("Both OTPs verified successfully");
+      console.log("Mobile OTP verified successfully");
     }
   } catch (error) {
     console.error("OTP verification error:", error);
+        // if(error?.responseJSON?.code=="ER_DUP_ENTRY"){
+    //   is_valid_email = false;
+    //   is_valid_mobile = false;
+    //   const emailInputFields = document.querySelectorAll(".email-otp-input");
+    //   emailInputFields.forEach((input) => {
+    //     input.disabled = false;
+    //     input.style.color = "black";
+    //     input.style.fontWeight = "400";
+    //   });
+    // }
     if(error?.responseJSON?.code=="ER_DUP_ENTRY"){
-      is_valid_email = false;
-    is_valid_mobile = false;
-
-    const emailInputFields = document.querySelectorAll(".email-otp-input");
-    emailInputFields.forEach((input) => {
-      input.disabled = false;
-      input.style.color = "black";
-      input.style.fontWeight = "400"; // back to original
-    });
+      is_valid_mobile = false;
     }
 
     const message =
